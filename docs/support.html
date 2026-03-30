@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven Notes — Support</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #FEFDFB;
+    color: #1A1815;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #161512; color: #FAF7F3; }
+    a { color: #7BAFA2; }
+    h1, h2, h3 { color: #FAF7F3; }
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: #6B6560;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  p, li {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  ul { padding-left: 24px; }
+  li { margin-bottom: 8px; }
+  a { color: #6B9B8E; }
+  .brand {
+    font-size: 14px;
+    color: #8B6F47;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .contact-box {
+    background: #F5F0EA;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .contact-box { background: #252018; }
+  }
+  .contact-box a {
+    font-size: 18px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<span class="brand">Haven Notes</span>
+<h1>Support</h1>
+<p class="subtitle">We're here to help.</p>
+
+<div class="contact-box">
+  <p>For bugs, feature requests, or questions:</p>
+  <p><a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a></p>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Where are my notes stored?</h3>
+<p>All notes are stored locally on your device in an encrypted database. Nothing leaves your phone unless you enable optional sync to your own server.</p>
+
+<h3>Can I sync between devices?</h3>
+<p>Yes — Haven Pro includes sync to a self-hosted server. You provide the server URL and authentication token. Haven never operates servers that hold your data.</p>
+
+<h3>What is encryption?</h3>
+<p>Haven offers optional AES-256-GCM encryption. When enabled, your notes are encrypted on your device before being sent to your sync server. Even if someone accesses the server, they cannot read your notes without your password.</p>
+
+<h3>Can I import from Notion?</h3>
+<p>Yes. Export your Notion workspace as "Markdown & CSV", unzip the file, and select the folder in Haven's import screen (Settings → Import from Notion).</p>
+
+<h3>What are wiki links?</h3>
+<p>Type <code>[[Note Title]]</code> to create a link to another note. This builds a knowledge graph — connections between your ideas that you can visualize.</p>
+
+<h3>How do I recover a deleted note?</h3>
+<p>Deleted notes are soft-deleted and can be recovered. If you've purged deleted notes, they cannot be recovered. We recommend enabling sync as a backup.</p>
+
+<h3>What happens if I forget my encryption password?</h3>
+<p>Your encryption password cannot be recovered. There is no password reset. If you forget it, encrypted notes on your sync server become permanently unreadable. Notes on your device remain accessible.</p>
+
+<h2>System Requirements</h2>
+<ul>
+  <li>iOS 17.0 or later</li>
+  <li>iPhone or iPad</li>
+</ul>
+</body>
+</html>
