@@ -98,6 +98,41 @@ final class NoteRepository: NoteRepositoryProtocol {
         }
     }
 
+    /// Insert or replace — used by the editor to save both new and existing notes.
+    func upsert(_ note: Note) async throws {
+        let plaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
+
+        try db.performSync {
+            let sql = """
+                INSERT INTO \(HavenConstants.Database.notesTable)
+                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    title = excluded.title,
+                    body_html = excluded.body_html,
+                    body_plaintext = excluded.body_plaintext,
+                    is_pinned = excluded.is_pinned,
+                    is_deleted = excluded.is_deleted,
+                    folder_id = excluded.folder_id,
+                    updated_at = excluded.updated_at
+                """
+            try self.db.executeStatement(sql, params: [
+                note.id,
+                note.title,
+                note.bodyHTML,
+                plaintext,
+                note.isPinned ? 1 : 0,
+                note.isDeleted ? 1 : 0,
+                note.folderID,
+                note.createdAt.iso8601String,
+                Date().iso8601String
+            ])
+
+            try self.updateFTS(noteID: note.id, title: note.title, plaintext: plaintext)
+            try self.recordSyncChange(entityType: "note", entityID: note.id, operation: "upsert")
+        }
+    }
+
     // MARK: - Soft Delete
 
     func softDelete(id: String) async throws {

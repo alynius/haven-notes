@@ -158,11 +158,21 @@ struct NoteEditorView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if viewModel.isSaving {
-                    ProgressView()
-                        .tint(Color.havenPrimary)
+                HStack(spacing: Spacing.md) {
+                    if viewModel.isSaving {
+                        ProgressView()
+                            .tint(Color.havenPrimary)
+                    }
+                    Button {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Dismiss keyboard")
                 }
             }
         }

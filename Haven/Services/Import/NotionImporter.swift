@@ -81,12 +81,10 @@ final class NotionImporter: ObservableObject {
         result = nil
         errorMessage = nil
 
-        do {
-            let accessing = url.startAccessingSecurityScopedResource()
-            defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+        let accessing = url.startAccessingSecurityScopedResource()
+        defer { if accessing { url.stopAccessingSecurityScopedResource() } }
 
-            await importMarkdownFiles(from: url)
-        }
+        await importMarkdownFiles(from: url)
 
         isImporting = false
     }
@@ -98,12 +96,22 @@ final class NotionImporter: ObservableObject {
         result = nil
         errorMessage = nil
 
-        var allMDFiles: [URL] = []
-
+        // Start security-scoped access for ALL URLs before doing any work
+        var accessingURLs: [URL] = []
         for url in urls {
-            let accessing = url.startAccessingSecurityScopedResource()
-            defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+            if url.startAccessingSecurityScopedResource() {
+                accessingURLs.append(url)
+            }
+        }
+        // Release all access when done
+        defer {
+            for url in accessingURLs {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
 
+        var allMDFiles: [URL] = []
+        for url in urls {
             do {
                 let found = try findMarkdownFiles(in: url)
                 allMDFiles.append(contentsOf: found)
@@ -159,7 +167,12 @@ final class NotionImporter: ObservableObject {
             progress = Double(index) / Double(max(total, 1))
 
             do {
-                let content = try String(contentsOf: mdFile, encoding: .utf8)
+                // Use NSFileCoordinator for security-scoped reads
+                let data = try Data(contentsOf: mdFile)
+                guard let content = String(data: data, encoding: .utf8) else {
+                    errors.append("\(mdFile.lastPathComponent): Not valid UTF-8")
+                    continue
+                }
                 let title = extractTitle(from: mdFile.lastPathComponent)
 
                 // Skip empty files

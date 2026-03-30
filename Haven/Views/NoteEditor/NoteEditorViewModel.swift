@@ -70,7 +70,8 @@ final class NoteEditorViewModel: ObservableObject {
     func save() async {
         isSaving = true
         do {
-            try await noteRepo.update(note)
+            try await noteRepo.upsert(note)
+            hasBeenSavedToDB = true
             try await noteRepo.rebuildLinks(for: note.id, bodyHTML: note.bodyHTML)
         } catch {
             errorMessage = error.localizedDescription
@@ -80,6 +81,7 @@ final class NoteEditorViewModel: ObservableObject {
 
     func addTask(text: String) async {
         do {
+            await ensureNoteSaved()
             let task = try await taskRepo.create(noteID: note.id, text: text, position: tasks.count)
             tasks.append(task)
         } catch {
@@ -107,9 +109,12 @@ final class NoteEditorViewModel: ObservableObject {
 
     func addTag(name: String) async {
         do {
+            // Ensure the note exists in DB before linking tags
+            await ensureNoteSaved()
             let tag = try await tagRepo.findOrCreate(name: name)
             try await tagRepo.addTag(noteID: note.id, tagID: tag.id)
             tags = try await tagRepo.fetchTags(for: note.id)
+            allTags = try await tagRepo.fetchAll()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -150,6 +155,21 @@ final class NoteEditorViewModel: ObservableObject {
     }
 
     // MARK: - Private
+
+    /// Ensure the note exists in the database (for new notes that haven't been saved yet).
+    private var hasBeenSavedToDB = false
+    private func ensureNoteSaved() async {
+        guard !hasBeenSavedToDB else { return }
+        do {
+            if try await noteRepo.fetchByID(note.id) == nil {
+                // Save the current note to DB so tags/tasks can reference it
+                await save()
+            }
+            hasBeenSavedToDB = true
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
 
     private func scheduleAutosave() {
         guard isLoaded else { return }  // Don't save until note is loaded from DB

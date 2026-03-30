@@ -82,6 +82,12 @@ final class SpeechRecognizer: ObservableObject {
             let inputNode = audioEngine.inputNode
             let recordingFormat = inputNode.outputFormat(forBus: 0)
 
+            // Guard against zero-channel format (e.g. simulator or no mic hardware)
+            guard recordingFormat.channelCount > 0 else {
+                errorMessage = "No microphone available"
+                return
+            }
+
             inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
                 request.append(buffer)
             }

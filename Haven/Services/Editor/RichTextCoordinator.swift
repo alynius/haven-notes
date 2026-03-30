@@ -37,6 +37,9 @@ struct RichTextEditor: UIViewRepresentable {
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textView.allowsEditingTextAttributes = false
+        // Enable link interaction while keeping editing enabled
+        textView.isSelectable = true
+        textView.dataDetectorTypes = []  // We handle links manually via .link attribute
 
         // Store references
         context.coordinator.textView = textView
@@ -114,6 +117,113 @@ struct RichTextEditor: UIViewRepresentable {
         func textViewDidChangeSelection(_ textView: UITextView) {
             let text = textView.text ?? ""
             detectActiveFormats(in: text, at: textView.selectedRange)
+        }
+
+        /// Handle taps on links — open in Safari when not actively editing that link
+        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+            // For wiki links, route through the parent callback
+            let tappedText = (textView.text as NSString?)?.substring(with: characterRange) ?? ""
+            if tappedText.hasPrefix("[[") {
+                let title = tappedText.replacingOccurrences(of: "[[", with: "").replacingOccurrences(of: "]]", with: "")
+                parent.onLinkTapped?(title)
+                return false
+            }
+            // Open regular URLs in Safari
+            UIApplication.shared.open(URL)
+            return false
+        }
+
+        /// Detect pasted URLs and auto-fetch page title
+        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            // Check if the pasted text is a bare URL
+            let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmed.hasPrefix("http://") || trimmed.hasPrefix("https://"),
+               let url = URL(string: trimmed),
+               trimmed.count > 10,
+               !trimmed.contains("\n") {
+                // Insert the URL immediately so the user sees it
+                // Then fetch the title in the background and replace
+                let nsText = (textView.text ?? "") as NSString
+                let newText = nsText.replacingCharacters(in: range, with: text)
+                commitText(newText, to: textView)
+                textView.selectedRange = NSRange(location: range.location + text.count, length: 0)
+
+                // Fetch title in background
+                let insertRange = NSRange(location: range.location, length: trimmed.count)
+                Task { [weak self] in
+                    if let title = await self?.fetchPageTitle(from: url), !title.isEmpty {
+                        await MainActor.run {
+                            guard let self = self, let textView = self.textView else { return }
+                            let current = textView.text ?? ""
+                            let nsCurrent = current as NSString
+                            // Verify the URL is still at the expected position
+                            if insertRange.location + insertRange.length <= nsCurrent.length {
+                                let existing = nsCurrent.substring(with: insertRange)
+                                if existing == trimmed {
+                                    let markdown = "[\(title)](\(trimmed))"
+                                    let replaced = nsCurrent.replacingCharacters(in: insertRange, with: markdown)
+                                    let cursorPos = insertRange.location + markdown.count
+                                    self.commitText(replaced, to: textView)
+                                    textView.selectedRange = NSRange(location: cursorPos, length: 0)
+                                }
+                            }
+                        }
+                    }
+                }
+                return false  // We handled the insertion
+            }
+            return true
+        }
+
+        /// Fetch the <title> tag from a URL.
+        private func fetchPageTitle(from url: URL) async -> String? {
+            do {
+                var request = URLRequest(url: url, timeoutInterval: 5)
+                request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)", forHTTPHeaderField: "User-Agent")
+                let (data, response) = try await URLSession.shared.data(for: request)
+
+                // Only parse HTML responses
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200,
+                      let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type"),
+                      contentType.contains("text/html") else {
+                    return nil
+                }
+
+                // Extract <title> from first 16KB of HTML
+                let chunk = data.prefix(16384)
+                guard let html = String(data: chunk, encoding: .utf8) ?? String(data: chunk, encoding: .ascii) else {
+                    return nil
+                }
+
+                // Simple regex to extract title
+                guard let regex = try? NSRegularExpression(pattern: "<title[^>]*>([^<]+)</title>", options: .caseInsensitive),
+                      let match = regex.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)) else {
+                    return nil
+                }
+
+                let titleRange = match.range(at: 1)
+                guard let swiftRange = Range(titleRange, in: html) else { return nil }
+                var title = String(html[swiftRange])
+
+                // Clean up common title artifacts
+                title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+                // Decode HTML entities
+                title = title.replacingOccurrences(of: "&amp;", with: "&")
+                    .replacingOccurrences(of: "&lt;", with: "<")
+                    .replacingOccurrences(of: "&gt;", with: ">")
+                    .replacingOccurrences(of: "&#39;", with: "'")
+                    .replacingOccurrences(of: "&quot;", with: "\"")
+
+                // Truncate very long titles
+                if title.count > 100 {
+                    title = String(title.prefix(97)) + "..."
+                }
+
+                return title.isEmpty ? nil : title
+            } catch {
+                return nil
+            }
         }
 
         // MARK: - Highlighting

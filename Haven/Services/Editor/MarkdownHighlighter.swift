@@ -181,27 +181,58 @@ final class MarkdownHighlighter {
     }
 
     private func applyLinks(_ str: NSMutableAttributedString, fullRange: NSRange) {
+        // Markdown links: [text](url)
         let pattern = #"\[([^\]]+)\]\(([^\)]+)\)"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
 
         for match in regex.matches(in: str.string, range: fullRange) {
             let textRange = match.range(at: 1)
+            let urlRange = match.range(at: 2)
+            let urlString = (str.string as NSString).substring(with: urlRange)
+
             str.addAttributes([
                 .foregroundColor: theme.linkColor,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ], range: textRange)
+
+            // Make the link text tappable
+            if let url = URL(string: urlString) {
+                str.addAttribute(.link, value: url, range: textRange)
+            }
 
             // Dim all syntax chars around the link text
             let fullMatch = match.range
             let openBracket = NSRange(location: fullMatch.location, length: 1)
             str.addAttribute(.foregroundColor, value: theme.syntaxColor, range: openBracket)
 
-            // ] and everything after it: ](url)
             let syntaxAfterText = NSRange(
                 location: textRange.location + textRange.length,
                 length: fullMatch.length - textRange.length - 1
             )
             str.addAttribute(.foregroundColor, value: theme.syntaxColor, range: syntaxAfterText)
+        }
+
+        // Bare URLs (https://... or http://...)
+        let urlPattern = #"(?<!\(|\")(https?://[^\s\)\]]+)"#
+        guard let urlRegex = try? NSRegularExpression(pattern: urlPattern) else { return }
+
+        for match in urlRegex.matches(in: str.string, range: fullRange) {
+            let urlRange = match.range(at: 1)
+            let urlString = (str.string as NSString).substring(with: urlRange)
+
+            // Skip if this URL is already inside a markdown link ](url)
+            if urlRange.location > 0 {
+                let charBefore = (str.string as NSString).substring(with: NSRange(location: urlRange.location - 1, length: 1))
+                if charBefore == "(" { continue }
+            }
+
+            if let url = URL(string: urlString) {
+                str.addAttributes([
+                    .foregroundColor: theme.linkColor,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .link: url
+                ], range: urlRange)
+            }
         }
     }
 

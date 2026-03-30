@@ -5,6 +5,7 @@ protocol NoteRepositoryProtocol {
     func fetchByID(_ id: String) async throws -> Note?
     func fetchAll() async throws -> [Note]
     func update(_ note: Note) async throws
+    func upsert(_ note: Note) async throws
     func softDelete(id: String) async throws
     func purgeDeleted(olderThan date: Date) async throws
     func togglePin(id: String) async throws
