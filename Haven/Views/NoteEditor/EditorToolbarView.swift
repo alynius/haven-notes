@@ -7,16 +7,33 @@ struct EditorToolbarView: View {
     var onList: () -> Void = {}
     var onCheckbox: () -> Void = {}
     var onLink: () -> Void = {}
+    var onMicrophone: () -> Void = {}
+    var isRecording: Bool = false
+    var activeFormats: Set<MarkdownFormat> = []
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                toolbarButton("bold", action: onBold)
-                toolbarButton("italic", action: onItalic)
-                toolbarButton("textformat.size", action: onHeading)
-                toolbarButton("list.bullet", action: onList)
-                toolbarButton("checkmark.square", action: onCheckbox)
-                toolbarButton("link", action: onLink)
+                toolbarButton("bold", label: "Bold", isActive: activeFormats.contains(.bold), action: onBold)
+                toolbarButton("italic", label: "Italic", isActive: activeFormats.contains(.italic), action: onItalic)
+                toolbarButton("textformat.size", label: "Heading", isActive: activeFormats.contains(.heading), action: onHeading)
+                toolbarButton("list.bullet", label: "List", isActive: activeFormats.contains(.list), action: onList)
+                toolbarButton("checkmark.square", label: "Checkbox", action: onCheckbox)
+                toolbarButton("link", label: "Link", action: onLink)
+                toolbarButton(
+                    isRecording ? "mic.fill" : "mic",
+                    label: isRecording ? "Stop dictation" : "Start dictation",
+                    action: onMicrophone
+                )
+                .foregroundColor(isRecording ? Color.red : Color.havenTextPrimary)
+                .overlay(
+                    isRecording
+                        ? Circle()
+                            .fill(Color.red)
+                            .frame(width: 6, height: 6)
+                            .offset(x: 12, y: -12)
+                        : nil
+                )
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -28,14 +45,31 @@ struct EditorToolbarView: View {
         )
     }
 
-    private func toolbarButton(_ systemName: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+    private let haptic = UIImpactFeedbackGenerator(style: .light)
+
+    private func toolbarButton(_ systemName: String, label: String, isActive: Bool = false, action: @escaping () -> Void) -> some View {
+        Button {
+            haptic.impactOccurred()
+            action()
+        } label: {
             Image(systemName: systemName)
                 .font(.callout.weight(.medium))
-                .foregroundStyle(.havenTextPrimary)
+                .foregroundColor(isActive ? Color.havenAccent : Color.havenTextPrimary)
                 .frame(width: 44, height: 44)
-                .background(Color.havenBackground)
+                .background(isActive ? Color.havenAccent.opacity(0.12) : Color.havenBackground)
                 .clipShape(.rect(cornerRadius: 6))
         }
+        .buttonStyle(ToolbarPressStyle())
+        .accessibilityLabel(label)
+        .accessibilityAddTraits(isActive ? .isSelected : [])
+    }
+}
+
+/// Scale-down press effect for toolbar buttons.
+private struct ToolbarPressStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }

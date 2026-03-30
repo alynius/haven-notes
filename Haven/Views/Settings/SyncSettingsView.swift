@@ -21,7 +21,7 @@ struct SyncSettingsView: View {
                 } footer: {
                     Text("When enabled, notes sync to your server. Your data never touches our servers.")
                         .font(.caption2)
-                        .foregroundStyle(.havenTextSecondary)
+                        .foregroundColor(Color.havenTextSecondary)
                 }
                 .listRowBackground(Color.havenSurface)
 
@@ -31,6 +31,8 @@ struct SyncSettingsView: View {
                             .font(.havenBody)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
+                            .keyboardType(.URL)
+                            .textContentType(.URL)
 
                         SecureField("Auth Token", text: $viewModel.authToken)
                             .font(.havenBody)
@@ -40,7 +42,7 @@ struct SyncSettingsView: View {
                         } label: {
                             Text("Save Configuration")
                                 .font(.havenBody)
-                                .foregroundStyle(.havenPrimary)
+                                .foregroundColor(Color.havenPrimary)
                         }
                     } header: {
                         Text("Server Configuration")
@@ -61,7 +63,7 @@ struct SyncSettingsView: View {
                             Spacer()
                             Text("\(viewModel.unsyncedCount)")
                                 .font(.havenBody)
-                                .foregroundStyle(.havenTextSecondary)
+                                .foregroundColor(Color.havenTextSecondary)
                         }
 
                         Button {
@@ -70,7 +72,7 @@ struct SyncSettingsView: View {
                             HStack {
                                 Text("Sync Now")
                                     .font(.havenBody)
-                                    .foregroundStyle(.havenPrimary)
+                                    .foregroundColor(Color.havenPrimary)
                                 Spacer()
                                 if case .syncing = viewModel.syncStatus {
                                     ProgressView()
@@ -84,20 +86,20 @@ struct SyncSettingsView: View {
                     .listRowBackground(Color.havenSurface)
                 }
 
-                if let error = viewModel.errorMessage {
-                    Section {
-                        Text(error)
-                            .font(.havenCaption)
-                            .foregroundStyle(.red)
-                    }
-                    .listRowBackground(Color.havenSurface)
-                }
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
         }
         .navigationTitle("Sync")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("Sync Error", isPresented: Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { if !$0 { viewModel.errorMessage = nil } }
+        )) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.errorMessage ?? "An error occurred")
+        }
         .task {
             await viewModel.loadUnsyncedCount()
         }
@@ -109,11 +111,11 @@ struct SyncSettingsView: View {
         case .idle:
             Label("Idle", systemImage: "checkmark.circle")
                 .font(.havenCaption)
-                .foregroundStyle(.havenAccent)
+                .foregroundColor(Color.havenAccent)
         case .syncing:
             Label("Syncing", systemImage: "arrow.triangle.2.circlepath")
                 .font(.havenCaption)
-                .foregroundStyle(.havenPrimary)
+                .foregroundColor(Color.havenPrimary)
         case .error:
             Label("Error", systemImage: "exclamationmark.triangle")
                 .font(.havenCaption)
@@ -121,7 +123,7 @@ struct SyncSettingsView: View {
         case .disabled:
             Label("Disabled", systemImage: "minus.circle")
                 .font(.havenCaption)
-                .foregroundStyle(.havenTextSecondary)
+                .foregroundColor(Color.havenTextSecondary)
         }
     }
 }

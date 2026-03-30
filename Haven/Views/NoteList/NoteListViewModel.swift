@@ -3,19 +3,41 @@ import SwiftUI
 @MainActor
 final class NoteListViewModel: ObservableObject {
     @Published var notes: [Note] = []
+    @Published var folders: [String: String] = [:]  // folderID -> folderName
     @Published var isLoading = false
     @Published var errorMessage: String?
 
     private let noteRepo: NoteRepositoryProtocol
+    private let folderRepo: FolderRepositoryProtocol?
+    var filter: NoteFilter
 
-    init(noteRepo: NoteRepositoryProtocol) {
+    init(noteRepo: NoteRepositoryProtocol, folderRepo: FolderRepositoryProtocol? = nil, filter: NoteFilter = .allNotes) {
         self.noteRepo = noteRepo
+        self.folderRepo = folderRepo
+        self.filter = filter
     }
 
     func loadNotes() async {
         isLoading = true
         do {
-            notes = try await noteRepo.fetchAll()
+            switch filter {
+            case .allNotes:
+                notes = try await noteRepo.fetchAll()
+            case .folder(let id, _):
+                notes = try await noteRepo.fetchByFolder(folderID: id)
+            case .tag(let id, _):
+                notes = try await noteRepo.fetchByTag(tagID: id)
+            }
+            // Load folder names for display
+            if let folderRepo = folderRepo {
+                let allFolders = try await folderRepo.fetchAll()
+                folders = Dictionary(uniqueKeysWithValues: allFolders.map { ($0.id, $0.name) })
+            }
+
+            // Share note count with widget via App Groups
+            let totalCount = try await noteRepo.fetchAll().count
+            UserDefaults(suiteName: HavenConstants.AppGroup.identifier)?
+                .set(totalCount, forKey: HavenConstants.AppGroup.noteCountKey)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -24,7 +46,8 @@ final class NoteListViewModel: ObservableObject {
 
     func createNote() async -> String? {
         do {
-            let note = try await noteRepo.create(title: "", bodyHTML: "")
+            let folderID: String? = if case .folder(let id, _) = filter { id } else { nil }
+            let note = try await noteRepo.create(title: "", bodyHTML: "", folderID: folderID)
             await loadNotes()
             return note.id
         } catch {

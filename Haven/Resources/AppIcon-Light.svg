@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Background: Light cream -->
+  <rect width="1024" height="1024" rx="0" fill="#FEFDFB"/>
+
+  <!-- Back rectangle (darkest) -->
+  <rect x="340" y="200" width="480" height="600" rx="48" fill="#6B5234" opacity="0.85"/>
+
+  <!-- Middle rectangle -->
+  <rect x="270" y="260" width="480" height="600" rx="48" fill="#7D6140" opacity="0.9"/>
+
+  <!-- Front rectangle (lightest) -->
+  <rect x="200" y="320" width="480" height="600" rx="48" fill="#8B6F47"/>
+
+  <!-- Text lines on front rectangle -->
+  <rect x="280" y="480" width="320" height="16" rx="8" fill="#A8925F" opacity="0.6"/>
+  <rect x="280" y="536" width="260" height="16" rx="8" fill="#A8925F" opacity="0.6"/>
+  <rect x="280" y="592" width="290" height="16" rx="8" fill="#A8925F" opacity="0.6"/>
+</svg>

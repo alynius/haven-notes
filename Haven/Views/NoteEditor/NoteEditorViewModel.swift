@@ -5,30 +5,49 @@ import Combine
 final class NoteEditorViewModel: ObservableObject {
     @Published var note: Note
     @Published var tasks: [NoteTask] = []
+    @Published var tags: [Tag] = []
+    @Published var allTags: [Tag] = []
     @Published var backlinks: [Note] = []
     @Published var autocompleteSuggestions: [Note] = []
     @Published var showAutocomplete = false
     @Published var isSaving = false
+    @Published var isLoaded = false
     @Published var errorMessage: String?
+
+    let speechRecognizer = SpeechRecognizer()
 
     private let noteRepo: NoteRepositoryProtocol
     private let taskRepo: TaskRepositoryProtocol
+    private let tagRepo: TagRepositoryProtocol
     private let wikiLinkParser: WikiLinkParser
     private var autosaveTask: Task<Void, Never>?
 
-    init(note: Note, noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, wikiLinkParser: WikiLinkParser) {
+    init(note: Note, noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, tagRepo: TagRepositoryProtocol, wikiLinkParser: WikiLinkParser) {
         self.note = note
         self.noteRepo = noteRepo
         self.taskRepo = taskRepo
+        self.tagRepo = tagRepo
         self.wikiLinkParser = wikiLinkParser
+    }
+
+    func resolveWikiLink(title: String) async -> Note? {
+        try? await noteRepo.resolveWikiLink(title: title)
     }
 
     func load() async {
         do {
+            // Load the actual note from DB if it exists (for existing notes)
+            if let existing = try await noteRepo.fetchByID(note.id) {
+                note = existing
+            }
             tasks = try await taskRepo.fetchTasks(for: note.id)
+            tags = try await tagRepo.fetchTags(for: note.id)
+            allTags = try await tagRepo.fetchAll()
             backlinks = try await noteRepo.fetchBacklinks(for: note.id)
+            isLoaded = true
         } catch {
             errorMessage = error.localizedDescription
+            isLoaded = true
         }
     }
 
@@ -38,14 +57,14 @@ final class NoteEditorViewModel: ObservableObject {
         scheduleAutosave()
     }
 
-    func updateBody(_ html: String) {
-        note.bodyHTML = html
-        note.bodyPlaintext = HTMLSanitizer.stripHTML(html)
+    func updateBody(_ markdown: String) {
+        note.bodyHTML = markdown  // Raw markdown stored in bodyHTML field for DB compat
+        note.bodyPlaintext = MarkdownStripper.stripMarkdown(markdown)
         note.updatedAt = Date()
         scheduleAutosave()
 
         // Check for wiki link autocomplete
-        checkForAutocomplete(in: note.bodyPlaintext)
+        checkForAutocomplete(in: markdown)
     }
 
     func save() async {
@@ -86,14 +105,54 @@ final class NoteEditorViewModel: ObservableObject {
         }
     }
 
+    func addTag(name: String) async {
+        do {
+            let tag = try await tagRepo.findOrCreate(name: name)
+            try await tagRepo.addTag(noteID: note.id, tagID: tag.id)
+            tags = try await tagRepo.fetchTags(for: note.id)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func removeTag(tagID: String) async {
+        do {
+            try await tagRepo.removeTag(noteID: note.id, tagID: tagID)
+            tags = try await tagRepo.fetchTags(for: note.id)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     func selectAutocompleteSuggestion(_ suggestion: Note) {
+        // Replace the partial [[query with [[SuggestionTitle]]
+        let linkText = "[[" + suggestion.title + "]]"
+        if let lastOpen = note.bodyHTML.range(of: "[[", options: .backwards) {
+            note.bodyHTML = String(note.bodyHTML[..<lastOpen.lowerBound]) + linkText
+            note.bodyPlaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
+            note.updatedAt = Date()
+            scheduleAutosave()
+        }
         showAutocomplete = false
         autocompleteSuggestions = []
+    }
+
+    func insertDictatedText(_ text: String) {
+        guard !text.isEmpty else { return }
+        if note.bodyHTML.isEmpty {
+            note.bodyHTML = text
+        } else {
+            note.bodyHTML += "\n\n" + text
+        }
+        note.bodyPlaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
+        note.updatedAt = Date()
+        scheduleAutosave()
     }
 
     // MARK: - Private
 
     private func scheduleAutosave() {
+        guard isLoaded else { return }  // Don't save until note is loaded from DB
         autosaveTask?.cancel()
         autosaveTask = Task {
             try? await Task.sleep(nanoseconds: UInt64(HavenConstants.autosaveDebounceSeconds * 1_000_000_000))

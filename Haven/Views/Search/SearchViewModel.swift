@@ -30,7 +30,17 @@ final class SearchViewModel: ObservableObject {
             do {
                 results = try await noteRepo.search(query: trimmed)
             } catch {
-                results = []
+                // Fallback: fetch all and filter client-side
+                do {
+                    let all = try await noteRepo.fetchAll()
+                    let q = trimmed.lowercased()
+                    results = all.filter {
+                        $0.title.lowercased().contains(q) ||
+                        $0.bodyPlaintext.lowercased().contains(q)
+                    }
+                } catch {
+                    results = []
+                }
             }
             isSearching = false
         }

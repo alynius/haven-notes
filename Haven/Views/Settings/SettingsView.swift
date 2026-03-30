@@ -3,6 +3,9 @@ import SwiftUI
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var container: DependencyContainer
+    @State private var showNotionImport = false
+    private let biometricService = BiometricService()
 
     var body: some View {
         ZStack {
@@ -15,14 +18,36 @@ struct SettingsView: View {
                     HStack {
                         Text("Notes")
                             .font(.havenBody)
-                            .foregroundStyle(.havenTextPrimary)
+                            .foregroundColor(Color.havenTextPrimary)
                         Spacer()
                         Text("\(viewModel.noteCount)")
                             .font(.havenBody)
-                            .foregroundStyle(.havenTextSecondary)
+                            .foregroundColor(Color.havenTextSecondary)
                     }
                 } header: {
                     Text("Library")
+                }
+                .listRowBackground(Color.havenSurface)
+
+                // Security section
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { biometricService.isEnabled },
+                        set: { biometricService.isEnabled = $0 }
+                    )) {
+                        HStack {
+                            Image(systemName: biometricService.availableBiometric == .faceID ? "faceid" : "touchid")
+                                .foregroundColor(Color.havenAccent)
+                            Text(biometricService.availableBiometric == .faceID ? "Face ID Lock" : "Touch ID Lock")
+                                .font(.havenBody)
+                        }
+                    }
+                    .tint(Color.havenAccent)
+                } header: {
+                    Text("Security")
+                } footer: {
+                    Text("Require authentication to open Haven.")
+                        .font(.caption2)
                 }
                 .listRowBackground(Color.havenSurface)
 
@@ -34,12 +59,33 @@ struct SettingsView: View {
                         Text("Dark").tag("dark")
                     }
                     .font(.havenBody)
-                    .foregroundStyle(.havenTextPrimary)
+                    .foregroundColor(Color.havenTextPrimary)
                     .onChange(of: viewModel.themeMode) { newValue in
                         viewModel.setThemeMode(newValue)
+                        appState.applyTheme(newValue)
                     }
                 } header: {
                     Text("Appearance")
+                }
+                .listRowBackground(Color.havenSurface)
+
+                // Import section
+                Section {
+                    Button {
+                        showNotionImport = true
+                    } label: {
+                        HStack {
+                            Label("Import from Notion", systemImage: "square.and.arrow.down")
+                                .font(.havenBody)
+                                .foregroundColor(Color.havenTextPrimary)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(Color.havenTextSecondary)
+                        }
+                    }
+                } header: {
+                    Text("Import")
                 }
                 .listRowBackground(Color.havenSurface)
 
@@ -48,6 +94,17 @@ struct SettingsView: View {
                     NavigationLink(value: Route.syncSettings) {
                         Text("Sync Settings")
                             .font(.havenBody)
+                    }
+
+                    NavigationLink(value: Route.encryption) {
+                        HStack {
+                            Text("Encryption")
+                                .font(.havenBody)
+                            Spacer()
+                            Text(container.encryptionService.hasKey ? "On" : "Off")
+                                .font(.havenCaption)
+                                .foregroundColor(container.encryptionService.hasKey ? Color.havenAccent : Color.havenTextSecondary)
+                        }
                     }
                 } header: {
                     Text("Sync")
@@ -70,13 +127,20 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Haven")
                             .font(.havenBody.weight(.medium))
-                            .foregroundStyle(.havenTextPrimary)
+                            .foregroundColor(Color.havenTextPrimary)
                         Text("Fast. Private. Solid.")
                             .font(.havenCaption)
-                            .foregroundStyle(.havenTextSecondary)
+                            .foregroundColor(Color.havenTextSecondary)
                         Text("Your notes stay on your device.")
                             .font(.havenCaption)
-                            .foregroundStyle(.havenTextSecondary)
+                            .foregroundColor(Color.havenTextSecondary)
+                        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+                           let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                            Text("Version \(version) (\(build))")
+                                .font(.caption2)
+                                .foregroundColor(Color.havenTextSecondary)
+                                .padding(.top, 2)
+                        }
                     }
                     .padding(.vertical, 4)
                 } header: {
@@ -89,6 +153,9 @@ struct SettingsView: View {
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showNotionImport) {
+            NotionImportView(importer: container.notionImporter)
+        }
         .task {
             await viewModel.load()
         }

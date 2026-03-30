@@ -5,6 +5,9 @@ struct NoteEditorView: View {
     @EnvironmentObject var appState: AppState
     @FocusState private var titleFocused: Bool
 
+    /// Shared reference to the editor coordinator for toolbar actions.
+    @StateObject private var editorShared = RichTextEditor.Shared()
+
     var body: some View {
         ZStack {
             Color.havenBackground
@@ -18,15 +21,15 @@ struct NoteEditorView: View {
                         set: { viewModel.updateTitle($0) }
                     ))
                     .font(.havenContentTitle)
-                    .foregroundStyle(.havenTextPrimary)
+                    .foregroundColor(Color.havenTextPrimary)
                     .focused($titleFocused)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 16)
-                    .padding(.bottom, 8)
+                    .padding(.top, Spacing.lg)
+                    .padding(.bottom, Spacing.sm)
 
-                    Divider()
-                        .background(Color.havenBorder)
-                        .padding(.horizontal, 16)
+                    // Subtle warm divider
+                    Rectangle()
+                        .fill(Color.havenBorder.opacity(0.6))
+                        .frame(height: 0.5)
 
                     // Body editor
                     RichTextEditor(
@@ -36,32 +39,40 @@ struct NoteEditorView: View {
                         ),
                         onLinkTapped: { target in
                             Task {
-                                if let linked = try? await viewModel.noteRepo.resolveWikiLink(title: target) {
+                                if let linked = await viewModel.resolveWikiLink(title: target) {
                                     appState.navigateTo(.noteEditor(noteID: linked.id))
                                 }
                             }
-                        }
+                        },
+                        shared: editorShared
                     )
                     .frame(minHeight: 300)
-                    .padding(.horizontal, 4)
+
+                    // Tags section
+                    if viewModel.isLoaded {
+                        TagPickerView(
+                            tags: viewModel.tags,
+                            allTags: viewModel.allTags,
+                            onAdd: { name in Task { await viewModel.addTag(name: name) } },
+                            onRemove: { tagID in Task { await viewModel.removeTag(tagID: tagID) } }
+                        )
+                    }
 
                     // Tasks section
-                    if !viewModel.tasks.isEmpty {
-                        TaskListView(
-                            tasks: viewModel.tasks,
-                            onToggle: { id in Task { await viewModel.toggleTask(id) } },
-                            onDelete: { id in Task { await viewModel.deleteTask(id) } }
-                        )
-                        .padding(.horizontal, 16)
-                        .padding(.top, 12)
-                    }
+                    TaskListView(
+                        tasks: viewModel.tasks,
+                        onToggle: { id in Task { await viewModel.toggleTask(id) } },
+                        onDelete: { id in Task { await viewModel.deleteTask(id) } },
+                        onAdd: { text in Task { await viewModel.addTask(text: text) } }
+                    )
+                    .padding(.top, 12)
 
                     // Backlinks section
                     if !viewModel.backlinks.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Linked from")
                                 .font(.havenCaption)
-                                .foregroundStyle(.havenTextSecondary)
+                                .foregroundColor(Color.havenTextSecondary)
 
                             ForEach(viewModel.backlinks) { linked in
                                 Button {
@@ -74,15 +85,59 @@ struct NoteEditorView: View {
                                             .font(.havenBody)
                                             .lineLimit(1)
                                     }
-                                    .foregroundStyle(.havenAccent)
+                                    .foregroundColor(Color.havenAccent)
                                 }
                             }
                         }
-                        .padding(.horizontal, 16)
                         .padding(.top, 20)
                     }
 
                     Spacer(minLength: 100)
+                }
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .safeAreaInset(edge: .bottom) {
+                VStack(spacing: 0) {
+                    // Dictation banner
+                    if viewModel.speechRecognizer.isRecording {
+                        HStack(spacing: Spacing.sm) {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                            Text(viewModel.speechRecognizer.transcript.isEmpty ? "Listening..." : viewModel.speechRecognizer.transcript)
+                                .font(.havenCaption)
+                                .foregroundColor(Color.havenTextPrimary)
+                                .lineLimit(2)
+                            Spacer()
+                            Button("Insert") {
+                                viewModel.insertDictatedText(viewModel.speechRecognizer.transcript)
+                                viewModel.speechRecognizer.stopRecording()
+                            }
+                            .font(.havenCaption.weight(.semibold))
+                            .foregroundColor(Color.havenAccent)
+                            .disabled(viewModel.speechRecognizer.transcript.isEmpty)
+                        }
+                        .padding(.horizontal, Spacing.lg)
+                        .padding(.vertical, Spacing.sm)
+                        .background(Color.havenSurface)
+                    }
+
+                    EditorToolbarView(
+                        onBold: { editorShared.coordinator?.insertBold() },
+                        onItalic: { editorShared.coordinator?.insertItalic() },
+                        onHeading: { editorShared.coordinator?.insertHeading(level: 1) },
+                        onList: { editorShared.coordinator?.insertList() },
+                        onCheckbox: { editorShared.coordinator?.insertCheckbox() },
+                        onLink: { editorShared.coordinator?.insertLink() },
+                        onMicrophone: {
+                            Task {
+                                await viewModel.speechRecognizer.toggleRecording()
+                            }
+                        },
+                        isRecording: viewModel.speechRecognizer.isRecording,
+                        activeFormats: editorShared.activeFormats
+                    )
                 }
             }
 
@@ -92,8 +147,14 @@ struct NoteEditorView: View {
                     suggestions: viewModel.autocompleteSuggestions,
                     onSelect: { note in
                         viewModel.selectAutocompleteSuggestion(note)
+                        // Update the text view to reflect the inserted link
+                        if let coordinator = editorShared.coordinator {
+                            coordinator.applyHighlighting(to: coordinator.textView!, text: viewModel.note.bodyHTML)
+                        }
                     }
                 )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showAutocomplete)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -123,16 +184,15 @@ struct NoteEditorView: View {
 
     // MARK: - Factory methods
 
-    static func forExisting(noteID: String, noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, wikiLinkParser: WikiLinkParser) -> NoteEditorView {
-        // Load note synchronously for now — will be replaced with async loading
+    static func forExisting(noteID: String, noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, tagRepo: TagRepositoryProtocol, wikiLinkParser: WikiLinkParser) -> NoteEditorView {
         let note = Note(id: noteID)
-        let vm = NoteEditorViewModel(note: note, noteRepo: noteRepo, taskRepo: taskRepo, wikiLinkParser: wikiLinkParser)
+        let vm = NoteEditorViewModel(note: note, noteRepo: noteRepo, taskRepo: taskRepo, tagRepo: tagRepo, wikiLinkParser: wikiLinkParser)
         return NoteEditorView(viewModel: vm)
     }
 
-    static func forNew(noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, wikiLinkParser: WikiLinkParser) -> NoteEditorView {
+    static func forNew(noteRepo: NoteRepositoryProtocol, taskRepo: TaskRepositoryProtocol, tagRepo: TagRepositoryProtocol, wikiLinkParser: WikiLinkParser) -> NoteEditorView {
         let note = Note()
-        let vm = NoteEditorViewModel(note: note, noteRepo: noteRepo, taskRepo: taskRepo, wikiLinkParser: wikiLinkParser)
+        let vm = NoteEditorViewModel(note: note, noteRepo: noteRepo, taskRepo: taskRepo, tagRepo: tagRepo, wikiLinkParser: wikiLinkParser)
         return NoteEditorView(viewModel: vm)
     }
 }

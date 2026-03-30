@@ -30,6 +30,9 @@ final class SettingsViewModel: ObservableObject {
 
     func setThemeMode(_ mode: String) {
         themeMode = mode
-        db.execute("UPDATE app_settings SET value = '\(mode)' WHERE key = 'theme_mode'")
+        try? db.executeStatement(
+            "UPDATE app_settings SET value = ? WHERE key = 'theme_mode'",
+            params: [mode]
+        )
     }
 }

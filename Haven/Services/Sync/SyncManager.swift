@@ -12,16 +12,18 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
     private let noteRepo: NoteRepository
     private let taskRepo: TaskRepository
     private let db: DatabaseManager
+    private let encryptionService: EncryptionService
 
     private var syncTimer: Timer?
 
-    init(db: DatabaseManager, noteRepo: NoteRepository, taskRepo: TaskRepository) {
+    init(db: DatabaseManager, noteRepo: NoteRepository, taskRepo: TaskRepository, encryptionService: EncryptionService) {
         self.db = db
         self.changeQueue = ChangeQueue(db: db)
         self.conflictResolver = ConflictResolver()
         self.httpClient = SyncHTTPClient()
         self.noteRepo = noteRepo
         self.taskRepo = taskRepo
+        self.encryptionService = encryptionService
     }
 
     func setEnabled(_ enabled: Bool) async throws {
@@ -29,7 +31,10 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
         status = enabled ? .idle : .disabled
 
         // Save setting
-        db.execute("UPDATE app_settings SET value = '\(enabled ? "true" : "false")' WHERE key = 'sync_enabled'")
+        try db.executeStatement(
+            "UPDATE app_settings SET value = ? WHERE key = 'sync_enabled'",
+            params: [enabled ? "true" : "false"]
+        )
 
         if enabled {
             startPeriodicSync()
@@ -40,7 +45,10 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
 
     func configure(serverURL: URL, authToken: String) async throws {
         httpClient.configure(serverURL: serverURL, authToken: authToken)
-        db.execute("UPDATE app_settings SET value = '\(serverURL.absoluteString)' WHERE key = 'sync_server_url'")
+        try db.executeStatement(
+            "UPDATE app_settings SET value = ? WHERE key = 'sync_server_url'",
+            params: [serverURL.absoluteString]
+        )
     }
 
     func sync() async throws {
@@ -67,22 +75,41 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
         var deletedNoteIDs: [String] = []
         var deletedTaskIDs: [String] = []
 
+        // Collect unique note IDs that have task changes so we can fetch their tasks
+        var noteIDsWithTaskChanges: Set<String> = []
+
         for entry in unsynced {
             switch (entry.entityType, entry.operation) {
             case ("note", "delete"):
                 deletedNoteIDs.append(entry.entityID)
             case ("note", _):
-                if let note = try await noteRepo.fetchByID(entry.entityID) {
+                if var note = try await noteRepo.fetchByID(entry.entityID) {
+                    if encryptionService.hasKey {
+                        note = try encryptionService.encryptNote(note)
+                    }
                     notes.append(note)
                 }
             case ("task", "delete"):
                 deletedTaskIDs.append(entry.entityID)
             case ("task", _):
-                // Tasks fetched by note, handled via note sync
-                break
+                // Look up the note_id for this task to fetch all tasks for that note
+                let taskID = entry.entityID
+                try db.query(
+                    "SELECT note_id FROM \(HavenConstants.Database.tasksTable) WHERE id = ?",
+                    params: [taskID]
+                ) { stmt in
+                    let noteID = String(cString: sqlite3_column_text(stmt, 0))
+                    noteIDsWithTaskChanges.insert(noteID)
+                }
             default:
                 break
             }
+        }
+
+        // Fetch tasks for notes that had task changes
+        for noteID in noteIDsWithTaskChanges {
+            let noteTasks = try await taskRepo.fetchTasks(for: noteID)
+            tasks.append(contentsOf: noteTasks)
         }
 
         let payload = SyncPushPayload(
@@ -111,14 +138,20 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
 
         // Apply remote changes with conflict resolution
         for remoteNote in response.notes {
-            if let localNote = try await noteRepo.fetchByID(remoteNote.id) {
-                let winner = conflictResolver.resolve(local: localNote, remote: remoteNote)
-                if winner.id == remoteNote.id && winner.updatedAt == remoteNote.updatedAt {
-                    try await noteRepo.update(remoteNote)
+            // Decrypt if encryption is enabled
+            var decryptedNote = remoteNote
+            if encryptionService.hasKey {
+                decryptedNote = try encryptionService.decryptNote(remoteNote)
+            }
+
+            if let localNote = try await noteRepo.fetchByID(decryptedNote.id) {
+                let winner = conflictResolver.resolve(local: localNote, remote: decryptedNote)
+                if winner.id == decryptedNote.id && winner.updatedAt == decryptedNote.updatedAt {
+                    try await noteRepo.update(decryptedNote)
                 }
             } else {
                 // New note from remote
-                let _ = try await noteRepo.create(title: remoteNote.title, bodyHTML: remoteNote.bodyHTML)
+                let _ = try await noteRepo.create(title: decryptedNote.title, bodyHTML: decryptedNote.bodyHTML)
             }
         }
 
@@ -128,7 +161,10 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
         }
 
         // Update last sync timestamp
-        db.execute("UPDATE app_settings SET value = '\(response.serverTimestamp)' WHERE key = 'last_sync_timestamp'")
+        try db.executeStatement(
+            "UPDATE app_settings SET value = ? WHERE key = 'last_sync_timestamp'",
+            params: [response.serverTimestamp]
+        )
     }
 
     func recordChange(entityType: String, entityID: String, operation: String) async throws {

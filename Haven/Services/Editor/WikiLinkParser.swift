@@ -2,12 +2,11 @@ import Foundation
 
 final class WikiLinkParser {
 
-    /// Extract all wiki link target titles from HTML content.
+    /// Extract all wiki link target titles from content (markdown or HTML).
     /// Looks for [[Title]] patterns in the text.
-    func extractLinkTargets(from html: String) -> [String] {
-        // Strip HTML first to get plain text, then extract [[links]]
-        let plaintext = HTMLSanitizer.stripHTML(html)
-        return plaintext.wikiLinkTargets
+    func extractLinkTargets(from content: String) -> [String] {
+        // Content may be raw markdown or legacy HTML; extract [[links]] directly
+        return content.wikiLinkTargets
     }
 
     /// Check if a string contains any wiki links.

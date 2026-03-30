@@ -1,7 +1,7 @@
 import Foundation
 
 protocol NoteRepositoryProtocol {
-    func create(title: String, bodyHTML: String) async throws -> Note
+    func create(title: String, bodyHTML: String, folderID: String?) async throws -> Note
     func fetchByID(_ id: String) async throws -> Note?
     func fetchAll() async throws -> [Note]
     func update(_ note: Note) async throws
@@ -13,4 +13,7 @@ protocol NoteRepositoryProtocol {
     func autocompleteTitles(query: String, limit: Int) async throws -> [Note]
     func fetchBacklinks(for noteID: String) async throws -> [Note]
     func rebuildLinks(for noteID: String, bodyHTML: String) async throws
+    func fetchByFolder(folderID: String?) async throws -> [Note]
+    func fetchByTag(tagID: String) async throws -> [Note]
+    func moveToFolder(noteID: String, folderID: String?) async throws
 }

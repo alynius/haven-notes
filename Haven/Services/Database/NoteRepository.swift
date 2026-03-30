@@ -10,18 +10,19 @@ final class NoteRepository: NoteRepositoryProtocol {
 
     // MARK: - Create
 
-    func create(title: String, bodyHTML: String) async throws -> Note {
+    func create(title: String, bodyHTML: String, folderID: String? = nil) async throws -> Note {
         let note = Note(
             title: title,
             bodyHTML: bodyHTML,
-            bodyPlaintext: HTMLSanitizer.stripHTML(bodyHTML)
+            bodyPlaintext: HTMLSanitizer.stripHTML(bodyHTML),
+            folderID: folderID
         )
 
         try db.performSync {
             let sql = """
                 INSERT INTO \(HavenConstants.Database.notesTable)
-                (id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """
             try self.db.executeStatement(sql, params: [
                 note.id,
@@ -30,6 +31,7 @@ final class NoteRepository: NoteRepositoryProtocol {
                 note.bodyPlaintext,
                 note.isPinned ? 1 : 0,
                 note.isDeleted ? 1 : 0,
+                note.folderID,
                 note.createdAt.iso8601String,
                 note.updatedAt.iso8601String
             ])
@@ -45,7 +47,7 @@ final class NoteRepository: NoteRepositoryProtocol {
 
     func fetchByID(_ id: String) async throws -> Note? {
         try db.performSync {
-            let sql = "SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at FROM \(HavenConstants.Database.notesTable) WHERE id = ?"
+            let sql = "SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id FROM \(HavenConstants.Database.notesTable) WHERE id = ?"
             var result: Note?
             try self.db.query(sql, params: [id]) { stmt in
                 result = self.noteFromRow(stmt)
@@ -57,7 +59,7 @@ final class NoteRepository: NoteRepositoryProtocol {
     func fetchAll() async throws -> [Note] {
         try db.performSync {
             let sql = """
-                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at
+                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                 FROM \(HavenConstants.Database.notesTable)
                 WHERE is_deleted = 0
                 ORDER BY is_pinned DESC, updated_at DESC
@@ -142,28 +144,26 @@ final class NoteRepository: NoteRepositoryProtocol {
         let sanitized = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !sanitized.isEmpty else { return [] }
 
-        return try db.performSync {
-            // Use FTS5 MATCH; append * for prefix matching
-            let ftsQuery = sanitized
-                .components(separatedBy: .whitespaces)
-                .filter { !$0.isEmpty }
-                .map { "\($0)*" }
-                .joined(separator: " ")
+        // Use FTS5 MATCH; append * for prefix matching
+        let ftsQuery = sanitized
+            .components(separatedBy: .whitespaces)
+            .filter { !$0.isEmpty }
+            .map { "\($0)*" }
+            .joined(separator: " ")
 
-            let sql = """
-                SELECT n.id, n.title, n.body_html, n.body_plaintext, n.is_pinned, n.is_deleted, n.created_at, n.updated_at
-                FROM \(HavenConstants.Database.notesFTSTable) fts
-                JOIN \(HavenConstants.Database.notesTable) n ON n.rowid = fts.rowid
-                WHERE fts MATCH ? AND n.is_deleted = 0
-                ORDER BY rank
-                LIMIT ?
-                """
-            var notes: [Note] = []
-            try self.db.query(sql, params: [ftsQuery, HavenConstants.maxSearchResults]) { stmt in
-                notes.append(self.noteFromRow(stmt))
-            }
-            return notes
+        let sql = """
+            SELECT n.id, n.title, n.body_html, n.body_plaintext, n.is_pinned, n.is_deleted, n.created_at, n.updated_at, n.folder_id
+            FROM \(HavenConstants.Database.notesFTSTable) fts
+            JOIN \(HavenConstants.Database.notesTable) n ON n.id = fts.note_id
+            WHERE fts MATCH ? AND n.is_deleted = 0
+            ORDER BY rank
+            LIMIT ?
+            """
+        var notes: [Note] = []
+        try db.query(sql, params: [ftsQuery, HavenConstants.maxSearchResults]) { stmt in
+            notes.append(self.noteFromRow(stmt))
         }
+        return notes
     }
 
     // MARK: - Wiki Link Resolution
@@ -171,9 +171,9 @@ final class NoteRepository: NoteRepositoryProtocol {
     func resolveWikiLink(title: String) async throws -> Note? {
         try db.performSync {
             let sql = """
-                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at
+                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                 FROM \(HavenConstants.Database.notesTable)
-                WHERE title LIKE ? AND is_deleted = 0
+                WHERE LOWER(title) = LOWER(?) AND is_deleted = 0
                 LIMIT 1
                 """
             var result: Note?
@@ -192,7 +192,7 @@ final class NoteRepository: NoteRepositoryProtocol {
 
         return try db.performSync {
             let sql = """
-                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at
+                SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                 FROM \(HavenConstants.Database.notesTable)
                 WHERE title LIKE ? AND is_deleted = 0
                 ORDER BY updated_at DESC
@@ -212,7 +212,7 @@ final class NoteRepository: NoteRepositoryProtocol {
     func fetchBacklinks(for noteID: String) async throws -> [Note] {
         try db.performSync {
             let sql = """
-                SELECT n.id, n.title, n.body_html, n.body_plaintext, n.is_pinned, n.is_deleted, n.created_at, n.updated_at
+                SELECT n.id, n.title, n.body_html, n.body_plaintext, n.is_pinned, n.is_deleted, n.created_at, n.updated_at, n.folder_id
                 FROM \(HavenConstants.Database.linksTable) l
                 JOIN \(HavenConstants.Database.notesTable) n ON n.id = l.source_note_id
                 WHERE l.target_note_id = ? AND n.is_deleted = 0
@@ -228,19 +228,19 @@ final class NoteRepository: NoteRepositoryProtocol {
     // MARK: - Rebuild Links
 
     func rebuildLinks(for noteID: String, bodyHTML: String) async throws {
-        let plaintext = HTMLSanitizer.stripHTML(bodyHTML)
-        let linkTargets = plaintext.wikiLinkTargets
+        // bodyHTML now stores raw markdown — extract [[links]] directly
+        let linkTargets = bodyHTML.wikiLinkTargets
 
         try db.performSync {
             // Delete existing outgoing links for this note
             let deleteSql = "DELETE FROM \(HavenConstants.Database.linksTable) WHERE source_note_id = ?"
             try self.db.executeStatement(deleteSql, params: [noteID])
 
-            // Resolve each target and insert link
+            // Resolve each target and insert link (case-insensitive match)
             for target in linkTargets {
                 let findSql = """
                     SELECT id FROM \(HavenConstants.Database.notesTable)
-                    WHERE title LIKE ? AND is_deleted = 0
+                    WHERE LOWER(title) = LOWER(?) AND is_deleted = 0
                     LIMIT 1
                     """
                 var targetID: String?
@@ -248,7 +248,7 @@ final class NoteRepository: NoteRepositoryProtocol {
                     targetID = DatabaseManager.columnTextNonNull(stmt, 0)
                 }
 
-                if let resolvedID = targetID, !resolvedID.isEmpty {
+                if let resolvedID = targetID, !resolvedID.isEmpty, resolvedID != noteID {
                     let insertSql = """
                         INSERT OR IGNORE INTO \(HavenConstants.Database.linksTable)
                         (source_note_id, target_note_id, link_text)
@@ -257,6 +257,66 @@ final class NoteRepository: NoteRepositoryProtocol {
                     try self.db.executeStatement(insertSql, params: [noteID, resolvedID, target])
                 }
             }
+        }
+    }
+
+    // MARK: - Folder / Tag Queries
+
+    func fetchByFolder(folderID: String?) async throws -> [Note] {
+        try db.performSync {
+            let sql: String
+            let params: [Any?]
+            if let folderID = folderID {
+                sql = """
+                    SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
+                    FROM \(HavenConstants.Database.notesTable)
+                    WHERE folder_id = ? AND is_deleted = 0
+                    ORDER BY is_pinned DESC, updated_at DESC
+                    """
+                params = [folderID]
+            } else {
+                sql = """
+                    SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
+                    FROM \(HavenConstants.Database.notesTable)
+                    WHERE folder_id IS NULL AND is_deleted = 0
+                    ORDER BY is_pinned DESC, updated_at DESC
+                    """
+                params = []
+            }
+            var notes: [Note] = []
+            try self.db.query(sql, params: params) { stmt in
+                notes.append(self.noteFromRow(stmt))
+            }
+            return notes
+        }
+    }
+
+    func fetchByTag(tagID: String) async throws -> [Note] {
+        try db.performSync {
+            let sql = """
+                SELECT n.id, n.title, n.body_html, n.body_plaintext, n.is_pinned, n.is_deleted, n.created_at, n.updated_at, n.folder_id
+                FROM \(HavenConstants.Database.notesTable) n
+                JOIN \(HavenConstants.Database.noteTagsTable) nt ON nt.note_id = n.id
+                WHERE nt.tag_id = ? AND n.is_deleted = 0
+                ORDER BY n.is_pinned DESC, n.updated_at DESC
+                """
+            var notes: [Note] = []
+            try self.db.query(sql, params: [tagID]) { stmt in
+                notes.append(self.noteFromRow(stmt))
+            }
+            return notes
+        }
+    }
+
+    func moveToFolder(noteID: String, folderID: String?) async throws {
+        try db.performSync {
+            let sql = """
+                UPDATE \(HavenConstants.Database.notesTable)
+                SET folder_id = ?, updated_at = ?
+                WHERE id = ?
+                """
+            try self.db.executeStatement(sql, params: [folderID, Date().iso8601String, noteID])
+            try self.recordSyncChange(entityType: "note", entityID: noteID, operation: "update")
         }
     }
 
@@ -270,27 +330,19 @@ final class NoteRepository: NoteRepositoryProtocol {
             bodyPlaintext: DatabaseManager.columnTextNonNull(stmt, 3),
             isPinned: sqlite3_column_int(stmt, 4) == 1,
             isDeleted: sqlite3_column_int(stmt, 5) == 1,
+            folderID: DatabaseManager.columnText(stmt, 8),
             createdAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 6)) ?? Date(),
             updatedAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 7)) ?? Date()
         )
     }
 
     private func updateFTS(noteID: String, title: String, plaintext: String) throws {
-        // FTS5 content-sync: delete old entry then insert new one
-        // We use the rowid of the notes table which SQLite assigns automatically
-        let deleteSQL = """
-            DELETE FROM \(HavenConstants.Database.notesFTSTable)
-            WHERE rowid = (SELECT rowid FROM \(HavenConstants.Database.notesTable) WHERE id = ?)
-            """
+        // Standalone FTS5: delete old entry by note_id, then insert new one
+        let deleteSQL = "DELETE FROM \(HavenConstants.Database.notesFTSTable) WHERE note_id = ?"
         try db.executeStatement(deleteSQL, params: [noteID])
 
-        let insertSQL = """
-            INSERT INTO \(HavenConstants.Database.notesFTSTable)(rowid, title, body_plaintext)
-            SELECT rowid, title, body_plaintext
-            FROM \(HavenConstants.Database.notesTable)
-            WHERE id = ?
-            """
-        try db.executeStatement(insertSQL, params: [noteID])
+        let insertSQL = "INSERT INTO \(HavenConstants.Database.notesFTSTable)(note_id, title, body_plaintext) VALUES (?, ?, ?)"
+        try db.executeStatement(insertSQL, params: [noteID, title, plaintext])
     }
 
     private func recordSyncChange(entityType: String, entityID: String, operation: String) throws {

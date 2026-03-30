@@ -16,7 +16,9 @@ final class DatabaseManager {
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent(HavenConstants.Database.fileName)
 
-        guard sqlite3_open(fileURL.path, &db) == SQLITE_OK else {
+        // Use SQLITE_OPEN_FULLMUTEX for thread-safe serialized mode
+        let flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX
+        guard sqlite3_open_v2(fileURL.path, &db, flags, nil) == SQLITE_OK else {
             throw DatabaseError.cannotOpen
         }
 
@@ -40,9 +42,7 @@ final class DatabaseManager {
         var errorMessage: UnsafeMutablePointer<Int8>?
         let result = sqlite3_exec(db, sql, nil, nil, &errorMessage)
         if let errorMessage = errorMessage {
-            let message = String(cString: errorMessage)
             sqlite3_free(errorMessage)
-            print("[DatabaseManager] SQL Error: \(message)")
         }
         return result == SQLITE_OK
     }
@@ -93,9 +93,9 @@ final class DatabaseManager {
 
     // MARK: - Thread Safety
 
-    /// Execute work synchronously on the serial database queue.
+    /// Execute work. SQLite handles thread safety via SQLITE_OPEN_FULLMUTEX.
     func performSync<T>(_ work: () throws -> T) rethrows -> T {
-        try queue.sync { try work() }
+        try work()
     }
 
     // MARK: - Schema
@@ -118,7 +118,9 @@ final class DatabaseManager {
             "CREATE INDEX IF NOT EXISTS idx_notes_is_deleted ON notes(is_deleted)",
             "CREATE INDEX IF NOT EXISTS idx_notes_is_pinned ON notes(is_pinned)",
 
-            "CREATE VIRTUAL TABLE IF NOT EXISTS notes_fts USING fts5(title, body_plaintext, content='notes', content_rowid='rowid')",
+            // Standalone FTS5 table — managed manually by NoteRepository.updateFTS()
+            // Using note_id column to link back to notes table instead of rowid
+            "CREATE VIRTUAL TABLE IF NOT EXISTS notes_fts USING fts5(note_id UNINDEXED, title, body_plaintext)",
 
             """
             CREATE TABLE IF NOT EXISTS tasks (
@@ -167,11 +169,62 @@ final class DatabaseManager {
             "INSERT OR IGNORE INTO app_settings (key, value) VALUES ('sync_enabled', 'false')",
             "INSERT OR IGNORE INTO app_settings (key, value) VALUES ('sync_server_url', '')",
             "INSERT OR IGNORE INTO app_settings (key, value) VALUES ('last_sync_timestamp', '')",
-            "INSERT OR IGNORE INTO app_settings (key, value) VALUES ('theme_mode', 'system')"
+            "INSERT OR IGNORE INTO app_settings (key, value) VALUES ('theme_mode', 'system')",
+
+            // Folders
+            """
+            CREATE TABLE IF NOT EXISTS folders (
+                id TEXT PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL,
+                position INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_folders_position ON folders(position)",
+
+            // Tags
+            """
+            CREATE TABLE IF NOT EXISTS tags (
+                id TEXT PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL UNIQUE,
+                created_at TEXT NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_tags_name ON tags(name)",
+
+            // Note-Tag join table
+            """
+            CREATE TABLE IF NOT EXISTS note_tags (
+                note_id TEXT NOT NULL,
+                tag_id TEXT NOT NULL,
+                PRIMARY KEY (note_id, tag_id),
+                FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE,
+                FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_note_tags_tag_id ON note_tags(tag_id)"
         ]
 
         for sql in statements {
             execute(sql)
+        }
+
+        runMigrations()
+    }
+
+    // MARK: - Migrations
+
+    func runMigrations() {
+        // Add folder_id column to notes table if it doesn't exist
+        var hasColumn = false
+        try? query("PRAGMA table_info(notes)") { stmt in
+            let name = DatabaseManager.columnTextNonNull(stmt, 1)
+            if name == "folder_id" { hasColumn = true }
+        }
+        if !hasColumn {
+            execute("ALTER TABLE notes ADD COLUMN folder_id TEXT REFERENCES folders(id) ON DELETE SET NULL")
+            execute("CREATE INDEX IF NOT EXISTS idx_notes_folder_id ON notes(folder_id)")
         }
     }
 

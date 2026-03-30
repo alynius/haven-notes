@@ -2,8 +2,17 @@ import SwiftUI
 
 extension Color {
     // MARK: - Brand Colors
-    static let havenPrimary = Color(red: 0x8B / 255.0, green: 0x6F / 255.0, blue: 0x47 / 255.0)       // #8B6F47
-    static let havenSecondary = Color(red: 0xC9 / 255.0, green: 0xB5 / 255.0, blue: 0x9A / 255.0)     // #C9B59A
+    static let havenPrimary = Color(UIColor { trait in
+        trait.userInterfaceStyle == .dark
+            ? UIColor(red: 0xA0 / 255.0, green: 0x85 / 255.0, blue: 0x5E / 255.0, alpha: 1) // lighter brown for dark
+            : UIColor(red: 0x8B / 255.0, green: 0x6F / 255.0, blue: 0x47 / 255.0, alpha: 1) // #8B6F47
+    })
+
+    static let havenSecondary = Color(UIColor { trait in
+        trait.userInterfaceStyle == .dark
+            ? UIColor(red: 0xD4 / 255.0, green: 0xC2 / 255.0, blue: 0xAA / 255.0, alpha: 1) // lighter taupe for dark
+            : UIColor(red: 0xC9 / 255.0, green: 0xB5 / 255.0, blue: 0x9A / 255.0, alpha: 1) // #C9B59A
+    })
     static let havenAccent = Color(UIColor { trait in
         trait.userInterfaceStyle == .dark
             ? UIColor(red: 0x7B / 255.0, green: 0xAF / 255.0, blue: 0xA2 / 255.0, alpha: 1) // #7BAFA2

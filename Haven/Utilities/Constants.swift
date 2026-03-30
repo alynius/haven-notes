@@ -16,9 +16,17 @@ enum HavenConstants {
         static let syncLogTable = "sync_log"
         static let settingsTable = "app_settings"
         static let notesFTSTable = "notes_fts"
+        static let foldersTable = "folders"
+        static let tagsTable = "tags"
+        static let noteTagsTable = "note_tags"
     }
 
     enum Subscription {
         static let groupID = "haven_pro"
+    }
+
+    enum AppGroup {
+        static let identifier = "group.com.havennotes.app"
+        static let noteCountKey = "noteCount"
     }
 }

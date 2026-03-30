@@ -9,17 +9,42 @@ struct SearchView: View {
             Color.havenBackground
                 .ignoresSafeArea()
 
-            if viewModel.isSearching {
-                ProgressView()
-                    .tint(Color.havenPrimary)
+            if viewModel.query.isEmpty && viewModel.results.isEmpty {
+                VStack(spacing: Spacing.md) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 36, weight: .thin))
+                        .foregroundColor(Color.havenTextSecondary.opacity(0.3))
+                    Text("Search your notes")
+                        .font(.havenBody)
+                        .foregroundColor(Color.havenTextSecondary)
+                }
+            } else if viewModel.isSearching {
+                List {
+                    ForEach(0..<3, id: \.self) { _ in
+                        SkeletonListRow()
+                            .listRowBackground(Color.havenBackground)
+                    }
+                }
+                .listStyle(.plain)
             } else if viewModel.results.isEmpty && !viewModel.query.isEmpty {
-                VStack(spacing: 8) {
+                VStack(spacing: Spacing.md) {
                     Image(systemName: "doc.text.magnifyingglass")
                         .font(.system(size: 36))
-                        .foregroundStyle(Color.havenTextSecondary.opacity(0.4))
+                        .foregroundColor(Color.havenTextSecondary.opacity(0.4))
                     Text("No results found")
-                        .font(.body)
+                        .font(.havenBody)
                         .foregroundStyle(.secondary)
+                    Text("Try a different search term")
+                        .font(.havenCaption)
+                        .foregroundColor(Color.havenTextSecondary)
+                    Button {
+                        viewModel.query = ""
+                    } label: {
+                        Text("Clear Search")
+                            .font(.havenBody.weight(.medium))
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .padding(.top, Spacing.xs)
                 }
             } else if !viewModel.results.isEmpty {
                 List {
@@ -27,7 +52,7 @@ struct SearchView: View {
                         Button {
                             appState.navigateTo(.noteEditor(noteID: note.id))
                         } label: {
-                            SearchResultRowView(note: note)
+                            SearchResultRowView(note: note, query: viewModel.query)
                         }
                         .buttonStyle(.plain)
                     }
@@ -38,7 +63,7 @@ struct SearchView: View {
         .navigationTitle("Search")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $viewModel.query, prompt: "Search notes...")
-        .onChange(of: viewModel.query) {
+        .onChange(of: viewModel.query) { _ in
             viewModel.search()
         }
     }

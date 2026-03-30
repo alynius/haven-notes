@@ -15,11 +15,11 @@ struct SubscriptionView: View {
                     VStack(spacing: 8) {
                         Text("Haven Pro")
                             .font(.havenContentTitle)
-                            .foregroundStyle(.havenTextPrimary)
+                            .foregroundColor(Color.havenTextPrimary)
 
                         Text("Unlock sync and support indie development")
                             .font(.havenBody)
-                            .foregroundStyle(.havenTextSecondary)
+                            .foregroundColor(Color.havenTextSecondary)
                             .multilineTextAlignment(.center)
                     }
                     .padding(.top, 24)
@@ -28,10 +28,10 @@ struct SubscriptionView: View {
                     if viewModel.isPro {
                         HStack {
                             Image(systemName: "checkmark.seal.fill")
-                                .foregroundStyle(.havenAccent)
+                                .foregroundColor(Color.havenAccent)
                             Text("You're a Pro subscriber")
                                 .font(.havenBody.weight(.medium))
-                                .foregroundStyle(.havenAccent)
+                                .foregroundColor(Color.havenAccent)
                         }
                         .padding(16)
                         .frame(maxWidth: .infinity)
@@ -52,7 +52,8 @@ struct SubscriptionView: View {
                     // Products
                     if !viewModel.isPro {
                         VStack(spacing: 12) {
-                            ForEach(viewModel.products, id: \.id) { product in
+                            ForEach(viewModel.products.sorted { $0.price > $1.price }, id: \.id) { product in
+                                let isYearly = product.id == SubscriptionProductID.yearly.rawValue
                                 Button {
                                     let productID = SubscriptionProductID(rawValue: product.id)
                                     if let id = productID {
@@ -61,24 +62,41 @@ struct SubscriptionView: View {
                                 } label: {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
-                                            Text(product.displayName)
-                                                .font(.havenBody.weight(.medium))
-                                                .foregroundStyle(.havenTextPrimary)
+                                            HStack(spacing: Spacing.sm) {
+                                                Text(product.displayName)
+                                                    .font(.havenBody.weight(.medium))
+                                                    .foregroundColor(Color.havenTextPrimary)
+                                                if isYearly {
+                                                    Text("Best value")
+                                                        .font(.caption2.weight(.bold))
+                                                        .foregroundColor(.white)
+                                                        .padding(.horizontal, Spacing.sm)
+                                                        .padding(.vertical, Spacing.xxs)
+                                                        .background(
+                                                            LinearGradient(
+                                                                colors: [Color.havenAccent, Color.havenAccent.opacity(0.8)],
+                                                                startPoint: .leading,
+                                                                endPoint: .trailing
+                                                            )
+                                                        )
+                                                        .clipShape(.rect(cornerRadius: CornerRadius.xs))
+                                                }
+                                            }
                                             Text(product.description)
                                                 .font(.havenCaption)
-                                                .foregroundStyle(.havenTextSecondary)
+                                                .foregroundColor(Color.havenTextSecondary)
                                         }
                                         Spacer()
                                         Text(product.displayPrice)
                                             .font(.havenBody.weight(.semibold))
-                                            .foregroundStyle(.havenPrimary)
+                                            .foregroundColor(Color.havenPrimary)
                                     }
                                     .padding(16)
                                     .background(Color.havenSurface)
                                     .clipShape(.rect(cornerRadius: 12))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.havenBorder, lineWidth: 1)
+                                            .stroke(isYearly ? Color.havenAccent : Color.havenBorder, lineWidth: isYearly ? 2 : 1)
                                     )
                                 }
                                 .disabled(viewModel.isPurchasing)
@@ -91,9 +109,17 @@ struct SubscriptionView: View {
                         } label: {
                             Text("Restore Purchases")
                                 .font(.havenCaption)
-                                .foregroundStyle(.havenTextSecondary)
+                                .foregroundColor(Color.havenTextSecondary)
                         }
                         .padding(.top, 8)
+
+                        HStack(spacing: Spacing.lg) {
+                            Link("Terms of Use", destination: URL(string: "https://havennotes.app/terms")!)
+                            Text("\u{00B7}").foregroundColor(Color.havenTextSecondary)
+                            Link("Privacy Policy", destination: URL(string: "https://havennotes.app/privacy")!)
+                        }
+                        .font(.caption2)
+                        .foregroundColor(Color.havenTextSecondary)
                     }
 
                     if let error = viewModel.errorMessage {
@@ -106,7 +132,7 @@ struct SubscriptionView: View {
                     // Privacy note
                     Text("No AI. No bloat. Just notes.\nYour subscription supports a solo developer.")
                         .font(.caption2)
-                        .foregroundStyle(.havenTextSecondary.opacity(0.6))
+                        .foregroundColor(Color.havenTextSecondary.opacity(0.6))
                         .multilineTextAlignment(.center)
                         .padding(.top, 16)
                         .padding(.bottom, 32)
@@ -129,11 +155,11 @@ struct SubscriptionView: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.callout)
-                .foregroundStyle(.havenAccent)
+                .foregroundColor(Color.havenAccent)
                 .frame(width: 24)
             Text(text)
                 .font(.havenBody)
-                .foregroundStyle(.havenTextPrimary)
+                .foregroundColor(Color.havenTextPrimary)
         }
     }
 }

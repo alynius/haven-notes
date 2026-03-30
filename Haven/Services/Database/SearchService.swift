@@ -26,7 +26,7 @@ final class SearchService {
                 SELECT n.id, n.title, n.body_html, n.body_plaintext,
                        n.is_pinned, n.is_deleted, n.created_at, n.updated_at
                 FROM \(HavenConstants.Database.notesFTSTable) fts
-                JOIN \(HavenConstants.Database.notesTable) n ON n.rowid = fts.rowid
+                JOIN \(HavenConstants.Database.notesTable) n ON n.id = fts.note_id
                 WHERE fts MATCH ? AND n.is_deleted = 0
                 ORDER BY rank
                 LIMIT ?
@@ -62,7 +62,7 @@ final class SearchService {
                        n.is_pinned, n.is_deleted, n.created_at, n.updated_at,
                        snippet(\(HavenConstants.Database.notesFTSTable), 1, '**', '**', '...', 32)
                 FROM \(HavenConstants.Database.notesFTSTable) fts
-                JOIN \(HavenConstants.Database.notesTable) n ON n.rowid = fts.rowid
+                JOIN \(HavenConstants.Database.notesTable) n ON n.id = fts.note_id
                 WHERE fts MATCH ? AND n.is_deleted = 0
                 ORDER BY rank
                 LIMIT ?
@@ -89,8 +89,8 @@ final class SearchService {
 
             // Re-populate from the notes table
             let sql = """
-                INSERT INTO \(HavenConstants.Database.notesFTSTable)(rowid, title, body_plaintext)
-                SELECT rowid, title, body_plaintext
+                INSERT INTO \(HavenConstants.Database.notesFTSTable)(note_id, title, body_plaintext)
+                SELECT id, title, body_plaintext
                 FROM \(HavenConstants.Database.notesTable)
                 WHERE is_deleted = 0
                 """

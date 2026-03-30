@@ -3,26 +3,74 @@ import SwiftUI
 struct HavenNavigationStack: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var container: DependencyContainer
+    @EnvironmentObject var toastManager: ToastManager
+    @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
-        NavigationStack(path: $appState.navigationPath) {
-            NoteListView(viewModel: NoteListViewModel(noteRepo: container.noteRepository))
-                .navigationDestination(for: Route.self) { route in
-                    switch route {
-                    case .noteEditor(let noteID):
-                        noteEditorDestination(noteID: noteID)
-                    case .search:
-                        SearchView(viewModel: SearchViewModel(noteRepo: container.noteRepository))
-                    case .settings:
-                        SettingsView(viewModel: SettingsViewModel(noteRepo: container.noteRepository, db: container.databaseManager))
-                    case .syncSettings:
-                        SyncSettingsView(viewModel: SyncSettingsViewModel(syncManager: container.syncManager))
-                    case .subscription:
-                        SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
+        ZStack(alignment: .top) {
+            Group {
+                if sizeClass == .regular {
+                    // iPad: Split view with sidebar
+                    NavigationSplitView {
+                        SidebarView(viewModel: SidebarViewModel(
+                            folderRepo: container.folderRepository,
+                            tagRepo: container.tagRepository,
+                            noteRepo: container.noteRepository
+                        ))
+                    } detail: {
+                        navigationContent
                     }
+                } else {
+                    // iPhone: Plain NavigationStack (no sidebar gesture delay)
+                    navigationContent
                 }
+            }
+            .tint(Color.havenPrimary)
+
+            // Global toast overlay
+            if let toast = toastManager.currentToast {
+                ToastView(
+                    message: toast.message,
+                    icon: toast.icon,
+                    type: toast.type
+                )
+                .padding(.top, Spacing.huge)
+                .zIndex(100)
+            }
         }
-        .tint(Color.havenPrimary)
+    }
+
+    private var navigationContent: some View {
+        NavigationStack(path: $appState.navigationPath) {
+            NoteListView(viewModel: NoteListViewModel(
+                noteRepo: container.noteRepository,
+                folderRepo: container.folderRepository,
+                filter: appState.activeFilter
+            ))
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .noteEditor(let noteID):
+                    noteEditorDestination(noteID: noteID)
+                case .search:
+                    SearchView(viewModel: SearchViewModel(noteRepo: container.noteRepository))
+                case .settings:
+                    SettingsView(viewModel: SettingsViewModel(noteRepo: container.noteRepository, db: container.databaseManager))
+                case .syncSettings:
+                    SyncSettingsView(viewModel: SyncSettingsViewModel(syncManager: container.syncManager))
+                case .subscription:
+                    SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
+                case .encryption:
+                    EncryptionSettingsView()
+                case .notionImport:
+                    NotionImportView(importer: container.notionImporter)
+                case .graph:
+                    GraphView(viewModel: GraphViewModel(
+                        noteRepo: container.noteRepository,
+                        linkRepo: container.linkRepository
+                    ))
+                }
+            }
+        }
     }
 
     @ViewBuilder
@@ -32,12 +80,14 @@ struct HavenNavigationStack: View {
                 noteID: noteID,
                 noteRepo: container.noteRepository,
                 taskRepo: container.taskRepository,
+                tagRepo: container.tagRepository,
                 wikiLinkParser: container.wikiLinkParser
             )
         } else {
             NoteEditorView.forNew(
                 noteRepo: container.noteRepository,
                 taskRepo: container.taskRepository,
+                tagRepo: container.tagRepository,
                 wikiLinkParser: container.wikiLinkParser
             )
         }
