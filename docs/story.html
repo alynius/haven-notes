@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story — Haven Notes</title>
+  <meta name="description" content="Haven is built by one person who was tired of bloated note apps. No venture capital. No data harvesting. Just craft.">
+  <meta property="og:title" content="Story — Haven Notes">
+  <meta property="og:description" content="Haven is built by one person who was tired of bloated note apps. No venture capital. No data harvesting. Just craft.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://havennotes.app/story">
+  <link rel="canonical" href="https://havennotes.app/story">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Haven</a>
+      <div class="nav-links">
+        <a href="/#features">Features</a><a href="/pricing">Pricing</a><a href="/story">Story</a><a href="/compare">Compare</a>
+        <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
+      </div>
+      <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav-mobile" id="mobile-menu">
+      <a href="/#features">Features</a><a href="/pricing">Pricing</a><a href="/story">Story</a><a href="/compare">Compare</a><a href="https://apps.apple.com/app/id6744229406">Download</a>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container prose prose-serif">
+      <p class="eyebrow">The story</p>
+      <h1>Why Haven exists</h1>
+      <p class="subtitle">Built by one person who was tired of bloated note apps.</p>
+
+      <h2>The problem</h2>
+      <p>Somewhere along the way, note apps stopped being about notes. They became platforms. Workspaces. Collaboration hubs. Every update brought a new sidebar panel, a new database view, a new AI button glowing in the corner — demanding your attention, promising to change how you think, begging you to invite your team.</p>
+      <p>Then came the AI wave. Not tools that help you write — surveillance dressed up as assistance. Models trained on the documents of millions of users, with privacy policies so long that no one reads them. Your grocery list, your therapy journal, your half-finished novel — fed quietly into the machine in exchange for a feature you didn't ask for and probably won't use.</p>
+      <p>The apps that didn't go full AI went full bloat instead. Launch times measured in seconds. Background processes that drain battery. Sync engines that conflict and corrupt. A settings screen that takes longer to navigate than the note itself. Tools that made you feel busy without helping you think.</p>
+
+      <h2>The alternative</h2>
+      <p>Haven opens fast and gets out of your way. There's no onboarding wizard, no empty-state mascot, no prompt asking you to connect your calendar. You tap the app and you're writing. That's it. The whole product is built around a single question: does this make it easier to put thoughts into words?</p>
+      <p>Your notes live on your device, in a local SQLite database that you own. Haven never connects to any Haven-operated server. There are no accounts, no analytics, no telemetry, no crash reporters phoning home. If you want sync, you point Haven at a server you control, and notes leave your device only after being encrypted end-to-end with AES-GCM. Not even the sync server can read them.</p>
+      <p>The features that are here are the ones that matter: Markdown that renders as you type, wiki links that let you build a knowledge graph with double brackets, full-text search that finds anything in milliseconds, daily notes for the rhythm of regular writing, voice dictation for when your hands are full, and biometric lock for when privacy isn't optional. No AI. No cloud. No surprises.</p>
+
+      <h2>The craft</h2>
+      <p>Haven is built by one person. Not a team of forty engineers chasing quarterly targets. Not a startup with a growth mandate and a Series B to justify. One person who wanted a note app that felt like a well-made tool — something that had been thought about carefully, where every detail had an owner who cared.</p>
+      <p>There's no product committee to approve decisions, no marketing department to veto features that don't fit the pitch deck. Every choice — the font, the gesture, the way a new note animates into view — gets made with one question: does this make the app better? If the answer is no, it doesn't ship. There's no roadmap pressure to ship it anyway.</p>
+      <p>Haven Pro exists because servers cost money and good software takes time. The free version is genuinely useful — most people won't need more. Pro unlocks sync and encryption for people who want their notes on more than one device, kept private even from the server. That's the whole business model. No advertising tier, no data partnerships, no enterprise upsell. Just people paying for something they find valuable.</p>
+
+      <h2>The name</h2>
+      <p>A haven is a place of safety — a harbor where ships take shelter from the storm, a quiet room where you can close the door and think. That felt right for a note app. Your ideas deserve somewhere calm to land. Haven is that place.</p>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to start writing?</h2>
+      <p class="section-subtitle">Download Haven and find your quiet place to think.</p>
+      <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
+      <p class="caption">Free to use · Pro unlocks sync</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/story">Story</a>
+        <a href="/compare">Compare</a>
+        <a href="/changelog">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello@havennotes.app">hello@havennotes.app</a>
+        <a href="/support">Support</a>
+        <a href="https://apps.apple.com/app/id6744229406">App Store</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Made by one person who was tired of bloated note apps.</span>
+      <span>&copy; 2026 Haven Notes</span>
+    </div>
+  </footer>
+
+  <script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  </script>
+
+</body>
+</html>
