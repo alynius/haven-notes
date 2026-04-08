@@ -82,14 +82,19 @@ struct SubscriptionView: View {
                                                         .clipShape(.rect(cornerRadius: CornerRadius.xs))
                                                 }
                                             }
-                                            Text(product.description)
+                                            Text(subscriptionPeriodLabel(for: product))
                                                 .font(.havenCaption)
                                                 .foregroundColor(Color.havenTextSecondary)
                                         }
                                         Spacer()
-                                        Text(product.displayPrice)
-                                            .font(.havenBody.weight(.semibold))
-                                            .foregroundColor(Color.havenPrimary)
+                                        VStack(alignment: .trailing, spacing: 2) {
+                                            Text(product.displayPrice)
+                                                .font(.havenBody.weight(.semibold))
+                                                .foregroundColor(Color.havenPrimary)
+                                            Text(isYearly ? "per year" : "per month")
+                                                .font(.caption2)
+                                                .foregroundColor(Color.havenTextSecondary)
+                                        }
                                     }
                                     .padding(16)
                                     .background(Color.havenSurface)
@@ -104,6 +109,14 @@ struct SubscriptionView: View {
                         }
                         .padding(.horizontal, 16)
 
+                        // Auto-renewal disclosure
+                        Text("Subscription automatically renews unless cancelled at least 24 hours before the end of the current period. Manage in Settings > Apple ID > Subscriptions.")
+                            .font(.caption2)
+                            .foregroundColor(Color.havenTextSecondary.opacity(0.7))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
+                            .padding(.top, 8)
+
                         Button {
                             Task { await viewModel.restore() }
                         } label: {
@@ -111,7 +124,7 @@ struct SubscriptionView: View {
                                 .font(.havenCaption)
                                 .foregroundColor(Color.havenTextSecondary)
                         }
-                        .padding(.top, 8)
+                        .padding(.top, 4)
 
                         HStack(spacing: Spacing.lg) {
                             Link("Terms of Use", destination: URL(string: "https://havennotes.app/terms")!)
@@ -149,6 +162,21 @@ struct SubscriptionView: View {
                 LoadingOverlayView(message: viewModel.isPurchasing ? "Processing..." : "Loading...")
             }
         }
+    }
+
+    private func subscriptionPeriodLabel(for product: Product) -> String {
+        if let subscription = product.subscription {
+            let unit = subscription.subscriptionPeriod.unit
+            let value = subscription.subscriptionPeriod.value
+            switch unit {
+            case .month: return value == 1 ? "1 month, auto-renewable" : "\(value) months, auto-renewable"
+            case .year: return value == 1 ? "1 year, auto-renewable" : "\(value) years, auto-renewable"
+            case .week: return value == 1 ? "1 week, auto-renewable" : "\(value) weeks, auto-renewable"
+            case .day: return value == 1 ? "1 day, auto-renewable" : "\(value) days, auto-renewable"
+            @unknown default: return "Auto-renewable"
+            }
+        }
+        return product.description
     }
 
     private func featureRow(icon: String, text: String) -> some View {
