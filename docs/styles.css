@@ -55,6 +55,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -118,7 +119,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: normal;
   line-height: 1.2;
-  color: var(--text);
 }
 
 h1 { font-size: 48px; }
@@ -164,6 +164,9 @@ h4 { font-size: 18px; }
 .section-centered .subtitle {
   margin: 0 auto;
 }
+
+.section--flush { padding-top: 0; }
+.text-center { text-align: center; }
 
 /* ------------------------------------------------------------
    7. Navigation
@@ -227,11 +230,11 @@ h4 { font-size: 18px; }
   color: var(--text);
 }
 
-.nav-cta {
+.nav-links .nav-cta {
   display: inline-flex;
   align-items: center;
   background: var(--accent);
-  color: #fff !important;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   padding: 8px 18px;
@@ -241,9 +244,9 @@ h4 { font-size: 18px; }
   flex-shrink: 0;
 }
 
-.nav-cta:hover {
-  background: var(--accent-hover) !important;
-  color: #fff !important;
+.nav-links .nav-cta:hover {
+  background: var(--accent-hover);
+  color: #fff;
 }
 
 .nav-hamburger {
@@ -255,10 +258,13 @@ h4 { font-size: 18px; }
   color: var(--text);
 }
 
-.nav-hamburger svg {
-  width: 22px;
-  height: 22px;
+.nav-hamburger span {
   display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  margin: 4px 0;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .nav-mobile {
@@ -286,10 +292,6 @@ h4 { font-size: 18px; }
   color: var(--text);
 }
 
-.nav-mobile .nav-cta {
-  margin: 8px 24px 0;
-  justify-content: center;
-}
 
 /* ------------------------------------------------------------
    8. Footer
@@ -307,6 +309,12 @@ h4 { font-size: 18px; }
   margin-bottom: 40px;
 }
 
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .footer-col h4 {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -314,7 +322,7 @@ h4 { font-size: 18px; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
 
 .footer-col ul {
@@ -674,7 +682,6 @@ details .faq-body {
   font-family: var(--font-serif);
   font-size: 18px;
   line-height: 1.75;
-  color: var(--text);
 }
 
 .prose h2,

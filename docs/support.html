@@ -7,7 +7,9 @@
 <meta name="description" content="Get help with Haven Notes. FAQs, contact information, and system requirements.">
 <meta property="og:title" content="Support — Haven Notes">
 <meta property="og:description" content="Get help with Haven Notes. FAQs, contact information, and system requirements.">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://havennotes.app/support">
+<link rel="canonical" href="https://havennotes.app/support">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,8 +24,8 @@
       <a href="/compare">Compare</a>
       <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
     </div>
-    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
   </div>
   <div class="nav-mobile" id="mobile-menu">
@@ -34,6 +36,8 @@
     <a href="https://apps.apple.com/app/id6744229406">Download</a>
   </div>
 </nav>
+
+<main>
 
 <section class="section">
   <div class="container prose prose-serif">
@@ -91,6 +95,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -122,9 +128,10 @@
 </footer>
 
 <script>
+const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
-});
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
 </script>
 
 </body>

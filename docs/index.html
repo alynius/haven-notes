@@ -24,18 +24,20 @@
         <a href="/compare">Compare</a>
         <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
       </div>
-      <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
     </div>
     <div class="nav-mobile" id="mobile-menu">
-      <a href="/#features" onclick="document.getElementById('mobile-menu').classList.remove('open')">Features</a>
+      <a href="/#features">Features</a>
       <a href="/pricing">Pricing</a>
       <a href="/story">Story</a>
       <a href="/compare">Compare</a>
       <a href="https://apps.apple.com/app/id6744229406">Download</a>
     </div>
   </nav>
+
+  <main>
 
   <section class="hero">
     <div class="hero-inner">
@@ -57,35 +59,35 @@
   <section id="features" class="section-centered">
     <div class="container">
       <h2>Everything you need, nothing you don't.</h2>
-      <p class="section-subtitle">Built for people who want to think clearly — not manage a productivity system.</p>
+      <p class="subtitle">Built for people who want to think clearly — not manage a productivity system.</p>
       <div class="feature-grid">
         <div class="feature-card">
-          <div class="feature-emoji">✏️</div>
+          <div class="emoji">✏️</div>
           <h3>Live Markdown</h3>
           <p>Write in plain text, see formatted output instantly. No mode switching, no friction.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-emoji">🔗</div>
+          <div class="emoji">🔗</div>
           <h3>Wiki Links</h3>
           <p>Connect notes with [[double brackets]]. Build a personal knowledge graph that grows with you.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-emoji">🔒</div>
+          <div class="emoji">🔒</div>
           <h3>E2E Encrypted</h3>
           <p>Your notes are encrypted before they ever leave your device. Not even we can read them.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-emoji">📅</div>
+          <div class="emoji">📅</div>
           <h3>Daily Notes</h3>
           <p>A fresh note every day, automatically. Great for journaling, standups, and quick captures.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-emoji">🎤</div>
+          <div class="emoji">🎤</div>
           <h3>Voice Notes</h3>
           <p>Dictate thoughts hands-free. Perfect for when you're on the move and ideas won't wait.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-emoji">🔍</div>
+          <div class="emoji">🔍</div>
           <h3>Full-Text Search</h3>
           <p>Find anything in your notes instantly. Fast, on-device search with no indexing delays.</p>
         </div>
@@ -93,53 +95,58 @@
     </div>
   </section>
 
-  <section class="pull-quote">
+  <section class="section">
     <div class="container">
-      <blockquote>No AI. No bloat. Just notes.</blockquote>
+      <p class="pull-quote">No AI. No bloat. Just notes.</p>
     </div>
   </section>
 
   <section class="cta-section">
     <div class="container">
       <h2>Ready to start writing?</h2>
-      <p class="section-subtitle">Download Haven and start capturing your thoughts today.</p>
+      <p class="subtitle">Download Haven and start capturing your thoughts today.</p>
       <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
-      <p class="caption">Free to use · Pro unlocks sync</p>
+      <p class="subtitle">Free to use · Pro unlocks sync</p>
     </div>
   </section>
 
+  </main>
+
   <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>Pages</h4>
-        <a href="/">Home</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/story">Story</a>
-        <a href="/compare">Compare</a>
-        <a href="/changelog">Changelog</a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <a href="/">Home</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/story">Story</a>
+          <a href="/compare">Compare</a>
+          <a href="/changelog">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a>
+          <a href="/support">Support</a>
+          <a href="https://apps.apple.com/app/id6744229406">App Store</a>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
+      <div class="footer-bottom">
+        <span>Made by one person who was tired of bloated note apps.</span>
+        <span>&copy; 2026 Haven Notes</span>
       </div>
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="mailto:hello@havennotes.app">hello@havennotes.app</a>
-        <a href="/support">Support</a>
-        <a href="https://apps.apple.com/app/id6744229406">App Store</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>Made by one person who was tired of bloated note apps.</span>
-      <span>&copy; 2026 Haven Notes</span>
     </div>
   </footer>
 
   <script>
+  const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
-  });
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
   </script>
 
 </body>
