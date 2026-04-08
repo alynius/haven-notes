@@ -3,113 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haven Notes — Support</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: #FEFDFB;
-    color: #1A1815;
-    line-height: 1.7;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-  @media (prefers-color-scheme: dark) {
-    body { background: #161512; color: #FAF7F3; }
-    a { color: #7BAFA2; }
-    h1, h2, h3 { color: #FAF7F3; }
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .subtitle {
-    color: #6B6560;
-    font-size: 16px;
-    margin-bottom: 40px;
-  }
-  h2 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-top: 36px;
-    margin-bottom: 12px;
-  }
-  h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 24px;
-    margin-bottom: 8px;
-  }
-  p, li {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-  ul { padding-left: 24px; }
-  li { margin-bottom: 8px; }
-  a { color: #6B9B8E; }
-  .brand {
-    font-size: 14px;
-    color: #8B6F47;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: block;
-  }
-  .contact-box {
-    background: #F5F0EA;
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 24px;
-  }
-  @media (prefers-color-scheme: dark) {
-    .contact-box { background: #252018; }
-  }
-  .contact-box a {
-    font-size: 18px;
-    font-weight: 600;
-  }
-</style>
+<title>Support — Haven Notes</title>
+<meta name="description" content="Get help with Haven Notes. FAQs, contact information, and system requirements.">
+<meta property="og:title" content="Support — Haven Notes">
+<meta property="og:description" content="Get help with Haven Notes. FAQs, contact information, and system requirements.">
+<meta property="og:url" content="https://havennotes.app/support">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<span class="brand">Haven Notes</span>
-<h1>Support</h1>
-<p class="subtitle">We're here to help.</p>
 
-<div class="contact-box">
-  <p>For bugs, feature requests, or questions:</p>
-  <p><a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a></p>
-</div>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Haven</a>
+    <div class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Story</a>
+      <a href="/compare">Compare</a>
+      <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
+    </div>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobile-menu">
+    <a href="/#features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Story</a>
+    <a href="/compare">Compare</a>
+    <a href="https://apps.apple.com/app/id6744229406">Download</a>
+  </div>
+</nav>
 
-<h2>Frequently Asked Questions</h2>
+<section class="section">
+  <div class="container prose prose-serif">
+    <p class="eyebrow">Help</p>
+    <h1>Support</h1>
+    <p class="subtitle">We're here to help.</p>
 
-<h3>Where are my notes stored?</h3>
-<p>All notes are stored locally on your device in an encrypted database. Nothing leaves your phone unless you enable optional sync to your own server.</p>
+    <div class="contact-box">
+      <p>For bugs, feature requests, or questions:</p>
+      <p><a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a></p>
+    </div>
 
-<h3>Can I sync between devices?</h3>
-<p>Yes — Haven Pro includes sync to a self-hosted server. You provide the server URL and authentication token. Haven never operates servers that hold your data.</p>
+    <h2>Frequently Asked Questions</h2>
 
-<h3>What is encryption?</h3>
-<p>Haven offers optional AES-256-GCM encryption. When enabled, your notes are encrypted on your device before being sent to your sync server. Even if someone accesses the server, they cannot read your notes without your password.</p>
+    <details>
+      <summary>Where are my notes stored?</summary>
+      <div class="faq-body">All notes are stored locally on your device in an encrypted database. Nothing leaves your phone unless you enable optional sync to your own server.</div>
+    </details>
 
-<h3>Can I import from Notion?</h3>
-<p>Yes. Export your Notion workspace as "Markdown & CSV", unzip the file, and select the folder in Haven's import screen (Settings → Import from Notion).</p>
+    <details>
+      <summary>Can I sync between devices?</summary>
+      <div class="faq-body">Yes — Haven Pro includes sync to a self-hosted server. You provide the server URL and authentication token. Haven never operates servers that hold your data.</div>
+    </details>
 
-<h3>What are wiki links?</h3>
-<p>Type <code>[[Note Title]]</code> to create a link to another note. This builds a knowledge graph — connections between your ideas that you can visualize.</p>
+    <details>
+      <summary>What is encryption?</summary>
+      <div class="faq-body">Haven offers optional AES-256-GCM encryption. When enabled, your notes are encrypted on your device before being sent to your sync server. Even if someone accesses the server, they cannot read your notes without your password.</div>
+    </details>
 
-<h3>How do I recover a deleted note?</h3>
-<p>Deleted notes are soft-deleted and can be recovered. If you've purged deleted notes, they cannot be recovered. We recommend enabling sync as a backup.</p>
+    <details>
+      <summary>Can I import from Notion?</summary>
+      <div class="faq-body">Yes. Export your Notion workspace as "Markdown &amp; CSV", unzip the file, and select the folder in Haven's import screen (Settings → Import from Notion).</div>
+    </details>
 
-<h3>What happens if I forget my encryption password?</h3>
-<p>Your encryption password cannot be recovered. There is no password reset. If you forget it, encrypted notes on your sync server become permanently unreadable. Notes on your device remain accessible.</p>
+    <details>
+      <summary>What are wiki links?</summary>
+      <div class="faq-body">Type <code>[[Note Title]]</code> to create a link to another note. This builds a knowledge graph — connections between your ideas that you can visualize.</div>
+    </details>
 
-<h2>System Requirements</h2>
-<ul>
-  <li>iOS 17.0 or later</li>
-  <li>iPhone or iPad</li>
-</ul>
+    <details>
+      <summary>How do I recover a deleted note?</summary>
+      <div class="faq-body">Deleted notes are soft-deleted and can be recovered. If you've purged deleted notes, they cannot be recovered. We recommend enabling sync as a backup.</div>
+    </details>
+
+    <details>
+      <summary>What happens if I forget my encryption password?</summary>
+      <div class="faq-body">Your encryption password cannot be recovered. There is no password reset. If you forget it, encrypted notes on your sync server become permanently unreadable. Notes on your device remain accessible.</div>
+    </details>
+
+    <h2>System Requirements</h2>
+    <ul>
+      <li>iOS 17.0 or later</li>
+      <li>iPhone or iPad</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/story">Story</a>
+        <a href="/compare">Compare</a>
+        <a href="/changelog">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a>
+        <a href="/support">Support</a>
+        <a href="https://apps.apple.com/app/id6744229406">App Store</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Made by one person who was tired of bloated note apps.</span>
+      <span>&copy; 2026 Haven Notes</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
+</script>
+
 </body>
 </html>

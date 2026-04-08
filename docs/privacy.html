@@ -3,98 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haven Notes — Privacy Policy</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: #FEFDFB;
-    color: #1A1815;
-    line-height: 1.7;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-  @media (prefers-color-scheme: dark) {
-    body { background: #161512; color: #FAF7F3; }
-    a { color: #7BAFA2; }
-    h1, h2 { color: #FAF7F3; }
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #1A1815;
-    margin-bottom: 8px;
-  }
-  .subtitle {
-    color: #6B6560;
-    font-size: 15px;
-    margin-bottom: 40px;
-  }
-  h2 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-top: 36px;
-    margin-bottom: 12px;
-  }
-  p, li {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-  ul { padding-left: 24px; }
-  li { margin-bottom: 8px; }
-  a { color: #6B9B8E; }
-  .brand {
-    font-size: 14px;
-    color: #8B6F47;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: block;
-  }
-</style>
+<title>Privacy Policy — Haven Notes</title>
+<meta name="description" content="Haven is built on a simple principle: your notes are yours. We don't collect, store, or transmit your data.">
+<meta property="og:title" content="Privacy Policy — Haven Notes">
+<meta property="og:description" content="Haven is built on a simple principle: your notes are yours. We don't collect, store, or transmit your data.">
+<meta property="og:url" content="https://havennotes.app/privacy">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<span class="brand">Haven Notes</span>
-<h1>Privacy Policy</h1>
-<p class="subtitle">Last updated: March 30, 2026</p>
 
-<h2>The Short Version</h2>
-<p>Haven is built on a simple principle: <strong>your notes are yours</strong>. We don't collect, store, or transmit your data. Period.</p>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Haven</a>
+    <div class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Story</a>
+      <a href="/compare">Compare</a>
+      <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
+    </div>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobile-menu">
+    <a href="/#features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Story</a>
+    <a href="/compare">Compare</a>
+    <a href="https://apps.apple.com/app/id6744229406">Download</a>
+  </div>
+</nav>
 
-<h2>Data Storage</h2>
-<p>All notes, tags, folders, and tasks are stored <strong>locally on your device</strong> in an SQLite database. Haven does not operate any servers that receive your data.</p>
+<section class="section">
+  <div class="container prose prose-serif">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Last updated: March 30, 2026</p>
 
-<h2>Optional Sync</h2>
-<p>If you enable sync, your notes are sent to a server URL that <strong>you provide and control</strong>. Haven never connects to any Haven-operated server. If you enable encryption, notes are encrypted with AES-256-GCM on your device before being transmitted. Not even your sync server can read encrypted notes.</p>
+    <h2>The Short Version</h2>
+    <p>Haven is built on a simple principle: <strong>your notes are yours</strong>. We don't collect, store, or transmit your data. Period.</p>
 
-<h2>Data We Do Not Collect</h2>
-<ul>
-  <li>We do not collect personal information</li>
-  <li>We do not collect usage analytics or telemetry</li>
-  <li>We do not collect crash reports</li>
-  <li>We do not use advertising or tracking SDKs</li>
-  <li>We do not share data with third parties</li>
-  <li>We have no user accounts or registration</li>
-</ul>
+    <h2>Data Storage</h2>
+    <p>All notes, tags, folders, and tasks are stored <strong>locally on your device</strong> in an SQLite database. Haven does not operate any servers that receive your data.</p>
 
-<h2>Microphone & Speech Recognition</h2>
-<p>Haven includes an optional voice dictation feature. When enabled, audio is processed using Apple's on-device Speech Recognition framework. Audio data is <strong>not sent to Haven</strong> and is not stored. On-device processing is preferred when available.</p>
+    <h2>Optional Sync</h2>
+    <p>If you enable sync, your notes are sent to a server URL that <strong>you provide and control</strong>. Haven never connects to any Haven-operated server. If you enable encryption, notes are encrypted with AES-256-GCM on your device before being transmitted. Not even your sync server can read encrypted notes.</p>
 
-<h2>Face ID / Touch ID</h2>
-<p>Haven offers optional biometric lock. Authentication is handled entirely by Apple's LocalAuthentication framework on your device. No biometric data is accessed or stored by Haven.</p>
+    <h2>Data We Do Not Collect</h2>
+    <ul>
+      <li>We do not collect personal information</li>
+      <li>We do not collect usage analytics or telemetry</li>
+      <li>We do not collect crash reports</li>
+      <li>We do not use advertising or tracking SDKs</li>
+      <li>We do not share data with third parties</li>
+      <li>We have no user accounts or registration</li>
+    </ul>
 
-<h2>In-App Purchases</h2>
-<p>Subscriptions are processed by Apple through StoreKit. Haven does not receive or store payment information.</p>
+    <h2>Microphone &amp; Speech Recognition</h2>
+    <p>Haven includes an optional voice dictation feature. When enabled, audio is processed using Apple's on-device Speech Recognition framework. Audio data is <strong>not sent to Haven</strong> and is not stored. On-device processing is preferred when available.</p>
 
-<h2>Children's Privacy</h2>
-<p>Haven does not knowingly collect information from children under 13. The app contains no features that target children.</p>
+    <h2>Face ID / Touch ID</h2>
+    <p>Haven offers optional biometric lock. Authentication is handled entirely by Apple's LocalAuthentication framework on your device. No biometric data is accessed or stored by Haven.</p>
 
-<h2>Changes to This Policy</h2>
-<p>If we update this policy, we will post the revised version here with an updated date. Material changes will be communicated through the app's update notes.</p>
+    <h2>In-App Purchases</h2>
+    <p>Subscriptions are processed by Apple through StoreKit. Haven does not receive or store payment information.</p>
 
-<h2>Contact</h2>
-<p>Questions about this privacy policy? Contact us at <a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a></p>
+    <h2>Children's Privacy</h2>
+    <p>Haven does not knowingly collect information from children under 13. The app contains no features that target children.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>If we update this policy, we will post the revised version here with an updated date. Material changes will be communicated through the app's update notes.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this privacy policy? Contact us at <a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a></p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/story">Story</a>
+        <a href="/compare">Compare</a>
+        <a href="/changelog">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:havennotes.app@gmail.com">havennotes.app@gmail.com</a>
+        <a href="/support">Support</a>
+        <a href="https://apps.apple.com/app/id6744229406">App Store</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Made by one person who was tired of bloated note apps.</span>
+      <span>&copy; 2026 Haven Notes</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
+</script>
+
 </body>
 </html>
