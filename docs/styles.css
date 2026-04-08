@@ -52,6 +52,12 @@
 /* ------------------------------------------------------------
    4. Base Styles
    ------------------------------------------------------------ */
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -223,11 +229,27 @@ h4 { font-size: 18px; }
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.2s ease;
+  position: relative;
 }
 
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
   color: var(--text);
+}
+
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.nav-links a:not(.nav-cta):hover::after {
+  width: 100%;
 }
 
 .nav-links .nav-cta {
@@ -338,11 +360,11 @@ h4 { font-size: 18px; }
   font-size: 15px;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .footer-col a:hover {
-  color: var(--text);
+  color: var(--accent);
 }
 
 .footer-bottom {
@@ -388,22 +410,32 @@ h4 { font-size: 18px; }
 .btn-primary {
   background: var(--accent);
   color: #fff;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
   background: var(--accent-hover);
   color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139,111,71,0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-outline {
   background: transparent;
   color: var(--text);
   border: 1.5px solid var(--border);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 
 /* ------------------------------------------------------------
@@ -453,6 +485,12 @@ h4 { font-size: 18px; }
   max-width: 100%;
   height: auto;
   border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02);
 }
 
 /* ------------------------------------------------------------
@@ -469,6 +507,13 @@ h4 { font-size: 18px; }
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 28px 28px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border-color: var(--accent);
 }
 
 .feature-card .emoji {
@@ -534,8 +579,12 @@ h4 { font-size: 18px; }
   background: var(--surface);
 }
 
+.comparison-table tbody tr {
+  transition: background 0.15s ease;
+}
+
 .comparison-table tbody tr:hover {
-  background: var(--surface);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 .comparison-table .highlight {
@@ -565,6 +614,12 @@ h4 { font-size: 18px; }
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
 .pricing-card.featured {
@@ -664,6 +719,10 @@ details[open] summary::after {
   content: "−";
 }
 
+details[open] summary {
+  margin-bottom: 8px;
+}
+
 details .faq-body {
   padding: 0 0 20px;
   color: var(--text-secondary);
@@ -756,6 +815,11 @@ details .faq-body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 40px;
+  transition: border-color 0.2s ease;
+}
+
+.contact-box:hover {
+  border-color: var(--accent);
 }
 
 /* ------------------------------------------------------------
@@ -769,7 +833,9 @@ details .faq-body {
   color: var(--text);
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px 0;
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 /* ------------------------------------------------------------
