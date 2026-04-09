@@ -953,6 +953,70 @@ details .faq-body {
 .section--flush { padding-top: 0; }
 .text-center { text-align: center; }
 
+/* ── 23. Illustrations ── */
+.illustration {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-illustration {
+  max-width: 480px;
+  margin: 0 auto;
+  filter: drop-shadow(0 20px 40px hsl(30, 30%, 4%, 0.3));
+}
+
+.graph-illustration {
+  max-width: 420px;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 20px 40px hsl(30, 30%, 4%, 0.3));
+}
+
+.feature-card .feature-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-4);
+  display: block;
+  transition: transform 0.3s var(--ease);
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.08);
+}
+
+.section-mark {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-6);
+  display: block;
+  opacity: 0.9;
+}
+
+.story-mark {
+  width: 80px;
+  height: 64px;
+  margin: var(--space-12) auto var(--space-6);
+  display: block;
+  opacity: 0.85;
+}
+
+.divider-mark {
+  width: 120px;
+  height: 20px;
+  margin: var(--space-4) auto var(--space-8);
+  display: block;
+  opacity: 0.7;
+}
+
+.brand-mark {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--space-6);
+  display: block;
+}
+
 /* ── 22. Responsive ── */
 @media (max-width: 900px) {
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
