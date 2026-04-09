@@ -5,10 +5,10 @@
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Haven Notes — Fast, Private Markdown Notes for iOS</title>
-  <meta name="description" content="Fast, private markdown notes with wiki links and end-to-end encryption. No AI. No cloud. Just yours.">
-  <meta property="og:title" content="Haven Notes — Fast, Private Markdown Notes for iOS">
-  <meta property="og:description" content="Fast, private markdown notes with wiki links and end-to-end encryption. No AI. No cloud. Just yours.">
+  <title>Haven Notes — Private markdown notes for iOS</title>
+  <meta name="description" content="Markdown notes with wiki links and a knowledge graph. Private by design. End-to-end encrypted. No AI. No tracking.">
+  <meta property="og:title" content="Haven Notes — Private markdown notes for iOS">
+  <meta property="og:description" content="Markdown notes with wiki links and a knowledge graph. Private by design. End-to-end encrypted.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://havennotes.app/">
   <link rel="canonical" href="https://havennotes.app/">
@@ -16,140 +16,200 @@
 </head>
 <body>
 
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">Haven</a>
-      <div class="nav-links">
-        <a href="/#features">Features</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/story">Story</a>
-        <a href="/compare">Compare</a>
-        <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
-      </div>
-      <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-      </button>
-    </div>
-    <div class="nav-mobile" id="mobile-menu">
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Haven</a>
+    <div class="nav-links">
       <a href="/#features">Features</a>
       <a href="/pricing">Pricing</a>
       <a href="/story">Story</a>
       <a href="/compare">Compare</a>
-      <a href="https://apps.apple.com/app/id6744229406">Download</a>
+      <a href="https://apps.apple.com/app/id6744229406" class="nav-cta">Download</a>
     </div>
-  </nav>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobile-menu">
+    <a href="/#features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Story</a>
+    <a href="/compare">Compare</a>
+    <a href="https://apps.apple.com/app/id6744229406">Download</a>
+  </div>
+</nav>
 
-  <main>
-
+<main>
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-text">
-        <p class="eyebrow">Haven Notes</p>
-        <h1>Private markdown notes for iOS.</h1>
-        <p class="subtitle">Wiki links, knowledge graph, and end-to-end encryption. No AI. No tracking. Just yours.</p>
-        <div class="hero-buttons">
-          <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
-          <a href="#features" class="btn btn-outline">See features</a>
-        </div>
+      <span class="eyebrow reveal">Haven — Private notes for iOS</span>
+      <h1 class="reveal reveal-delay-1">
+        Your thoughts,<br>
+        <span class="accent-italic">beautifully organized.</span>
+      </h1>
+      <p class="subtitle reveal reveal-delay-2">
+        Markdown notes with wiki links and a visual knowledge graph. Private by design. Encrypted end to end. No AI. No tracking.
+      </p>
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
+        <a href="#graph" class="btn btn-outline">See it in action</a>
       </div>
-      <div class="hero-image">
-        <img src="assets/screenshot.png" alt="Haven Notes app screenshot showing markdown notes interface" width="300" height="600">
+      <div class="hero-image reveal reveal-delay-3">
+        <img src="assets/screenshot.png" alt="Haven Notes app showing the markdown editor with wiki links" width="320" height="640">
       </div>
     </div>
   </section>
 
-  <section id="features" class="section-centered">
+  <!-- Knowledge Graph Hero Feature -->
+  <section class="graph-feature" id="graph">
+    <div class="graph-inner">
+      <div class="graph-text">
+        <span class="eyebrow reveal">The Knowledge Graph</span>
+        <h2 class="reveal reveal-delay-1">
+          See how ideas<br>
+          <span class="accent-italic">connect.</span>
+        </h2>
+        <p class="subtitle reveal reveal-delay-2">
+          Link notes with <code>[[double brackets]]</code>. Watch your thinking form a living network. The graph reveals connections you didn't know existed.
+        </p>
+        <a href="/story" class="link-arrow reveal reveal-delay-2">
+          Why we built this →
+        </a>
+      </div>
+      <div class="graph-image reveal reveal-delay-1">
+        <img src="assets/graph.png" alt="Haven knowledge graph showing connected notes" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features-section" id="features">
     <div class="container">
-      <h2>Everything you need, nothing you don't.</h2>
-      <p class="subtitle">Built for people who want to think clearly — not manage a productivity system.</p>
+      <div class="section-heading reveal">
+        <span class="eyebrow">Built for thinkers</span>
+        <h2>
+          Everything you need,<br>
+          <span class="accent-italic">nothing you don't.</span>
+        </h2>
+      </div>
+
       <div class="feature-grid">
-        <div class="feature-card">
-          <div class="emoji">✏️</div>
+        <div class="feature-card reveal">
+          <span class="emoji" aria-hidden="true">✏️</span>
           <h3>Live Markdown</h3>
-          <p>Write in plain text, see formatted output instantly. No mode switching, no friction.</p>
+          <p>Bold, italic, headings, and code — rendered as you type. No mode switching.</p>
         </div>
-        <div class="feature-card">
-          <div class="emoji">🔗</div>
+        <div class="feature-card reveal reveal-delay-1">
+          <span class="emoji" aria-hidden="true">🔗</span>
           <h3>Wiki Links</h3>
-          <p>Connect notes with [[double brackets]]. Build a personal knowledge graph that grows with you.</p>
+          <p>Connect notes with <code>[[brackets]]</code>. Build a personal knowledge network.</p>
         </div>
-        <div class="feature-card">
-          <div class="emoji">🔒</div>
+        <div class="feature-card reveal reveal-delay-2">
+          <span class="emoji" aria-hidden="true">🔒</span>
           <h3>E2E Encrypted</h3>
-          <p>Your notes are encrypted before they ever leave your device. Not even we can read them.</p>
+          <p>AES-256 encryption. Keys live on your device. Not even we can read your notes.</p>
         </div>
-        <div class="feature-card">
-          <div class="emoji">📅</div>
+        <div class="feature-card reveal">
+          <span class="emoji" aria-hidden="true">📅</span>
           <h3>Daily Notes</h3>
-          <p>A fresh note every day, automatically. Great for journaling, standups, and quick captures.</p>
+          <p>A fresh note every day, automatically. Perfect for journaling and rhythm.</p>
         </div>
-        <div class="feature-card">
-          <div class="emoji">🎤</div>
-          <h3>Voice Notes</h3>
-          <p>Dictate thoughts hands-free. Perfect for when you're on the move and ideas won't wait.</p>
+        <div class="feature-card reveal reveal-delay-1">
+          <span class="emoji" aria-hidden="true">🎤</span>
+          <h3>Voice Dictation</h3>
+          <p>Capture thoughts hands-free. On-device processing. Nothing leaves your phone.</p>
         </div>
-        <div class="feature-card">
-          <div class="emoji">🔍</div>
+        <div class="feature-card reveal reveal-delay-2">
+          <span class="emoji" aria-hidden="true">🔍</span>
           <h3>Full-Text Search</h3>
-          <p>Find anything in your notes instantly. Fast, on-device search with no indexing delays.</p>
+          <p>Find anything instantly. Fast, on-device, no indexing delays.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <p class="pull-quote">Your notes live on your device. Not on someone else's server.</p>
+  <!-- Pricing Teaser -->
+  <section class="pricing-teaser">
+    <div class="pricing-teaser-inner">
+      <span class="eyebrow reveal">Pricing</span>
+      <h2 class="reveal reveal-delay-1">
+        Free forever.<br>
+        Pro <span class="accent-italic">unlocks sync.</span>
+      </h2>
+      <p class="subtitle reveal reveal-delay-2">
+        All core features are free. Haven Pro adds cloud sync and end-to-end encryption — $2.99/month or $19.99/year.
+      </p>
+      <a href="/pricing" class="link-arrow reveal reveal-delay-2">
+        See full pricing →
+      </a>
     </div>
   </section>
 
+  <!-- Final CTA -->
   <section class="cta-section">
-    <div class="container">
-      <h2>Ready to start writing?</h2>
-      <p class="subtitle">Download Haven and start capturing your thoughts today.</p>
-      <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
-      <p class="subtitle">Free to use · Pro unlocks sync</p>
+    <div class="cta-inner">
+      <h2 class="reveal">
+        Ready to<br>
+        <span class="accent-italic">start writing?</span>
+      </h2>
+      <p class="subtitle reveal reveal-delay-1">
+        Haven is free to download. Pro unlocks sync when you need it.
+      </p>
+      <div class="reveal reveal-delay-2">
+        <a href="https://apps.apple.com/app/id6744229406" class="btn btn-primary">Download for iOS</a>
+      </div>
     </div>
   </section>
+</main>
 
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>Pages</h4>
-          <a href="/">Home</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/story">Story</a>
-          <a href="/compare">Compare</a>
-          <a href="/changelog">Changelog</a>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Use</a>
-        </div>
-        <div class="footer-col">
-          <h4>Connect</h4>
-          <a href="mailto:support@havennotes.app">support@havennotes.app</a>
-          <a href="/support">Support</a>
-          <a href="https://apps.apple.com/app/id6744229406">App Store</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>Made by one person who was tired of bloated note apps.</span>
-        <span>&copy; 2026 Haven Notes</span>
-      </div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="/">Home</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Story</a>
+      <a href="/compare">Compare</a>
+      <a href="/changelog">Changelog</a>
     </div>
-  </footer>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="mailto:support@havennotes.app">support@havennotes.app</a>
+      <a href="/support">Support</a>
+      <a href="https://apps.apple.com/app/id6744229406">App Store</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Made by one person who was tired of bloated note apps.</span>
+    <span>&copy; 2026 Haven Notes</span>
+  </div>
+</footer>
 
-  <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
-  </script>
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
