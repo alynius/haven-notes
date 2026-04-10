@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+
+const rows = [
+  { feature: 'Local-first', haven: '✓', notion: '—', bear: '✓', apple: '✓', obsidian: '✓' },
+  { feature: 'E2E encryption', haven: '✓', notion: '—', bear: '—', apple: '—', obsidian: 'Plugin' },
+  { feature: 'Wiki links', haven: '✓', notion: '✓', bear: '—', apple: '—', obsidian: '✓' },
+  { feature: 'Knowledge graph', haven: '✓', notion: '—', bear: '—', apple: '—', obsidian: '✓' },
+  { feature: 'Native iOS', haven: '✓', notion: 'Non-native', bear: '✓', apple: '✓', obsidian: 'Non-native' },
+  { feature: 'No AI training', haven: '✓', notion: '—', bear: '—', apple: '—', obsidian: '✓' },
+  { feature: 'No account required', haven: '✓', notion: '—', bear: '—', apple: '—', obsidian: '✓' },
+];
+---
+<BaseLayout
+  title="Haven vs Notion, Bear, Obsidian — Haven Notes"
+  description="How Haven compares to other note apps. Privacy, speed, and craft over features and bloat."
+  ogUrl="https://havennotes.app/compare"
+  currentPath="/compare"
+>
+  <section class="py-20 md:py-24 text-center">
+    <div class="max-w-[1080px] mx-auto px-6">
+      <Eyebrow>Compare</Eyebrow>
+      <h1 class="font-serif text-display mt-4">
+        Haven vs <span class="accent-italic">the rest.</span>
+      </h1>
+      <p class="text-lg text-text-secondary mt-6 max-w-prose mx-auto">
+        We're not trying to be Notion. We're not trying to be Obsidian. Here's where Haven stands.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24">
+    <div class="max-w-[1080px] mx-auto px-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-left py-4 px-4 border-b border-border bg-surface">Feature</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-accent/10">Haven</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Notion</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Bear</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Apple Notes</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Obsidian</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr class="hover:bg-accent/5 transition-colors">
+              <td class="py-4 px-4 border-b border-border text-text-primary">{row.feature}</td>
+              <td class="py-4 px-4 border-b border-border text-center bg-accent/5">
+                {row.haven === '✓' ? <span class="text-accent font-bold">✓</span> : row.haven === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-primary text-xs">{row.haven}</span>}
+              </td>
+              <td class="py-4 px-4 border-b border-border text-center">
+                {row.notion === '✓' ? <span class="text-accent font-bold">✓</span> : row.notion === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.notion}</span>}
+              </td>
+              <td class="py-4 px-4 border-b border-border text-center">
+                {row.bear === '✓' ? <span class="text-accent font-bold">✓</span> : row.bear === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.bear}</span>}
+              </td>
+              <td class="py-4 px-4 border-b border-border text-center">
+                {row.apple === '✓' ? <span class="text-accent font-bold">✓</span> : row.apple === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.apple}</span>}
+              </td>
+              <td class="py-4 px-4 border-b border-border text-center">
+                {row.obsidian === '✓' ? <span class="text-accent font-bold">✓</span> : row.obsidian === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.obsidian}</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="py-24 text-center border-t border-border">
+    <div class="max-w-[600px] mx-auto px-6">
+      <h2 class="font-serif text-4xl md:text-5xl">
+        Try Haven <span class="accent-italic">for free.</span>
+      </h2>
+      <div class="mt-8">
+        <Button href={appStoreUrl} variant="primary" external={true}>Download for iOS</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

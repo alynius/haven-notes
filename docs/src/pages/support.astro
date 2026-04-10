@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+---
+<BaseLayout
+  title="Support — Haven Notes"
+  description="Get help with Haven Notes. FAQs, contact, and system requirements."
+  ogUrl="https://havennotes.app/support"
+  currentPath="/support"
+>
+  <section class="py-20 md:py-24">
+    <div class="max-w-prose mx-auto px-6 prose-serif">
+      <div class="text-center mb-16">
+        <Eyebrow>Help</Eyebrow>
+        <h1 class="font-serif text-display mt-4">
+          <span class="accent-italic">Support.</span>
+        </h1>
+        <p class="text-lg text-text-secondary mt-6 not-italic font-sans">
+          We're here to help.
+        </p>
+      </div>
+
+      <div class="bg-elevated border border-border rounded-[14px] p-8 my-8 transition-colors hover:border-accent not-italic font-sans">
+        <h2 class="font-serif text-xl mb-4">Contact us</h2>
+        <p class="text-text-secondary mb-2">Have a question, bug report, or feedback?</p>
+        <a href="mailto:support@havennotes.app" class="text-lg font-semibold">support@havennotes.app</a>
+      </div>
+
+      <h2>Frequently asked <span class="accent-italic">questions</span></h2>
+
+      <h3>How do I enable sync?</h3>
+      <p>Sync requires Haven Pro. Go to Settings → Sync, subscribe to Haven Pro, then enter your sync server URL. Haven never operates sync servers — you bring your own.</p>
+
+      <h3>What servers work with Haven?</h3>
+      <p>Any WebDAV-compatible server works. Many users run a simple self-hosted server on a Raspberry Pi, VPS, or NAS.</p>
+
+      <h3>Is my data encrypted?</h3>
+      <p>Yes. With Haven Pro, your notes are encrypted with AES-256 on your device before being sent to your sync server. Nobody but you can read them.</p>
+
+      <h3>Can I export my notes?</h3>
+      <p>Yes. Go to Settings → Export to download all your notes as markdown files.</p>
+
+      <h3>Does Haven work offline?</h3>
+      <p>Haven is offline-first. The app works entirely without an internet connection. Sync (with Pro) runs in the background when you're online.</p>
+
+      <h2>System <span class="accent-italic">Requirements</span></h2>
+      <ul>
+        <li>iPhone or iPad running iOS 17.0 or later</li>
+        <li>Apple Silicon Macs running macOS Sonoma or later (via iPad app)</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

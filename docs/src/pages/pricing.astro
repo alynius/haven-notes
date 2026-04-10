@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import PricingCard from '../components/PricingCard.astro';
+
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+
+const features = [
+  { name: 'Local notes', free: true, pro: true },
+  { name: 'Markdown editor', free: true, pro: true },
+  { name: 'Wiki links', free: true, pro: true },
+  { name: 'Knowledge graph', free: true, pro: true },
+  { name: 'Tags & folders', free: true, pro: true },
+  { name: 'Daily notes', free: true, pro: true },
+  { name: 'Voice dictation', free: true, pro: true },
+  { name: 'Full-text search', free: true, pro: true },
+  { name: 'Widgets', free: true, pro: true },
+  { name: 'Cloud sync', free: false, pro: true },
+  { name: 'E2E encrypted sync', free: false, pro: true },
+];
+---
+<BaseLayout
+  title="Pricing — Haven Notes"
+  description="Haven is free. Pro unlocks sync."
+  ogUrl="https://havennotes.app/pricing"
+  currentPath="/pricing"
+>
+  <section class="py-20 md:py-24 text-center">
+    <div class="max-w-[1080px] mx-auto px-6">
+      <Eyebrow>Pricing</Eyebrow>
+      <h1 class="font-serif text-display mt-4">
+        Simple, <span class="accent-italic">honest pricing.</span>
+      </h1>
+      <p class="text-lg text-text-secondary mt-4 max-w-prose mx-auto">
+        Haven is free. Pro unlocks sync.
+      </p>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="pb-16">
+    <div class="max-w-[1080px] mx-auto px-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-left py-4 px-6 border-b border-border bg-surface">Feature</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-6 border-b border-border bg-surface">Free</th>
+            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-6 border-b border-border bg-surface bg-accent/10">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          {features.map((feature) => (
+            <tr class="hover:bg-accent/5 transition-colors">
+              <td class="py-4 px-6 border-b border-border text-text-primary">{feature.name}</td>
+              <td class="py-4 px-6 border-b border-border text-center">
+                {feature.free ? <span class="text-accent font-bold">✓</span> : <span class="text-text-secondary">—</span>}
+              </td>
+              <td class="py-4 px-6 border-b border-border text-center bg-accent/5">
+                {feature.pro ? <span class="text-accent font-bold">✓</span> : <span class="text-text-secondary">—</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="pb-16">
+    <div class="max-w-[820px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <PricingCard
+        title="Free"
+        price="$0"
+        period="forever"
+        cta="Download"
+        ctaHref={appStoreUrl}
+        ctaVariant="outline"
+        note="All core features included"
+      />
+      <PricingCard
+        title="Monthly"
+        price="$2.99"
+        period="per month"
+        cta="Download Haven"
+        ctaHref={appStoreUrl}
+        ctaVariant="outline"
+        note="Auto-renewable · Cancel anytime"
+      />
+      <PricingCard
+        title="Yearly"
+        price="$19.99"
+        period="per year"
+        cta="Download Haven"
+        ctaHref={appStoreUrl}
+        ctaVariant="primary"
+        featured={true}
+        badge="Save 44%"
+        note="Auto-renewable · Cancel anytime"
+      />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pb-24">
+    <div class="max-w-prose mx-auto px-6">
+      <h2 class="font-serif text-3xl text-center mb-10">
+        Frequently asked <span class="accent-italic">questions</span>
+      </h2>
+      <details class="border-t border-border group">
+        <summary class="flex items-center justify-between cursor-pointer py-6 font-medium text-text-primary text-lg list-none [&::-webkit-details-marker]:hidden">
+          Can I use Haven for free?
+          <span class="text-accent text-2xl font-light group-open:hidden">+</span>
+          <span class="text-accent text-2xl font-light hidden group-open:inline">−</span>
+        </summary>
+        <div class="pb-6 text-text-secondary leading-relaxed">All core features are free forever: markdown editor, wiki links, knowledge graph, tags, folders, daily notes, voice dictation, full-text search, and widgets. Only sync and encryption require Pro.</div>
+      </details>
+      <details class="border-t border-border group">
+        <summary class="flex items-center justify-between cursor-pointer py-6 font-medium text-text-primary text-lg list-none [&::-webkit-details-marker]:hidden">
+          What does Pro add?
+          <span class="text-accent text-2xl font-light group-open:hidden">+</span>
+          <span class="text-accent text-2xl font-light hidden group-open:inline">−</span>
+        </summary>
+        <div class="pb-6 text-text-secondary leading-relaxed">Haven Pro unlocks cloud sync to your own server plus end-to-end encryption with AES-256. Your data stays yours — Haven never operates a server that sees your notes.</div>
+      </details>
+      <details class="border-t border-border group">
+        <summary class="flex items-center justify-between cursor-pointer py-6 font-medium text-text-primary text-lg list-none [&::-webkit-details-marker]:hidden">
+          How do I cancel?
+          <span class="text-accent text-2xl font-light group-open:hidden">+</span>
+          <span class="text-accent text-2xl font-light hidden group-open:inline">−</span>
+        </summary>
+        <div class="pb-6 text-text-secondary leading-relaxed">Open Settings → your Apple ID → Subscriptions → Haven → Cancel. Your subscription stays active until the end of the current billing period.</div>
+      </details>
+      <details class="border-t border-border border-b group">
+        <summary class="flex items-center justify-between cursor-pointer py-6 font-medium text-text-primary text-lg list-none [&::-webkit-details-marker]:hidden">
+          Is my data private?
+          <span class="text-accent text-2xl font-light group-open:hidden">+</span>
+          <span class="text-accent text-2xl font-light hidden group-open:inline">−</span>
+        </summary>
+        <div class="pb-6 text-text-secondary leading-relaxed">Yes. Notes live on your device. If you enable sync, they're encrypted end-to-end before leaving your phone. Haven has no analytics, no tracking, no AI reading your notes.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 text-center border-t border-border">
+    <div class="max-w-[600px] mx-auto px-6">
+      <h2 class="font-serif text-4xl md:text-5xl">
+        Ready to <span class="accent-italic">start writing?</span>
+      </h2>
+      <div class="mt-8">
+        <Button href={appStoreUrl} variant="primary" external={true}>Download for iOS</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

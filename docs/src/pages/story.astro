@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+---
+<BaseLayout
+  title="Story — Haven Notes"
+  description="Why Haven exists. Built by one person who was tired of bloated note apps."
+  ogUrl="https://havennotes.app/story"
+  currentPath="/story"
+>
+  <section class="py-20 md:py-24">
+    <div class="max-w-prose mx-auto px-6 prose-serif">
+      <div class="text-center mb-16">
+        <Eyebrow>The story</Eyebrow>
+        <h1 class="font-serif text-display mt-4">
+          Why <span class="accent-italic">Haven exists.</span>
+        </h1>
+        <p class="text-lg text-text-secondary mt-6 not-italic font-sans">
+          Built by one person who was tired of bloated note apps.
+        </p>
+      </div>
+
+      <h2>The problem</h2>
+      <p>Modern note apps aren't about notes anymore. They're about features. Teams. Collaboration. AI. Analytics. Everything except the simple act of writing something down.</p>
+      <p>Open Notion and you're greeted by a dashboard. Open Obsidian and you're configuring plugins. Open Bear and you're scrolling ads for their cloud tier. The friction between having a thought and capturing it has grown unbearable.</p>
+      <p>And now, AI reads everything. Your notes are training data. Your drafts are analyzed. Your private thinking is no longer private.</p>
+
+      <h2>The alternative</h2>
+      <p>Haven is a note app that remembers what notes are for: thinking. It opens instantly. It has no dashboard. It never asks you to sign in. It never reads your writing. It doesn't try to be a wiki, a database, a CRM, or a knowledge management system.</p>
+      <p>It's just a place for your thoughts. Markdown, wiki links, a knowledge graph. Everything on your device. Everything encrypted when you sync. Nothing else.</p>
+
+      <h2>The craft</h2>
+      <p>Haven is built by one person. No venture capital. No growth team. No optimization pipeline. Just careful design and obsessive attention to detail.</p>
+      <p>Every choice asks: does this serve the person writing? If the answer is no, we don't ship it. That's why there's no notification system. No streak counter. No social feed. No AI assistant asking if you'd like to "expand this idea."</p>
+      <p>The subscription exists because sustainable software costs money to make. But the free version isn't crippleware — it's the full app. Pro is a way to support the work and get sync. That's it.</p>
+
+      <p class="text-center mt-16 not-italic">
+        <a href={appStoreUrl} rel="noopener noreferrer" target="_blank" class="text-accent font-semibold">Download Haven →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24 text-center border-t border-border">
+    <div class="max-w-[600px] mx-auto px-6">
+      <h2 class="font-serif text-4xl md:text-5xl">
+        Ready to <span class="accent-italic">start writing?</span>
+      </h2>
+      <div class="mt-8">
+        <Button href={appStoreUrl} variant="primary" external={true}>Download for iOS</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

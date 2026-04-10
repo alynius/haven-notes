@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+---
+<BaseLayout
+  title="Privacy Policy — Haven Notes"
+  description="Haven is built on a simple principle: your notes are yours. We don't collect, store, or transmit your data."
+  ogUrl="https://havennotes.app/privacy"
+  currentPath="/privacy"
+>
+  <section class="py-20 md:py-24">
+    <div class="max-w-prose mx-auto px-6 prose-serif">
+      <div class="text-center mb-16">
+        <Eyebrow>Legal</Eyebrow>
+        <h1 class="font-serif text-display mt-4">
+          Privacy <span class="accent-italic">Policy.</span>
+        </h1>
+        <p class="text-lg text-text-secondary mt-6 not-italic font-sans">
+          Last updated: March 30, 2026
+        </p>
+      </div>
+
+      <h2>The short version</h2>
+      <p>Haven is built on a simple principle: <strong>your notes are yours</strong>. We don't collect, store, or transmit your data. There are no accounts. There's no tracking. There's no AI reading your writing.</p>
+
+      <h2>What we don't collect</h2>
+      <ul>
+        <li><strong>No analytics.</strong> We don't track what you do in the app.</li>
+        <li><strong>No crash reports.</strong> No third-party SDKs. No telemetry.</li>
+        <li><strong>No account.</strong> You don't sign up. We don't know you exist.</li>
+        <li><strong>No AI training.</strong> Your notes are never used to train any model.</li>
+      </ul>
+
+      <h2>What we do collect</h2>
+      <p>Nothing. Haven has no servers that receive your data. All notes are stored locally on your device in an encrypted database.</p>
+
+      <h2>Haven Pro and sync</h2>
+      <p>If you subscribe to Haven Pro and enable sync, you provide your own server URL. Your notes are encrypted with AES-256 on your device before leaving your phone. Even if we ran a sync server (we don't), we wouldn't be able to read your notes.</p>
+
+      <h2>Apple In-App Purchases</h2>
+      <p>Subscription payments are processed by Apple, not by us. We receive no personal information from Apple beyond what's required for subscription validation — which is handled entirely by Apple's StoreKit framework.</p>
+
+      <h2>Third parties</h2>
+      <p>Haven uses no third-party services for analytics, tracking, advertising, or data processing. The only external connection Haven makes is to your own sync server (if you configure one) and to Apple's servers for subscription verification.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Email <a href="mailto:support@havennotes.app">support@havennotes.app</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

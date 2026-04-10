@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+---
+<BaseLayout
+  title="Changelog — Haven Notes"
+  description="What's new in Haven."
+  ogUrl="https://havennotes.app/changelog"
+  currentPath="/changelog"
+>
+  <section class="py-20 md:py-24">
+    <div class="max-w-prose mx-auto px-6">
+      <div class="text-center mb-16">
+        <Eyebrow>Updates</Eyebrow>
+        <h1 class="font-serif text-display mt-4">
+          <span class="accent-italic">Changelog.</span>
+        </h1>
+        <p class="text-lg text-text-secondary mt-6">What's new in Haven.</p>
+      </div>
+
+      <article class="border-b border-border py-12">
+        <div class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary mb-2">
+          April 2026
+        </div>
+        <h3 class="font-serif text-2xl mb-6">Version 1.0</h3>
+        <ul class="list-disc list-inside text-text-secondary space-y-2 leading-relaxed">
+          <li>Initial release</li>
+          <li>Markdown editor with wiki links and live preview</li>
+          <li>Knowledge graph visualization</li>
+          <li>Daily notes and voice dictation</li>
+          <li>Full-text search</li>
+          <li>Dark mode by default</li>
+          <li>Haven Pro: cloud sync and end-to-end encryption</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
