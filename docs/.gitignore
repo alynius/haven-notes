@@ -1,1 +1,7 @@
-.vercel
+dist/
+.astro/
+node_modules/
+npm-debug.log*
+.env
+.env.production
+.DS_Store
