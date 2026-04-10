@@ -45,6 +45,7 @@ struct TagPickerView: View {
                             .background(Color.havenAccent.opacity(0.1))
                             .clipShape(.rect(cornerRadius: 12))
                         }
+                        .accessibilityIdentifier("tagPicker_button_removeTag_\(tag.id)")
                     }
                 }
             }
@@ -56,6 +57,7 @@ struct TagPickerView: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .focused($isFieldFocused)
+                    .accessibilityIdentifier("tagPicker_textField_newTag")
                     .onSubmit {
                         addCurrentTag()
                     }
@@ -66,6 +68,7 @@ struct TagPickerView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(Color.havenAccent)
                     }
+                    .accessibilityIdentifier("tagPicker_button_addTag")
                 }
             }
             .padding(Spacing.sm)

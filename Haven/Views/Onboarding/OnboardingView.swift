@@ -91,6 +91,7 @@ struct OnboardingView: View {
                                 .font(.havenBody)
                                 .foregroundColor(Color.havenTextSecondary)
                         }
+                        .accessibilityIdentifier("onboarding_button_skip")
                     }
                 }
                 .padding(.horizontal, Spacing.xxl)
@@ -146,6 +147,7 @@ struct OnboardingView: View {
                                 .background(Color.havenPrimary)
                                 .clipShape(.rect(cornerRadius: CornerRadius.md))
                             }
+                            .accessibilityIdentifier("onboarding_button_startWriting")
 
                             Text("Free to use · Pro unlocks sync")
                                 .font(.caption)
@@ -169,6 +171,7 @@ struct OnboardingView: View {
                             .background(Color.havenPrimary.opacity(0.08))
                             .clipShape(.rect(cornerRadius: CornerRadius.md))
                         }
+                        .accessibilityIdentifier("onboarding_button_continue")
                     }
                 }
                 .padding(.horizontal, Spacing.xxl)

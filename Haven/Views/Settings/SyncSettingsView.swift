@@ -16,6 +16,7 @@ struct SyncSettingsView: View {
                     ))
                     .font(.havenBody)
                     .tint(Color.havenAccent)
+                    .accessibilityIdentifier("syncSettings_toggle_enableSync")
                 } header: {
                     Text("Sync")
                 } footer: {
@@ -33,9 +34,11 @@ struct SyncSettingsView: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
                             .textContentType(.URL)
+                            .accessibilityIdentifier("syncSettings_textField_serverURL")
 
                         SecureField("Auth Token", text: $viewModel.authToken)
                             .font(.havenBody)
+                            .accessibilityIdentifier("syncSettings_secureField_authToken")
 
                         Button {
                             Task { await viewModel.saveConfiguration() }
@@ -44,6 +47,7 @@ struct SyncSettingsView: View {
                                 .font(.havenBody)
                                 .foregroundColor(Color.havenPrimary)
                         }
+                        .accessibilityIdentifier("syncSettings_button_save")
                     } header: {
                         Text("Server Configuration")
                     }
@@ -80,6 +84,7 @@ struct SyncSettingsView: View {
                                 }
                             }
                         }
+                        .accessibilityIdentifier("syncSettings_button_syncNow")
                     } header: {
                         Text("Status")
                     }

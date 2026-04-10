@@ -15,16 +15,23 @@ struct EditorToolbarView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
                 toolbarButton("bold", label: "Bold", isActive: activeFormats.contains(.bold), action: onBold)
+                    .accessibilityIdentifier("editorToolbar_button_bold")
                 toolbarButton("italic", label: "Italic", isActive: activeFormats.contains(.italic), action: onItalic)
+                    .accessibilityIdentifier("editorToolbar_button_italic")
                 toolbarButton("textformat.size", label: "Heading", isActive: activeFormats.contains(.heading), action: onHeading)
+                    .accessibilityIdentifier("editorToolbar_button_heading")
                 toolbarButton("list.bullet", label: "List", isActive: activeFormats.contains(.list), action: onList)
+                    .accessibilityIdentifier("editorToolbar_button_list")
                 toolbarButton("checkmark.square", label: "Checkbox", action: onCheckbox)
+                    .accessibilityIdentifier("editorToolbar_button_checkbox")
                 toolbarButton("link", label: "Link", action: onLink)
+                    .accessibilityIdentifier("editorToolbar_button_link")
                 toolbarButton(
                     isRecording ? "mic.fill" : "mic",
                     label: isRecording ? "Stop dictation" : "Start dictation",
                     action: onMicrophone
                 )
+                .accessibilityIdentifier("editorToolbar_button_microphone")
                 .foregroundColor(isRecording ? Color.red : Color.havenTextPrimary)
                 .overlay(
                     isRecording

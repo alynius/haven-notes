@@ -30,6 +30,7 @@ struct SidebarView: View {
                             .foregroundColor(Color.havenAccent)
                     }
                 }
+                .accessibilityIdentifier("sidebar_button_dailyNote")
             }
 
             // All Notes
@@ -48,6 +49,7 @@ struct SidebarView: View {
                         .foregroundColor(Color.havenPrimary)
                 }
                 .tag(NoteFilter.allNotes)
+                .accessibilityIdentifier("sidebar_row_allNotes")
             }
 
             // Folders
@@ -114,6 +116,7 @@ struct SidebarView: View {
                     HStack {
                         TextField("Folder name", text: $viewModel.newFolderName)
                             .font(.havenBody)
+                            .accessibilityIdentifier("sidebar_textField_newFolderName")
                             .onSubmit {
                                 Task { await viewModel.createFolder() }
                             }
@@ -139,6 +142,7 @@ struct SidebarView: View {
                             .font(.havenBody)
                             .foregroundColor(Color.havenAccent)
                     }
+                    .accessibilityIdentifier("sidebar_button_createFolder")
                 }
             } header: {
                 Text("Folders")

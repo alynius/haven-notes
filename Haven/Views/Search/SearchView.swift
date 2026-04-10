@@ -44,6 +44,7 @@ struct SearchView: View {
                             .font(.havenBody.weight(.medium))
                             .foregroundColor(Color.havenPrimary)
                     }
+                    .accessibilityIdentifier("search_button_clear")
                     .padding(.top, Spacing.xs)
                 }
             } else if !viewModel.results.isEmpty {
@@ -55,6 +56,7 @@ struct SearchView: View {
                             SearchResultRowView(note: note, query: viewModel.query)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("search_row_\(note.id)")
                     }
                 }
                 .listStyle(.plain)

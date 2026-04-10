@@ -29,6 +29,7 @@ struct TaskListView: View {
                             .foregroundColor(task.isCompleted ? Color.havenAccent : Color.havenTextSecondary.opacity(0.5))
                     }
                     .accessibilityLabel(task.isCompleted ? "Mark incomplete" : "Mark complete")
+                    .accessibilityIdentifier("taskList_button_toggle_\(task.id)")
 
                     Text(task.text)
                         .font(.havenContentBody)
@@ -45,6 +46,7 @@ struct TaskListView: View {
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())
                     }
+                    .accessibilityIdentifier("taskList_button_delete_\(task.id)")
                 }
                 .padding(.vertical, 6)
             }
@@ -60,6 +62,7 @@ struct TaskListView: View {
                         .font(.havenContentBody)
                         .foregroundColor(Color.havenTextPrimary)
                         .focused($isNewTaskFocused)
+                        .accessibilityIdentifier("taskList_textField_newTask")
                         .onSubmit {
                             submitNewTask()
                         }

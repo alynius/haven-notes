@@ -23,6 +23,7 @@ struct NoteEditorView: View {
                     .font(.havenContentTitle)
                     .foregroundColor(Color.havenTextPrimary)
                     .focused($titleFocused)
+                    .accessibilityIdentifier("noteEditor_textField_title")
                     .padding(.top, Spacing.lg)
                     .padding(.bottom, Spacing.sm)
 
@@ -117,6 +118,7 @@ struct NoteEditorView: View {
                             .font(.havenCaption.weight(.semibold))
                             .foregroundColor(Color.havenAccent)
                             .disabled(viewModel.speechRecognizer.transcript.isEmpty)
+                            .accessibilityIdentifier("noteEditor_button_insertDictation")
                         }
                         .padding(.horizontal, Spacing.lg)
                         .padding(.vertical, Spacing.sm)
@@ -173,6 +175,7 @@ struct NoteEditorView: View {
                             .foregroundColor(Color.havenPrimary)
                     }
                     .accessibilityLabel("Dismiss keyboard")
+                    .accessibilityIdentifier("noteEditor_button_dismissKeyboard")
                 }
             }
         }

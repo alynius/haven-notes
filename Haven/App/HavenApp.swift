@@ -7,8 +7,8 @@ struct HavenApp: App {
     @StateObject private var container = DependencyContainer()
     @StateObject private var toastManager = ToastManager()
     @State private var initializationFailed = false
-    @State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-    @State private var isLocked = true
+    @State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") || ProcessInfo.processInfo.arguments.contains("--uitesting")
+    @State private var isLocked = !ProcessInfo.processInfo.arguments.contains("--uitesting")
     @Environment(\.scenePhase) var scenePhase
 
     private let biometricService = BiometricService()

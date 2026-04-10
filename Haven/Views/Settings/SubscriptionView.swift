@@ -105,6 +105,7 @@ struct SubscriptionView: View {
                                     )
                                 }
                                 .disabled(viewModel.isPurchasing)
+                                .accessibilityIdentifier("subscription_button_product_\(product.id)")
                             }
                         }
                         .padding(.horizontal, 16)
@@ -124,6 +125,7 @@ struct SubscriptionView: View {
                                 .font(.havenCaption)
                                 .foregroundColor(Color.havenTextSecondary)
                         }
+                        .accessibilityIdentifier("subscription_button_restore")
                         .padding(.top, 4)
 
                         HStack(spacing: Spacing.lg) {

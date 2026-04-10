@@ -75,6 +75,7 @@ struct GraphView: View {
                         .padding(.vertical, Spacing.xs)
                         .background(.regularMaterial)
                         .clipShape(Capsule())
+                        .accessibilityIdentifier("graph_badge_stats")
                     Spacer()
                     Button {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
@@ -92,6 +93,7 @@ struct GraphView: View {
                             .clipShape(Circle())
                     }
                     .accessibilityLabel("Reset zoom")
+                    .accessibilityIdentifier("graph_button_resetZoom")
                 }
                 .padding(Spacing.lg)
             }

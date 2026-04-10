@@ -46,10 +46,12 @@ struct EncryptionSettingsView: View {
                         SecureField("Encryption password", text: $password)
                             .font(.havenBody)
                             .textContentType(.newPassword)
+                            .accessibilityIdentifier("encryption_secureField_password")
 
                         SecureField("Confirm password", text: $confirmPassword)
                             .font(.havenBody)
                             .textContentType(.newPassword)
+                            .accessibilityIdentifier("encryption_secureField_confirmPassword")
 
                         Button {
                             setupEncryption()
@@ -64,6 +66,7 @@ struct EncryptionSettingsView: View {
                             }
                         }
                         .disabled(password.count < 8 || password != confirmPassword || isSettingUp)
+                        .accessibilityIdentifier("encryption_button_enable")
                     } header: {
                         Text("Set Up")
                     } footer: {
@@ -84,6 +87,7 @@ struct EncryptionSettingsView: View {
                             Text("Disable Encryption")
                                 .font(.havenBody)
                         }
+                        .accessibilityIdentifier("encryption_button_disable")
                     } header: {
                         Text("Manage")
                     } footer: {

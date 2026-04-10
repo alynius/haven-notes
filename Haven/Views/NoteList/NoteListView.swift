@@ -54,6 +54,7 @@ struct NoteListView: View {
                             )
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("noteList_row_\(note.id)")
                         .listRowBackground(Color.havenBackground)
                         .listRowSeparatorTint(Color.havenBorder)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -63,6 +64,7 @@ struct NoteListView: View {
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
+                            .accessibilityIdentifier("noteList_button_delete_\(note.id)")
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button {
@@ -71,6 +73,7 @@ struct NoteListView: View {
                                 Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
                             }
                             .tint(Color.havenAccent)
+                            .accessibilityIdentifier("noteList_button_pin_\(note.id)")
                         }
                         .contextMenu {
                             Button {
@@ -118,12 +121,14 @@ struct NoteListView: View {
                                 .foregroundColor(Color.havenPrimary)
                         }
                         .accessibilityLabel("Folders & Tags")
+                        .accessibilityIdentifier("noteList_button_foldersAndTags")
                     }
                     Button { appState.navigateTo(.settings) } label: {
                         Image(systemName: "gearshape")
                             .foregroundColor(Color.havenPrimary)
                     }
                     .accessibilityLabel("Settings")
+                    .accessibilityIdentifier("noteList_button_settings")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -133,11 +138,13 @@ struct NoteListView: View {
                             .foregroundColor(Color.havenPrimary)
                     }
                     .accessibilityLabel("Knowledge Graph")
+                    .accessibilityIdentifier("noteList_button_graph")
                     Button { appState.navigateTo(.search) } label: {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(Color.havenPrimary)
                     }
                     .accessibilityLabel("Search")
+                    .accessibilityIdentifier("noteList_button_search")
                     Button {
                         Task {
                             if let id = await viewModel.createNote() {
@@ -150,6 +157,7 @@ struct NoteListView: View {
                             .font(.title3)
                     }
                     .accessibilityLabel("New Note")
+                    .accessibilityIdentifier("noteList_button_newNote")
                 }
             }
         }

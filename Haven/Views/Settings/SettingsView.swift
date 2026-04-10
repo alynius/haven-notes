@@ -43,6 +43,7 @@ struct SettingsView: View {
                         }
                     }
                     .tint(Color.havenAccent)
+                    .accessibilityIdentifier("settings_toggle_faceId")
                 } header: {
                     Text("Security")
                 } footer: {
@@ -60,6 +61,7 @@ struct SettingsView: View {
                     }
                     .font(.havenBody)
                     .foregroundColor(Color.havenTextPrimary)
+                    .accessibilityIdentifier("settings_picker_theme")
                     .onChange(of: viewModel.themeMode) { newValue in
                         viewModel.setThemeMode(newValue)
                         appState.applyTheme(newValue)
@@ -84,6 +86,7 @@ struct SettingsView: View {
                                 .foregroundColor(Color.havenTextSecondary)
                         }
                     }
+                    .accessibilityIdentifier("settings_button_importNotion")
                 } header: {
                     Text("Import")
                 }
@@ -95,6 +98,7 @@ struct SettingsView: View {
                         Text("Sync Settings")
                             .font(.havenBody)
                     }
+                    .accessibilityIdentifier("settings_navLink_sync")
 
                     NavigationLink(value: Route.encryption) {
                         HStack {
@@ -106,6 +110,7 @@ struct SettingsView: View {
                                 .foregroundColor(container.encryptionService.hasKey ? Color.havenAccent : Color.havenTextSecondary)
                         }
                     }
+                    .accessibilityIdentifier("settings_navLink_encryption")
                 } header: {
                     Text("Sync")
                 }
@@ -117,6 +122,7 @@ struct SettingsView: View {
                         Text("Haven Pro")
                             .font(.havenBody)
                     }
+                    .accessibilityIdentifier("settings_navLink_subscription")
                 } header: {
                     Text("Subscription")
                 }

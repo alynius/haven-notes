@@ -33,6 +33,7 @@ struct EmptyStateView: View {
                         .clipShape(.rect(cornerRadius: CornerRadius.sm))
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("emptyState_button_createNote")
                 .padding(.top, Spacing.sm)
             }
         }
