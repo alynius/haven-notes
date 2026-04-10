@@ -30,11 +30,15 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Haven uses Face ID to secure your notes.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Haven uses the microphone to transcribe your voice into text.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Haven uses speech recognition for voice dictation in the note editor.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

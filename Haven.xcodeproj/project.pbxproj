@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008BB55E939A2349BB259314 /* page-2026-04-10T19-32-40-733Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */; };
 		012F1EE213B116F26F49DBC6 /* console-2026-04-05T20-57-23-073Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 53B02A03D3953A061A1AC069 /* console-2026-04-05T20-57-23-073Z.log */; };
 		02763C7B43E9527B4DCD002B /* console-2026-04-05T20-21-54-138Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C16082CC6C3B8B5E578664EE /* console-2026-04-05T20-21-54-138Z.log */; };
 		028F3111E68E52D53DD9B43E /* page-2026-04-08T09-44-56-358Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = EBD61F5520F75A63BDE32239 /* page-2026-04-08T09-44-56-358Z.yml */; };
@@ -87,6 +88,7 @@
 		53BE71FA5F4C1534819668F5 /* DateISO8601Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375DDE3A8FF4E1894BA64B9 /* DateISO8601Tests.swift */; };
 		53CD47AB68DE67C70B923565 /* page-2026-04-10T14-41-49-107Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = EB3EBABA52A27AE0FE27887A /* page-2026-04-10T14-41-49-107Z.yml */; };
 		550E617033C7DFC1E61B7777 /* final-pricing-cards.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */; };
+		564B46301F7FBFF55DE2C547 /* page-2026-04-10T19-34-02-223Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = B9F30BA5BBC8E271E3CEB338 /* page-2026-04-10T19-34-02-223Z.yml */; };
 		57088D60882023696CA4DD67 /* page-2026-04-05T20-42-32-231Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2E15102167029A0D4B4A130F /* page-2026-04-05T20-42-32-231Z.yml */; };
 		570C65F69978987C12D789B3 /* post-upgrade-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = E8968693AB4C088AAFEF96D4 /* post-upgrade-pricing.png */; };
 		5763314A220C2B508A42C89C /* hero-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = ABB40FD76708BC080E90CB3C /* hero-fixed.png */; };
@@ -112,9 +114,12 @@
 		6D4E9631A27D0DF8A534BAEE /* console-2026-04-08T13-54-54-850Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 32DB2BF8729F9B251B40596B /* console-2026-04-08T13-54-54-850Z.log */; };
 		6FD4854C0AD37887F60C352F /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46972FAA7F9A308EBB974B8 /* SidebarView.swift */; };
 		700A99228A0C0DD5FDA81D59 /* 08-dark-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = FB43EDA2258695441EAB55A8 /* 08-dark-landing.png */; };
+		72143A41B44D661597881E56 /* page-2026-04-10T19-34-18-906Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */; };
+		74E71C000D4C00AC06DB13D2 /* page-2026-04-10T19-32-48-875Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = DEF6BC22B7C08390B0A5D2CD /* page-2026-04-10T19-32-48-875Z.yml */; };
 		750A8F94A65956FC6BB47B8F /* GraphUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21EC384E2EF12F73CFFCDD /* GraphUITests.swift */; };
 		77E93CFA60FE60D11085ECAA /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171B5F1ADC4F58B64D511FC2 /* GraphViewModel.swift */; };
 		77F0F1FACB46C348EB8B2A89 /* page-2026-04-05T20-17-00-932Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1076CED835050A50487A14DA /* page-2026-04-05T20-17-00-932Z.yml */; };
+		789738FE66FDED340A2AAFE6 /* console-2026-04-10T19-32-39-952Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */; };
 		78CA670ECFA3950CF2C52619 /* console-2026-04-08T15-16-23-085Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 22A169E9B41F4F975EC73019 /* console-2026-04-08T15-16-23-085Z.log */; };
 		7B1D366E2556AA83B5BF41E6 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B0CA62910AFED44B5981A /* SubscriptionManager.swift */; };
 		7C8721BAD5FF44CF2D4282C4 /* console-2026-04-05T20-42-30-940Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 935C942F408A4D5C327ECCB3 /* console-2026-04-05T20-42-30-940Z.log */; };
@@ -214,6 +219,7 @@
 		F23D04C0FD4DA4EE0156454F /* 09-dark-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FE1E18206A72E7DA266C98 /* 09-dark-pricing.png */; };
 		F299C7425D7BDE928D8A1453 /* SyncSettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E5863F798CA3795F0B130 /* SyncSettingsUITests.swift */; };
 		F2A9F3D6BEA16DFE93ECE787 /* page-2026-04-05T20-16-26-969Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3BCFA591FD09FC35D0E2C0BF /* page-2026-04-05T20-16-26-969Z.yml */; };
+		F2D58EA289C1656C696FF0A3 /* page-2026-04-10T19-33-00-263Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7784611864558A864F51F24E /* page-2026-04-10T19-33-00-263Z.yml */; };
 		F3180A44B42B091409B9B80C /* console-2026-04-05T20-18-36-976Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 93E4586D5BF958EE31F1A450 /* console-2026-04-05T20-18-36-976Z.log */; };
 		F46BF6519FF1A31D370EEFC1 /* final-hero.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA4B0006A759B489B2FD0F3 /* final-hero.png */; };
 		F48F57BDD30C4F58A32ABC16 /* audit-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C97D2B0951A044DBD590559 /* audit-landing.png */; };
@@ -306,11 +312,13 @@
 		38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiLinkParser.swift; sourceTree = "<group>"; };
 		38AE3EC651FC75E59E5EB153 /* SearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUITests.swift; sourceTree = "<group>"; };
 		38DC47091541C60C8B29113A /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
+		39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-34-18-906Z.yml"; sourceTree = "<group>"; };
 		3AA69AD21992B1DBF8D2E983 /* Color+Haven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Haven.swift"; sourceTree = "<group>"; };
 		3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-15-23-954Z.yml"; sourceTree = "<group>"; };
 		3BCFA591FD09FC35D0E2C0BF /* page-2026-04-05T20-16-26-969Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-16-26-969Z.yml"; sourceTree = "<group>"; };
 		3BF309D861F4B741F2FA8D20 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		3C358855C77165A4F1244030 /* page-2026-04-05T20-57-23-627Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-57-23-627Z.yml"; sourceTree = "<group>"; };
+		3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-32-40-733Z.yml"; sourceTree = "<group>"; };
 		451A5FD74829DBD75CEB9032 /* asc-review-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-review-info.png"; sourceTree = "<group>"; };
 		45F0136A42922E16A0FD68D8 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		46D8676D4EAD296C8CC82EAC /* tax-section.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "tax-section.yml"; sourceTree = "<group>"; };
@@ -357,6 +365,7 @@
 		7525EB1C32E9D266C571AE5D /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		7615331F54A69CA6A7EF32D4 /* HTMLSanitizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLSanitizer.swift; sourceTree = "<group>"; };
 		776E2E8B0CCA359124ADAC35 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		7784611864558A864F51F24E /* page-2026-04-10T19-33-00-263Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-33-00-263Z.yml"; sourceTree = "<group>"; };
 		782BC7DD02AE340EDA77E51C /* page-2026-04-10T14-41-58-534Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T14-41-58-534Z.yml"; sourceTree = "<group>"; };
 		788EC4D8D91B718CFE422F5D /* console-2026-04-05T20-14-58-999Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-14-58-999Z.log"; sourceTree = "<group>"; };
 		78D19164FF99C07A27753B8D /* sidebar-detail.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "sidebar-detail.yml"; sourceTree = "<group>"; };
@@ -436,11 +445,13 @@
 		B6AE1AD127978C940D8A960F /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-14-59-511Z.yml"; sourceTree = "<group>"; };
 		B881919B0D964DC2E138EDA9 /* page-2026-04-08T13-54-55-144Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T13-54-55-144Z.yml"; sourceTree = "<group>"; };
+		B9F30BA5BBC8E271E3CEB338 /* page-2026-04-10T19-34-02-223Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-34-02-223Z.yml"; sourceTree = "<group>"; };
 		C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-12-896Z.yml"; sourceTree = "<group>"; };
 		C16082CC6C3B8B5E578664EE /* console-2026-04-05T20-21-54-138Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-21-54-138Z.log"; sourceTree = "<group>"; };
 		C1F8E00AC61661FB6BBFDDB2 /* 01-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-landing.png"; sourceTree = "<group>"; };
 		C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		C2E813F46438FB3A5B3A019D /* page-2026-04-05T20-18-37-464Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-18-37-464Z.yml"; sourceTree = "<group>"; };
+		C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */ = {isa = PBXFileReference; path = "console-2026-04-10T19-32-39-952Z.log"; sourceTree = "<group>"; };
 		C4814D66609EE1B3C6629954 /* SubscriptionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUITests.swift; sourceTree = "<group>"; };
 		C4A068D5F6762A8796831D02 /* HTMLSanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLSanitizerTests.swift; sourceTree = "<group>"; };
 		C6F000B2F979187F8F513A78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
@@ -464,6 +475,7 @@
 		DB674EB5B8305C3889BAA2A4 /* asc-app-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-app-info.png"; sourceTree = "<group>"; };
 		DC939D7C59757EDAB8A8AA5B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		DEA4B0006A759B489B2FD0F3 /* final-hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "final-hero.png"; sourceTree = "<group>"; };
+		DEF6BC22B7C08390B0A5D2CD /* page-2026-04-10T19-32-48-875Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-32-48-875Z.yml"; sourceTree = "<group>"; };
 		DFAE94346B3907DBD2B6A49F /* editorial-upgrade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editorial-upgrade.png"; sourceTree = "<group>"; };
 		DFF9A7A3C5557BAE4CE79384 /* page-2026-04-05T20-17-11-815Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-17-11-815Z.yml"; sourceTree = "<group>"; };
 		E20EEB8E2B564325520F0AA1 /* asc-current.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-current.png"; sourceTree = "<group>"; };
@@ -908,6 +920,7 @@
 				A5E16CDBF4DEE16B97EBF064 /* console-2026-04-08T15-15-32-564Z.log */,
 				22A169E9B41F4F975EC73019 /* console-2026-04-08T15-16-23-085Z.log */,
 				A4A10F99EB2A92D5EFD923C4 /* console-2026-04-10T14-40-54-910Z.log */,
+				C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */,
 				B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */,
 				3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */,
 				5BCE72209150E29437CAB059 /* page-2026-04-05T20-16-12-860Z.yml */,
@@ -964,6 +977,11 @@
 				708F005AE7DF854B6400948F /* page-2026-04-10T14-41-39-818Z.yml */,
 				EB3EBABA52A27AE0FE27887A /* page-2026-04-10T14-41-49-107Z.yml */,
 				782BC7DD02AE340EDA77E51C /* page-2026-04-10T14-41-58-534Z.yml */,
+				3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */,
+				DEF6BC22B7C08390B0A5D2CD /* page-2026-04-10T19-32-48-875Z.yml */,
+				7784611864558A864F51F24E /* page-2026-04-10T19-33-00-263Z.yml */,
+				B9F30BA5BBC8E271E3CEB338 /* page-2026-04-10T19-34-02-223Z.yml */,
+				39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */,
 				78D19164FF99C07A27753B8D /* sidebar-detail.yml */,
 				46D8676D4EAD296C8CC82EAC /* tax-section.yml */,
 			);
@@ -1197,6 +1215,7 @@
 				4C64008C26B1C746BC1A69BE /* console-2026-04-08T15-15-32-564Z.log in Resources */,
 				78CA670ECFA3950CF2C52619 /* console-2026-04-08T15-16-23-085Z.log in Resources */,
 				BF139542D7346F68AE6B04F8 /* console-2026-04-10T14-40-54-910Z.log in Resources */,
+				789738FE66FDED340A2AAFE6 /* console-2026-04-10T19-32-39-952Z.log in Resources */,
 				97D8A358B07C267562103C39 /* editorial-upgrade.png in Resources */,
 				F46BF6519FF1A31D370EEFC1 /* final-hero.png in Resources */,
 				550E617033C7DFC1E61B7777 /* final-pricing-cards.png in Resources */,
@@ -1260,6 +1279,11 @@
 				5A9301B1C3C7349DC0CC874D /* page-2026-04-10T14-41-39-818Z.yml in Resources */,
 				53CD47AB68DE67C70B923565 /* page-2026-04-10T14-41-49-107Z.yml in Resources */,
 				4B564ED349A71208D2A11DC0 /* page-2026-04-10T14-41-58-534Z.yml in Resources */,
+				008BB55E939A2349BB259314 /* page-2026-04-10T19-32-40-733Z.yml in Resources */,
+				74E71C000D4C00AC06DB13D2 /* page-2026-04-10T19-32-48-875Z.yml in Resources */,
+				F2D58EA289C1656C696FF0A3 /* page-2026-04-10T19-33-00-263Z.yml in Resources */,
+				564B46301F7FBFF55DE2C547 /* page-2026-04-10T19-34-02-223Z.yml in Resources */,
+				72143A41B44D661597881E56 /* page-2026-04-10T19-34-18-906Z.yml in Resources */,
 				7F93C3DB899FAB252278DD41 /* post-upgrade-landing.png in Resources */,
 				570C65F69978987C12D789B3 /* post-upgrade-pricing.png in Resources */,
 				E8E9F27D5B22BC72ABEB4D76 /* pre-upgrade-landing.png in Resources */,

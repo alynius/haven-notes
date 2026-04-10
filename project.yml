@@ -35,7 +35,7 @@ targets:
       properties:
         CFBundleDisplayName: Haven
         CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "2"
+        CFBundleVersion: "3"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIApplicationSceneManifest:
@@ -50,6 +50,8 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         NSFaceIDUsageDescription: Haven uses Face ID to secure your notes.
+        NSSpeechRecognitionUsageDescription: Haven uses speech recognition for voice dictation in the note editor.
+        NSMicrophoneUsageDescription: Haven uses the microphone to transcribe your voice into text.
         CFBundleURLTypes:
           - CFBundleURLName: com.havennotes.app
             CFBundleURLSchemes:
@@ -81,7 +83,7 @@ targets:
       properties:
         CFBundleDisplayName: Haven Widget
         CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "2"
+        CFBundleVersion: "3"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
