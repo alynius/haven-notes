@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -30,17 +30,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Haven uses Face ID to secure your notes.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Haven uses the microphone for voice dictation to capture your thoughts hands-free.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Haven uses speech recognition to convert your voice into text notes.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
