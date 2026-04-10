@@ -1,7 +1,105 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+
+const features = [
+  { label: 'Write', title: 'Live Markdown', description: 'Bold, italic, headings, and code — rendered as you type. No mode switching.' },
+  { label: 'Connect', title: 'Wiki Links', description: 'Connect notes with [[brackets]]. Build a personal knowledge network.' },
+  { label: 'Protect', title: 'E2E Encrypted', description: 'AES-256 encryption. Keys live on your device. Not even we can read your notes.' },
+  { label: 'Rhythm', title: 'Daily Notes', description: 'A fresh note every day, automatically. Perfect for journaling.' },
+  { label: 'Capture', title: 'Voice Dictation', description: 'Capture thoughts hands-free. On-device processing. Nothing leaves your phone.' },
+  { label: 'Find', title: 'Full-Text Search', description: 'Find anything instantly. Fast, on-device, no indexing delays.' },
+];
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head><meta charset="utf-8" /><title>Placeholder</title></head>
-  <body><p>Astro works.</p></body>
-</html>
+<BaseLayout
+  title="Haven Notes — Private markdown notes for iOS"
+  description="A quiet place to think. Markdown notes with wiki links and a visual knowledge graph. Private by design. Encrypted end to end."
+  ogUrl="https://havennotes.app/"
+  currentPath="/"
+>
+  <Hero />
+
+  <!-- Knowledge Graph Pull Quote -->
+  <section id="graph" class="relative py-24 md:py-32 bg-glow-right">
+    <div class="relative max-w-prose mx-auto px-6 text-center">
+      <div class="reveal">
+        <Eyebrow>The Knowledge Graph</Eyebrow>
+      </div>
+      <p class="font-serif text-3xl md:text-display accent-italic leading-[1.15] mt-6 reveal reveal-delay-1">
+        Link notes with [[double brackets]]. Watch ideas find each other.
+      </p>
+      <div class="mt-12 reveal reveal-delay-2">
+        <a href="/story/" class="inline-flex items-center gap-2 text-accent font-semibold hover:text-accent-hover transition-colors">
+          Why we built this →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="py-24 md:py-32">
+    <div class="max-w-[1080px] mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <Eyebrow>Built for thinkers</Eyebrow>
+        <h2 class="font-serif text-display mt-4">
+          Everything you need,<br>
+          <span class="accent-italic">nothing you don't.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((feature, index) => (
+          <div class={`reveal ${index % 3 === 1 ? 'reveal-delay-1' : index % 3 === 2 ? 'reveal-delay-2' : ''}`}>
+            <FeatureCard
+              label={feature.label}
+              title={feature.title}
+              description={feature.description}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Teaser -->
+  <section class="relative py-24 text-center bg-glow-center">
+    <div class="relative max-w-[600px] mx-auto px-6">
+      <div class="reveal">
+        <Eyebrow>Pricing</Eyebrow>
+      </div>
+      <h2 class="font-serif text-4xl md:text-5xl mt-4 reveal reveal-delay-1">
+        Free forever.<br>
+        Pro <span class="accent-italic">unlocks sync.</span>
+      </h2>
+      <p class="text-lg text-text-secondary mt-6 reveal reveal-delay-2">
+        Haven is free. Pro adds cloud sync and end-to-end encryption — $2.99/mo or $19.99/yr.
+      </p>
+      <div class="mt-8 reveal reveal-delay-2">
+        <a href="/pricing/" class="inline-flex items-center gap-2 text-accent font-semibold hover:text-accent-hover transition-colors">
+          See full pricing →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="relative py-32 md:py-40 text-center border-t border-border bg-glow-bottom">
+    <div class="relative max-w-[600px] mx-auto px-6">
+      <h2 class="font-serif text-display reveal">
+        Ready to<br>
+        <span class="accent-italic">start writing?</span>
+      </h2>
+      <p class="text-lg text-text-secondary mt-6 reveal reveal-delay-1">
+        Haven is free to download. Pro unlocks sync when you need it.
+      </p>
+      <div class="mt-8 reveal reveal-delay-2">
+        <Button href={appStoreUrl} variant="primary" external={true}>Download for iOS</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
