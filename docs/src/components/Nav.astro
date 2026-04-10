@@ -1,0 +1,66 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const links = [
+  { href: '/#features', label: 'Features', path: '/#features' },
+  { href: '/pricing/', label: 'Pricing', path: '/pricing' },
+  { href: '/story/', label: 'Story', path: '/story' },
+  { href: '/compare/', label: 'Compare', path: '/compare' },
+];
+
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+---
+<nav id="nav" class="sticky top-0 z-[100] bg-bg/85 backdrop-blur-xl border-b border-border transition-all duration-300">
+  <div class="flex items-center justify-between max-w-[1080px] mx-auto px-6 h-[68px]">
+    <a href="/" class="font-serif text-[20px] font-bold tracking-[-0.01em] text-text-primary hover:text-text-primary">Haven</a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={currentPath === link.path ? 'page' : undefined}
+          class:list={[
+            'relative text-sm text-text-secondary hover:text-text-primary transition-colors duration-200',
+            'after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-accent after:transition-all after:duration-200',
+            'hover:after:w-full',
+            currentPath === link.path && 'text-text-primary',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href={appStoreUrl}
+        class="inline-flex items-center bg-accent text-bg font-semibold text-sm px-[18px] py-[9px] rounded-lg transition-all duration-200 hover:bg-accent-hover hover:shadow-accent-glow hover:text-bg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Download
+      </a>
+    </div>
+
+    <button
+      class="md:hidden bg-transparent border-none cursor-pointer p-2"
+      onclick="document.getElementById('mobile-menu').classList.toggle('open')"
+      aria-label="Menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span aria-hidden="true" class="block w-5 h-0.5 bg-text-primary my-1"></span>
+      <span aria-hidden="true" class="block w-5 h-0.5 bg-text-primary my-1"></span>
+      <span aria-hidden="true" class="block w-5 h-0.5 bg-text-primary my-1"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden flex-col bg-bg border-t border-border py-2 pb-4 md:hidden [&.open]:flex">
+    <a href="/#features" class="text-base text-text-secondary hover:text-text-primary py-3 px-6">Features</a>
+    <a href="/pricing/" class="text-base text-text-secondary hover:text-text-primary py-3 px-6">Pricing</a>
+    <a href="/story/" class="text-base text-text-secondary hover:text-text-primary py-3 px-6">Story</a>
+    <a href="/compare/" class="text-base text-text-secondary hover:text-text-primary py-3 px-6">Compare</a>
+    <a href={appStoreUrl} class="text-base text-text-secondary hover:text-text-primary py-3 px-6" target="_blank" rel="noopener noreferrer">Download</a>
+  </div>
+</nav>

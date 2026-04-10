@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  price: string;
+  period: string;
+  cta: string;
+  ctaHref: string;
+  ctaVariant?: 'primary' | 'outline';
+  featured?: boolean;
+  badge?: string;
+  note: string;
+}
+
+const { title, price, period, cta, ctaHref, ctaVariant = 'outline', featured = false, badge, note } = Astro.props;
+
+const cardClasses = featured
+  ? 'bg-elevated border-2 border-accent rounded-2xl p-8 flex flex-col gap-2 shadow-accent-glow'
+  : 'bg-elevated border border-border rounded-2xl p-8 flex flex-col gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-warm-md';
+
+const buttonClasses = ctaVariant === 'primary'
+  ? 'mt-4 w-full inline-flex items-center justify-center bg-accent text-bg font-semibold text-base px-6 py-3 rounded-[10px] transition-all duration-200 hover:bg-accent-hover hover:shadow-accent-glow'
+  : 'mt-4 w-full inline-flex items-center justify-center bg-transparent text-text-primary font-semibold text-base px-6 py-3 rounded-[10px] border border-border-strong transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5';
+---
+<div class={cardClasses}>
+  {badge && (
+    <span class="inline-block self-start bg-accent text-bg text-micro font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-2">
+      {badge}
+    </span>
+  )}
+  <h3 class="font-serif text-xl font-bold text-text-primary mb-2">{title}</h3>
+  <div class="font-serif text-[44px] leading-none tracking-[-0.03em] text-text-primary">{price}</div>
+  <div class="text-sm text-text-secondary mb-2">{period}</div>
+  <a href={ctaHref} class={buttonClasses} target="_blank" rel="noopener noreferrer">{cta}</a>
+  <p class="text-micro text-text-secondary mt-2">{note}</p>
+</div>

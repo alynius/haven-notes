@@ -1,0 +1,30 @@
+---
+const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
+---
+<footer class="border-t border-border pt-16 pb-8 bg-bg">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-[1080px] mx-auto px-6 mb-12">
+    <div class="flex flex-col gap-2">
+      <h4 class="font-sans text-micro font-semibold tracking-[0.1em] uppercase text-text-secondary mb-4">Pages</h4>
+      <a href="/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Home</a>
+      <a href="/pricing/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Pricing</a>
+      <a href="/story/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Story</a>
+      <a href="/compare/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Compare</a>
+      <a href="/changelog/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Changelog</a>
+    </div>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-sans text-micro font-semibold tracking-[0.1em] uppercase text-text-secondary mb-4">Legal</h4>
+      <a href="/privacy/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Privacy Policy</a>
+      <a href="/terms/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Terms of Use</a>
+    </div>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-sans text-micro font-semibold tracking-[0.1em] uppercase text-text-secondary mb-4">Connect</h4>
+      <a href="mailto:support@havennotes.app" class="text-sm text-text-secondary hover:text-text-primary transition-colors">support@havennotes.app</a>
+      <a href="/support/" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Support</a>
+      <a href={appStoreUrl} class="text-sm text-text-secondary hover:text-text-primary transition-colors" target="_blank" rel="noopener noreferrer">App Store</a>
+    </div>
+  </div>
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between max-w-[1080px] mx-auto px-6 pt-6 border-t border-border text-sm text-text-secondary gap-4">
+    <span>Made by one person who was tired of bloated note apps.</span>
+    <span>&copy; 2026 Haven Notes</span>
+  </div>
+</footer>
