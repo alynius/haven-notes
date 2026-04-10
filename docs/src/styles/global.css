@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-text-primary font-sans;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(160, 133, 94, 0.25);
+    color: #FAF7F3;
+  }
+
+  :focus-visible {
+    outline: 2px solid #A0855E;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold text-text-primary;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  a {
+    @apply text-accent;
+    text-decoration: none;
+    transition: color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  a:hover {
+    @apply text-accent-hover;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  code, kbd, samp {
+    @apply font-mono text-sm bg-surface border border-border rounded px-1.5 py-0.5;
+  }
+}
+
+@layer components {
+  .accent-italic {
+    @apply text-accent;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .prose-serif {
+    @apply font-serif;
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  .prose-serif p,
+  .prose-serif ul,
+  .prose-serif ol {
+    margin-bottom: 1.25em;
+  }
+
+  .prose-serif li {
+    margin-bottom: 0.4em;
+  }
+
+  .prose-serif h2 {
+    font-size: 32px;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+
+  .prose-serif h3 {
+    font-size: 22px;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+  }
+
+  .prose-serif a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+}
