@@ -4,29 +4,21 @@ import Button from './Button.astro';
 
 const appStoreUrl = 'https://apps.apple.com/app/id6744229406';
 ---
-<section class="relative overflow-hidden pt-24 pb-24 md:pt-32 md:pb-32 bg-glow-top">
-  <div class="relative z-10 max-w-[1080px] mx-auto px-6 text-center">
+<section class="relative overflow-hidden pt-20 pb-20 md:pt-28 md:pb-24 bg-glow-top">
+  <div class="relative z-10 max-w-[720px] mx-auto px-6 text-center">
     <div class="reveal">
       <Eyebrow>Haven — Private notes for iOS</Eyebrow>
     </div>
 
-    <h1 class="font-serif text-hero text-text-primary reveal reveal-delay-1">
-      <span class="block font-bold">A quiet place</span>
-      <span class="block font-bold">to think.</span>
+    <h1 class="font-serif text-hero text-text-primary mt-2 reveal reveal-delay-1">
+      A quiet place to think. No AI watching. No metrics counting.
     </h1>
 
-    <h1 class="font-serif text-hero text-text-primary mt-6 md:mt-10 reveal reveal-delay-2">
-      <span class="block font-bold">No AI watching.</span>
-      <span class="block font-bold">No metrics counting.</span>
-    </h1>
+    <p class="font-serif text-hero accent-italic mt-4 reveal reveal-delay-2">
+      Just you and your words — the way writing used to feel.
+    </p>
 
-    <h1 class="font-serif text-hero accent-italic mt-6 md:mt-10 reveal reveal-delay-3">
-      <span class="block">Just you and your words —</span>
-      <span class="block">the way writing</span>
-      <span class="block">used to feel.</span>
-    </h1>
-
-    <div class="flex flex-wrap justify-center gap-3 mt-12 md:mt-16 reveal reveal-delay-3">
+    <div class="flex flex-wrap justify-center gap-3 mt-10 md:mt-12 reveal reveal-delay-3">
       <Button href={appStoreUrl} variant="primary" external={true}>Download for iOS</Button>
       <Button href="/story/" variant="outline">Read the story</Button>
     </div>

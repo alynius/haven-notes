@@ -26,8 +26,8 @@ export default {
       },
       fontSize: {
         micro: ['12px', { lineHeight: '1.4' }],
-        hero: ['clamp(56px, 9vw, 128px)', { lineHeight: '1.02', letterSpacing: '-0.03em' }],
-        display: ['clamp(40px, 6vw, 80px)', { lineHeight: '1.08', letterSpacing: '-0.025em' }],
+        hero: ['clamp(36px, 5vw, 64px)', { lineHeight: '1.1', letterSpacing: '-0.025em' }],
+        display: ['clamp(32px, 4vw, 56px)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
       },
       backgroundImage: {
         'glow-top': 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(160,133,94,0.18), transparent 70%)',
