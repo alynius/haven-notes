@@ -7,19 +7,32 @@ struct HavenApp: App {
     @StateObject private var container = DependencyContainer()
     @StateObject private var toastManager = ToastManager()
     @State private var initializationFailed = false
-    @State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") || ProcessInfo.processInfo.arguments.contains("--uitesting")
-    @State private var isLocked = !ProcessInfo.processInfo.arguments.contains("--uitesting")
+    @State private var hasCompletedOnboarding: Bool = {
+        #if DEBUG
+        let isUITesting = ProcessInfo.processInfo.arguments.contains("--uitesting")
+        #else
+        let isUITesting = false
+        #endif
+        return UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") || isUITesting
+    }()
+    @State private var isLocked: Bool = {
+        #if DEBUG
+        let isUITesting = ProcessInfo.processInfo.arguments.contains("--uitesting")
+        #else
+        let isUITesting = false
+        #endif
+        return !isUITesting
+    }()
+    @State private var showPaywallAfterOnboarding = false
     @Environment(\.scenePhase) var scenePhase
-
-    private let biometricService = BiometricService()
 
     var body: some Scene {
         WindowGroup {
             Group {
-                if biometricService.isEnabled && isLocked {
+                if container.biometricService.isEnabled && isLocked {
                     LockScreenView(
                         onUnlock: { attemptUnlock() },
-                        biometricType: biometricService.availableBiometric
+                        biometricType: container.biometricService.availableBiometric
                     )
                 } else if hasCompletedOnboarding {
                     HavenNavigationStack()
@@ -27,10 +40,16 @@ struct HavenApp: App {
                         .environmentObject(container)
                         .environmentObject(toastManager)
                         .preferredColorScheme(appState.preferredColorScheme)
+                        .sheet(isPresented: $showPaywallAfterOnboarding) {
+                            SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
+                        }
                 } else {
-                    OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
-                        .environmentObject(container)
-                        .preferredColorScheme(appState.preferredColorScheme)
+                    OnboardingView(
+                        hasCompletedOnboarding: $hasCompletedOnboarding,
+                        showPaywallAfterOnboarding: $showPaywallAfterOnboarding
+                    )
+                    .environmentObject(container)
+                    .preferredColorScheme(appState.preferredColorScheme)
                 }
             }
             .onAppear {
@@ -42,34 +61,55 @@ struct HavenApp: App {
                     initializationFailed = true
                 }
                 // Auto-trigger biometric authentication on launch
-                if biometricService.isEnabled {
+                if container.biometricService.isEnabled {
                     attemptUnlock()
                 }
             }
             .onOpenURL { url in
                 DeepLink.handle(url: url, appState: appState)
             }
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .background && biometricService.isEnabled {
+            .onChange(of: scenePhase) { _, newPhase in
+                if newPhase == .background && container.biometricService.isEnabled {
                     isLocked = true
                 }
-                if newPhase == .active && biometricService.isEnabled && isLocked {
+                if newPhase == .active && container.biometricService.isEnabled && isLocked {
                     attemptUnlock()
                 }
             }
             .alert("Haven cannot start", isPresented: $initializationFailed) {
-                Button("Quit") {
-                    fatalError("Database initialization failed")
+                Button("Try Again") {
+                    initializationFailed = false
+                    do {
+                        try container.initialize()
+                        loadSavedTheme()
+                    } catch {
+                        initializationFailed = true
+                    }
+                }
+                Button("Quit", role: .destructive) {
+                    exit(0)
                 }
             } message: {
                 Text("The database could not be opened. Please restart the app or reinstall.")
             }
         }
+        #if os(macOS)
+        .commands {
+            HavenMenuCommands()
+        }
+        #endif
+
+        #if os(macOS)
+        Settings {
+            MacSettingsView()
+                .environmentObject(container)
+        }
+        #endif
     }
 
     private func attemptUnlock() {
         Task {
-            let success = await biometricService.authenticate()
+            let success = await container.biometricService.authenticate()
             await MainActor.run {
                 if success {
                     isLocked = false
@@ -127,6 +167,7 @@ struct LockScreenView: View {
                     .clipShape(.rect(cornerRadius: CornerRadius.sm))
                 }
                 .accessibilityLabel("Unlock Haven")
+                .accessibilityHint("Authenticates with Face ID or passcode")
 
                 Text("Tap to use \(biometricType == .faceID ? "Face ID" : "Touch ID") or your passcode")
                     .font(.caption2)

@@ -70,6 +70,7 @@ struct NoteEditorView: View {
                         shared: editorShared
                     )
                     .frame(minHeight: 300)
+                    .focusedValue(\.activeEditor, editorShared.coordinator)
                     #endif
 
                     // Tags section
