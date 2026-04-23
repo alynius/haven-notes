@@ -80,6 +80,20 @@ struct HavenNavigationStack: View {
                 folderRepo: container.folderRepository,
                 filter: appState.activeFilter
             ))
+            #if os(macOS)
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button {
+                        NSApp.keyWindow?.firstResponder?.tryToPerform(
+                            #selector(NSSplitViewController.toggleSidebar(_:)),
+                            with: nil
+                        )
+                    } label: {
+                        Image(systemName: "sidebar.left")
+                    }
+                }
+            }
+            #endif
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .noteEditor(let noteID):
