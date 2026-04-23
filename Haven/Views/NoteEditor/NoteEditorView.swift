@@ -6,7 +6,11 @@ struct NoteEditorView: View {
     @FocusState private var titleFocused: Bool
 
     /// Shared reference to the editor coordinator for toolbar actions.
+    #if os(iOS)
     @StateObject private var editorShared = RichTextEditor.Shared()
+    #elseif os(macOS)
+    @StateObject private var editorShared = MacEditorView.Shared()
+    #endif
 
     var body: some View {
         ZStack {
@@ -33,6 +37,7 @@ struct NoteEditorView: View {
                         .frame(height: 0.5)
 
                     // Body editor
+                    #if os(iOS)
                     RichTextEditor(
                         htmlContent: Binding(
                             get: { viewModel.note.bodyHTML },
@@ -48,6 +53,24 @@ struct NoteEditorView: View {
                         shared: editorShared
                     )
                     .frame(minHeight: 300)
+                    #elseif os(macOS)
+                    MacEditorView(
+                        htmlContent: Binding(
+                            get: { viewModel.note.bodyHTML },
+                            set: { viewModel.updateBody($0) }
+                        ),
+                        onLinkTapped: { target in
+                            Task {
+                                if let linked = await viewModel.resolveWikiLink(title: target) {
+                                    appState.navigateTo(.noteEditor(noteID: linked.id))
+                                }
+                            }
+                        },
+                        onTextChanged: { _ in },
+                        shared: editorShared
+                    )
+                    .frame(minHeight: 300)
+                    #endif
 
                     // Tags section
                     if viewModel.isLoaded {
@@ -74,6 +97,7 @@ struct NoteEditorView: View {
                             Text("Linked from")
                                 .font(.havenCaption)
                                 .foregroundColor(Color.havenTextSecondary)
+                                .accessibilityAddTraits(.isHeader)
 
                             ForEach(viewModel.backlinks) { linked in
                                 Button {
@@ -88,6 +112,7 @@ struct NoteEditorView: View {
                                     }
                                     .foregroundColor(Color.havenAccent)
                                 }
+                                .accessibilityLabel("Linked from \(linked.title.isEmpty ? "Untitled" : linked.title)")
                             }
                         }
                         .padding(.top, 20)
@@ -98,6 +123,7 @@ struct NoteEditorView: View {
                 .padding(.horizontal, 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            #if os(iOS)
             .safeAreaInset(edge: .bottom) {
                 VStack(spacing: 0) {
                     // Dictation banner
@@ -142,6 +168,7 @@ struct NoteEditorView: View {
                     )
                 }
             }
+            #endif
 
             // Autocomplete overlay
             if viewModel.showAutocomplete {
@@ -150,18 +177,28 @@ struct NoteEditorView: View {
                     onSelect: { note in
                         viewModel.selectAutocompleteSuggestion(note)
                         // Update the text view to reflect the inserted link
+                        #if os(iOS)
                         if let coordinator = editorShared.coordinator {
                             coordinator.applyHighlighting(to: coordinator.textView!, text: viewModel.note.bodyHTML)
                         }
+                        #elseif os(macOS)
+                        if let coordinator = editorShared.coordinator,
+                           let textView = coordinator.textView {
+                            coordinator.applyHighlighting(to: textView, text: viewModel.note.bodyHTML)
+                        }
+                        #endif
                     }
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
                 .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showAutocomplete)
             }
         }
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .scrollDismissesKeyboard(.interactively)
+        #endif
         .toolbar {
+            #if os(iOS)
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: Spacing.md) {
                     if viewModel.isSaving {
@@ -178,6 +215,14 @@ struct NoteEditorView: View {
                     .accessibilityIdentifier("noteEditor_button_dismissKeyboard")
                 }
             }
+            #elseif os(macOS)
+            ToolbarItem {
+                if viewModel.isSaving {
+                    ProgressView()
+                        .tint(Color.havenPrimary)
+                }
+            }
+            #endif
         }
         .task {
             await viewModel.load()

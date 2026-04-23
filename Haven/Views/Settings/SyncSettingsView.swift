@@ -2,12 +2,16 @@ import SwiftUI
 
 struct SyncSettingsView: View {
     @StateObject var viewModel: SyncSettingsViewModel
+    @EnvironmentObject var container: DependencyContainer
 
     var body: some View {
         ZStack {
             Color.havenBackground
                 .ignoresSafeArea()
 
+            if case .free = container.subscriptionManager.entitlement {
+                proUpgradePrompt(feature: "sync")
+            } else {
             List {
                 Section {
                     Toggle("Enable Sync", isOn: Binding(
@@ -31,9 +35,11 @@ struct SyncSettingsView: View {
                         TextField("Server URL", text: $viewModel.serverURL)
                             .font(.havenBody)
                             .autocorrectionDisabled()
+                            #if os(iOS)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
                             .textContentType(.URL)
+                            #endif
                             .accessibilityIdentifier("syncSettings_textField_serverURL")
 
                         SecureField("Auth Token", text: $viewModel.authToken)
@@ -92,11 +98,16 @@ struct SyncSettingsView: View {
                 }
 
             }
+            #if os(iOS)
             .listStyle(.insetGrouped)
+            #endif
             .scrollContentBackground(.hidden)
+            } // end else (Pro)
         }
         .navigationTitle("Sync")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .alert("Sync Error", isPresented: Binding(
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
@@ -108,6 +119,32 @@ struct SyncSettingsView: View {
         .task {
             await viewModel.loadUnsyncedCount()
         }
+    }
+
+    @ViewBuilder
+    private func proUpgradePrompt(feature: String) -> some View {
+        VStack(spacing: 20) {
+            Image(systemName: "lock.fill")
+                .font(.system(size: 44))
+                .foregroundColor(Color.havenAccent)
+            Text("Haven Pro Required")
+                .font(.havenHeadline)
+                .foregroundColor(Color.havenTextPrimary)
+            Text("Upgrade to Haven Pro to unlock \(feature).")
+                .font(.havenBody)
+                .foregroundColor(Color.havenTextSecondary)
+                .multilineTextAlignment(.center)
+            NavigationLink(value: Route.subscription) {
+                Text("Upgrade to Pro")
+                    .font(.havenBody.weight(.semibold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color.havenAccent)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+        .padding(32)
     }
 
     @ViewBuilder

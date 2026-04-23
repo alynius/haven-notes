@@ -2,10 +2,10 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Binding var hasCompletedOnboarding: Bool
+    @Binding var showPaywallAfterOnboarding: Bool
     @EnvironmentObject var container: DependencyContainer
     @State private var currentPage = 0
     @State private var appeared = false
-    @State private var showPaywall = false
 
     // 6 pages: Hook → Problem → Solution → Features → Trust → CTA
     private let pages: [OnboardingPage] = [
@@ -105,7 +105,9 @@ struct OnboardingView: View {
                             .tag(index)
                     }
                 }
+                #if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                #endif
 
                 // Progress bar (thin, warm)
                 GeometryReader { geo in
@@ -123,6 +125,8 @@ struct OnboardingView: View {
                 .frame(height: 4)
                 .padding(.horizontal, Spacing.xxl)
                 .padding(.bottom, Spacing.xl)
+                .accessibilityLabel("Onboarding progress")
+                .accessibilityValue("Page \(currentPage + 1) of \(pages.count)")
 
                 // Bottom button
                 Group {
@@ -130,11 +134,11 @@ struct OnboardingView: View {
                         // Final: prominent Get Started → leads to paywall or app
                         VStack(spacing: Spacing.md) {
                             Button {
-                                // Complete onboarding first, then offer paywall
+                                // Signal paywall before completing onboarding so HavenApp
+                                // can present it from the HavenNavigationStack (which survives
+                                // the onboarding-to-main transition).
+                                showPaywallAfterOnboarding = true
                                 completeOnboarding()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    showPaywall = true
-                                }
                             } label: {
                                 HStack(spacing: Spacing.sm) {
                                     Text("Start Writing")
@@ -184,7 +188,7 @@ struct OnboardingView: View {
                 appeared = true
             }
         }
-        .onChange(of: currentPage) { newPage in
+        .onChange(of: currentPage) { _, newPage in
             // Clamp page index to prevent swiping past the last page
             if newPage >= pages.count {
                 currentPage = pages.count - 1
@@ -192,14 +196,13 @@ struct OnboardingView: View {
                 currentPage = 0
             }
         }
-        .sheet(isPresented: $showPaywall) {
-            SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
-        }
     }
 
     private func completeOnboarding() {
+        #if os(iOS)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        #endif
 
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             hasCompletedOnboarding = true

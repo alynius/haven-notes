@@ -14,6 +14,9 @@ struct EncryptionSettingsView: View {
             Color.havenBackground
                 .ignoresSafeArea()
 
+            if case .free = container.subscriptionManager.entitlement {
+                proUpgradePrompt
+            } else {
             List {
                 // Status section
                 Section {
@@ -66,6 +69,7 @@ struct EncryptionSettingsView: View {
                             }
                         }
                         .disabled(password.count < 8 || password != confirmPassword || isSettingUp)
+                        .accessibilityHint("Sets up end-to-end encryption for your notes")
                         .accessibilityIdentifier("encryption_button_enable")
                     } header: {
                         Text("Set Up")
@@ -87,6 +91,7 @@ struct EncryptionSettingsView: View {
                             Text("Disable Encryption")
                                 .font(.havenBody)
                         }
+                        .accessibilityHint("Removes end-to-end encryption from your notes")
                         .accessibilityIdentifier("encryption_button_disable")
                     } header: {
                         Text("Manage")
@@ -99,11 +104,16 @@ struct EncryptionSettingsView: View {
 
                 // Error/success shown via ToastManager
             }
+            #if os(iOS)
             .listStyle(.insetGrouped)
+            #endif
             .scrollContentBackground(.hidden)
+            } // end else (Pro)
         }
         .navigationTitle("Encryption")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .task {
             isEnabled = container.encryptionService.hasKey
         }
@@ -117,6 +127,32 @@ struct EncryptionSettingsView: View {
         } message: {
             Text("Your encryption key will be deleted. Encrypted notes on the server will become unreadable.")
         }
+    }
+
+    @ViewBuilder
+    private var proUpgradePrompt: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "lock.fill")
+                .font(.system(size: 44))
+                .foregroundColor(Color.havenAccent)
+            Text("Haven Pro Required")
+                .font(.havenHeadline)
+                .foregroundColor(Color.havenTextPrimary)
+            Text("Upgrade to Haven Pro to unlock encryption.")
+                .font(.havenBody)
+                .foregroundColor(Color.havenTextSecondary)
+                .multilineTextAlignment(.center)
+            NavigationLink(value: Route.subscription) {
+                Text("Upgrade to Pro")
+                    .font(.havenBody.weight(.semibold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color.havenAccent)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+        .padding(32)
     }
 
     private func setupEncryption() {
@@ -143,6 +179,7 @@ struct EncryptionSettingsView: View {
                 )
 
                 await MainActor.run {
+                    service.setMasterKey(result.key)
                     self.isSettingUp = false
                     self.isEnabled = true
                     self.password = ""

@@ -9,6 +9,7 @@ struct GraphView: View {
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
     @State private var draggedNodeID: String?
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var body: some View {
         ZStack {
@@ -26,7 +27,9 @@ struct GraphView: View {
             }
         }
         .navigationTitle("Graph")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .task {
             await viewModel.load()
         }
@@ -42,7 +45,8 @@ struct GraphView: View {
             Image(systemName: "point.3.connected.trianglepath.dotted")
                 .font(.system(size: 48, weight: .thin))
                 .foregroundStyle(Color.havenPrimary.opacity(0.4))
-                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3))
+                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3), isActive: !reduceMotion)
+                .accessibilityHidden(true)
             Text("No connections yet")
                 .font(.havenHeadline)
                 .foregroundColor(Color.havenTextPrimary)

@@ -68,7 +68,9 @@ struct NotionImportView: View {
             }
             .background(Color.havenBackground)
             .navigationTitle("Import")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }

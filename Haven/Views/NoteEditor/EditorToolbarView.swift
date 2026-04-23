@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 struct EditorToolbarView: View {
@@ -74,9 +75,12 @@ struct EditorToolbarView: View {
 
 /// Scale-down press effect for toolbar buttons.
 private struct ToolbarPressStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-            .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+            .scaleEffect((!reduceMotion && configuration.isPressed) ? 0.9 : 1.0)
+            .animation(reduceMotion ? .none : .spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
+#endif

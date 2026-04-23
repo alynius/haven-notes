@@ -79,6 +79,7 @@
 		25E390BA597FA469484D613C /* SyncManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD9E0437E6783D977371D80 /* SyncManagerProtocol.swift */; };
 		26C54A0A89BA87D3E99A2879 /* console-2026-04-05T20-14-58-999Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 788EC4D8D91B718CFE422F5D /* console-2026-04-05T20-14-58-999Z.log */; };
 		26CD1EE95C5D7E86D345CF07 /* AppIcon-Dark.svg in Resources */ = {isa = PBXBuildFile; fileRef = 07137A28B2EA32D9C58D2C10 /* AppIcon-Dark.svg */; };
+		26FA26D2EF680234A35E72E2 /* MacTextViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */; };
 		271E8785592B2965B8A8FB8D /* console-2026-04-05T20-16-25-569Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */; };
 		2829B4E4A2403F5326D8490D /* page-2026-04-09T18-34-05-015Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6F41A4359E8FA02E6513AD6D /* page-2026-04-09T18-34-05-015Z.yml */; };
 		2872DEEEF5877DF9869673E7 /* Font+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C6927589DFE73C0E09CA9 /* Font+Haven.swift */; };
@@ -185,6 +186,7 @@
 		605569B00D0C5EAC39810C33 /* rebuild-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = F6110DD50257059A83838CAE /* rebuild-pricing.png */; };
 		606ADA9C5E83592BF2842344 /* NotionImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A6B87960E53389415F1C5 /* NotionImportView.swift */; };
 		62AD973BBF8D6DBBE220A824 /* 08-dark-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = FB43EDA2258695441EAB55A8 /* 08-dark-landing.png */; };
+		631DDFD4569E7868F88786A6 /* MacEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C8A7E4A246785295B51B55 /* MacEditorView.swift */; };
 		634A03ACF2D83F094BE3DE4B /* console-2026-04-05T21-18-28-756Z.log in Resources */ = {isa = PBXBuildFile; fileRef = D772EC0DE2BDC2D56515EF96 /* console-2026-04-05T21-18-28-756Z.log */; };
 		638E84D5A8996BB85D830A55 /* 06-mobile-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = C99744EAE77A0129858C53B6 /* 06-mobile-landing.png */; };
 		64BCE520C0B6B325F5AC14D5 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39306A115ECB99EC9674908 /* GraphView.swift */; };
@@ -274,6 +276,7 @@
 		9524E4560FD8841C4427D80C /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677FFCD4E0AC4ACA4966F247 /* NoteEditorView.swift */; };
 		952C23F4C0A277DE2033D893 /* page-2026-04-05T20-39-54-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9439FAE2BF0172E09BDCFFF0 /* page-2026-04-05T20-39-54-756Z.yml */; };
 		953B443E52DE0D6585CA5ABF /* console-2026-04-08T09-43-55-712Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 71C43AAC99DF0EE53E820421 /* console-2026-04-08T09-43-55-712Z.log */; };
+		9567D9D87A7F3884731791C4 /* MarkdownFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */; };
 		95F3FE59475332FC141C5AE3 /* final-pricing-cards.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */; };
 		9653E7D000E386D21F352804 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE1AD127978C940D8A960F /* OnboardingPageView.swift */; };
 		9778B3FBC99DF49121640C47 /* page-2026-04-05T20-39-54-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9439FAE2BF0172E09BDCFFF0 /* page-2026-04-05T20-39-54-756Z.yml */; };
@@ -282,6 +285,7 @@
 		9819E1A910210A76B7729332 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C4AC4356EA24D4BD4F2F /* Folder.swift */; };
 		98C903D7BDDB61C9175AFECC /* card-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 875FAC78FAB278335EA52CE5 /* card-hover.png */; };
 		98E6EB9966DA9F3496BE95DD /* page-2026-04-05T20-17-11-815Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = DFF9A7A3C5557BAE4CE79384 /* page-2026-04-05T20-17-11-815Z.yml */; };
+		99EB1C18D5B567C5C7C3A040 /* MacTextViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */; };
 		9A5796FF918922AFFF7DB925 /* TaskRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC461D9767572ACCA2F1F3ED /* TaskRepositoryProtocol.swift */; };
 		9A79FEDBBC182F11C67055C6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CAADFDB0217608D939E1B /* SettingsView.swift */; };
 		9A92DA388F6FFDD34C8CD2D7 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5BC57C883879B16564DDC /* ToastView.swift */; };
@@ -323,6 +327,7 @@
 		B04041E226EE0F3EAF9FA6D2 /* NoteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BB55E3546AF3C33BB60B1 /* NoteTask.swift */; };
 		B0B5E4786C8410A00FBE02D2 /* page-2026-04-05T20-57-23-627Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C358855C77165A4F1244030 /* page-2026-04-05T20-57-23-627Z.yml */; };
 		B12E22C14908F6C96AD3274C /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465E1A93BE44C10D275F6FD /* NoteListView.swift */; };
+		B18192DCA4C751249C212A90 /* MarkdownFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */; };
 		B23C11F8631FE5069367C7D4 /* page-2026-04-08T13-53-33-795Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8F2E03674111AC82E3D5A184 /* page-2026-04-08T13-53-33-795Z.yml */; };
 		B2E753E580744D38AF7BBC57 /* graph-refined.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F77B61C765649D1F2B944C0 /* graph-refined.png */; };
 		B324323613BF3CB72EA01243 /* MacInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 266F78E3BB5D002D05517494 /* MacInfo.plist */; };
@@ -361,6 +366,7 @@
 		C9D219947EB6DC35C950348B /* Date+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */; };
 		C9F8CAADAB67EDD7E4810AEB /* console-2026-04-08T12-07-11-618Z.log in Resources */ = {isa = PBXBuildFile; fileRef = FFB1C620AFD5043EFBE07759 /* console-2026-04-08T12-07-11-618Z.log */; };
 		CA9987C231A425F77BE09EBC /* page-2026-04-05T20-19-44-560Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8795E4C85363FEC1C0D9F21 /* page-2026-04-05T20-19-44-560Z.yml */; };
+		CB6233B5317A4FAF54C65C8B /* MacEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C8A7E4A246785295B51B55 /* MacEditorView.swift */; };
 		CB66EEC06F7120C2EE7AAB4F /* page-2026-04-08T09-44-21-474Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9F3E65581A931CB296C4C714 /* page-2026-04-08T09-44-21-474Z.yml */; };
 		CCC54E17EED3D486D30F395D /* AppIcon-Tinted.svg in Resources */ = {isa = PBXBuildFile; fileRef = 6ED74A3057CA76BAC0AAB541 /* AppIcon-Tinted.svg */; };
 		CCEF9404BF142065AB18C9F7 /* 09-dark-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FE1E18206A72E7DA266C98 /* 09-dark-pricing.png */; };
@@ -485,6 +491,7 @@
 
 /* Begin PBXFileReference section */
 		00F1261EA015BD2646F2DBC9 /* page-2026-04-10T14-41-20-308Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T14-41-20-308Z.yml"; sourceTree = "<group>"; };
+		00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFormat.swift; sourceTree = "<group>"; };
 		01341118D82BF06E0E516994 /* page-2026-04-05T20-21-55-348Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-21-55-348Z.yml"; sourceTree = "<group>"; };
 		0339A0666158A311348A57BD /* page-2026-04-05T21-18-28-824Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T21-18-28-824Z.yml"; sourceTree = "<group>"; };
 		04148EDDA531C2CA0DA05653 /* NotionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionImporter.swift; sourceTree = "<group>"; };
@@ -551,6 +558,7 @@
 		5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ISO8601.swift"; sourceTree = "<group>"; };
 		5D364257D14F6053EABBDDB5 /* console-2026-04-08T09-44-56-305Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T09-44-56-305Z.log"; sourceTree = "<group>"; };
 		5F062CCDA03C358949207399 /* Haven.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Haven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTextViewCoordinator.swift; sourceTree = "<group>"; };
 		621A6B87960E53389415F1C5 /* NotionImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionImportView.swift; sourceTree = "<group>"; };
 		62BAB620D6E76C08B0602100 /* SearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRowView.swift; sourceTree = "<group>"; };
 		6345B5D6704D98B45E08F60A /* 05-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-support.png"; sourceTree = "<group>"; };
@@ -668,6 +676,7 @@
 		C4814D66609EE1B3C6629954 /* SubscriptionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUITests.swift; sourceTree = "<group>"; };
 		C4A068D5F6762A8796831D02 /* HTMLSanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLSanitizerTests.swift; sourceTree = "<group>"; };
 		C6F000B2F979187F8F513A78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		C8C8A7E4A246785295B51B55 /* MacEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorView.swift; sourceTree = "<group>"; };
 		C8FC134D3B2D8C07CF173718 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		C940C3A9A946BE88C4FE685C /* page-2026-04-08T09-44-40-965Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-40-965Z.yml"; sourceTree = "<group>"; };
 		C99744EAE77A0129858C53B6 /* 06-mobile-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-mobile-landing.png"; sourceTree = "<group>"; };
@@ -1112,6 +1121,8 @@
 		ED3BDA46B5D5BA4C41688623 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				C8C8A7E4A246785295B51B55 /* MacEditorView.swift */,
+				6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -1217,6 +1228,7 @@
 			children = (
 				A3EDDC709452138CFFED98DF /* AppSetting.swift */,
 				C6F000B2F979187F8F513A78 /* Folder.swift */,
+				00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */,
 				8741CA24A0CC0B0C5B34FC4F /* Note.swift */,
 				D15BB55E3546AF3C33BB60B1 /* NoteTask.swift */,
 				A5332423870EBB71CEECC349 /* SubscriptionTier.swift */,
@@ -1712,6 +1724,9 @@
 				6B1F0FB3EDAEC196363D2B95 /* HavenNavigationStack.swift in Sources */,
 				17CC0F7B05228FDAA8F330C1 /* LinkRepository.swift in Sources */,
 				3251E5B1A87A10A2D6120E17 /* LoadingOverlayView.swift in Sources */,
+				CB6233B5317A4FAF54C65C8B /* MacEditorView.swift in Sources */,
+				26FA26D2EF680234A35E72E2 /* MacTextViewCoordinator.swift in Sources */,
+				9567D9D87A7F3884731791C4 /* MarkdownFormat.swift in Sources */,
 				EA8D0AFE17AE0C62CB971D21 /* MarkdownHighlighter.swift in Sources */,
 				F13D3845916730287A9EE7D7 /* MarkdownStripper.swift in Sources */,
 				D66EB8CE62D9651D03EDB366 /* Note.swift in Sources */,
@@ -1815,6 +1830,9 @@
 				79F8F0BE8145656EA596FD22 /* HavenNavigationStack.swift in Sources */,
 				560A908E6EDA8C7762743C11 /* LinkRepository.swift in Sources */,
 				DCE8BCD51FC5E083F449E457 /* LoadingOverlayView.swift in Sources */,
+				631DDFD4569E7868F88786A6 /* MacEditorView.swift in Sources */,
+				99EB1C18D5B567C5C7C3A040 /* MacTextViewCoordinator.swift in Sources */,
+				B18192DCA4C751249C212A90 /* MarkdownFormat.swift in Sources */,
 				85B0B5C2A13DA797E915945C /* MarkdownHighlighter.swift in Sources */,
 				30D6728B4F06D2A46284234C /* MarkdownStripper.swift in Sources */,
 				852CEC032E2F74F70817A2DF /* Note.swift in Sources */,

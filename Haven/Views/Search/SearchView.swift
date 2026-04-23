@@ -14,6 +14,7 @@ struct SearchView: View {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 36, weight: .thin))
                         .foregroundColor(Color.havenTextSecondary.opacity(0.3))
+                        .accessibilityHidden(true)
                     Text("Search your notes")
                         .font(.havenBody)
                         .foregroundColor(Color.havenTextSecondary)
@@ -31,6 +32,7 @@ struct SearchView: View {
                     Image(systemName: "doc.text.magnifyingglass")
                         .font(.system(size: 36))
                         .foregroundColor(Color.havenTextSecondary.opacity(0.4))
+                        .accessibilityHidden(true)
                     Text("No results found")
                         .font(.havenBody)
                         .foregroundStyle(.secondary)
@@ -63,9 +65,11 @@ struct SearchView: View {
             }
         }
         .navigationTitle("Search")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .searchable(text: $viewModel.query, prompt: "Search notes...")
-        .onChange(of: viewModel.query) { _ in
+        .onChange(of: viewModel.query) { _, _ in
             viewModel.search()
         }
     }

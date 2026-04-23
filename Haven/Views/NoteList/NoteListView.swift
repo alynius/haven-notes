@@ -64,6 +64,7 @@ struct NoteListView: View {
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
+                            .accessibilityHint("Deletes this note permanently")
                             .accessibilityIdentifier("noteList_button_delete_\(note.id)")
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -113,6 +114,7 @@ struct NoteListView: View {
             .presentationDetents([.medium, .large])
         }
         .toolbar {
+            #if os(iOS)
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack(spacing: Spacing.md) {
                     if sizeClass != .regular {
@@ -160,6 +162,43 @@ struct NoteListView: View {
                     .accessibilityIdentifier("noteList_button_newNote")
                 }
             }
+            #elseif os(macOS)
+            ToolbarItem(placement: .automatic) {
+                HStack(spacing: Spacing.md) {
+                    Button { appState.navigateTo(.settings) } label: {
+                        Image(systemName: "gearshape")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Settings")
+                }
+            }
+            ToolbarItem(placement: .automatic) {
+                HStack(spacing: 16) {
+                    Button { appState.navigateTo(.graph) } label: {
+                        Image(systemName: "point.3.connected.trianglepath.dotted")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Knowledge Graph")
+                    Button { appState.navigateTo(.search) } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Search")
+                    Button {
+                        Task {
+                            if let id = await viewModel.createNote() {
+                                appState.navigateTo(.noteEditor(noteID: id))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(Color.havenPrimary)
+                            .font(.title3)
+                    }
+                    .accessibilityLabel("New Note")
+                }
+            }
+            #endif
         }
         .confirmationDialog("Delete Note", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
@@ -174,12 +213,12 @@ struct NoteListView: View {
         .task {
             await viewModel.loadNotes()
         }
-        .onChange(of: appState.activeFilter) { newFilter in
+        .onChange(of: appState.activeFilter) { _, newFilter in
             viewModel.filter = newFilter
             showSidebar = false
             Task { await viewModel.loadNotes() }
         }
-        .onChange(of: appState.navigationPath) { _ in
+        .onChange(of: appState.navigationPath) { _, _ in
             showSidebar = false  // Dismiss sidebar when navigating (e.g. Daily Note)
         }
         .alert("Error", isPresented: Binding(

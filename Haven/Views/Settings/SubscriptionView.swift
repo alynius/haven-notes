@@ -51,6 +51,13 @@ struct SubscriptionView: View {
 
                     // Products
                     if !viewModel.isPro {
+                        // Auto-renewal disclosure — shown BEFORE purchase buttons per App Store guidelines
+                        Text("Subscription automatically renews unless cancelled at least 24 hours before the end of the current period. Manage in Settings > Apple ID > Subscriptions.")
+                            .font(.caption2)
+                            .foregroundColor(Color.havenTextSecondary.opacity(0.7))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
+
                         VStack(spacing: 12) {
                             ForEach(viewModel.products.sorted { $0.price > $1.price }, id: \.id) { product in
                                 let isYearly = product.id == SubscriptionProductID.yearly.rawValue
@@ -105,18 +112,11 @@ struct SubscriptionView: View {
                                     )
                                 }
                                 .disabled(viewModel.isPurchasing)
+                                .accessibilityHint("Purchases this subscription plan")
                                 .accessibilityIdentifier("subscription_button_product_\(product.id)")
                             }
                         }
                         .padding(.horizontal, 16)
-
-                        // Auto-renewal disclosure
-                        Text("Subscription automatically renews unless cancelled at least 24 hours before the end of the current period. Manage in Settings > Apple ID > Subscriptions.")
-                            .font(.caption2)
-                            .foregroundColor(Color.havenTextSecondary.opacity(0.7))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 24)
-                            .padding(.top, 8)
 
                         Button {
                             Task { await viewModel.restore() }
@@ -138,10 +138,18 @@ struct SubscriptionView: View {
                     }
 
                     if let error = viewModel.errorMessage {
-                        Text(error)
-                            .font(.havenCaption)
-                            .foregroundStyle(.red)
-                            .padding(.horizontal, 16)
+                        VStack(spacing: 8) {
+                            Text(error)
+                                .font(.havenCaption)
+                                .foregroundStyle(.red)
+                                .multilineTextAlignment(.center)
+                            Button("Try Again") {
+                                Task { await viewModel.load() }
+                            }
+                            .font(.caption)
+                            .foregroundColor(Color.havenPrimary)
+                        }
+                        .padding(.horizontal, 16)
                     }
 
                     // Privacy note
@@ -155,7 +163,9 @@ struct SubscriptionView: View {
             }
         }
         .navigationTitle("Subscribe")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .task {
             await viewModel.load()
         }
