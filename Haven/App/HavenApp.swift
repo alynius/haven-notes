@@ -6,6 +6,9 @@ struct HavenApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var container = DependencyContainer()
     @StateObject private var toastManager = ToastManager()
+    #if os(macOS)
+    @StateObject private var quickNotePanelController = QuickNotePanelController()
+    #endif
     @State private var initializationFailed = false
     @State private var hasCompletedOnboarding: Bool = {
         #if DEBUG
@@ -30,10 +33,24 @@ struct HavenApp: App {
         WindowGroup {
             Group {
                 if container.biometricService.isEnabled && isLocked {
+                    #if os(iOS)
                     LockScreenView(
                         onUnlock: { attemptUnlock() },
                         biometricType: container.biometricService.availableBiometric
                     )
+                    #else
+                    // Simple lock overlay for macOS
+                    VStack(spacing: Spacing.xl) {
+                        Text("H").font(.system(size: 72, design: .serif)).foregroundColor(Color.havenPrimary)
+                        Text("Haven is Locked").font(.havenHeadline)
+                        Button("Unlock") { Task { await attemptUnlockAsync() } }
+                            .keyboardShortcut(.return, modifiers: [])
+                            .buttonStyle(.borderedProminent)
+                            .tint(Color.havenPrimary)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.havenBackground)
+                    #endif
                 } else if hasCompletedOnboarding {
                     HavenNavigationStack()
                         .environmentObject(appState)
@@ -64,7 +81,18 @@ struct HavenApp: App {
                 if container.biometricService.isEnabled {
                     attemptUnlock()
                 }
+                #if os(macOS)
+                setupQuickNotePanel()
+                GlobalHotkeyManager.shared.register {
+                    NotificationCenter.default.post(name: .havenQuickNote, object: nil)
+                }
+                #endif
             }
+            #if os(macOS)
+            .onReceive(NotificationCenter.default.publisher(for: .havenQuickNote)) { _ in
+                quickNotePanelController.toggle()
+            }
+            #endif
             .onOpenURL { url in
                 DeepLink.handle(url: url, appState: appState)
             }
@@ -118,6 +146,38 @@ struct HavenApp: App {
         }
     }
 
+    @MainActor
+    private func attemptUnlockAsync() async {
+        let success = await container.biometricService.authenticate()
+        if success {
+            isLocked = false
+        }
+    }
+
+    #if os(macOS)
+    private func setupQuickNotePanel() {
+        let view = QuickNoteView(
+            onSave: { title, body in
+                Task {
+                    let noteTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+                    let noteBody = body.trimmingCharacters(in: .whitespacesAndNewlines)
+                    _ = try? await container.noteRepository.create(
+                        title: noteTitle.isEmpty ? "Quick Note" : noteTitle,
+                        bodyHTML: noteBody
+                    )
+                    await MainActor.run {
+                        quickNotePanelController.hide()
+                    }
+                }
+            },
+            onDismiss: {
+                quickNotePanelController.hide()
+            }
+        )
+        quickNotePanelController.setContent(view)
+    }
+    #endif
+
     private func loadSavedTheme() {
         try? container.databaseManager.query("SELECT value FROM app_settings WHERE key = 'theme_mode'") { stmt in
             if let cStr = sqlite3_column_text(stmt, 0) {
@@ -130,6 +190,7 @@ struct HavenApp: App {
 
 // MARK: - Lock Screen
 
+#if os(iOS)
 struct LockScreenView: View {
     let onUnlock: () -> Void
     let biometricType: BiometricService.BiometricType
@@ -182,3 +243,4 @@ struct LockScreenView: View {
         }
     }
 }
+#endif

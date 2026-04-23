@@ -31,6 +31,7 @@
 		0AF382B8D27AABB206EA8399 /* page-2026-04-05T20-14-59-511Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */; };
 		0B593A77E266C1E6036A0D32 /* console-2026-04-10T14-40-54-910Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A4A10F99EB2A92D5EFD923C4 /* console-2026-04-10T14-40-54-910Z.log */; };
 		0B85BAEA4EEE12459DE2FDBF /* page-2026-04-08T09-43-55-791Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 675B2E41ED4A75E7EF0D3252 /* page-2026-04-08T09-43-55-791Z.yml */; };
+		0BC005483DD0B668236E365E /* QuickNotePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC08647B1550251CEE5F4D2 /* QuickNotePanel.swift */; };
 		0C9C5A3A4AB9343BD6D53C5E /* page-2026-04-05T20-17-53-319Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 73524AAC084377C175C0E04E /* page-2026-04-05T20-17-53-319Z.yml */; };
 		0CD49F8625A6ED25EB889E17 /* page-2026-04-05T20-14-59-511Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */; };
 		0D33B19D0969EB632B518FE9 /* 02-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EF9CB70413DA971BB6BB48 /* 02-pricing.png */; };
@@ -211,6 +212,7 @@
 		6FD1767E5729B79309867797 /* MacMenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C09CB30FBEDB99502E2781 /* MacMenuCommands.swift */; };
 		6FD4854C0AD37887F60C352F /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46972FAA7F9A308EBB974B8 /* SidebarView.swift */; };
 		700A99228A0C0DD5FDA81D59 /* 08-dark-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = FB43EDA2258695441EAB55A8 /* 08-dark-landing.png */; };
+		7036732935A57DC7AD88A32E /* QuickNotePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC08647B1550251CEE5F4D2 /* QuickNotePanel.swift */; };
 		70D56F969DFA0984840EC75F /* page-2026-04-05T20-18-37-464Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C2E813F46438FB3A5B3A019D /* page-2026-04-05T20-18-37-464Z.yml */; };
 		70E5B6E6870AA67FB9880C56 /* HavenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32EA73709C3E322D4BD3954 /* HavenApp.swift */; };
 		71E192FDE21B3D6E07A0FDA3 /* console-2026-04-05T20-21-54-138Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C16082CC6C3B8B5E578664EE /* console-2026-04-05T20-21-54-138Z.log */; };
@@ -224,6 +226,7 @@
 		7632B3CD215F5D69D59F1D47 /* page-2026-04-08T15-00-31-957Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9AE5319B2B89B3A13627062 /* page-2026-04-08T15-00-31-957Z.yml */; };
 		77E93CFA60FE60D11085ECAA /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171B5F1ADC4F58B64D511FC2 /* GraphViewModel.swift */; };
 		77F0F1FACB46C348EB8B2A89 /* page-2026-04-05T20-17-00-932Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1076CED835050A50487A14DA /* page-2026-04-05T20-17-00-932Z.yml */; };
+		784AAD62576091F94691A20D /* GlobalHotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67587AB0975C95195BD120E3 /* GlobalHotkey.swift */; };
 		789738FE66FDED340A2AAFE6 /* console-2026-04-10T19-32-39-952Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */; };
 		78CA670ECFA3950CF2C52619 /* console-2026-04-08T15-16-23-085Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 22A169E9B41F4F975EC73019 /* console-2026-04-08T15-16-23-085Z.log */; };
 		795C0DF5EC4A7481A8D974E3 /* page-2026-04-05T20-42-32-231Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2E15102167029A0D4B4A130F /* page-2026-04-05T20-42-32-231Z.yml */; };
@@ -252,6 +255,7 @@
 		868953B592B8C929B5BFD7EC /* page-2026-04-08T09-44-12-896Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */; };
 		897A11659D7DF84BB2D8BAF5 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0460B482C048500781097DB /* NoteRowView.swift */; };
 		8A1EE6545BBBB3DCA0BFC395 /* page-2026-04-08T12-44-10-237Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89CB972EF462A6301C293305 /* page-2026-04-08T12-44-10-237Z.yml */; };
+		8AF2D099CF50481323241AA7 /* GlobalHotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67587AB0975C95195BD120E3 /* GlobalHotkey.swift */; };
 		8AFE80044681395B2E4483DA /* console-2026-04-05T20-17-51-738Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 189530546DBD6F32F6FCEE94 /* console-2026-04-05T20-17-51-738Z.log */; };
 		8B206DBBC94232720E3B8829 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5332423870EBB71CEECC349 /* SubscriptionTier.swift */; };
 		8B511384A0682182D11F04A6 /* asc-notes-filled.png in Resources */ = {isa = PBXBuildFile; fileRef = F2CB1EA52B1832F3FE0640BE /* asc-notes-filled.png */; };
@@ -568,6 +572,7 @@
 		62BAB620D6E76C08B0602100 /* SearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRowView.swift; sourceTree = "<group>"; };
 		6345B5D6704D98B45E08F60A /* 05-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-support.png"; sourceTree = "<group>"; };
 		651041F6BE63B3B93891866A /* ChangeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeQueue.swift; sourceTree = "<group>"; };
+		67587AB0975C95195BD120E3 /* GlobalHotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkey.swift; sourceTree = "<group>"; };
 		675B2E41ED4A75E7EF0D3252 /* page-2026-04-08T09-43-55-791Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-43-55-791Z.yml"; sourceTree = "<group>"; };
 		677FFCD4E0AC4ACA4966F247 /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
 		69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-16-25-569Z.log"; sourceTree = "<group>"; };
@@ -716,6 +721,7 @@
 		EB3EBABA52A27AE0FE27887A /* page-2026-04-10T14-41-49-107Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T14-41-49-107Z.yml"; sourceTree = "<group>"; };
 		EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "final-pricing-cards.png"; sourceTree = "<group>"; };
 		EBD61F5520F75A63BDE32239 /* page-2026-04-08T09-44-56-358Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-56-358Z.yml"; sourceTree = "<group>"; };
+		EEC08647B1550251CEE5F4D2 /* QuickNotePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotePanel.swift; sourceTree = "<group>"; };
 		EEEA87AA6CDC06B7D98F809F /* SyncHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHTTPClient.swift; sourceTree = "<group>"; };
 		EFEE2DE6FF3823B9033E7743 /* asc-logged-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-logged-in.png"; sourceTree = "<group>"; };
 		F2CB1EA52B1832F3FE0640BE /* asc-notes-filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-notes-filled.png"; sourceTree = "<group>"; };
@@ -1127,10 +1133,12 @@
 		ED3BDA46B5D5BA4C41688623 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				67587AB0975C95195BD120E3 /* GlobalHotkey.swift */,
 				C8C8A7E4A246785295B51B55 /* MacEditorView.swift */,
 				18C09CB30FBEDB99502E2781 /* MacMenuCommands.swift */,
 				A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */,
 				6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */,
+				EEC08647B1550251CEE5F4D2 /* QuickNotePanel.swift */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -1725,6 +1733,7 @@
 				17F1C387702C187A377AC49B /* FolderRepository.swift in Sources */,
 				6C5EF33B3BF0F3BF49ACCA7F /* FolderRepositoryProtocol.swift in Sources */,
 				2872DEEEF5877DF9869673E7 /* Font+Haven.swift in Sources */,
+				784AAD62576091F94691A20D /* GlobalHotkey.swift in Sources */,
 				64BCE520C0B6B325F5AC14D5 /* GraphView.swift in Sources */,
 				77E93CFA60FE60D11085ECAA /* GraphViewModel.swift in Sources */,
 				2B4860CE2B347CD725D99788 /* HTMLSanitizer.swift in Sources */,
@@ -1752,6 +1761,7 @@
 				B9CAAC4D144E94DCFFE8BE86 /* NotionImporter.swift in Sources */,
 				6B0FA672CBEECBBA954F676F /* OnboardingPageView.swift in Sources */,
 				1212C777E0BC9E0900392983 /* OnboardingView.swift in Sources */,
+				0BC005483DD0B668236E365E /* QuickNotePanel.swift in Sources */,
 				5BC16FCA5867D06CE393438A /* RichTextCoordinator.swift in Sources */,
 				DF3C669351C8F071B89EC37E /* SearchResultRowView.swift in Sources */,
 				49A17028EC0A2D1B36D945B0 /* SearchService.swift in Sources */,
@@ -1833,6 +1843,7 @@
 				83185A627853DB6104DEEDD9 /* FolderRepository.swift in Sources */,
 				3C11F19A56F2650599B9990F /* FolderRepositoryProtocol.swift in Sources */,
 				7EEE490A1D182F827ECB1DDE /* Font+Haven.swift in Sources */,
+				8AF2D099CF50481323241AA7 /* GlobalHotkey.swift in Sources */,
 				F8103B60143625A0BBE5BDC0 /* GraphView.swift in Sources */,
 				9D3FAE5CB93286D39D076789 /* GraphViewModel.swift in Sources */,
 				360BF08FCBB748A71E137191 /* HTMLSanitizer.swift in Sources */,
@@ -1860,6 +1871,7 @@
 				A840B42B99A7C270043521E0 /* NotionImporter.swift in Sources */,
 				9653E7D000E386D21F352804 /* OnboardingPageView.swift in Sources */,
 				85B305D01A6FBBCB2863C2BF /* OnboardingView.swift in Sources */,
+				7036732935A57DC7AD88A32E /* QuickNotePanel.swift in Sources */,
 				0E9D0E0108ABA19456E38B5B /* RichTextCoordinator.swift in Sources */,
 				3DE1AF2996DEDA0B72E9BA53 /* SearchResultRowView.swift in Sources */,
 				0E66216E8523B943CC76D810 /* SearchService.swift in Sources */,
