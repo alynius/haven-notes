@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import Speech
 import AVFoundation
@@ -140,3 +141,17 @@ final class SpeechRecognizer: ObservableObject {
         }
     }
 }
+#endif
+
+#if os(macOS)
+import SwiftUI
+
+@MainActor
+final class SpeechRecognizer: ObservableObject {
+    @Published var transcript: String = ""
+    @Published var isRecording: Bool = false
+    @Published var isAvailable: Bool = false
+    func startRecording() async {}
+    func stopRecording() {}
+}
+#endif

@@ -1,4 +1,9 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 @MainActor
 final class ToastManager: ObservableObject {
@@ -14,6 +19,14 @@ final class ToastManager: ObservableObject {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
             currentToast = ToastItem(message: message, icon: icon, type: type)
         }
+        #if os(iOS)
+        UIAccessibility.post(notification: .announcement, argument: message)
+        #elseif os(macOS)
+        NSAccessibility.post(element: NSApp as Any, notification: .announcementRequested, userInfo: [
+            .announcement: message,
+            .priority: NSAccessibilityPriorityLevel.high.rawValue
+        ])
+        #endif
 
         Task {
             try? await Task.sleep(nanoseconds: 2_500_000_000) // 2.5 seconds

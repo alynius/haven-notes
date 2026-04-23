@@ -1,68 +1,136 @@
+#if os(iOS)
 import UIKit
+typealias PlatformFont = UIFont
+typealias PlatformColor = UIColor
+#elseif os(macOS)
+import AppKit
+typealias PlatformFont = NSFont
+typealias PlatformColor = NSColor
+#endif
 
 final class MarkdownHighlighter {
 
     // MARK: - Theme colors (adapt to trait collection)
 
     struct Theme {
-        let bodyFont: UIFont
-        let bodyColor: UIColor
-        let h1Font: UIFont
-        let h2Font: UIFont
-        let h3Font: UIFont
-        let headerColor: UIColor
-        let boldFont: UIFont
-        let italicFont: UIFont
-        let boldItalicFont: UIFont
-        let syntaxColor: UIColor      // dimmed color for **, *, #, etc.
-        let linkColor: UIColor
-        let codeFont: UIFont
-        let codeBackground: UIColor
-        let listBulletColor: UIColor
-        let checkboxColor: UIColor
-        let strikethroughColor: UIColor
+        let bodyFont: PlatformFont
+        let bodyColor: PlatformColor
+        let h1Font: PlatformFont
+        let h2Font: PlatformFont
+        let h3Font: PlatformFont
+        let headerColor: PlatformColor
+        let boldFont: PlatformFont
+        let italicFont: PlatformFont
+        let boldItalicFont: PlatformFont
+        let syntaxColor: PlatformColor      // dimmed color for **, *, #, etc.
+        let linkColor: PlatformColor
+        let codeFont: PlatformFont
+        let codeBackground: PlatformColor
+        let listBulletColor: PlatformColor
+        let checkboxColor: PlatformColor
+        let strikethroughColor: PlatformColor
 
+        #if os(iOS)
         static func haven(traitCollection: UITraitCollection) -> Theme {
             let isDark = traitCollection.userInterfaceStyle == .dark
-            let bodySize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize
+            let bodySize: CGFloat = PlatformFont.preferredFont(forTextStyle: .body).pointSize
 
             return Theme(
                 bodyFont: .preferredFont(forTextStyle: .body),
                 bodyColor: isDark
-                    ? UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
-                    : UIColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
+                    ? PlatformColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
+                    : PlatformColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
                 h1Font: .systemFont(ofSize: bodySize * 1.6, weight: .bold),
                 h2Font: .systemFont(ofSize: bodySize * 1.35, weight: .semibold),
                 h3Font: .systemFont(ofSize: bodySize * 1.15, weight: .semibold),
                 headerColor: isDark
-                    ? UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
-                    : UIColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
+                    ? PlatformColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
+                    : PlatformColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
                 boldFont: .boldSystemFont(ofSize: bodySize),
                 italicFont: .italicSystemFont(ofSize: bodySize),
                 boldItalicFont: {
-                    let descriptor = UIFont.systemFont(ofSize: bodySize).fontDescriptor
+                    let descriptor = PlatformFont.systemFont(ofSize: bodySize).fontDescriptor
                         .withSymbolicTraits([.traitBold, .traitItalic])
-                    return UIFont(
-                        descriptor: descriptor ?? UIFont.boldSystemFont(ofSize: bodySize).fontDescriptor,
+                    return PlatformFont(
+                        descriptor: descriptor ?? PlatformFont.boldSystemFont(ofSize: bodySize).fontDescriptor,
                         size: bodySize
                     )
                 }(),
                 syntaxColor: isDark
-                    ? UIColor(white: 1.0, alpha: 0.25)
-                    : UIColor(white: 0.0, alpha: 0.2),
-                linkColor: UIColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                    ? PlatformColor(white: 1.0, alpha: 0.25)
+                    : PlatformColor(white: 0.0, alpha: 0.2),
+                linkColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
                 codeFont: .monospacedSystemFont(ofSize: bodySize * 0.9, weight: .regular),
                 codeBackground: isDark
-                    ? UIColor(white: 1.0, alpha: 0.08)
-                    : UIColor(white: 0.0, alpha: 0.04),
-                listBulletColor: UIColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
-                checkboxColor: UIColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                    ? PlatformColor(white: 1.0, alpha: 0.08)
+                    : PlatformColor(white: 0.0, alpha: 0.04),
+                listBulletColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                checkboxColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
                 strikethroughColor: isDark
-                    ? UIColor(white: 1.0, alpha: 0.4)
-                    : UIColor(white: 0.0, alpha: 0.35)
+                    ? PlatformColor(white: 1.0, alpha: 0.4)
+                    : PlatformColor(white: 0.0, alpha: 0.35)
             )
         }
+        #elseif os(macOS)
+        static func haven(appearance: NSAppearance? = NSAppearance.current) -> Theme {
+            let isDark = appearance?.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+            let bodySize: CGFloat = NSFont.systemFontSize
+
+            return Theme(
+                bodyFont: NSFont.systemFont(ofSize: bodySize),
+                bodyColor: isDark
+                    ? PlatformColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
+                    : PlatformColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
+                h1Font: .systemFont(ofSize: bodySize * 1.6, weight: .bold),
+                h2Font: .systemFont(ofSize: bodySize * 1.35, weight: .semibold),
+                h3Font: .systemFont(ofSize: bodySize * 1.15, weight: .semibold),
+                headerColor: isDark
+                    ? PlatformColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1)
+                    : PlatformColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1),
+                boldFont: .boldSystemFont(ofSize: bodySize),
+                italicFont: {
+                    let descriptor = NSFont.systemFont(ofSize: bodySize).fontDescriptor
+                        .withSymbolicTraits(.italic)
+                    return NSFont(descriptor: descriptor, size: bodySize)
+                        ?? NSFont.systemFont(ofSize: bodySize)
+                }(),
+                boldItalicFont: {
+                    let descriptor = NSFont.systemFont(ofSize: bodySize).fontDescriptor
+                        .withSymbolicTraits([.bold, .italic])
+                    return NSFont(descriptor: descriptor, size: bodySize)
+                        ?? NSFont.boldSystemFont(ofSize: bodySize)
+                }(),
+                syntaxColor: isDark
+                    ? PlatformColor(white: 1.0, alpha: 0.25)
+                    : PlatformColor(white: 0.0, alpha: 0.2),
+                linkColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                codeFont: .monospacedSystemFont(ofSize: bodySize * 0.9, weight: .regular),
+                codeBackground: isDark
+                    ? PlatformColor(white: 1.0, alpha: 0.08)
+                    : PlatformColor(white: 0.0, alpha: 0.04),
+                listBulletColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                checkboxColor: PlatformColor(red: 0.42, green: 0.61, blue: 0.56, alpha: 1),
+                strikethroughColor: isDark
+                    ? PlatformColor(white: 1.0, alpha: 0.4)
+                    : PlatformColor(white: 0.0, alpha: 0.35)
+            )
+        }
+        #endif
     }
+
+    // MARK: - Pre-compiled Regex (static — compiled once at first use)
+
+    private static let headerRegex = try! NSRegularExpression(pattern: #"^(#{1,3})\s+(.+)$"#, options: .anchorsMatchLines)
+    private static let boldItalicRegex = try! NSRegularExpression(pattern: #"\*{3}(.+?)\*{3}"#)
+    private static let boldRegex = try! NSRegularExpression(pattern: #"\*{2}(.+?)\*{2}"#)
+    private static let italicRegex = try! NSRegularExpression(pattern: #"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)"#)
+    private static let inlineCodeRegex = try! NSRegularExpression(pattern: #"`([^`]+)`"#)
+    private static let strikethroughRegex = try! NSRegularExpression(pattern: #"~~(.+?)~~"#)
+    private static let markdownLinkRegex = try! NSRegularExpression(pattern: #"\[([^\]]+)\]\(([^\)]+)\)"#)
+    private static let bareURLRegex = try! NSRegularExpression(pattern: #"(?<!\(|\")(https?://[^\s\)\]]+)"#)
+    private static let wikiLinkRegex = try! NSRegularExpression(pattern: #"\[\[([^\]]+)\]\]"#)
+    private static let listBulletRegex = try! NSRegularExpression(pattern: #"^(\s*[-*+])\s"#, options: .anchorsMatchLines)
+    private static let checkboxRegex = try! NSRegularExpression(pattern: #"^(\s*-\s+\[[ xX]\])"#, options: .anchorsMatchLines)
 
     private var theme: Theme
 
@@ -73,6 +141,16 @@ final class MarkdownHighlighter {
     func updateTheme(_ theme: Theme) {
         self.theme = theme
     }
+
+    #if os(iOS)
+    func updateTheme(for traitCollection: UITraitCollection) {
+        self.theme = Theme.haven(traitCollection: traitCollection)
+    }
+    #elseif os(macOS)
+    func updateTheme(for appearance: NSAppearance? = nil) {
+        self.theme = Theme.haven(appearance: appearance ?? NSAppearance.current)
+    }
+    #endif
 
     /// Apply markdown highlighting to the full text, returning an NSAttributedString.
     func highlight(_ text: String) -> NSAttributedString {
@@ -99,15 +177,13 @@ final class MarkdownHighlighter {
     // MARK: - Patterns
 
     private func applyHeaders(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"^(#{1,3})\s+(.+)$"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: .anchorsMatchLines) else { return }
-
+        let regex = Self.headerRegex
         for match in regex.matches(in: str.string, range: fullRange) {
             let hashRange = match.range(at: 1)
             let contentRange = match.range(at: 2)
             let hashCount = hashRange.length
 
-            let font: UIFont
+            let font: PlatformFont
             switch hashCount {
             case 1: font = theme.h1Font
             case 2: font = theme.h2Font
@@ -127,25 +203,23 @@ final class MarkdownHighlighter {
 
     private func applyBoldItalic(_ str: NSMutableAttributedString, fullRange: NSRange) {
         // ***bold italic***
-        applyInlinePattern(#"\*{3}(.+?)\*{3}"#, to: str, fullRange: fullRange,
-                           contentAttrs: [.font: theme.boldItalicFont],
-                           syntaxOpenLen: 3, syntaxCloseLen: 3)
+        applyInlineRegex(Self.boldItalicRegex, to: str, fullRange: fullRange,
+                         contentAttrs: [.font: theme.boldItalicFont],
+                         syntaxOpenLen: 3, syntaxCloseLen: 3)
 
         // **bold**
-        applyInlinePattern(#"\*{2}(.+?)\*{2}"#, to: str, fullRange: fullRange,
-                           contentAttrs: [.font: theme.boldFont],
-                           syntaxOpenLen: 2, syntaxCloseLen: 2)
+        applyInlineRegex(Self.boldRegex, to: str, fullRange: fullRange,
+                         contentAttrs: [.font: theme.boldFont],
+                         syntaxOpenLen: 2, syntaxCloseLen: 2)
 
         // *italic* (but not inside **)
-        applyInlinePattern(#"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)"#, to: str, fullRange: fullRange,
-                           contentAttrs: [.font: theme.italicFont],
-                           syntaxOpenLen: 1, syntaxCloseLen: 1)
+        applyInlineRegex(Self.italicRegex, to: str, fullRange: fullRange,
+                         contentAttrs: [.font: theme.italicFont],
+                         syntaxOpenLen: 1, syntaxCloseLen: 1)
     }
 
     private func applyInlineCode(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"`([^`]+)`"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
-
+        let regex = Self.inlineCodeRegex
         for match in regex.matches(in: str.string, range: fullRange) {
             let fullMatch = match.range
             let contentRange = match.range(at: 1)
@@ -163,9 +237,7 @@ final class MarkdownHighlighter {
     }
 
     private func applyStrikethrough(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"~~(.+?)~~"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
-
+        let regex = Self.strikethroughRegex
         for match in regex.matches(in: str.string, range: fullRange) {
             let contentRange = match.range(at: 1)
             str.addAttributes([
@@ -182,10 +254,7 @@ final class MarkdownHighlighter {
 
     private func applyLinks(_ str: NSMutableAttributedString, fullRange: NSRange) {
         // Markdown links: [text](url)
-        let pattern = #"\[([^\]]+)\]\(([^\)]+)\)"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
-
-        for match in regex.matches(in: str.string, range: fullRange) {
+        for match in Self.markdownLinkRegex.matches(in: str.string, range: fullRange) {
             let textRange = match.range(at: 1)
             let urlRange = match.range(at: 2)
             let urlString = (str.string as NSString).substring(with: urlRange)
@@ -213,10 +282,7 @@ final class MarkdownHighlighter {
         }
 
         // Bare URLs (https://... or http://...)
-        let urlPattern = #"(?<!\(|\")(https?://[^\s\)\]]+)"#
-        guard let urlRegex = try? NSRegularExpression(pattern: urlPattern) else { return }
-
-        for match in urlRegex.matches(in: str.string, range: fullRange) {
+        for match in Self.bareURLRegex.matches(in: str.string, range: fullRange) {
             let urlRange = match.range(at: 1)
             let urlString = (str.string as NSString).substring(with: urlRange)
 
@@ -237,10 +303,7 @@ final class MarkdownHighlighter {
     }
 
     private func applyWikiLinks(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"\[\[([^\]]+)\]\]"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
-
-        for match in regex.matches(in: str.string, range: fullRange) {
+        for match in Self.wikiLinkRegex.matches(in: str.string, range: fullRange) {
             let contentRange = match.range(at: 1)
             str.addAttribute(.foregroundColor, value: theme.linkColor, range: contentRange)
 
@@ -252,20 +315,14 @@ final class MarkdownHighlighter {
     }
 
     private func applyListBullets(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"^(\s*[-*+])\s"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: .anchorsMatchLines) else { return }
-
-        for match in regex.matches(in: str.string, range: fullRange) {
+        for match in Self.listBulletRegex.matches(in: str.string, range: fullRange) {
             let bulletRange = match.range(at: 1)
             str.addAttribute(.foregroundColor, value: theme.listBulletColor, range: bulletRange)
         }
     }
 
     private func applyCheckboxes(_ str: NSMutableAttributedString, fullRange: NSRange) {
-        let pattern = #"^(\s*-\s+\[[ xX]\])"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: .anchorsMatchLines) else { return }
-
-        for match in regex.matches(in: str.string, range: fullRange) {
+        for match in Self.checkboxRegex.matches(in: str.string, range: fullRange) {
             let checkboxRange = match.range(at: 1)
             str.addAttribute(.foregroundColor, value: theme.checkboxColor, range: checkboxRange)
         }
@@ -273,11 +330,9 @@ final class MarkdownHighlighter {
 
     // MARK: - Helper
 
-    private func applyInlinePattern(_ pattern: String, to str: NSMutableAttributedString,
-                                    fullRange: NSRange, contentAttrs: [NSAttributedString.Key: Any],
-                                    syntaxOpenLen: Int, syntaxCloseLen: Int) {
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
-
+    private func applyInlineRegex(_ regex: NSRegularExpression, to str: NSMutableAttributedString,
+                                   fullRange: NSRange, contentAttrs: [NSAttributedString.Key: Any],
+                                   syntaxOpenLen: Int, syntaxCloseLen: Int) {
         for match in regex.matches(in: str.string, range: fullRange) {
             let contentRange = match.range(at: 1)
             str.addAttributes(contentAttrs, range: contentRange)
