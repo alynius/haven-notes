@@ -4,6 +4,9 @@ protocol NoteRepositoryProtocol {
     func create(title: String, bodyHTML: String, folderID: String?) async throws -> Note
     func fetchByID(_ id: String) async throws -> Note?
     func fetchAll() async throws -> [Note]
+    func countAll() async -> Int
+    func countByFolder() async -> [String: Int]
+    func countByTag() async -> [String: Int]
     func update(_ note: Note) async throws
     func upsert(_ note: Note) async throws
     func softDelete(id: String) async throws

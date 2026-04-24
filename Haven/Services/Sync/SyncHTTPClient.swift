@@ -1,4 +1,5 @@
 import Foundation
+import Security
 
 /// Represents a batch of changes to send to the server.
 struct SyncPushPayload: Codable {
@@ -24,6 +25,9 @@ final class SyncHTTPClient {
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder
 
+    private let keychainService = "com.haven.sync"
+    private let keychainAccount = "authToken"
+
     init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30
@@ -35,11 +39,64 @@ final class SyncHTTPClient {
 
         self.decoder = JSONDecoder()
         self.decoder.dateDecodingStrategy = .iso8601
+
+        // Restore persisted token so sync survives app restarts
+        self.authToken = loadStoredToken()
     }
 
     func configure(serverURL: URL, authToken: String) {
         self.serverURL = serverURL
         self.authToken = authToken
+        saveTokenToKeychain(authToken)
+    }
+
+    /// Clear credentials and remove token from Keychain (call on disconnect).
+    func clearCredentials() {
+        serverURL = nil
+        authToken = nil
+        deleteTokenFromKeychain()
+    }
+
+    // MARK: - Keychain helpers
+
+    private func saveTokenToKeychain(_ token: String) {
+        guard let data = token.data(using: .utf8) else { return }
+        // Delete any existing entry first
+        deleteTokenFromKeychain()
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount,
+            kSecValueData as String: data,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+        ]
+        SecItemAdd(query as CFDictionary, nil)
+    }
+
+    private func loadStoredToken() -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var result: AnyObject?
+        guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
+              let data = result as? Data,
+              let token = String(data: data, encoding: .utf8) else {
+            return nil
+        }
+        return token
+    }
+
+    private func deleteTokenFromKeychain() {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount
+        ]
+        SecItemDelete(query as CFDictionary)
     }
 
     /// Push local changes to the server.

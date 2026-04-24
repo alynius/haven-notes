@@ -1,5 +1,4 @@
 import Foundation
-import SQLite3
 
 @MainActor
 final class SyncManager: ObservableObject, SyncManagerProtocol {
@@ -40,6 +39,7 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
             startPeriodicSync()
         } else {
             stopPeriodicSync()
+            httpClient.clearCredentials()
         }
     }
 
@@ -58,6 +58,8 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
         do {
             try await pullChanges()
             try await pushChanges()
+            // Purge synced log entries older than 30 days to prevent unbounded growth
+            try changeQueue.purgeSynced(olderThan: Date().addingTimeInterval(-30 * 86400))
             status = .idle
         } catch {
             status = .error(error.localizedDescription)
@@ -98,7 +100,7 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
                     "SELECT note_id FROM \(HavenConstants.Database.tasksTable) WHERE id = ?",
                     params: [taskID]
                 ) { stmt in
-                    let noteID = String(cString: sqlite3_column_text(stmt, 0))
+                    let noteID = DatabaseManager.columnTextNonNull(stmt, 0)
                     noteIDsWithTaskChanges.insert(noteID)
                 }
             default:
@@ -130,7 +132,7 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
         // Get last sync timestamp
         var lastSync: String?
         try db.query("SELECT value FROM app_settings WHERE key = 'last_sync_timestamp'") { stmt in
-            let value = String(cString: sqlite3_column_text(stmt, 0))
+            let value = DatabaseManager.columnTextNonNull(stmt, 0)
             if !value.isEmpty { lastSync = value }
         }
 
@@ -150,8 +152,8 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
                     try await noteRepo.update(decryptedNote)
                 }
             } else {
-                // New note from remote
-                let _ = try await noteRepo.create(title: decryptedNote.title, bodyHTML: decryptedNote.bodyHTML)
+                // New note from remote — upsert to preserve the remote note's original ID
+                try await noteRepo.upsert(decryptedNote)
             }
         }
 
@@ -191,6 +193,7 @@ final class SyncManager: ObservableObject, SyncManagerProtocol {
                 try? await self?.sync()
             }
         }
+        syncTimer?.tolerance = 60
     }
 
     private func stopPeriodicSync() {

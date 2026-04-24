@@ -12,6 +12,6 @@ protocol SubscriptionManagerProtocol: AnyObject {
     func fetchProducts() async throws
     func purchase(_ productID: SubscriptionProductID) async throws -> Transaction
     func restorePurchases() async throws
-    func checkEntitlement() async throws
+    func checkEntitlement() async
     func listenForTransactionUpdates() async
 }

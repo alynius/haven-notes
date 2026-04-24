@@ -67,7 +67,7 @@ struct WikiLinkAutocompleteView: View {
                 return .handled
             }
         }
-        .onChange(of: suggestions) { _ in
+        .onChange(of: suggestions) { _, _ in
             selectedIndex = 0
         }
     }

@@ -15,6 +15,7 @@ struct TaskListView: View {
             Text("Tasks")
                 .font(.havenCaption)
                 .foregroundColor(Color.havenTextSecondary)
+                .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 4)
 
             ForEach(tasks) { task in
@@ -46,6 +47,8 @@ struct TaskListView: View {
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())
                     }
+                    .accessibilityLabel("Delete task")
+                    .accessibilityHint("Removes this task")
                     .accessibilityIdentifier("taskList_button_delete_\(task.id)")
                 }
                 .padding(.vertical, 6)

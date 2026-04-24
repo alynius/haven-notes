@@ -24,10 +24,10 @@ final class ChangeQueue {
         try db.query(sql) { stmt in
             let entry = SyncLogEntry(
                 id: Int(sqlite3_column_int64(stmt, 0)),
-                entityType: String(cString: sqlite3_column_text(stmt, 1)),
-                entityID: String(cString: sqlite3_column_text(stmt, 2)),
-                operation: String(cString: sqlite3_column_text(stmt, 3)),
-                timestamp: Date(iso8601String: String(cString: sqlite3_column_text(stmt, 4))) ?? Date(),
+                entityType: DatabaseManager.columnTextNonNull(stmt, 1),
+                entityID: DatabaseManager.columnTextNonNull(stmt, 2),
+                operation: DatabaseManager.columnTextNonNull(stmt, 3),
+                timestamp: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 4)) ?? Date(),
                 syncedAt: nil
             )
             entries.append(entry)

@@ -36,11 +36,6 @@ final class GraphViewModel: ObservableObject {
         do {
             let allNotes = try await noteRepo.fetchAll()
 
-            // Rebuild links for ALL notes first (ensures links table is up-to-date)
-            for note in allNotes {
-                try await noteRepo.rebuildLinks(for: note.id, bodyHTML: note.bodyHTML)
-            }
-
             // Build edges from link repository
             var allEdges: [GraphEdge] = []
             var linkCounts: [String: Int] = [:]  // noteID -> connection count

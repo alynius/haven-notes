@@ -35,7 +35,7 @@ final class NoteListViewModel: ObservableObject {
             }
 
             // Share note count with widget via App Groups
-            let totalCount = try await noteRepo.fetchAll().count
+            let totalCount = await noteRepo.countAll()
             UserDefaults(suiteName: HavenConstants.AppGroup.identifier)?
                 .set(totalCount, forKey: HavenConstants.AppGroup.noteCountKey)
         } catch {

@@ -2,13 +2,15 @@ import SwiftUI
 
 struct EmptyStateView: View {
     var onCreateNote: (() -> Void)?
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var body: some View {
         VStack(spacing: Spacing.xxl) {
             Image(systemName: "note.text")
                 .font(.system(size: 48, weight: .thin))
                 .foregroundStyle(Color.havenPrimary.opacity(0.4))
-                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3))
+                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3), isActive: !reduceMotion)
+                .accessibilityHidden(true)
 
             VStack(spacing: Spacing.sm) {
                 Text("No notes yet")
