@@ -34,41 +34,47 @@ const rows = [
   </section>
 
   <section class="pb-24">
-    <div class="max-w-[1080px] mx-auto px-6 overflow-x-auto">
-      <table class="w-full border-collapse text-sm">
-        <thead>
-          <tr>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-left py-4 px-4 border-b border-border bg-surface">Feature</th>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-accent/10">Haven</th>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Notion</th>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Bear</th>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Apple Notes</th>
-            <th class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Obsidian</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr class="hover:bg-accent/5 transition-colors">
-              <td class="py-4 px-4 border-b border-border text-text-primary">{row.feature}</td>
-              <td class="py-4 px-4 border-b border-border text-center bg-accent/5">
-                {row.haven === '✓' ? <span class="text-accent font-bold">✓</span> : row.haven === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-primary text-xs">{row.haven}</span>}
-              </td>
-              <td class="py-4 px-4 border-b border-border text-center">
-                {row.notion === '✓' ? <span class="text-accent font-bold">✓</span> : row.notion === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.notion}</span>}
-              </td>
-              <td class="py-4 px-4 border-b border-border text-center">
-                {row.bear === '✓' ? <span class="text-accent font-bold">✓</span> : row.bear === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.bear}</span>}
-              </td>
-              <td class="py-4 px-4 border-b border-border text-center">
-                {row.apple === '✓' ? <span class="text-accent font-bold">✓</span> : row.apple === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.apple}</span>}
-              </td>
-              <td class="py-4 px-4 border-b border-border text-center">
-                {row.obsidian === '✓' ? <span class="text-accent font-bold">✓</span> : row.obsidian === '—' ? <span class="text-text-secondary">—</span> : <span class="text-text-secondary text-xs">{row.obsidian}</span>}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div class="max-w-[1080px] mx-auto px-6">
+      <p class="md:hidden text-xs text-text-secondary text-center mb-3" aria-hidden="true">
+        Swipe to compare →
+      </p>
+      <div class="overflow-x-auto md:[mask-image:none] [mask-image:linear-gradient(to_right,black_calc(100%-32px),transparent)]">
+        <table class="w-full border-collapse text-sm min-w-[640px]">
+          <caption class="sr-only">Feature support across Haven, Notion, Bear, Apple Notes, and Obsidian.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-left py-4 px-4 border-b border-border bg-surface">Feature</th>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-accent/10">Haven</th>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Notion</th>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Bear</th>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Apple Notes</th>
+                <th scope="col" class="font-sans text-micro font-semibold tracking-[0.08em] uppercase text-text-secondary text-center py-4 px-4 border-b border-border bg-surface">Obsidian</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr class="hover:bg-accent/5 transition-colors">
+                  <th scope="row" class="py-4 px-4 border-b border-border text-text-primary text-left font-normal">{row.feature}</th>
+                  <td class="py-4 px-4 border-b border-border text-center bg-accent/5">
+                    {row.haven === '✓' ? <><span aria-hidden="true" class="text-accent font-bold">✓</span><span class="sr-only">Supported</span></> : row.haven === '—' ? <><span aria-hidden="true" class="text-text-secondary">—</span><span class="sr-only">Not supported</span></> : <span class="text-text-primary text-xs">{row.haven}</span>}
+                  </td>
+                  <td class="py-4 px-4 border-b border-border text-center">
+                    {row.notion === '✓' ? <><span aria-hidden="true" class="text-accent font-bold">✓</span><span class="sr-only">Supported</span></> : row.notion === '—' ? <><span aria-hidden="true" class="text-text-secondary">—</span><span class="sr-only">Not supported</span></> : <span class="text-text-secondary text-xs">{row.notion}</span>}
+                  </td>
+                  <td class="py-4 px-4 border-b border-border text-center">
+                    {row.bear === '✓' ? <><span aria-hidden="true" class="text-accent font-bold">✓</span><span class="sr-only">Supported</span></> : row.bear === '—' ? <><span aria-hidden="true" class="text-text-secondary">—</span><span class="sr-only">Not supported</span></> : <span class="text-text-secondary text-xs">{row.bear}</span>}
+                  </td>
+                  <td class="py-4 px-4 border-b border-border text-center">
+                    {row.apple === '✓' ? <><span aria-hidden="true" class="text-accent font-bold">✓</span><span class="sr-only">Supported</span></> : row.apple === '—' ? <><span aria-hidden="true" class="text-text-secondary">—</span><span class="sr-only">Not supported</span></> : <span class="text-text-secondary text-xs">{row.apple}</span>}
+                  </td>
+                  <td class="py-4 px-4 border-b border-border text-center">
+                    {row.obsidian === '✓' ? <><span aria-hidden="true" class="text-accent font-bold">✓</span><span class="sr-only">Supported</span></> : row.obsidian === '—' ? <><span aria-hidden="true" class="text-text-secondary">—</span><span class="sr-only">Not supported</span></> : <span class="text-text-secondary text-xs">{row.obsidian}</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
