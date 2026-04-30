@@ -34,8 +34,14 @@ final class NoteListViewModel: ObservableObject {
                 folders = Dictionary(uniqueKeysWithValues: allFolders.map { ($0.id, $0.name) })
             }
 
-            // Share note count with widget via App Groups
-            let totalCount = await noteRepo.countAll()
+            // Share note count with widget via App Groups.
+            // For .all filter, the loaded array already holds every non-deleted note, so we skip the extra COUNT query.
+            let totalCount: Int
+            if case .allNotes = filter {
+                totalCount = notes.count
+            } else {
+                totalCount = await noteRepo.countAll()
+            }
             UserDefaults(suiteName: HavenConstants.AppGroup.identifier)?
                 .set(totalCount, forKey: HavenConstants.AppGroup.noteCountKey)
         } catch {

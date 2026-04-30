@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct NoteEditorView: View {
     @StateObject var viewModel: NoteEditorViewModel
@@ -10,6 +11,45 @@ struct NoteEditorView: View {
     @StateObject private var editorShared = RichTextEditor.Shared()
     #elseif os(macOS)
     @StateObject private var editorShared = MacEditorView.Shared()
+
+    private func handleEditorDrop(_ providers: [NSItemProvider]) -> Bool {
+        var didHandle = false
+        for provider in providers {
+            let types = provider.registeredTypeIdentifiers
+
+            if types.contains(UTType.fileURL.identifier) {
+                didHandle = true
+                _ = provider.loadDataRepresentation(forTypeIdentifier: UTType.fileURL.identifier) { data, _ in
+                    guard let data = data,
+                          let url = URL(dataRepresentation: data, relativeTo: nil) else { return }
+                    let granted = url.startAccessingSecurityScopedResource()
+                    defer { if granted { url.stopAccessingSecurityScopedResource() } }
+                    guard let text = try? String(contentsOf: url, encoding: .utf8) else { return }
+                    Task { @MainActor in
+                        editorShared.coordinator?.insertAtCursor(text)
+                    }
+                }
+            } else if types.contains(UTType.url.identifier) {
+                didHandle = true
+                _ = provider.loadDataRepresentation(forTypeIdentifier: UTType.url.identifier) { data, _ in
+                    guard let data = data,
+                          let url = URL(dataRepresentation: data, relativeTo: nil) else { return }
+                    Task { @MainActor in
+                        editorShared.coordinator?.insertAtCursor(url.absoluteString)
+                    }
+                }
+            } else if let textType = types.first(where: { $0 == UTType.utf8PlainText.identifier || $0 == UTType.plainText.identifier }) {
+                didHandle = true
+                _ = provider.loadDataRepresentation(forTypeIdentifier: textType) { data, _ in
+                    guard let data = data, let text = String(data: data, encoding: .utf8) else { return }
+                    Task { @MainActor in
+                        editorShared.coordinator?.insertAtCursor(text)
+                    }
+                }
+            }
+        }
+        return didHandle
+    }
     #endif
 
     var body: some View {
@@ -71,6 +111,9 @@ struct NoteEditorView: View {
                     )
                     .frame(minHeight: 300)
                     .focusedValue(\.activeEditor, editorShared.coordinator)
+                    .onDrop(of: [.fileURL, .url, .plainText, .utf8PlainText], isTargeted: nil) { providers in
+                        handleEditorDrop(providers)
+                    }
                     #endif
 
                     // Tags section
@@ -169,6 +212,50 @@ struct NoteEditorView: View {
                     )
                 }
             }
+            #elseif os(macOS)
+            .safeAreaInset(edge: .bottom) {
+                VStack(spacing: 0) {
+                    if viewModel.speechRecognizer.isRecording {
+                        HStack(spacing: Spacing.sm) {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                            Text(viewModel.speechRecognizer.transcript.isEmpty ? "Listening..." : viewModel.speechRecognizer.transcript)
+                                .font(.havenCaption)
+                                .foregroundColor(Color.havenTextPrimary)
+                                .lineLimit(2)
+                            Spacer()
+                            Button("Insert") {
+                                viewModel.insertDictatedText(viewModel.speechRecognizer.transcript)
+                                viewModel.speechRecognizer.stopRecording()
+                            }
+                            .font(.havenCaption.weight(.semibold))
+                            .foregroundColor(Color.havenAccent)
+                            .disabled(viewModel.speechRecognizer.transcript.isEmpty)
+                        }
+                        .padding(.horizontal, Spacing.lg)
+                        .padding(.vertical, Spacing.sm)
+                        .background(Color.havenSurface)
+                    }
+
+                    EditorToolbarView(
+                        onBold: { editorShared.coordinator?.toggleBold() },
+                        onItalic: { editorShared.coordinator?.toggleItalic() },
+                        onHeading: { editorShared.coordinator?.toggleHeading() },
+                        onList: { editorShared.coordinator?.toggleList() },
+                        onCheckbox: { editorShared.coordinator?.toggleTask() },
+                        onLink: { editorShared.coordinator?.insertWikiLink() },
+                        onMicrophone: {
+                            Task {
+                                await viewModel.speechRecognizer.toggleRecording()
+                            }
+                        },
+                        isRecording: viewModel.speechRecognizer.isRecording,
+                        showMicrophone: viewModel.speechRecognizer.isAvailable,
+                        activeFormats: editorShared.activeFormats
+                    )
+                }
+            }
             #endif
 
             // Autocomplete overlay
@@ -178,16 +265,10 @@ struct NoteEditorView: View {
                     onSelect: { note in
                         viewModel.selectAutocompleteSuggestion(note)
                         // Update the text view to reflect the inserted link
-                        #if os(iOS)
-                        if let coordinator = editorShared.coordinator {
-                            coordinator.applyHighlighting(to: coordinator.textView!, text: viewModel.note.bodyHTML)
-                        }
-                        #elseif os(macOS)
                         if let coordinator = editorShared.coordinator,
                            let textView = coordinator.textView {
                             coordinator.applyHighlighting(to: textView, text: viewModel.note.bodyHTML)
                         }
-                        #endif
                     }
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))

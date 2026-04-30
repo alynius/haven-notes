@@ -18,6 +18,8 @@
 		02C12658D4F90F44308B549C /* page-2026-04-08T12-46-40-257Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6B4164DA152864AE915E3453 /* page-2026-04-08T12-46-40-257Z.yml */; };
 		030D94B1A6E2CC9DD8ECD52F /* console-2026-04-08T09-44-56-305Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 5D364257D14F6053EABBDDB5 /* console-2026-04-08T09-44-56-305Z.log */; };
 		038EA2A0CBA90B50A1217F23 /* page-2026-04-10T14-41-39-818Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 708F005AE7DF854B6400948F /* page-2026-04-10T14-41-39-818Z.yml */; };
+		05938879C8B2680F38B5C096 /* page-2026-04-27T07-28-07-640Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = F5DAFFCAD4194E4F79668738 /* page-2026-04-27T07-28-07-640Z.yml */; };
+		059F0448A6F902F455C33F07 /* haven-compare-desktop-final.png in Resources */ = {isa = PBXBuildFile; fileRef = EE07C35B01A43AEAE0D15A0B /* haven-compare-desktop-final.png */; };
 		067E419F0406A215C8A36270 /* rebuild-final.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D13971CE8DD078A6383C781 /* rebuild-final.png */; };
 		06E25D5D4C6EF0842D9DC4B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B343C5CE9C37F301442D4752 /* Tag.swift */; };
 		06FA3065BBD10E2F9A443699 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A66E97D27D71B7B67D1EAD0F /* PrivacyInfo.xcprivacy */; };
@@ -27,6 +29,7 @@
 		08AF32613F8329D2FA7A1281 /* page-2026-04-08T15-00-46-450Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D401AEB9DE158FD0C623900E /* page-2026-04-08T15-00-46-450Z.yml */; };
 		090F6501E04013131197894F /* SettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3487B4F5FB3B9CFC606D50B /* SettingsUITests.swift */; };
 		0915B1A2026E51DC2506A958 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74011861F3C467471A264726 /* TestHelpers.swift */; };
+		0A15C7CD77393B68E1438238 /* haven-home-320.png in Resources */ = {isa = PBXBuildFile; fileRef = F77FBD82F448A506DDBC7B3E /* haven-home-320.png */; };
 		0A38F0886E475BDFB97A4A0F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A66E97D27D71B7B67D1EAD0F /* PrivacyInfo.xcprivacy */; };
 		0AF382B8D27AABB206EA8399 /* page-2026-04-05T20-14-59-511Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */; };
 		0B593A77E266C1E6036A0D32 /* console-2026-04-10T14-40-54-910Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A4A10F99EB2A92D5EFD923C4 /* console-2026-04-10T14-40-54-910Z.log */; };
@@ -50,12 +53,16 @@
 		145D9BF3116535651AF6CDA7 /* page-2026-04-10T14-41-30-857Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2D36B0183C1F54F2C001F0EA /* page-2026-04-10T14-41-30-857Z.yml */; };
 		14C091D745A0BA943C918D3E /* page-2026-04-09T19-10-41-592Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 269ED8B14F397E18C721E725 /* page-2026-04-09T19-10-41-592Z.yml */; };
 		14F6EE3B0DBCA705B0895646 /* asc-app-info.png in Resources */ = {isa = PBXBuildFile; fileRef = DB674EB5B8305C3889BAA2A4 /* asc-app-info.png */; };
+		150DCECFF66D5E2D778501EE /* haven-compare-mobile-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B4C2E00D3E397D5D057B2E /* haven-compare-mobile-v2.png */; };
 		152B29DEECC35B5B4D6E7306 /* DailyNoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786915CC1B216076A3711D8 /* DailyNoteService.swift */; };
+		153D2D00757A8D4FADD651C9 /* page-2026-04-27T07-23-25-582Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */; };
 		15DAFF20BE16E5A98254F424 /* asc-logged-in.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEE2DE6FF3823B9033E7743 /* asc-logged-in.png */; };
 		15F1BCF23D8B57421310B546 /* page-2026-04-08T12-46-51-784Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0A49DE4C26C92BF0368D2FC5 /* page-2026-04-08T12-46-51-784Z.yml */; };
+		1627113B49D092261053253E /* page-2026-04-27T07-24-14-611Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DE34AFAD89AC849308A79C8 /* page-2026-04-27T07-24-14-611Z.yml */; };
 		16B14FB1A3F9C1D14630F305 /* AppIcon-Tinted.svg in Resources */ = {isa = PBXBuildFile; fileRef = 6ED74A3057CA76BAC0AAB541 /* AppIcon-Tinted.svg */; };
 		16E4CD526750C8103988633E /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3048163CF56FCFCCE116762 /* DeepLinkHandler.swift */; };
 		16E5572D3E8A0151A6B4AE57 /* console-2026-04-10T19-32-39-952Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */; };
+		179CA8834917CCA230E98F4B /* haven-compare.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D6DEF3BE4CC7A250255BB84 /* haven-compare.png */; };
 		17BC7BBA90C1E0A06D3F1AF9 /* post-upgrade-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = E8968693AB4C088AAFEF96D4 /* post-upgrade-pricing.png */; };
 		17C534B31ACC94B6AD0DB51E /* rebuild-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = F6110DD50257059A83838CAE /* rebuild-pricing.png */; };
 		17CC0F7B05228FDAA8F330C1 /* LinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78E3A2E3AB36EF80B3B1973 /* LinkRepository.swift */; };
@@ -67,21 +74,29 @@
 		1AD7EAA37E3A50A9742644A4 /* page-2026-04-05T21-12-49-213Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A867ABDF98D974EF7AF43B33 /* page-2026-04-05T21-12-49-213Z.yml */; };
 		1B6CF666986780D1CAAF1DDD /* SyncSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B8077DA44C579327246EC /* SyncSettingsView.swift */; };
 		1C61A87A3CDD4C1FE9318946 /* page-2026-04-09T18-35-10-048Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FB2312FC9BEE91A2852A5E4C /* page-2026-04-09T18-35-10-048Z.yml */; };
+		1C6D6DD734AA8C8EDF0DFFD2 /* haven-story.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CA96770F942AEAD34CDA05 /* haven-story.png */; };
+		1CAC31A3C9E4832995A14AF3 /* page-2026-04-27T05-45-57-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A81DE211088E89F2EBBE0ABB /* page-2026-04-27T05-45-57-756Z.yml */; };
 		1DD0D06A0B44932743FC318E /* illustrations-final.png in Resources */ = {isa = PBXBuildFile; fileRef = ABDD77A88589FB6D37728BB6 /* illustrations-final.png */; };
 		1E2F7612087848F39BAA3BD0 /* page-2026-04-08T09-44-30-955Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8EBB26251335B2C650496EC5 /* page-2026-04-08T09-44-30-955Z.yml */; };
 		1F3A07CD1A6999876A4261D2 /* page-2026-04-05T20-46-09-126Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1152591B9B0F632F06D6E39A /* page-2026-04-05T20-46-09-126Z.yml */; };
 		1F6F3304C29D93EA37BB9512 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE4B86607C03A09485AFEDA /* SearchView.swift */; };
+		1F789CF9B58ED17077515577 /* page-2026-04-27T07-28-07-640Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = F5DAFFCAD4194E4F79668738 /* page-2026-04-27T07-28-07-640Z.yml */; };
 		2138034100E42DCA702E1FDE /* card-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 875FAC78FAB278335EA52CE5 /* card-hover.png */; };
+		232E22F3AB3BA945DEB96AE8 /* haven-home-mobile-375-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDBC857CB35F74C1398E68D /* haven-home-mobile-375-fixed.png */; };
 		23A4CAA641A60F008BF1A984 /* page-2026-04-08T13-52-21-340Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = ABD659BFDA21FA9AFB554181 /* page-2026-04-08T13-52-21-340Z.yml */; };
 		2460A2A133B7D83CB4221E15 /* asc-license-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D4E85B191BA1DE6AE6257CB /* asc-license-edit.png */; };
 		24E6EA59A03C3A72C8A226EE /* FlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88140E40CB18B3DFAB7F1EA /* FlowUITests.swift */; };
+		25332BD7BE272DFF84455CD2 /* page-2026-04-27T07-28-24-193Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 83551DFB882EF76231365B22 /* page-2026-04-27T07-28-24-193Z.yml */; };
 		2537FEB42A83A51E972829D2 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FEA75AF0427AB888756AB /* OnboardingUITests.swift */; };
 		2575818390E769CCC67E945C /* hero-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = ABB40FD76708BC080E90CB3C /* hero-fixed.png */; };
+		25762AE7D8AF193095C137FC /* haven-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 41C4E0C52D5D134611D228ED /* haven-pricing.png */; };
 		25E390BA597FA469484D613C /* SyncManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD9E0437E6783D977371D80 /* SyncManagerProtocol.swift */; };
 		26C54A0A89BA87D3E99A2879 /* console-2026-04-05T20-14-58-999Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 788EC4D8D91B718CFE422F5D /* console-2026-04-05T20-14-58-999Z.log */; };
 		26CD1EE95C5D7E86D345CF07 /* AppIcon-Dark.svg in Resources */ = {isa = PBXBuildFile; fileRef = 07137A28B2EA32D9C58D2C10 /* AppIcon-Dark.svg */; };
 		26FA26D2EF680234A35E72E2 /* MacTextViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */; };
 		271E8785592B2965B8A8FB8D /* console-2026-04-05T20-16-25-569Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */; };
+		272AC989D69C9041B9F12BF2 /* haven-home-mobile-375.png in Resources */ = {isa = PBXBuildFile; fileRef = F2127C25BA93B438FC466A38 /* haven-home-mobile-375.png */; };
+		27E05F659BC5B90DF7864D0F /* haven-after-fixes-desktop.png in Resources */ = {isa = PBXBuildFile; fileRef = F2A55782C84B9BDA26FEC784 /* haven-after-fixes-desktop.png */; };
 		2829B4E4A2403F5326D8490D /* page-2026-04-09T18-34-05-015Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6F41A4359E8FA02E6513AD6D /* page-2026-04-09T18-34-05-015Z.yml */; };
 		2872DEEEF5877DF9869673E7 /* Font+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C6927589DFE73C0E09CA9 /* Font+Haven.swift */; };
 		28A544BD42385F7F0FF03902 /* WikiLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */; };
@@ -93,6 +108,7 @@
 		2B48438A332490D790219343 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */; };
 		2B4860CE2B347CD725D99788 /* HTMLSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615331F54A69CA6A7EF32D4 /* HTMLSanitizer.swift */; };
 		2BA23512DA732DEFBFB0B38A /* SubscriptionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CAA9BACFA8076210885397 /* SubscriptionManagerProtocol.swift */; };
+		2C75C31FC96C8C346C87FDE5 /* og-render.html in Resources */ = {isa = PBXBuildFile; fileRef = D769ED681224DC6735D7727E /* og-render.html */; };
 		2D31810DCE0135E826970F0D /* AppIcon-Dark.svg in Resources */ = {isa = PBXBuildFile; fileRef = 07137A28B2EA32D9C58D2C10 /* AppIcon-Dark.svg */; };
 		2D370D58E5421FECA8FB083C /* final-hero.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA4B0006A759B489B2FD0F3 /* final-hero.png */; };
 		2DA0C3834D466908F51898A7 /* rebuild-final.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D13971CE8DD078A6383C781 /* rebuild-final.png */; };
@@ -109,12 +125,15 @@
 		32963B8F3569EDF8577769F7 /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A332A42A234DBDAEE9B4C /* EncryptionService.swift */; };
 		32F7A3CE9349D97BA543A511 /* HavenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 89FEE7A022F493F5DF0CB53A /* HavenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		32FFC9D081F394F9FA376305 /* page-2026-04-10T19-34-18-906Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */; };
+		33041477C50AA845930FFEA1 /* page-2026-04-27T07-27-27-199Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D1ABAAFF45F0E1251E3B6EC0 /* page-2026-04-27T07-27-27-199Z.yml */; };
 		331A5CCC443E1046AEBF1D94 /* page-2026-04-10T07-10-24-708Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = AA22DD9068E5A1E800F30996 /* page-2026-04-10T07-10-24-708Z.yml */; };
 		339E94BE56789F272442F8B6 /* asc-license-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D4E85B191BA1DE6AE6257CB /* asc-license-edit.png */; };
+		343E8B6EE5ACF6C1BDDBC263 /* page-2026-04-27T06-21-12-193Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 897A1B5DA26A1DAEED7485CD /* page-2026-04-27T06-21-12-193Z.yml */; };
 		350515F51273F0802C3C731F /* Date+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */; };
 		3581CB77B32D54E4AAEF16C5 /* astro-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C877C25C7B7289E9E020AC /* astro-landing.png */; };
 		360BF08FCBB748A71E137191 /* HTMLSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615331F54A69CA6A7EF32D4 /* HTMLSanitizer.swift */; };
 		3923E5FF0E8BCBDBE1CC6515 /* SyncSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F9602901FE5EA1BB3A71D /* SyncSettingsViewModel.swift */; };
+		39C08D994F548351DF6805D4 /* haven-support.png in Resources */ = {isa = PBXBuildFile; fileRef = 886E331C028F08C63D9151BC /* haven-support.png */; };
 		3BB73B32990DB8585F712F1B /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465E1A93BE44C10D275F6FD /* NoteListView.swift */; };
 		3BC06E33C54B268D14E2723F /* page-2026-04-05T20-18-03-791Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9E7A4E7040276A30F8829838 /* page-2026-04-05T20-18-03-791Z.yml */; };
 		3C0D858D0A3BF62FF6BF8EAF /* asc-notes-filled.png in Resources */ = {isa = PBXBuildFile; fileRef = F2CB1EA52B1832F3FE0640BE /* asc-notes-filled.png */; };
@@ -127,16 +146,21 @@
 		40A6CE8C4E0488FE465D6DA2 /* console-2026-04-05T20-17-00-516Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 96D40F479C14C43E13C2E0EA /* console-2026-04-05T20-17-00-516Z.log */; };
 		40B17235D33C24227FF5913A /* ConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534690A83A3133300CEBA34 /* ConflictResolver.swift */; };
 		40D42107816B2B255E28AE14 /* asc-description.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E9999444C0DAE1101FCF4 /* asc-description.png */; };
+		412BE071AC5F3ACE05489090 /* console-2026-04-27T07-10-40-226Z.log in Resources */ = {isa = PBXBuildFile; fileRef = AE9527619CFE933EC751CBC6 /* console-2026-04-27T07-10-40-226Z.log */; };
 		4173241F617D461D6E78A5F1 /* page-2026-04-10T14-40-55-122Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BC0C6FF5E83857902513B0C /* page-2026-04-10T14-40-55-122Z.yml */; };
 		41D4FF7B47C59872A679CC8B /* ConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534690A83A3133300CEBA34 /* ConflictResolver.swift */; };
 		42639B76263BE454C5526946 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46972FAA7F9A308EBB974B8 /* SidebarView.swift */; };
+		42928A6F8ACEEBEB12CD33E8 /* haven-compare-mobile-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6B936746CFFD9C4A1ACD /* haven-compare-mobile-fixed.png */; };
 		42C75F2AB5C1663315BE722A /* page-2026-04-05T21-12-49-213Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A867ABDF98D974EF7AF43B33 /* page-2026-04-05T21-12-49-213Z.yml */; };
 		4403856CF77251A44D667334 /* page-2026-04-05T20-19-51-375Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = F2F4B7D108072F05424A6EE2 /* page-2026-04-05T20-19-51-375Z.yml */; };
+		443DC07DF1340F36D2FDB67B /* haven-home-mobile-375.png in Resources */ = {isa = PBXBuildFile; fileRef = F2127C25BA93B438FC466A38 /* haven-home-mobile-375.png */; };
 		448477F7FA1295032B0FAEE5 /* page-2026-04-05T20-45-22-915Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2002B95697C44F309BC810D5 /* page-2026-04-05T20-45-22-915Z.yml */; };
+		4527C0AD1FFBD0017F40DE45 /* page-2026-04-27T07-23-04-271Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A199F5E098398339B226CFF8 /* page-2026-04-27T07-23-04-271Z.yml */; };
 		459DB15CCF4873F42FF3D911 /* page-2026-04-08T12-46-21-488Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2EF97BBFF81A0B7AFF2EF34 /* page-2026-04-08T12-46-21-488Z.yml */; };
 		462253D9A4394263369F29DE /* TaskRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC461D9767572ACCA2F1F3ED /* TaskRepositoryProtocol.swift */; };
 		465A10465BBD2353F9214918 /* DailyNoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786915CC1B216076A3711D8 /* DailyNoteService.swift */; };
 		46B2D754C9560EEB408F7F85 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CAADFDB0217608D939E1B /* SettingsView.swift */; };
+		46CF1CD4344B821A9EB82273 /* page-2026-04-27T05-43-39-947Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 06FF8652D590F39903B35242 /* page-2026-04-27T05-43-39-947Z.yml */; };
 		474AC1C4A86ECE5D66F2A9AB /* page-2026-04-10T14-41-30-857Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2D36B0183C1F54F2C001F0EA /* page-2026-04-10T14-41-30-857Z.yml */; };
 		48985F13ED8F2982E6467EB7 /* page-2026-04-08T12-44-10-237Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89CB972EF462A6301C293305 /* page-2026-04-08T12-44-10-237Z.yml */; };
 		48CBBE514082401B61C681AB /* page-2026-04-05T20-46-09-126Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1152591B9B0F632F06D6E39A /* page-2026-04-05T20-46-09-126Z.yml */; };
@@ -147,6 +171,7 @@
 		4A337DD6CB29B1C31247B6EB /* page-2026-04-10T14-40-55-122Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BC0C6FF5E83857902513B0C /* page-2026-04-10T14-40-55-122Z.yml */; };
 		4AD7D3970CF90BAD485DB2A8 /* audit-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C97D2B0951A044DBD590559 /* audit-landing.png */; };
 		4B05D283BA7BB74FF1C2F012 /* console-2026-04-08T13-52-21-096Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 471594556B32C96C357740BB /* console-2026-04-08T13-52-21-096Z.log */; };
+		4B42A0C49D840434DED34DDF /* page-2026-04-27T06-20-25-219Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2C2F7607A5FB8DF500B14901 /* page-2026-04-27T06-20-25-219Z.yml */; };
 		4B564ED349A71208D2A11DC0 /* page-2026-04-10T14-41-58-534Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 782BC7DD02AE340EDA77E51C /* page-2026-04-10T14-41-58-534Z.yml */; };
 		4BE271634B7E67825D29C452 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97647E5F6AC4D97C036279F /* SyncManager.swift */; };
 		4BE5AA54608A26D2CDD63837 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F21E2347101F280AF6E2FC /* AppState.swift */; };
@@ -165,6 +190,8 @@
 		528BC2DACB28B902B0EC55E2 /* ConflictResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF22CF94D380E53C92D322 /* ConflictResolverTests.swift */; };
 		53BE71FA5F4C1534819668F5 /* DateISO8601Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375DDE3A8FF4E1894BA64B9 /* DateISO8601Tests.swift */; };
 		53CD47AB68DE67C70B923565 /* page-2026-04-10T14-41-49-107Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = EB3EBABA52A27AE0FE27887A /* page-2026-04-10T14-41-49-107Z.yml */; };
+		541F2FD1AAD86559F3947E24 /* page-2026-04-27T07-23-41-339Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 62120ED5CD6F1E196342CFFD /* page-2026-04-27T07-23-41-339Z.yml */; };
+		5467A5FFFDB25D242634AF3A /* page-2026-04-27T05-46-52-923Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AE29DA4401B4727DC0F72 /* page-2026-04-27T05-46-52-923Z.yml */; };
 		547FB025B53A5A4A125127EB /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DC0EC9F31B6489319A673 /* EncryptionSettingsView.swift */; };
 		549991D189586391AA38D163 /* 07-mobile-menu-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 82B44D3F064342159137EBE9 /* 07-mobile-menu-open.png */; };
 		550E617033C7DFC1E61B7777 /* final-pricing-cards.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */; };
@@ -176,30 +203,39 @@
 		57877634E94FE483C4B84D70 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0136A42922E16A0FD68D8 /* TaskRepository.swift */; };
 		58516C6683760B2A10D886B4 /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DC47091541C60C8B29113A /* NoteRepository.swift */; };
 		5894F793910D95955116C056 /* page-2026-04-10T06-58-27-260Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 70392D8DBECA6DF4E2DB8EDA /* page-2026-04-10T06-58-27-260Z.yml */; };
+		59A9205492DB545649D17B8E /* console-2026-04-27T07-23-03-941Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 553AA511D74CCBDEED94C510 /* console-2026-04-27T07-23-03-941Z.log */; };
 		59AD4D1A659175CBF9691562 /* asc-review-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 451A5FD74829DBD75CEB9032 /* asc-review-info.png */; };
 		5A9301B1C3C7349DC0CC874D /* page-2026-04-10T14-41-39-818Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 708F005AE7DF854B6400948F /* page-2026-04-10T14-41-39-818Z.yml */; };
+		5B30179AFE2901FB35CF2FD3 /* page-2026-04-27T07-26-10-229Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FB16DA6A75B809DC7C5A15CF /* page-2026-04-27T07-26-10-229Z.yml */; };
+		5B58AF0AE74BC13CA8EE0248 /* haven-changelog.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DF3D33EA06B85728CC1E9D /* haven-changelog.png */; };
 		5BAA089472F59F84E9D85275 /* sidebar-detail.yml in Resources */ = {isa = PBXBuildFile; fileRef = 78D19164FF99C07A27753B8D /* sidebar-detail.yml */; };
 		5BC16FCA5867D06CE393438A /* RichTextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518571D349182791593F73F3 /* RichTextCoordinator.swift */; };
 		5C850F13EA0EEE763871927D /* page-2026-04-08T09-44-12-896Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */; };
 		5D7B24CA45ECF9EF3EEA6F13 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0460B482C048500781097DB /* NoteRowView.swift */; };
 		5E0DC258F3B83194041327A4 /* console-2026-04-08T13-53-59-131Z.log in Resources */ = {isa = PBXBuildFile; fileRef = D6CB255ABBF47C5A3BFB5333 /* console-2026-04-08T13-53-59-131Z.log */; };
 		5F072EB28542EA810943F6BC /* page-2026-04-10T07-14-48-949Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = F4BC41758706E4CDAAABC3B9 /* page-2026-04-10T07-14-48-949Z.yml */; };
+		5F18E48C2DDDF3BA8C9C46BA /* haven-compare-mobile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3359A61393B93F18ABB0D8 /* haven-compare-mobile.png */; };
 		605569B00D0C5EAC39810C33 /* rebuild-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = F6110DD50257059A83838CAE /* rebuild-pricing.png */; };
 		606ADA9C5E83592BF2842344 /* NotionImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A6B87960E53389415F1C5 /* NotionImportView.swift */; };
 		62AD973BBF8D6DBBE220A824 /* 08-dark-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = FB43EDA2258695441EAB55A8 /* 08-dark-landing.png */; };
+		62EFEDD63CD772BFA986AF26 /* haven-home-mobile-375-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDBC857CB35F74C1398E68D /* haven-home-mobile-375-fixed.png */; };
 		631DDFD4569E7868F88786A6 /* MacEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C8A7E4A246785295B51B55 /* MacEditorView.swift */; };
 		634A03ACF2D83F094BE3DE4B /* console-2026-04-05T21-18-28-756Z.log in Resources */ = {isa = PBXBuildFile; fileRef = D772EC0DE2BDC2D56515EF96 /* console-2026-04-05T21-18-28-756Z.log */; };
 		638E84D5A8996BB85D830A55 /* 06-mobile-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = C99744EAE77A0129858C53B6 /* 06-mobile-landing.png */; };
 		64BCE520C0B6B325F5AC14D5 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39306A115ECB99EC9674908 /* GraphView.swift */; };
 		64D9FC9434300B43A8070BEF /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDDC709452138CFFED98DF /* AppSetting.swift */; };
+		64F105ADFFDC25952A736B0E /* og-render.html in Resources */ = {isa = PBXBuildFile; fileRef = D769ED681224DC6735D7727E /* og-render.html */; };
 		64F83B4DDE98F524C1A05176 /* asc-saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A419771D076B0B1AE1E1220 /* asc-saved.png */; };
+		6653FF25438007DB0420B1A9 /* haven-404-page.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A1B5CDA8D4B6D8B76F032E /* haven-404-page.png */; };
 		666FF364D9D9E658FC163545 /* page-2026-04-10T19-32-48-875Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = DEF6BC22B7C08390B0A5D2CD /* page-2026-04-10T19-32-48-875Z.yml */; };
+		66778D19AE9CF45DD821328A /* page-2026-04-27T07-28-35-737Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A8963373F8A54798899B6F48 /* page-2026-04-27T07-28-35-737Z.yml */; };
 		66A70D05FDA261DF72A5AFD0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648DC62F94C1F87E4F53384 /* TaskListView.swift */; };
 		66CBD3054E436659842D8DB7 /* WikiLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FDA5DDC3D812C77EFDBC1 /* WikiLink.swift */; };
 		66E7F970A95C47FE8474768F /* page-2026-04-08T13-52-21-340Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = ABD659BFDA21FA9AFB554181 /* page-2026-04-08T13-52-21-340Z.yml */; };
 		67461350AF211EE92CA9D3BA /* page-2026-04-09T17-44-11-420Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9A37567B2AD810FBED48AAC4 /* page-2026-04-09T17-44-11-420Z.yml */; };
 		6796079D077BE9BB19166550 /* asc-review-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 451A5FD74829DBD75CEB9032 /* asc-review-info.png */; };
 		68727D005FC86B381E52B93D /* page-2026-04-05T20-17-53-319Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 73524AAC084377C175C0E04E /* page-2026-04-05T20-17-53-319Z.yml */; };
+		69334B6E54321DA123F711FE /* page-2026-04-27T05-47-13-243Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4EB129DF9165344C2503263F /* page-2026-04-27T05-47-13-243Z.yml */; };
 		693CBFB2558CC73775A1A6A8 /* TagPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D686222A9D718ED7820A383 /* TagPickerView.swift */; };
 		69CC284D93DEF48789A9FF79 /* console-2026-04-08T12-07-11-618Z.log in Resources */ = {isa = PBXBuildFile; fileRef = FFB1C620AFD5043EFBE07759 /* console-2026-04-08T12-07-11-618Z.log */; };
 		6ABFBE1EF2207473ECB34E73 /* AppIcon-Light.svg in Resources */ = {isa = PBXBuildFile; fileRef = A08E2704ED60DEF91B69C517 /* AppIcon-Light.svg */; };
@@ -218,6 +254,7 @@
 		71E192FDE21B3D6E07A0FDA3 /* console-2026-04-05T20-21-54-138Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C16082CC6C3B8B5E578664EE /* console-2026-04-05T20-21-54-138Z.log */; };
 		72143A41B44D661597881E56 /* page-2026-04-10T19-34-18-906Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */; };
 		72A0A64E771C0CF1AC3BC4C2 /* page-2026-04-08T09-44-21-474Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9F3E65581A931CB296C4C714 /* page-2026-04-08T09-44-21-474Z.yml */; };
+		732028F1FC865304BDA93B35 /* haven-home-desktop.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C12DCA25E005AB4AEE91CD3 /* haven-home-desktop.png */; };
 		738262F656004A245B88613B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC939D7C59757EDAB8A8AA5B /* SearchViewModel.swift */; };
 		73976F5C911EC623844B2E41 /* EditorToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09FF0F773C7E186F3E4969F /* EditorToolbarView.swift */; };
 		74E71C000D4C00AC06DB13D2 /* page-2026-04-10T19-32-48-875Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = DEF6BC22B7C08390B0A5D2CD /* page-2026-04-10T19-32-48-875Z.yml */; };
@@ -230,6 +267,7 @@
 		789738FE66FDED340A2AAFE6 /* console-2026-04-10T19-32-39-952Z.log in Resources */ = {isa = PBXBuildFile; fileRef = C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */; };
 		78CA670ECFA3950CF2C52619 /* console-2026-04-08T15-16-23-085Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 22A169E9B41F4F975EC73019 /* console-2026-04-08T15-16-23-085Z.log */; };
 		795C0DF5EC4A7481A8D974E3 /* page-2026-04-05T20-42-32-231Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2E15102167029A0D4B4A130F /* page-2026-04-05T20-42-32-231Z.yml */; };
+		7978D31DE4FE6B346203DDBE /* haven-compare-mobile-final.png in Resources */ = {isa = PBXBuildFile; fileRef = 043BC4AF229CA2947EDAACAA /* haven-compare-mobile-final.png */; };
 		7993021074BF2902E4A408E7 /* page-2026-04-08T09-45-55-687Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8133E11FF5389703A085C202 /* page-2026-04-08T09-45-55-687Z.yml */; };
 		79F8F0BE8145656EA596FD22 /* HavenNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7F12FBA0A804B94107D34 /* HavenNavigationStack.swift */; };
 		7B1D366E2556AA83B5BF41E6 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B0CA62910AFED44B5981A /* SubscriptionManager.swift */; };
@@ -238,11 +276,14 @@
 		7E01C70B31D37AE92283202A /* page-2026-04-10T07-10-24-708Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = AA22DD9068E5A1E800F30996 /* page-2026-04-10T07-10-24-708Z.yml */; };
 		7E790E04D606E56BD190CBD9 /* console-2026-04-05T20-19-50-160Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 704CC325C2DACA9DCDC1B09D /* console-2026-04-05T20-19-50-160Z.log */; };
 		7EEE490A1D182F827ECB1DDE /* Font+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C6927589DFE73C0E09CA9 /* Font+Haven.swift */; };
+		7F90DEAEB22E23F5408BCDBD /* page-2026-04-27T05-47-13-243Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4EB129DF9165344C2503263F /* page-2026-04-27T05-47-13-243Z.yml */; };
 		7F93C3DB899FAB252278DD41 /* post-upgrade-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = F4946DE26106F37338D8800D /* post-upgrade-landing.png */; };
+		80ABEA541742F6BAA77E38CC /* page-2026-04-27T07-28-24-193Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 83551DFB882EF76231365B22 /* page-2026-04-27T07-28-24-193Z.yml */; };
 		82A152A444350077AF619F1C /* console-2026-04-08T13-52-21-096Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 471594556B32C96C357740BB /* console-2026-04-08T13-52-21-096Z.log */; };
 		82B17EA1A05E68DCBF4C31EA /* page-2026-04-09T17-44-11-420Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9A37567B2AD810FBED48AAC4 /* page-2026-04-09T17-44-11-420Z.yml */; };
 		83185A627853DB6104DEEDD9 /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC2B056209313C0882151BE /* FolderRepository.swift */; };
 		83D4D720A904A344EE986130 /* page-2026-04-10T14-41-58-534Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 782BC7DD02AE340EDA77E51C /* page-2026-04-10T14-41-58-534Z.yml */; };
+		840DAAE0B6E3BCAF73052757 /* haven-skip-link-focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2397D3328D34772F472443 /* haven-skip-link-focus.png */; };
 		852CEC032E2F74F70817A2DF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741CA24A0CC0B0C5B34FC4F /* Note.swift */; };
 		852F443C89D4724DF52C0E91 /* asc-current.png in Resources */ = {isa = PBXBuildFile; fileRef = E20EEB8E2B564325520F0AA1 /* asc-current.png */; };
 		852FEE3514D47891DA1CC3C8 /* page-2026-04-10T14-41-20-308Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 00F1261EA015BD2646F2DBC9 /* page-2026-04-10T14-41-20-308Z.yml */; };
@@ -255,10 +296,13 @@
 		868953B592B8C929B5BFD7EC /* page-2026-04-08T09-44-12-896Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */; };
 		897A11659D7DF84BB2D8BAF5 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0460B482C048500781097DB /* NoteRowView.swift */; };
 		8A1EE6545BBBB3DCA0BFC395 /* page-2026-04-08T12-44-10-237Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89CB972EF462A6301C293305 /* page-2026-04-08T12-44-10-237Z.yml */; };
+		8A98AEABE60C27D58FA449BE /* page-2026-04-27T07-29-11-529Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FD24420E2008276D9EE604D6 /* page-2026-04-27T07-29-11-529Z.yml */; };
+		8AA83C02745AAC198388F48B /* page-2026-04-27T07-23-41-339Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 62120ED5CD6F1E196342CFFD /* page-2026-04-27T07-23-41-339Z.yml */; };
 		8AF2D099CF50481323241AA7 /* GlobalHotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67587AB0975C95195BD120E3 /* GlobalHotkey.swift */; };
 		8AFE80044681395B2E4483DA /* console-2026-04-05T20-17-51-738Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 189530546DBD6F32F6FCEE94 /* console-2026-04-05T20-17-51-738Z.log */; };
 		8B206DBBC94232720E3B8829 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5332423870EBB71CEECC349 /* SubscriptionTier.swift */; };
 		8B511384A0682182D11F04A6 /* asc-notes-filled.png in Resources */ = {isa = PBXBuildFile; fileRef = F2CB1EA52B1832F3FE0640BE /* asc-notes-filled.png */; };
+		8C456A2584A9B418FD7BCB22 /* page-2026-04-27T05-47-22-475Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 82FA6D272877AD62AB7DE51C /* page-2026-04-27T05-47-22-475Z.yml */; };
 		8C471C112812AB4427F4E310 /* page-2026-04-08T09-44-40-965Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C940C3A9A946BE88C4FE685C /* page-2026-04-08T09-44-40-965Z.yml */; };
 		8C77153514036E7C54934813 /* asc-current.png in Resources */ = {isa = PBXBuildFile; fileRef = E20EEB8E2B564325520F0AA1 /* asc-current.png */; };
 		8D4CBA54E94BE714CBF6CCF0 /* page-2026-04-08T15-00-31-957Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9AE5319B2B89B3A13627062 /* page-2026-04-08T15-00-31-957Z.yml */; };
@@ -273,6 +317,7 @@
 		9036097028548BF04E6A145F /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DC0EC9F31B6489319A673 /* EncryptionSettingsView.swift */; };
 		90C52D7FB643D317B251ADF2 /* page-2026-04-09T18-34-05-015Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6F41A4359E8FA02E6513AD6D /* page-2026-04-09T18-34-05-015Z.yml */; };
 		90F5DCE4B53EE6FF603E72C5 /* page-2026-04-08T15-00-46-450Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D401AEB9DE158FD0C623900E /* page-2026-04-08T15-00-46-450Z.yml */; };
+		912E2E80968BDA5226C21674 /* haven-compare-desktop-final.png in Resources */ = {isa = PBXBuildFile; fileRef = EE07C35B01A43AEAE0D15A0B /* haven-compare-desktop-final.png */; };
 		919E1AE83B2EBA17AD7A0599 /* page-2026-04-09T18-35-40-738Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F52568E696D56E0027BEB /* page-2026-04-09T18-35-40-738Z.yml */; };
 		9246D206284A3124BD08E641 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F000B2F979187F8F513A78 /* Folder.swift */; };
 		941785974EE8E21008AD025C /* graph-refined.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F77B61C765649D1F2B944C0 /* graph-refined.png */; };
@@ -282,12 +327,14 @@
 		952C23F4C0A277DE2033D893 /* page-2026-04-05T20-39-54-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9439FAE2BF0172E09BDCFFF0 /* page-2026-04-05T20-39-54-756Z.yml */; };
 		953B443E52DE0D6585CA5ABF /* console-2026-04-08T09-43-55-712Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 71C43AAC99DF0EE53E820421 /* console-2026-04-08T09-43-55-712Z.log */; };
 		9567D9D87A7F3884731791C4 /* MarkdownFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */; };
+		95B3BA20099DD0DB830C9FCE /* page-2026-04-27T06-21-12-193Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 897A1B5DA26A1DAEED7485CD /* page-2026-04-27T06-21-12-193Z.yml */; };
 		95F3FE59475332FC141C5AE3 /* final-pricing-cards.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */; };
 		9653E7D000E386D21F352804 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE1AD127978C940D8A960F /* OnboardingPageView.swift */; };
 		9778B3FBC99DF49121640C47 /* page-2026-04-05T20-39-54-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9439FAE2BF0172E09BDCFFF0 /* page-2026-04-05T20-39-54-756Z.yml */; };
 		97D8A358B07C267562103C39 /* editorial-upgrade.png in Resources */ = {isa = PBXBuildFile; fileRef = DFAE94346B3907DBD2B6A49F /* editorial-upgrade.png */; };
 		97F347E2DEFA155A2C73708E /* 02-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EF9CB70413DA971BB6BB48 /* 02-pricing.png */; };
 		9819E1A910210A76B7729332 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C4AC4356EA24D4BD4F2F /* Folder.swift */; };
+		985AE3D68F00BB2145CC0753 /* page-2026-04-27T07-24-14-611Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DE34AFAD89AC849308A79C8 /* page-2026-04-27T07-24-14-611Z.yml */; };
 		98C903D7BDDB61C9175AFECC /* card-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 875FAC78FAB278335EA52CE5 /* card-hover.png */; };
 		98E6EB9966DA9F3496BE95DD /* page-2026-04-05T20-17-11-815Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = DFF9A7A3C5557BAE4CE79384 /* page-2026-04-05T20-17-11-815Z.yml */; };
 		99EB1C18D5B567C5C7C3A040 /* MacTextViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */; };
@@ -301,16 +348,19 @@
 		9D3FAE5CB93286D39D076789 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171B5F1ADC4F58B64D511FC2 /* GraphViewModel.swift */; };
 		9DEBFB84D5B42BCF05F8F176 /* console-2026-04-05T20-18-36-976Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 93E4586D5BF958EE31F1A450 /* console-2026-04-05T20-18-36-976Z.log */; };
 		9EBFCCD88BC305D37BD0CE85 /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254CA858B24E2E955BAB7AD /* SidebarViewModel.swift */; };
+		A1341B1EE7BF02582081CD8A /* page-2026-04-27T07-29-11-529Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FD24420E2008276D9EE604D6 /* page-2026-04-27T07-29-11-529Z.yml */; };
 		A163A9B01EF70558A7D711C6 /* NoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F7AC6A527808EE4688868A /* NoteListViewModel.swift */; };
 		A2162164B6FEBDD611ACD2F0 /* page-2026-04-05T21-18-28-824Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0339A0666158A311348A57BD /* page-2026-04-05T21-18-28-824Z.yml */; };
 		A2705DBF121A60104B5D5D3E /* console-2026-04-08T13-54-54-850Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 32DB2BF8729F9B251B40596B /* console-2026-04-08T13-54-54-850Z.log */; };
 		A2ADE9EB5FE4BED878994227 /* page-2026-04-10T19-32-40-733Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */; };
 		A376AA1C107B6BC33884F704 /* console-2026-04-05T20-16-25-569Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */; };
+		A39AB4E06DEA2A25A23FFCD7 /* page-2026-04-27T07-23-25-582Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */; };
 		A4DC0CB1E1AC38F88BB744A4 /* page-2026-04-05T20-15-23-954Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */; };
 		A53CE8B238DF11BE6E55D256 /* console-2026-04-08T09-45-55-629Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A8AE0DC15779AB9433297753 /* console-2026-04-08T09-45-55-629Z.log */; };
 		A563DA9BEF15DA94B5C3AFA3 /* console-2026-04-05T20-39-53-742Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 9FEBC43AB1152DD4D4690F5A /* console-2026-04-05T20-39-53-742Z.log */; };
 		A56D91177337BDD5DC1359D9 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */; };
 		A61D170EA3E0DDE4E67B283F /* 10-hero-with-screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A10CDC2E5A2DC6732CA5553 /* 10-hero-with-screenshot.png */; };
+		A6537D2239C8249E14E3EC34 /* page-2026-04-27T07-23-04-271Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A199F5E098398339B226CFF8 /* page-2026-04-27T07-23-04-271Z.yml */; };
 		A6C6BAA18BF12FAA55839CF0 /* console-2026-04-05T21-12-43-886Z.log in Resources */ = {isa = PBXBuildFile; fileRef = F60AE0192A5E2CEB6C3EC905 /* console-2026-04-05T21-12-43-886Z.log */; };
 		A708A0F1495C8709DF1B4A65 /* page-2026-04-08T12-46-40-257Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6B4164DA152864AE915E3453 /* page-2026-04-08T12-46-40-257Z.yml */; };
 		A74EE02221EB6730F27B2FDC /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */; };
@@ -323,7 +373,9 @@
 		AA4DD3F6F95668851D075B02 /* 05-support.png in Resources */ = {isa = PBXBuildFile; fileRef = 6345B5D6704D98B45E08F60A /* 05-support.png */; };
 		AB098C054CA91987864E0FBF /* SyncLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9424BDC0CC10A90F3831B1 /* SyncLogEntry.swift */; };
 		AB52B31632D1CDB39A94D111 /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254CA858B24E2E955BAB7AD /* SidebarViewModel.swift */; };
+		AD181684A69E2B52868EF20D /* page-2026-04-27T05-45-05-690Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D2D7117A83E2CBFF35F73571 /* page-2026-04-27T05-45-05-690Z.yml */; };
 		AD241733A2ADDCD6499063F8 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7525EB1C32E9D266C571AE5D /* EmptyStateView.swift */; };
+		AD4ED4AF05283F9F0D83AA31 /* haven-support-after.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FA6DD0F7776EBFD26398A3 /* haven-support-after.png */; };
 		AD6079796D2D562C4974170E /* tax-section.yml in Resources */ = {isa = PBXBuildFile; fileRef = 46D8676D4EAD296C8CC82EAC /* tax-section.yml */; };
 		AD63C822DCFF43012B5E89BD /* rebuild-final-all.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A80DA2845A2507E3AC17F2 /* rebuild-final-all.png */; };
 		AD90C1D03B536FFC5853A99F /* page-2026-04-05T20-57-23-627Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C358855C77165A4F1244030 /* page-2026-04-05T20-57-23-627Z.yml */; };
@@ -334,11 +386,14 @@
 		B0B5E4786C8410A00FBE02D2 /* page-2026-04-05T20-57-23-627Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C358855C77165A4F1244030 /* page-2026-04-05T20-57-23-627Z.yml */; };
 		B12E22C14908F6C96AD3274C /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465E1A93BE44C10D275F6FD /* NoteListView.swift */; };
 		B18192DCA4C751249C212A90 /* MarkdownFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF4122A2CE6D0C3899A5E8 /* MarkdownFormat.swift */; };
+		B1E806615C6F28804EC5D0CA /* haven-support-after.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FA6DD0F7776EBFD26398A3 /* haven-support-after.png */; };
 		B23C11F8631FE5069367C7D4 /* page-2026-04-08T13-53-33-795Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8F2E03674111AC82E3D5A184 /* page-2026-04-08T13-53-33-795Z.yml */; };
 		B2E753E580744D38AF7BBC57 /* graph-refined.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F77B61C765649D1F2B944C0 /* graph-refined.png */; };
 		B324323613BF3CB72EA01243 /* MacInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 266F78E3BB5D002D05517494 /* MacInfo.plist */; };
+		B38AA843823438C0425085CC /* page-2026-04-27T05-47-22-475Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 82FA6D272877AD62AB7DE51C /* page-2026-04-27T05-47-22-475Z.yml */; };
 		B3F9F97DCEF560B047B18CC9 /* sidebar-detail.yml in Resources */ = {isa = PBXBuildFile; fileRef = 78D19164FF99C07A27753B8D /* sidebar-detail.yml */; };
 		B4B66636CB82C57F5828D3EE /* pre-upgrade-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE6E009F7A80FC5D65BAA74 /* pre-upgrade-landing.png */; };
+		B4CD4686B642E748528F30BB /* haven-compare-mobile.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3359A61393B93F18ABB0D8 /* haven-compare-mobile.png */; };
 		B50FE8F3F8414F87677307B3 /* astro-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C877C25C7B7289E9E020AC /* astro-landing.png */; };
 		B53531227B8F303D7876343B /* TagRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D85133B1D37745F09DDF2E /* TagRepositoryProtocol.swift */; };
 		B562EB71D460A99225D44B1D /* NoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F7AC6A527808EE4688868A /* NoteListViewModel.swift */; };
@@ -351,11 +406,15 @@
 		B9CAAC4D144E94DCFFE8BE86 /* NotionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04148EDDA531C2CA0DA05653 /* NotionImporter.swift */; };
 		BAAA36524F025BD37049F38E /* console-2026-04-05T20-57-23-073Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 53B02A03D3953A061A1AC069 /* console-2026-04-05T20-57-23-073Z.log */; };
 		BB1F0DAA4DBC093647A39827 /* console-2026-04-08T09-45-55-629Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A8AE0DC15779AB9433297753 /* console-2026-04-08T09-45-55-629Z.log */; };
+		BB869C845832759DBB8EC5F8 /* haven-after-fixes-desktop.png in Resources */ = {isa = PBXBuildFile; fileRef = F2A55782C84B9BDA26FEC784 /* haven-after-fixes-desktop.png */; };
+		BC08C6F43A3E6F9D49849AFC /* haven-compare-mobile-after.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1B348E65D182C5A487769 /* haven-compare-mobile-after.png */; };
 		BCB2D4667ADB68BAD1F10591 /* console-2026-04-05T20-46-08-163Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A4E04F1071AAE1EF58069A8D /* console-2026-04-05T20-46-08-163Z.log */; };
 		BD9ED8CBFF667CA295FDC75B /* WikiLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */; };
 		BF139542D7346F68AE6B04F8 /* console-2026-04-10T14-40-54-910Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A4A10F99EB2A92D5EFD923C4 /* console-2026-04-10T14-40-54-910Z.log */; };
 		BFF45EC4B80D2FE07DD28A58 /* NoteListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FA39820AA3D91A29A3C08E /* NoteListUITests.swift */; };
 		C04BA856821F53EB94AEEDF6 /* 03-story.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D19802A24CE7B385D746535 /* 03-story.png */; };
+		C08C4734120A350C46793FE5 /* page-2026-04-27T05-46-52-923Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AE29DA4401B4727DC0F72 /* page-2026-04-27T05-46-52-923Z.yml */; };
+		C10C2707126420C74838DF3C /* console-2026-04-27T07-10-40-226Z.log in Resources */ = {isa = PBXBuildFile; fileRef = AE9527619CFE933EC751CBC6 /* console-2026-04-27T07-10-40-226Z.log */; };
 		C446A08CB78B8682F3420D77 /* page-2026-04-08T14-36-46-081Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 16C585C627A4F1DEE7D123DE /* page-2026-04-08T14-36-46-081Z.yml */; };
 		C4C53397367044F5F106D7BD /* console-2026-04-05T20-17-11-350Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A18C2C0D8557A5A5ED56D001 /* console-2026-04-05T20-17-11-350Z.log */; };
 		C4DCD9BA014F80FED7210342 /* SyncLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9424BDC0CC10A90F3831B1 /* SyncLogEntry.swift */; };
@@ -373,12 +432,18 @@
 		C9D219947EB6DC35C950348B /* Date+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */; };
 		C9F8CAADAB67EDD7E4810AEB /* console-2026-04-08T12-07-11-618Z.log in Resources */ = {isa = PBXBuildFile; fileRef = FFB1C620AFD5043EFBE07759 /* console-2026-04-08T12-07-11-618Z.log */; };
 		CA9987C231A425F77BE09EBC /* page-2026-04-05T20-19-44-560Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8795E4C85363FEC1C0D9F21 /* page-2026-04-05T20-19-44-560Z.yml */; };
+		CAEBD1AF825C4FAB0F632C5A /* page-2026-04-27T06-20-25-219Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2C2F7607A5FB8DF500B14901 /* page-2026-04-27T06-20-25-219Z.yml */; };
 		CB6233B5317A4FAF54C65C8B /* MacEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C8A7E4A246785295B51B55 /* MacEditorView.swift */; };
 		CB66EEC06F7120C2EE7AAB4F /* page-2026-04-08T09-44-21-474Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9F3E65581A931CB296C4C714 /* page-2026-04-08T09-44-21-474Z.yml */; };
+		CBB6B8A175EFC29F74C6F128 /* haven-support.png in Resources */ = {isa = PBXBuildFile; fileRef = 886E331C028F08C63D9151BC /* haven-support.png */; };
+		CCA32661A477613E44A3EBCA /* console-2026-04-27T07-23-03-941Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 553AA511D74CCBDEED94C510 /* console-2026-04-27T07-23-03-941Z.log */; };
 		CCC54E17EED3D486D30F395D /* AppIcon-Tinted.svg in Resources */ = {isa = PBXBuildFile; fileRef = 6ED74A3057CA76BAC0AAB541 /* AppIcon-Tinted.svg */; };
 		CCEF9404BF142065AB18C9F7 /* 09-dark-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FE1E18206A72E7DA266C98 /* 09-dark-pricing.png */; };
+		CD2DFF8AA9A23A613AF75520 /* page-2026-04-27T05-45-57-756Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A81DE211088E89F2EBBE0ABB /* page-2026-04-27T05-45-57-756Z.yml */; };
 		CD33FF216CF15D93E0E7EBD4 /* page-2026-04-08T09-45-55-687Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8133E11FF5389703A085C202 /* page-2026-04-08T09-45-55-687Z.yml */; };
 		CDA8E3E91C173079A5F653FE /* MacMenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C09CB30FBEDB99502E2781 /* MacMenuCommands.swift */; };
+		CE545B76A983CAE6373D66B5 /* haven-compare-mobile-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B4C2E00D3E397D5D057B2E /* haven-compare-mobile-v2.png */; };
+		CEB8A9090467A2B3638CA89C /* haven-compare.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D6DEF3BE4CC7A250255BB84 /* haven-compare.png */; };
 		CFF121264BC492FFE9FD56E9 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FC134D3B2D8C07CF173718 /* SkeletonView.swift */; };
 		D123CAE049C70EDC8ACB9BC1 /* page-2026-04-08T09-44-30-955Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8EBB26251335B2C650496EC5 /* page-2026-04-08T09-44-30-955Z.yml */; };
 		D13C6DB86103159F7222476D /* EncryptionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3DB5A8D0DE579ECEA9B24 /* EncryptionUITests.swift */; };
@@ -388,6 +453,7 @@
 		D49647E9CB3FF5704F0750B7 /* page-2026-04-10T07-17-45-554Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 842725D005A7B4A8F76D0D1A /* page-2026-04-10T07-17-45-554Z.yml */; };
 		D49FD955BB3CC56D40A2A4F7 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97647E5F6AC4D97C036279F /* SyncManager.swift */; };
 		D58E4C2B35B9E8CCF6B257C8 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3048163CF56FCFCCE116762 /* DeepLinkHandler.swift */; };
+		D5B39E21FD2FA8D93D68E325 /* haven-story.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CA96770F942AEAD34CDA05 /* haven-story.png */; };
 		D5DB5B67DBF54F2A2BDC6594 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDDC709452138CFFED98DF /* AppSetting.swift */; };
 		D66EB8CE62D9651D03EDB366 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741CA24A0CC0B0C5B34FC4F /* Note.swift */; };
 		D6D2412A0B01740675603767 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FC134D3B2D8C07CF173718 /* SkeletonView.swift */; };
@@ -395,6 +461,8 @@
 		D70FB650284F825CE9BD55B9 /* asc-description.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E9999444C0DAE1101FCF4 /* asc-description.png */; };
 		D88E138E0EC185560CFD9917 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B343C5CE9C37F301442D4752 /* Tag.swift */; };
 		D8BF7B0D46A55C7E1531A60F /* tax-section.yml in Resources */ = {isa = PBXBuildFile; fileRef = 46D8676D4EAD296C8CC82EAC /* tax-section.yml */; };
+		D8F95CB0E8F43B02DF636F07 /* page-2026-04-27T05-45-05-690Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D2D7117A83E2CBFF35F73571 /* page-2026-04-27T05-45-05-690Z.yml */; };
+		DA2A65266F2176FE26F5FE7D /* haven-pricing.png in Resources */ = {isa = PBXBuildFile; fileRef = 41C4E0C52D5D134611D228ED /* haven-pricing.png */; };
 		DB6ED6F54CF21DACAF8322C7 /* page-2026-04-05T20-44-17-210Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9DFFAD523E1378A8355E937F /* page-2026-04-05T20-44-17-210Z.yml */; };
 		DC38EC1E14531FBC595C48ED /* page-2026-04-08T12-46-51-784Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0A49DE4C26C92BF0368D2FC5 /* page-2026-04-08T12-46-51-784Z.yml */; };
 		DC754D16EF2A195087231A3E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F0136A42922E16A0FD68D8 /* TaskRepository.swift */; };
@@ -404,10 +472,14 @@
 		DF3C669351C8F071B89EC37E /* SearchResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BAB620D6E76C08B0602100 /* SearchResultRowView.swift */; };
 		DFFACA1BF13AE56E3CB30DAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD215965A7924C56002AED4 /* Constants.swift */; };
 		E1ED0670E5C737DED2DF193B /* console-2026-04-05T20-17-51-738Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 189530546DBD6F32F6FCEE94 /* console-2026-04-05T20-17-51-738Z.log */; };
+		E208C4DF69C23C4787DE235A /* haven-404-page.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A1B5CDA8D4B6D8B76F032E /* haven-404-page.png */; };
 		E33F9E279F4411EF7CCC3443 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144412DA4D449F7D6C5F714 /* SubscriptionView.swift */; };
 		E41F3F10B96BF054B12C1152 /* page-2026-04-08T14-36-46-081Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 16C585C627A4F1DEE7D123DE /* page-2026-04-08T14-36-46-081Z.yml */; };
+		E4D88A66523FB8D33C4CD02A /* haven-home-desktop.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C12DCA25E005AB4AEE91CD3 /* haven-home-desktop.png */; };
 		E4ECDD4429C2E98D7D0B8628 /* page-2026-04-10T06-58-27-260Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 70392D8DBECA6DF4E2DB8EDA /* page-2026-04-10T06-58-27-260Z.yml */; };
 		E5126FD1683C849AFD2A93B9 /* Color+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA69AD21992B1DBF8D2E983 /* Color+Haven.swift */; };
+		E629E18B0B245CAD7D7F03CD /* haven-home-320.png in Resources */ = {isa = PBXBuildFile; fileRef = F77FBD82F448A506DDBC7B3E /* haven-home-320.png */; };
+		E6531B17542ACC86507BAF95 /* haven-skip-link-focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2397D3328D34772F472443 /* haven-skip-link-focus.png */; };
 		E6AC83BF7ECB23DE9F07E9D7 /* BiometricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8BB7C1EE1B086BB5F552C6 /* BiometricService.swift */; };
 		E7B35C1EEBB85F8C15D5C412 /* WikiLinkAutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861042406F289AEFEB8299FD /* WikiLinkAutocompleteView.swift */; };
 		E7E637D22C057ACB95293B34 /* SearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE3EC651FC75E59E5EB153 /* SearchUITests.swift */; };
@@ -421,12 +493,14 @@
 		E9F92C7D910FF14BCAA07559 /* console-2026-04-05T20-39-53-742Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 9FEBC43AB1152DD4D4690F5A /* console-2026-04-05T20-39-53-742Z.log */; };
 		EA1B3269A54444840977884A /* NotionImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A6B87960E53389415F1C5 /* NotionImportView.swift */; };
 		EA8D0AFE17AE0C62CB971D21 /* MarkdownHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C57DC7D02BE3CF53FC5791 /* MarkdownHighlighter.swift */; };
+		EA94DB380E6D9434F515DCF3 /* haven-compare-mobile-final.png in Resources */ = {isa = PBXBuildFile; fileRef = 043BC4AF229CA2947EDAACAA /* haven-compare-mobile-final.png */; };
 		EB2DF414745DF68AE225C9B6 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB381115FDF63AF4E668982 /* SettingsViewModel.swift */; };
 		EB436A3EC5DD80D987BD78AB /* NoteRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899DD7758A73A4C6EE749BEA /* NoteRepositoryProtocol.swift */; };
 		EBC219DB6BEDFA391061D3A0 /* page-2026-04-05T20-19-51-375Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = F2F4B7D108072F05424A6EE2 /* page-2026-04-05T20-19-51-375Z.yml */; };
 		EBEB6AE2F2DF6D4B260BA3BA /* String+WikiLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A235F8DE76DDDCEE3F3108 /* String+WikiLink.swift */; };
 		EDC9003E1C9CB491B3F66046 /* console-2026-04-05T20-14-58-999Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 788EC4D8D91B718CFE422F5D /* console-2026-04-05T20-14-58-999Z.log */; };
 		EECF9B19EC3D8040091E59FE /* AppIcon-Light.svg in Resources */ = {isa = PBXBuildFile; fileRef = A08E2704ED60DEF91B69C517 /* AppIcon-Light.svg */; };
+		EFEC5DC1E34FB92F0F1412AC /* page-2026-04-26T22-21-19-477Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8CAF99B81F385E9C8BB0D96B /* page-2026-04-26T22-21-19-477Z.yml */; };
 		F09059BD7A7A0E522D9E08CA /* page-2026-04-08T13-53-33-795Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8F2E03674111AC82E3D5A184 /* page-2026-04-08T13-53-33-795Z.yml */; };
 		F0CE32C9B59F2567772DA2AB /* WikiLinkAutocompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861042406F289AEFEB8299FD /* WikiLinkAutocompleteView.swift */; };
 		F0E36E7EE91FFB1564A0BB45 /* TagRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D85133B1D37745F09DDF2E /* TagRepositoryProtocol.swift */; };
@@ -443,8 +517,12 @@
 		F46BF6519FF1A31D370EEFC1 /* final-hero.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA4B0006A759B489B2FD0F3 /* final-hero.png */; };
 		F48F57BDD30C4F58A32ABC16 /* audit-landing.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C97D2B0951A044DBD590559 /* audit-landing.png */; };
 		F5D9388F0AD16F93DAD5C62C /* rebuild-final-all.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A80DA2845A2507E3AC17F2 /* rebuild-final-all.png */; };
+		F63BFB3C8266A1ED9D455EAE /* page-2026-04-26T22-21-19-477Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8CAF99B81F385E9C8BB0D96B /* page-2026-04-26T22-21-19-477Z.yml */; };
+		F69E576869FA159950934196 /* page-2026-04-27T05-43-39-947Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 06FF8652D590F39903B35242 /* page-2026-04-27T05-43-39-947Z.yml */; };
 		F6C15C8303ABC36B28C2322F /* page-2026-04-08T09-43-55-791Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 675B2E41ED4A75E7EF0D3252 /* page-2026-04-08T09-43-55-791Z.yml */; };
+		F6C597D9D117C751C1411B96 /* haven-changelog.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DF3D33EA06B85728CC1E9D /* haven-changelog.png */; };
 		F6DF5689078098278ABC453E /* page-2026-04-08T12-46-21-488Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2EF97BBFF81A0B7AFF2EF34 /* page-2026-04-08T12-46-21-488Z.yml */; };
+		F7202CC745419358BAE44896 /* page-2026-04-27T07-26-10-229Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FB16DA6A75B809DC7C5A15CF /* page-2026-04-27T07-26-10-229Z.yml */; };
 		F73546A9C1B7D24B8914E423 /* NoteEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08297557AB13BD2E3FA0E63D /* NoteEditorViewModel.swift */; };
 		F739EA066C27AA99AAF60751 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 10F55A26B9E1B415EFA843E2 /* Configuration.storekit */; };
 		F8103B60143625A0BBE5BDC0 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39306A115ECB99EC9674908 /* GraphView.swift */; };
@@ -452,8 +530,12 @@
 		F9100F4E9D0E5592A139E831 /* page-2026-04-08T13-54-00-225Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8BE973D68B2BAB7101D83EB /* page-2026-04-08T13-54-00-225Z.yml */; };
 		FAD681F49D199CB473C8329D /* HTMLSanitizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A068D5F6762A8796831D02 /* HTMLSanitizerTests.swift */; };
 		FAF547B2963C861BFDFBBB9C /* page-2026-04-05T20-42-43-746Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4F9F027AFA19BAD55F22592D /* page-2026-04-05T20-42-43-746Z.yml */; };
+		FB3D3FC789C8DA4DFA629139 /* page-2026-04-27T07-27-27-199Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D1ABAAFF45F0E1251E3B6EC0 /* page-2026-04-27T07-27-27-199Z.yml */; };
+		FBAD592BCC0444766FCB4308 /* haven-compare-mobile-fixed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6B936746CFFD9C4A1ACD /* haven-compare-mobile-fixed.png */; };
+		FC463D578AE6B909C785C9B3 /* page-2026-04-27T07-28-35-737Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = A8963373F8A54798899B6F48 /* page-2026-04-27T07-28-35-737Z.yml */; };
 		FCCBC770768B40ACF5B21107 /* TagPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D686222A9D718ED7820A383 /* TagPickerView.swift */; };
 		FCE56CC4FB985F68D770AA05 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBC6C12C9B1F9C044BEDEB /* DesignTokens.swift */; };
+		FD332DE760FEF7F5972ED8FC /* haven-compare-mobile-after.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1B348E65D182C5A487769 /* haven-compare-mobile-after.png */; };
 		FD338A6B3DC2215D127B2FCD /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DC47091541C60C8B29113A /* NoteRepository.swift */; };
 		FE6DB9C659D2E98E23658486 /* EditorToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09FF0F773C7E186F3E4969F /* EditorToolbarView.swift */; };
 		FF921E4CD371CFBF89D7D2A9 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144412DA4D449F7D6C5F714 /* SubscriptionView.swift */; };
@@ -503,9 +585,11 @@
 		01341118D82BF06E0E516994 /* page-2026-04-05T20-21-55-348Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-21-55-348Z.yml"; sourceTree = "<group>"; };
 		0339A0666158A311348A57BD /* page-2026-04-05T21-18-28-824Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T21-18-28-824Z.yml"; sourceTree = "<group>"; };
 		04148EDDA531C2CA0DA05653 /* NotionImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionImporter.swift; sourceTree = "<group>"; };
+		043BC4AF229CA2947EDAACAA /* haven-compare-mobile-final.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-mobile-final.png"; sourceTree = "<group>"; };
 		04B2584C5F99D9A8D8E8432A /* HavenUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HavenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D85133B1D37745F09DDF2E /* TagRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0560576E09E5CA35141686B0 /* WikiLinkParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiLinkParserTests.swift; sourceTree = "<group>"; };
+		06FF8652D590F39903B35242 /* page-2026-04-27T05-43-39-947Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-43-39-947Z.yml"; sourceTree = "<group>"; };
 		07137A28B2EA32D9C58D2C10 /* AppIcon-Dark.svg */ = {isa = PBXFileReference; path = "AppIcon-Dark.svg"; sourceTree = "<group>"; };
 		08297557AB13BD2E3FA0E63D /* NoteEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewModel.swift; sourceTree = "<group>"; };
 		0A49DE4C26C92BF0368D2FC5 /* page-2026-04-08T12-46-51-784Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T12-46-51-784Z.yml"; sourceTree = "<group>"; };
@@ -532,21 +616,29 @@
 		266F78E3BB5D002D05517494 /* MacInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = MacInfo.plist; sourceTree = "<group>"; };
 		269ED8B14F397E18C721E725 /* page-2026-04-09T19-10-41-592Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-09T19-10-41-592Z.yml"; sourceTree = "<group>"; };
 		28C877C25C7B7289E9E020AC /* astro-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "astro-landing.png"; sourceTree = "<group>"; };
+		2C12DCA25E005AB4AEE91CD3 /* haven-home-desktop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-desktop.png"; sourceTree = "<group>"; };
+		2C2F7607A5FB8DF500B14901 /* page-2026-04-27T06-20-25-219Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T06-20-25-219Z.yml"; sourceTree = "<group>"; };
 		2D36B0183C1F54F2C001F0EA /* page-2026-04-10T14-41-30-857Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T14-41-30-857Z.yml"; sourceTree = "<group>"; };
+		2D6DEF3BE4CC7A250255BB84 /* haven-compare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare.png"; sourceTree = "<group>"; };
 		2E15102167029A0D4B4A130F /* page-2026-04-05T20-42-32-231Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-42-32-231Z.yml"; sourceTree = "<group>"; };
 		32DB2BF8729F9B251B40596B /* console-2026-04-08T13-54-54-850Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T13-54-54-850Z.log"; sourceTree = "<group>"; };
+		32FA6DD0F7776EBFD26398A3 /* haven-support-after.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-support-after.png"; sourceTree = "<group>"; };
 		34A80DA2845A2507E3AC17F2 /* rebuild-final-all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rebuild-final-all.png"; sourceTree = "<group>"; };
 		367DC207B9A01D6F9D79A0B0 /* console-2026-04-08T15-08-23-205Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T15-08-23-205Z.log"; sourceTree = "<group>"; };
 		38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiLinkParser.swift; sourceTree = "<group>"; };
 		38AE3EC651FC75E59E5EB153 /* SearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUITests.swift; sourceTree = "<group>"; };
 		38DC47091541C60C8B29113A /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
 		39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-34-18-906Z.yml"; sourceTree = "<group>"; };
+		39DF3D33EA06B85728CC1E9D /* haven-changelog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-changelog.png"; sourceTree = "<group>"; };
 		3AA69AD21992B1DBF8D2E983 /* Color+Haven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Haven.swift"; sourceTree = "<group>"; };
 		3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-15-23-954Z.yml"; sourceTree = "<group>"; };
 		3BCFA591FD09FC35D0E2C0BF /* page-2026-04-05T20-16-26-969Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-16-26-969Z.yml"; sourceTree = "<group>"; };
 		3BF309D861F4B741F2FA8D20 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		3C358855C77165A4F1244030 /* page-2026-04-05T20-57-23-627Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-57-23-627Z.yml"; sourceTree = "<group>"; };
 		3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-32-40-733Z.yml"; sourceTree = "<group>"; };
+		3F3359A61393B93F18ABB0D8 /* haven-compare-mobile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-mobile.png"; sourceTree = "<group>"; };
+		3FE1B348E65D182C5A487769 /* haven-compare-mobile-after.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-mobile-after.png"; sourceTree = "<group>"; };
+		41C4E0C52D5D134611D228ED /* haven-pricing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-pricing.png"; sourceTree = "<group>"; };
 		451A5FD74829DBD75CEB9032 /* asc-review-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-review-info.png"; sourceTree = "<group>"; };
 		45F0136A42922E16A0FD68D8 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		46D8676D4EAD296C8CC82EAC /* tax-section.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "tax-section.yml"; sourceTree = "<group>"; };
@@ -554,6 +646,8 @@
 		4A08A4A15BC2CAFABDBA5957 /* HavenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HavenWidget.swift; sourceTree = "<group>"; };
 		4B36895CEEE27C41A7654B73 /* page-2026-04-08T09-45-18-288Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-45-18-288Z.yml"; sourceTree = "<group>"; };
 		4D13971CE8DD078A6383C781 /* rebuild-final.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rebuild-final.png"; sourceTree = "<group>"; };
+		4DE34AFAD89AC849308A79C8 /* page-2026-04-27T07-24-14-611Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-24-14-611Z.yml"; sourceTree = "<group>"; };
+		4EB129DF9165344C2503263F /* page-2026-04-27T05-47-13-243Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-47-13-243Z.yml"; sourceTree = "<group>"; };
 		4EE4B86607C03A09485AFEDA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4F9F027AFA19BAD55F22592D /* page-2026-04-05T20-42-43-746Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-42-43-746Z.yml"; sourceTree = "<group>"; };
 		5084EB1D0A49A9222C5198D8 /* page-2026-04-05T20-18-22-540Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-18-22-540Z.yml"; sourceTree = "<group>"; };
@@ -561,13 +655,16 @@
 		516E9999444C0DAE1101FCF4 /* asc-description.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-description.png"; sourceTree = "<group>"; };
 		518571D349182791593F73F3 /* RichTextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextCoordinator.swift; sourceTree = "<group>"; };
 		53B02A03D3953A061A1AC069 /* console-2026-04-05T20-57-23-073Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-57-23-073Z.log"; sourceTree = "<group>"; };
+		553AA511D74CCBDEED94C510 /* console-2026-04-27T07-23-03-941Z.log */ = {isa = PBXFileReference; path = "console-2026-04-27T07-23-03-941Z.log"; sourceTree = "<group>"; };
 		5A10CDC2E5A2DC6732CA5553 /* 10-hero-with-screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-hero-with-screenshot.png"; sourceTree = "<group>"; };
 		5B9424BDC0CC10A90F3831B1 /* SyncLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncLogEntry.swift; sourceTree = "<group>"; };
 		5BCE72209150E29437CAB059 /* page-2026-04-05T20-16-12-860Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-16-12-860Z.yml"; sourceTree = "<group>"; };
 		5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ISO8601.swift"; sourceTree = "<group>"; };
+		5D2397D3328D34772F472443 /* haven-skip-link-focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-skip-link-focus.png"; sourceTree = "<group>"; };
 		5D364257D14F6053EABBDDB5 /* console-2026-04-08T09-44-56-305Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T09-44-56-305Z.log"; sourceTree = "<group>"; };
 		5F062CCDA03C358949207399 /* Haven.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Haven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6138530653B2DF3B24E801AE /* MacTextViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTextViewCoordinator.swift; sourceTree = "<group>"; };
+		62120ED5CD6F1E196342CFFD /* page-2026-04-27T07-23-41-339Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-23-41-339Z.yml"; sourceTree = "<group>"; };
 		621A6B87960E53389415F1C5 /* NotionImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionImportView.swift; sourceTree = "<group>"; };
 		62BAB620D6E76C08B0602100 /* SearchResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRowView.swift; sourceTree = "<group>"; };
 		6345B5D6704D98B45E08F60A /* 05-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-support.png"; sourceTree = "<group>"; };
@@ -575,6 +672,7 @@
 		67587AB0975C95195BD120E3 /* GlobalHotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkey.swift; sourceTree = "<group>"; };
 		675B2E41ED4A75E7EF0D3252 /* page-2026-04-08T09-43-55-791Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-43-55-791Z.yml"; sourceTree = "<group>"; };
 		677FFCD4E0AC4ACA4966F247 /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
+		67CA96770F942AEAD34CDA05 /* haven-story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-story.png"; sourceTree = "<group>"; };
 		69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-16-25-569Z.log"; sourceTree = "<group>"; };
 		6B4164DA152864AE915E3453 /* page-2026-04-08T12-46-40-257Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T12-46-40-257Z.yml"; sourceTree = "<group>"; };
 		6B5A332A42A234DBDAEE9B4C /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
@@ -582,6 +680,7 @@
 		6E7C76AAF4A19FB25E9BE9EA /* 04-compare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04-compare.png"; sourceTree = "<group>"; };
 		6ED74A3057CA76BAC0AAB541 /* AppIcon-Tinted.svg */ = {isa = PBXFileReference; path = "AppIcon-Tinted.svg"; sourceTree = "<group>"; };
 		6F41A4359E8FA02E6513AD6D /* page-2026-04-09T18-34-05-015Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-09T18-34-05-015Z.yml"; sourceTree = "<group>"; };
+		6F6AE29DA4401B4727DC0F72 /* page-2026-04-27T05-46-52-923Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-46-52-923Z.yml"; sourceTree = "<group>"; };
 		6F83F6B4436AB6D5EED6AE00 /* hero-refined.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-refined.png"; sourceTree = "<group>"; };
 		70392D8DBECA6DF4E2DB8EDA /* page-2026-04-10T06-58-27-260Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T06-58-27-260Z.yml"; sourceTree = "<group>"; };
 		704CC325C2DACA9DCDC1B09D /* console-2026-04-05T20-19-50-160Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-19-50-160Z.log"; sourceTree = "<group>"; };
@@ -606,6 +705,8 @@
 		7DC2B056209313C0882151BE /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
 		8133E11FF5389703A085C202 /* page-2026-04-08T09-45-55-687Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-45-55-687Z.yml"; sourceTree = "<group>"; };
 		82B44D3F064342159137EBE9 /* 07-mobile-menu-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-mobile-menu-open.png"; sourceTree = "<group>"; };
+		82FA6D272877AD62AB7DE51C /* page-2026-04-27T05-47-22-475Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-47-22-475Z.yml"; sourceTree = "<group>"; };
+		83551DFB882EF76231365B22 /* page-2026-04-27T07-28-24-193Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-28-24-193Z.yml"; sourceTree = "<group>"; };
 		83FE1E18206A72E7DA266C98 /* 09-dark-pricing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-dark-pricing.png"; sourceTree = "<group>"; };
 		842725D005A7B4A8F76D0D1A /* page-2026-04-10T07-17-45-554Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T07-17-45-554Z.yml"; sourceTree = "<group>"; };
 		845F9602901FE5EA1BB3A71D /* SyncSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -613,10 +714,13 @@
 		861042406F289AEFEB8299FD /* WikiLinkAutocompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiLinkAutocompleteView.swift; sourceTree = "<group>"; };
 		8741CA24A0CC0B0C5B34FC4F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		875FAC78FAB278335EA52CE5 /* card-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card-hover.png"; sourceTree = "<group>"; };
+		886E331C028F08C63D9151BC /* haven-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-support.png"; sourceTree = "<group>"; };
+		897A1B5DA26A1DAEED7485CD /* page-2026-04-27T06-21-12-193Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T06-21-12-193Z.yml"; sourceTree = "<group>"; };
 		898D3AEC29B0E076E61AA176 /* HavenTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HavenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		899DD7758A73A4C6EE749BEA /* NoteRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepositoryProtocol.swift; sourceTree = "<group>"; };
 		89CB972EF462A6301C293305 /* page-2026-04-08T12-44-10-237Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T12-44-10-237Z.yml"; sourceTree = "<group>"; };
 		89FEE7A022F493F5DF0CB53A /* HavenWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HavenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CAF99B81F385E9C8BB0D96B /* page-2026-04-26T22-21-19-477Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-26T22-21-19-477Z.yml"; sourceTree = "<group>"; };
 		8CD215965A7924C56002AED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CE5BC57C883879B16564DDC /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		8E3D8AA092DA0EF00FE6C642 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
@@ -642,8 +746,10 @@
 		9F77B61C765649D1F2B944C0 /* graph-refined.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph-refined.png"; sourceTree = "<group>"; };
 		9FEBC43AB1152DD4D4690F5A /* console-2026-04-05T20-39-53-742Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-39-53-742Z.log"; sourceTree = "<group>"; };
 		A08E2704ED60DEF91B69C517 /* AppIcon-Light.svg */ = {isa = PBXFileReference; path = "AppIcon-Light.svg"; sourceTree = "<group>"; };
+		A0A1B5CDA8D4B6D8B76F032E /* haven-404-page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-404-page.png"; sourceTree = "<group>"; };
 		A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSettingsView.swift; sourceTree = "<group>"; };
 		A18C2C0D8557A5A5ED56D001 /* console-2026-04-05T20-17-11-350Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-17-11-350Z.log"; sourceTree = "<group>"; };
+		A199F5E098398339B226CFF8 /* page-2026-04-27T07-23-04-271Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-23-04-271Z.yml"; sourceTree = "<group>"; };
 		A254CA858B24E2E955BAB7AD /* SidebarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewModel.swift; sourceTree = "<group>"; };
 		A2EF97BBFF81A0B7AFF2EF34 /* page-2026-04-08T12-46-21-488Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T12-46-21-488Z.yml"; sourceTree = "<group>"; };
 		A39306A115ECB99EC9674908 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -657,8 +763,10 @@
 		A66E97D27D71B7B67D1EAD0F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A78E3A2E3AB36EF80B3B1973 /* LinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkRepository.swift; sourceTree = "<group>"; };
 		A81B8ED8BD4305417CEC1FF4 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		A81DE211088E89F2EBBE0ABB /* page-2026-04-27T05-45-57-756Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-45-57-756Z.yml"; sourceTree = "<group>"; };
 		A867ABDF98D974EF7AF43B33 /* page-2026-04-05T21-12-49-213Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T21-12-49-213Z.yml"; sourceTree = "<group>"; };
 		A88140E40CB18B3DFAB7F1EA /* FlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowUITests.swift; sourceTree = "<group>"; };
+		A8963373F8A54798899B6F48 /* page-2026-04-27T07-28-35-737Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-28-35-737Z.yml"; sourceTree = "<group>"; };
 		A8AE0DC15779AB9433297753 /* console-2026-04-08T09-45-55-629Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T09-45-55-629Z.log"; sourceTree = "<group>"; };
 		A97647E5F6AC4D97C036279F /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		A9AE5319B2B89B3A13627062 /* page-2026-04-08T15-00-31-957Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T15-00-31-957Z.yml"; sourceTree = "<group>"; };
@@ -669,6 +777,7 @@
 		ABEFB45E3063F5F956F12605 /* appstoreconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appstoreconnect.png; sourceTree = "<group>"; };
 		AC461D9767572ACCA2F1F3ED /* TaskRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepositoryProtocol.swift; sourceTree = "<group>"; };
 		AE8BB7C1EE1B086BB5F552C6 /* BiometricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricService.swift; sourceTree = "<group>"; };
+		AE9527619CFE933EC751CBC6 /* console-2026-04-27T07-10-40-226Z.log */ = {isa = PBXFileReference; path = "console-2026-04-27T07-10-40-226Z.log"; sourceTree = "<group>"; };
 		B09FF0F773C7E186F3E4969F /* EditorToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarView.swift; sourceTree = "<group>"; };
 		B343C5CE9C37F301442D4752 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B3487B4F5FB3B9CFC606D50B /* SettingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUITests.swift; sourceTree = "<group>"; };
@@ -678,6 +787,7 @@
 		B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-14-59-511Z.yml"; sourceTree = "<group>"; };
 		B881919B0D964DC2E138EDA9 /* page-2026-04-08T13-54-55-144Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T13-54-55-144Z.yml"; sourceTree = "<group>"; };
 		B9F30BA5BBC8E271E3CEB338 /* page-2026-04-10T19-34-02-223Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T19-34-02-223Z.yml"; sourceTree = "<group>"; };
+		BA9E6B936746CFFD9C4A1ACD /* haven-compare-mobile-fixed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-mobile-fixed.png"; sourceTree = "<group>"; };
 		C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-12-896Z.yml"; sourceTree = "<group>"; };
 		C16082CC6C3B8B5E578664EE /* console-2026-04-05T20-21-54-138Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T20-21-54-138Z.log"; sourceTree = "<group>"; };
 		C1F8E00AC61661FB6BBFDDB2 /* 01-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-landing.png"; sourceTree = "<group>"; };
@@ -692,16 +802,21 @@
 		C940C3A9A946BE88C4FE685C /* page-2026-04-08T09-44-40-965Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-40-965Z.yml"; sourceTree = "<group>"; };
 		C99744EAE77A0129858C53B6 /* 06-mobile-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-mobile-landing.png"; sourceTree = "<group>"; };
 		CA27D782856DB172A6EEB01B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-23-25-582Z.yml"; sourceTree = "<group>"; };
+		CDDBC857CB35F74C1398E68D /* haven-home-mobile-375-fixed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-mobile-375-fixed.png"; sourceTree = "<group>"; };
 		CDE6E009F7A80FC5D65BAA74 /* pre-upgrade-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pre-upgrade-landing.png"; sourceTree = "<group>"; };
 		CFD9E0437E6783D977371D80 /* SyncManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManagerProtocol.swift; sourceTree = "<group>"; };
 		D0460B482C048500781097DB /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
 		D0C2C4AC4356EA24D4BD4F2F /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		D144412DA4D449F7D6C5F714 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		D15BB55E3546AF3C33BB60B1 /* NoteTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTask.swift; sourceTree = "<group>"; };
+		D1ABAAFF45F0E1251E3B6EC0 /* page-2026-04-27T07-27-27-199Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-27-27-199Z.yml"; sourceTree = "<group>"; };
+		D2D7117A83E2CBFF35F73571 /* page-2026-04-27T05-45-05-690Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T05-45-05-690Z.yml"; sourceTree = "<group>"; };
 		D31CAADFDB0217608D939E1B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D401AEB9DE158FD0C623900E /* page-2026-04-08T15-00-46-450Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T15-00-46-450Z.yml"; sourceTree = "<group>"; };
 		D4CAA9BACFA8076210885397 /* SubscriptionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManagerProtocol.swift; sourceTree = "<group>"; };
 		D6CB255ABBF47C5A3BFB5333 /* console-2026-04-08T13-53-59-131Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T13-53-59-131Z.log"; sourceTree = "<group>"; };
+		D769ED681224DC6735D7727E /* og-render.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "og-render.html"; sourceTree = "<group>"; };
 		D772EC0DE2BDC2D56515EF96 /* console-2026-04-05T21-18-28-756Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T21-18-28-756Z.log"; sourceTree = "<group>"; };
 		D9BCFBF2FFD9104A3447D7D1 /* LoadingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayView.swift; sourceTree = "<group>"; };
 		DAC3DB5A8D0DE579ECEA9B24 /* EncryptionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionUITests.swift; sourceTree = "<group>"; };
@@ -712,6 +827,7 @@
 		DFAE94346B3907DBD2B6A49F /* editorial-upgrade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editorial-upgrade.png"; sourceTree = "<group>"; };
 		DFF9A7A3C5557BAE4CE79384 /* page-2026-04-05T20-17-11-815Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-17-11-815Z.yml"; sourceTree = "<group>"; };
 		E20EEB8E2B564325520F0AA1 /* asc-current.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-current.png"; sourceTree = "<group>"; };
+		E2B4C2E00D3E397D5D057B2E /* haven-compare-mobile-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-mobile-v2.png"; sourceTree = "<group>"; };
 		E46972FAA7F9A308EBB974B8 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		E5AB75E21903A9833695E4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5FA39820AA3D91A29A3C08E /* NoteListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListUITests.swift; sourceTree = "<group>"; };
@@ -721,9 +837,12 @@
 		EB3EBABA52A27AE0FE27887A /* page-2026-04-10T14-41-49-107Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T14-41-49-107Z.yml"; sourceTree = "<group>"; };
 		EBCFBB58E75BD7ADFA328C71 /* final-pricing-cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "final-pricing-cards.png"; sourceTree = "<group>"; };
 		EBD61F5520F75A63BDE32239 /* page-2026-04-08T09-44-56-358Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-56-358Z.yml"; sourceTree = "<group>"; };
+		EE07C35B01A43AEAE0D15A0B /* haven-compare-desktop-final.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-compare-desktop-final.png"; sourceTree = "<group>"; };
 		EEC08647B1550251CEE5F4D2 /* QuickNotePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotePanel.swift; sourceTree = "<group>"; };
 		EEEA87AA6CDC06B7D98F809F /* SyncHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHTTPClient.swift; sourceTree = "<group>"; };
 		EFEE2DE6FF3823B9033E7743 /* asc-logged-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-logged-in.png"; sourceTree = "<group>"; };
+		F2127C25BA93B438FC466A38 /* haven-home-mobile-375.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-mobile-375.png"; sourceTree = "<group>"; };
+		F2A55782C84B9BDA26FEC784 /* haven-after-fixes-desktop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-after-fixes-desktop.png"; sourceTree = "<group>"; };
 		F2CB1EA52B1832F3FE0640BE /* asc-notes-filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asc-notes-filled.png"; sourceTree = "<group>"; };
 		F2F4B7D108072F05424A6EE2 /* page-2026-04-05T20-19-51-375Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-05T20-19-51-375Z.yml"; sourceTree = "<group>"; };
 		F3048163CF56FCFCCE116762 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
@@ -732,13 +851,17 @@
 		F4946DE26106F37338D8800D /* post-upgrade-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post-upgrade-landing.png"; sourceTree = "<group>"; };
 		F49DC0EC9F31B6489319A673 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		F4BC41758706E4CDAAABC3B9 /* page-2026-04-10T07-14-48-949Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-10T07-14-48-949Z.yml"; sourceTree = "<group>"; };
+		F5DAFFCAD4194E4F79668738 /* page-2026-04-27T07-28-07-640Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-28-07-640Z.yml"; sourceTree = "<group>"; };
 		F5EF22CF94D380E53C92D322 /* ConflictResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictResolverTests.swift; sourceTree = "<group>"; };
 		F60AE0192A5E2CEB6C3EC905 /* console-2026-04-05T21-12-43-886Z.log */ = {isa = PBXFileReference; path = "console-2026-04-05T21-12-43-886Z.log"; sourceTree = "<group>"; };
 		F6110DD50257059A83838CAE /* rebuild-pricing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rebuild-pricing.png"; sourceTree = "<group>"; };
 		F6451BE2103ED0CDA0A5466E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F648DC62F94C1F87E4F53384 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		F77FBD82F448A506DDBC7B3E /* haven-home-320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-320.png"; sourceTree = "<group>"; };
+		FB16DA6A75B809DC7C5A15CF /* page-2026-04-27T07-26-10-229Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-26-10-229Z.yml"; sourceTree = "<group>"; };
 		FB2312FC9BEE91A2852A5E4C /* page-2026-04-09T18-35-10-048Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-09T18-35-10-048Z.yml"; sourceTree = "<group>"; };
 		FB43EDA2258695441EAB55A8 /* 08-dark-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08-dark-landing.png"; sourceTree = "<group>"; };
+		FD24420E2008276D9EE604D6 /* page-2026-04-27T07-29-11-529Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-29-11-529Z.yml"; sourceTree = "<group>"; };
 		FE3B8077DA44C579327246EC /* SyncSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSettingsView.swift; sourceTree = "<group>"; };
 		FFB1C620AFD5043EFBE07759 /* console-2026-04-08T12-07-11-618Z.log */ = {isa = PBXFileReference; path = "console-2026-04-08T12-07-11-618Z.log"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -932,6 +1055,25 @@
 			children = (
 				E5AB75E21903A9833695E4FA /* Assets.xcassets */,
 				10F55A26B9E1B415EFA843E2 /* Configuration.storekit */,
+				A0A1B5CDA8D4B6D8B76F032E /* haven-404-page.png */,
+				F2A55782C84B9BDA26FEC784 /* haven-after-fixes-desktop.png */,
+				39DF3D33EA06B85728CC1E9D /* haven-changelog.png */,
+				EE07C35B01A43AEAE0D15A0B /* haven-compare-desktop-final.png */,
+				3FE1B348E65D182C5A487769 /* haven-compare-mobile-after.png */,
+				043BC4AF229CA2947EDAACAA /* haven-compare-mobile-final.png */,
+				BA9E6B936746CFFD9C4A1ACD /* haven-compare-mobile-fixed.png */,
+				E2B4C2E00D3E397D5D057B2E /* haven-compare-mobile-v2.png */,
+				3F3359A61393B93F18ABB0D8 /* haven-compare-mobile.png */,
+				2D6DEF3BE4CC7A250255BB84 /* haven-compare.png */,
+				F77FBD82F448A506DDBC7B3E /* haven-home-320.png */,
+				2C12DCA25E005AB4AEE91CD3 /* haven-home-desktop.png */,
+				CDDBC857CB35F74C1398E68D /* haven-home-mobile-375-fixed.png */,
+				F2127C25BA93B438FC466A38 /* haven-home-mobile-375.png */,
+				41C4E0C52D5D134611D228ED /* haven-pricing.png */,
+				5D2397D3328D34772F472443 /* haven-skip-link-focus.png */,
+				67CA96770F942AEAD34CDA05 /* haven-story.png */,
+				32FA6DD0F7776EBFD26398A3 /* haven-support-after.png */,
+				886E331C028F08C63D9151BC /* haven-support.png */,
 				7317F0A1DECBE8A6C0CE5C88 /* Haven.entitlements */,
 				105AA96443808CE8A0F29E5D /* HavenMac.entitlements */,
 				9D69106057751D726F6FD170 /* Info.plist */,
@@ -1172,6 +1314,9 @@
 				22A169E9B41F4F975EC73019 /* console-2026-04-08T15-16-23-085Z.log */,
 				A4A10F99EB2A92D5EFD923C4 /* console-2026-04-10T14-40-54-910Z.log */,
 				C41E6550C7266224FE28B767 /* console-2026-04-10T19-32-39-952Z.log */,
+				AE9527619CFE933EC751CBC6 /* console-2026-04-27T07-10-40-226Z.log */,
+				553AA511D74CCBDEED94C510 /* console-2026-04-27T07-23-03-941Z.log */,
+				D769ED681224DC6735D7727E /* og-render.html */,
 				B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */,
 				3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */,
 				5BCE72209150E29437CAB059 /* page-2026-04-05T20-16-12-860Z.yml */,
@@ -1233,6 +1378,25 @@
 				7784611864558A864F51F24E /* page-2026-04-10T19-33-00-263Z.yml */,
 				B9F30BA5BBC8E271E3CEB338 /* page-2026-04-10T19-34-02-223Z.yml */,
 				39CFFE54E44C70996535A44F /* page-2026-04-10T19-34-18-906Z.yml */,
+				8CAF99B81F385E9C8BB0D96B /* page-2026-04-26T22-21-19-477Z.yml */,
+				06FF8652D590F39903B35242 /* page-2026-04-27T05-43-39-947Z.yml */,
+				D2D7117A83E2CBFF35F73571 /* page-2026-04-27T05-45-05-690Z.yml */,
+				A81DE211088E89F2EBBE0ABB /* page-2026-04-27T05-45-57-756Z.yml */,
+				6F6AE29DA4401B4727DC0F72 /* page-2026-04-27T05-46-52-923Z.yml */,
+				4EB129DF9165344C2503263F /* page-2026-04-27T05-47-13-243Z.yml */,
+				82FA6D272877AD62AB7DE51C /* page-2026-04-27T05-47-22-475Z.yml */,
+				2C2F7607A5FB8DF500B14901 /* page-2026-04-27T06-20-25-219Z.yml */,
+				897A1B5DA26A1DAEED7485CD /* page-2026-04-27T06-21-12-193Z.yml */,
+				A199F5E098398339B226CFF8 /* page-2026-04-27T07-23-04-271Z.yml */,
+				CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */,
+				62120ED5CD6F1E196342CFFD /* page-2026-04-27T07-23-41-339Z.yml */,
+				4DE34AFAD89AC849308A79C8 /* page-2026-04-27T07-24-14-611Z.yml */,
+				FB16DA6A75B809DC7C5A15CF /* page-2026-04-27T07-26-10-229Z.yml */,
+				D1ABAAFF45F0E1251E3B6EC0 /* page-2026-04-27T07-27-27-199Z.yml */,
+				F5DAFFCAD4194E4F79668738 /* page-2026-04-27T07-28-07-640Z.yml */,
+				83551DFB882EF76231365B22 /* page-2026-04-27T07-28-24-193Z.yml */,
+				A8963373F8A54798899B6F48 /* page-2026-04-27T07-28-35-737Z.yml */,
+				FD24420E2008276D9EE604D6 /* page-2026-04-27T07-29-11-529Z.yml */,
 				78D19164FF99C07A27753B8D /* sidebar-detail.yml */,
 				46D8676D4EAD296C8CC82EAC /* tax-section.yml */,
 			);
@@ -1488,13 +1652,35 @@
 				78CA670ECFA3950CF2C52619 /* console-2026-04-08T15-16-23-085Z.log in Resources */,
 				BF139542D7346F68AE6B04F8 /* console-2026-04-10T14-40-54-910Z.log in Resources */,
 				789738FE66FDED340A2AAFE6 /* console-2026-04-10T19-32-39-952Z.log in Resources */,
+				C10C2707126420C74838DF3C /* console-2026-04-27T07-10-40-226Z.log in Resources */,
+				CCA32661A477613E44A3EBCA /* console-2026-04-27T07-23-03-941Z.log in Resources */,
 				97D8A358B07C267562103C39 /* editorial-upgrade.png in Resources */,
 				F46BF6519FF1A31D370EEFC1 /* final-hero.png in Resources */,
 				550E617033C7DFC1E61B7777 /* final-pricing-cards.png in Resources */,
 				B2E753E580744D38AF7BBC57 /* graph-refined.png in Resources */,
+				E208C4DF69C23C4787DE235A /* haven-404-page.png in Resources */,
+				BB869C845832759DBB8EC5F8 /* haven-after-fixes-desktop.png in Resources */,
+				F6C597D9D117C751C1411B96 /* haven-changelog.png in Resources */,
+				059F0448A6F902F455C33F07 /* haven-compare-desktop-final.png in Resources */,
+				BC08C6F43A3E6F9D49849AFC /* haven-compare-mobile-after.png in Resources */,
+				7978D31DE4FE6B346203DDBE /* haven-compare-mobile-final.png in Resources */,
+				FBAD592BCC0444766FCB4308 /* haven-compare-mobile-fixed.png in Resources */,
+				CE545B76A983CAE6373D66B5 /* haven-compare-mobile-v2.png in Resources */,
+				5F18E48C2DDDF3BA8C9C46BA /* haven-compare-mobile.png in Resources */,
+				179CA8834917CCA230E98F4B /* haven-compare.png in Resources */,
+				0A15C7CD77393B68E1438238 /* haven-home-320.png in Resources */,
+				732028F1FC865304BDA93B35 /* haven-home-desktop.png in Resources */,
+				62EFEDD63CD772BFA986AF26 /* haven-home-mobile-375-fixed.png in Resources */,
+				443DC07DF1340F36D2FDB67B /* haven-home-mobile-375.png in Resources */,
+				25762AE7D8AF193095C137FC /* haven-pricing.png in Resources */,
+				840DAAE0B6E3BCAF73052757 /* haven-skip-link-focus.png in Resources */,
+				1C6D6DD734AA8C8EDF0DFFD2 /* haven-story.png in Resources */,
+				B1E806615C6F28804EC5D0CA /* haven-support-after.png in Resources */,
+				CBB6B8A175EFC29F74C6F128 /* haven-support.png in Resources */,
 				5763314A220C2B508A42C89C /* hero-fixed.png in Resources */,
 				C6EA26723975A4B5E6746A1A /* hero-refined.png in Resources */,
 				12FACD78AFB0CB42A7461621 /* illustrations-final.png in Resources */,
+				64F105ADFFDC25952A736B0E /* og-render.html in Resources */,
 				0CD49F8625A6ED25EB889E17 /* page-2026-04-05T20-14-59-511Z.yml in Resources */,
 				A4DC0CB1E1AC38F88BB744A4 /* page-2026-04-05T20-15-23-954Z.yml in Resources */,
 				C7E898794C6FABAB4041061B /* page-2026-04-05T20-16-12-860Z.yml in Resources */,
@@ -1556,6 +1742,25 @@
 				F2D58EA289C1656C696FF0A3 /* page-2026-04-10T19-33-00-263Z.yml in Resources */,
 				564B46301F7FBFF55DE2C547 /* page-2026-04-10T19-34-02-223Z.yml in Resources */,
 				72143A41B44D661597881E56 /* page-2026-04-10T19-34-18-906Z.yml in Resources */,
+				F63BFB3C8266A1ED9D455EAE /* page-2026-04-26T22-21-19-477Z.yml in Resources */,
+				F69E576869FA159950934196 /* page-2026-04-27T05-43-39-947Z.yml in Resources */,
+				AD181684A69E2B52868EF20D /* page-2026-04-27T05-45-05-690Z.yml in Resources */,
+				1CAC31A3C9E4832995A14AF3 /* page-2026-04-27T05-45-57-756Z.yml in Resources */,
+				C08C4734120A350C46793FE5 /* page-2026-04-27T05-46-52-923Z.yml in Resources */,
+				69334B6E54321DA123F711FE /* page-2026-04-27T05-47-13-243Z.yml in Resources */,
+				8C456A2584A9B418FD7BCB22 /* page-2026-04-27T05-47-22-475Z.yml in Resources */,
+				CAEBD1AF825C4FAB0F632C5A /* page-2026-04-27T06-20-25-219Z.yml in Resources */,
+				95B3BA20099DD0DB830C9FCE /* page-2026-04-27T06-21-12-193Z.yml in Resources */,
+				4527C0AD1FFBD0017F40DE45 /* page-2026-04-27T07-23-04-271Z.yml in Resources */,
+				153D2D00757A8D4FADD651C9 /* page-2026-04-27T07-23-25-582Z.yml in Resources */,
+				8AA83C02745AAC198388F48B /* page-2026-04-27T07-23-41-339Z.yml in Resources */,
+				1627113B49D092261053253E /* page-2026-04-27T07-24-14-611Z.yml in Resources */,
+				5B30179AFE2901FB35CF2FD3 /* page-2026-04-27T07-26-10-229Z.yml in Resources */,
+				33041477C50AA845930FFEA1 /* page-2026-04-27T07-27-27-199Z.yml in Resources */,
+				05938879C8B2680F38B5C096 /* page-2026-04-27T07-28-07-640Z.yml in Resources */,
+				80ABEA541742F6BAA77E38CC /* page-2026-04-27T07-28-24-193Z.yml in Resources */,
+				66778D19AE9CF45DD821328A /* page-2026-04-27T07-28-35-737Z.yml in Resources */,
+				A1341B1EE7BF02582081CD8A /* page-2026-04-27T07-29-11-529Z.yml in Resources */,
 				7F93C3DB899FAB252278DD41 /* post-upgrade-landing.png in Resources */,
 				570C65F69978987C12D789B3 /* post-upgrade-pricing.png in Resources */,
 				E8E9F27D5B22BC72ABEB4D76 /* pre-upgrade-landing.png in Resources */,
@@ -1626,13 +1831,35 @@
 				E892175EC7726349A12B7ED1 /* console-2026-04-08T15-16-23-085Z.log in Resources */,
 				0B593A77E266C1E6036A0D32 /* console-2026-04-10T14-40-54-910Z.log in Resources */,
 				16E5572D3E8A0151A6B4AE57 /* console-2026-04-10T19-32-39-952Z.log in Resources */,
+				412BE071AC5F3ACE05489090 /* console-2026-04-27T07-10-40-226Z.log in Resources */,
+				59A9205492DB545649D17B8E /* console-2026-04-27T07-23-03-941Z.log in Resources */,
 				4EB69C3873055AC72EFAE762 /* editorial-upgrade.png in Resources */,
 				2D370D58E5421FECA8FB083C /* final-hero.png in Resources */,
 				95F3FE59475332FC141C5AE3 /* final-pricing-cards.png in Resources */,
 				941785974EE8E21008AD025C /* graph-refined.png in Resources */,
+				6653FF25438007DB0420B1A9 /* haven-404-page.png in Resources */,
+				27E05F659BC5B90DF7864D0F /* haven-after-fixes-desktop.png in Resources */,
+				5B58AF0AE74BC13CA8EE0248 /* haven-changelog.png in Resources */,
+				912E2E80968BDA5226C21674 /* haven-compare-desktop-final.png in Resources */,
+				FD332DE760FEF7F5972ED8FC /* haven-compare-mobile-after.png in Resources */,
+				EA94DB380E6D9434F515DCF3 /* haven-compare-mobile-final.png in Resources */,
+				42928A6F8ACEEBEB12CD33E8 /* haven-compare-mobile-fixed.png in Resources */,
+				150DCECFF66D5E2D778501EE /* haven-compare-mobile-v2.png in Resources */,
+				B4CD4686B642E748528F30BB /* haven-compare-mobile.png in Resources */,
+				CEB8A9090467A2B3638CA89C /* haven-compare.png in Resources */,
+				E629E18B0B245CAD7D7F03CD /* haven-home-320.png in Resources */,
+				E4D88A66523FB8D33C4CD02A /* haven-home-desktop.png in Resources */,
+				232E22F3AB3BA945DEB96AE8 /* haven-home-mobile-375-fixed.png in Resources */,
+				272AC989D69C9041B9F12BF2 /* haven-home-mobile-375.png in Resources */,
+				DA2A65266F2176FE26F5FE7D /* haven-pricing.png in Resources */,
+				E6531B17542ACC86507BAF95 /* haven-skip-link-focus.png in Resources */,
+				D5B39E21FD2FA8D93D68E325 /* haven-story.png in Resources */,
+				AD4ED4AF05283F9F0D83AA31 /* haven-support-after.png in Resources */,
+				39C08D994F548351DF6805D4 /* haven-support.png in Resources */,
 				2575818390E769CCC67E945C /* hero-fixed.png in Resources */,
 				4F64FBE43DFAD20A9702B96A /* hero-refined.png in Resources */,
 				1DD0D06A0B44932743FC318E /* illustrations-final.png in Resources */,
+				2C75C31FC96C8C346C87FDE5 /* og-render.html in Resources */,
 				0AF382B8D27AABB206EA8399 /* page-2026-04-05T20-14-59-511Z.yml in Resources */,
 				F828E5EA664A905F12410573 /* page-2026-04-05T20-15-23-954Z.yml in Resources */,
 				31BDF98503F25867C32780F1 /* page-2026-04-05T20-16-12-860Z.yml in Resources */,
@@ -1694,6 +1921,25 @@
 				2AED192976881ACD69033193 /* page-2026-04-10T19-33-00-263Z.yml in Resources */,
 				F2359867D019391E662D0540 /* page-2026-04-10T19-34-02-223Z.yml in Resources */,
 				32FFC9D081F394F9FA376305 /* page-2026-04-10T19-34-18-906Z.yml in Resources */,
+				EFEC5DC1E34FB92F0F1412AC /* page-2026-04-26T22-21-19-477Z.yml in Resources */,
+				46CF1CD4344B821A9EB82273 /* page-2026-04-27T05-43-39-947Z.yml in Resources */,
+				D8F95CB0E8F43B02DF636F07 /* page-2026-04-27T05-45-05-690Z.yml in Resources */,
+				CD2DFF8AA9A23A613AF75520 /* page-2026-04-27T05-45-57-756Z.yml in Resources */,
+				5467A5FFFDB25D242634AF3A /* page-2026-04-27T05-46-52-923Z.yml in Resources */,
+				7F90DEAEB22E23F5408BCDBD /* page-2026-04-27T05-47-13-243Z.yml in Resources */,
+				B38AA843823438C0425085CC /* page-2026-04-27T05-47-22-475Z.yml in Resources */,
+				4B42A0C49D840434DED34DDF /* page-2026-04-27T06-20-25-219Z.yml in Resources */,
+				343E8B6EE5ACF6C1BDDBC263 /* page-2026-04-27T06-21-12-193Z.yml in Resources */,
+				A6537D2239C8249E14E3EC34 /* page-2026-04-27T07-23-04-271Z.yml in Resources */,
+				A39AB4E06DEA2A25A23FFCD7 /* page-2026-04-27T07-23-25-582Z.yml in Resources */,
+				541F2FD1AAD86559F3947E24 /* page-2026-04-27T07-23-41-339Z.yml in Resources */,
+				985AE3D68F00BB2145CC0753 /* page-2026-04-27T07-24-14-611Z.yml in Resources */,
+				F7202CC745419358BAE44896 /* page-2026-04-27T07-26-10-229Z.yml in Resources */,
+				FB3D3FC789C8DA4DFA629139 /* page-2026-04-27T07-27-27-199Z.yml in Resources */,
+				1F789CF9B58ED17077515577 /* page-2026-04-27T07-28-07-640Z.yml in Resources */,
+				25332BD7BE272DFF84455CD2 /* page-2026-04-27T07-28-24-193Z.yml in Resources */,
+				FC463D578AE6B909C785C9B3 /* page-2026-04-27T07-28-35-737Z.yml in Resources */,
+				8A98AEABE60C27D58FA449BE /* page-2026-04-27T07-29-11-529Z.yml in Resources */,
 				C97B58EBEC7963F7AD8BD894 /* post-upgrade-landing.png in Resources */,
 				17BC7BBA90C1E0A06D3F1AF9 /* post-upgrade-pricing.png in Resources */,
 				B4B66636CB82C57F5828D3EE /* pre-upgrade-landing.png in Resources */,
@@ -1977,6 +2223,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Haven/HavenMac.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Haven/MacInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2203,6 +2450,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Haven/HavenMac.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Haven/MacInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

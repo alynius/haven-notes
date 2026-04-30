@@ -13,11 +13,11 @@ final class BiometricService {
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
             return .none
         }
-        #if os(iOS)
-        return context.biometryType == .faceID ? .faceID : .touchID
-        #elseif os(macOS)
-        return .touchID
-        #endif
+        switch context.biometryType {
+        case .faceID: return .faceID
+        case .touchID: return .touchID
+        default: return .none
+        }
     }
 
     var isEnabled: Bool {

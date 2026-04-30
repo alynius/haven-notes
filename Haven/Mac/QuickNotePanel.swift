@@ -85,6 +85,7 @@ struct QuickNoteView: View {
                     .padding(.vertical, Spacing.xxs)
                     .background(Color.havenSurface)
                     .clipShape(.rect(cornerRadius: CornerRadius.xs))
+                    .accessibilityHidden(true)
             }
             .padding(.horizontal, Spacing.lg)
             .padding(.top, Spacing.lg)
@@ -97,6 +98,8 @@ struct QuickNoteView: View {
                 .foregroundColor(Color.havenTextPrimary)
                 .padding(.horizontal, Spacing.lg)
                 .padding(.bottom, Spacing.sm)
+                .accessibilityLabel("Note title")
+                .accessibilityHint("Optional. Defaults to Quick Note if left empty.")
 
             Divider()
                 .background(Color.havenBorder)
@@ -111,6 +114,8 @@ struct QuickNoteView: View {
                 .padding(.vertical, Spacing.sm)
                 .focused($bodyFocused)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .accessibilityLabel("Note body")
+                .accessibilityHint("Press Command Return to save, Escape to discard.")
 
             Divider()
                 .background(Color.havenBorder)
@@ -118,28 +123,39 @@ struct QuickNoteView: View {
             // Bottom action bar
             HStack(spacing: Spacing.sm) {
                 Button("Discard") {
+                    reset()
                     onDismiss()
                 }
                 .keyboardShortcut(.escape, modifiers: [])
                 .foregroundColor(Color.havenTextSecondary)
+                .accessibilityHint("Closes the panel without saving.")
 
                 Spacer()
 
                 Button("Save Note") {
                     onSave(noteTitle, noteBody)
+                    reset()
                 }
                 .keyboardShortcut(.return, modifiers: .command)
                 .disabled(noteBody.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 .buttonStyle(.borderedProminent)
                 .tint(Color.havenPrimary)
+                .accessibilityHint("Saves the note to your library.")
             }
             .padding(.horizontal, Spacing.lg)
             .padding(.vertical, Spacing.md)
         }
         .background(Color.havenBackground)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Quick Note")
         .onAppear {
             bodyFocused = true
         }
+    }
+
+    private func reset() {
+        noteTitle = ""
+        noteBody = ""
     }
 }
 

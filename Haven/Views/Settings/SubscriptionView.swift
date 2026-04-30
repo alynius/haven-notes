@@ -3,6 +3,8 @@ import StoreKit
 
 struct SubscriptionView: View {
     @StateObject var viewModel: SubscriptionViewModel
+    var isModal: Bool = false
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -117,6 +119,26 @@ struct SubscriptionView: View {
                             }
                         }
                         .padding(.horizontal, 16)
+
+                        if isModal {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Text("Continue with Haven Free")
+                                    .font(.havenBody.weight(.medium))
+                                    .foregroundColor(Color.havenTextPrimary)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 14)
+                                    .background(Color.havenSurface)
+                                    .clipShape(.rect(cornerRadius: 12))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.havenBorder, lineWidth: 1)
+                                    )
+                            }
+                            .padding(.horizontal, 16)
+                            .accessibilityIdentifier("subscription_button_continueFree")
+                        }
 
                         Button {
                             Task { await viewModel.restore() }

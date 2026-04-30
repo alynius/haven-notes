@@ -72,7 +72,7 @@ final class MarkdownHighlighter {
             )
         }
         #elseif os(macOS)
-        static func haven(appearance: NSAppearance? = NSAppearance.current) -> Theme {
+        static func haven(appearance: NSAppearance? = NSApplication.shared.effectiveAppearance) -> Theme {
             let isDark = appearance?.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
             let bodySize: CGFloat = NSFont.systemFontSize
 
@@ -148,7 +148,7 @@ final class MarkdownHighlighter {
     }
     #elseif os(macOS)
     func updateTheme(for appearance: NSAppearance? = nil) {
-        self.theme = Theme.haven(appearance: appearance ?? NSAppearance.current)
+        self.theme = Theme.haven(appearance: appearance ?? NSApplication.shared.effectiveAppearance)
     }
     #endif
 

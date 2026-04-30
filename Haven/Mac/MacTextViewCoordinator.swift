@@ -15,7 +15,8 @@ final class MacTextViewCoordinator: NSObject, NSTextViewDelegate, ObservableObje
     private let highlighter: MarkdownHighlighter
     var isEditing: Bool = false
     private var highlightWorkItem: DispatchWorkItem?
-    private let highlightDebounce: TimeInterval = 0.05
+    private let highlightDebounce: TimeInterval = 0.1
+    private var lastAppearanceName: NSAppearance.Name?
 
     @Published var activeFormats: Set<MarkdownFormat> = []
 
@@ -25,7 +26,7 @@ final class MacTextViewCoordinator: NSObject, NSTextViewDelegate, ObservableObje
         self.htmlContent = htmlContent
         self.onTextChanged = onTextChanged
         self.onLinkTapped = onLinkTapped
-        let theme = MarkdownHighlighter.Theme.haven(appearance: NSAppearance.current)
+        let theme = MarkdownHighlighter.Theme.haven(appearance: NSApplication.shared.effectiveAppearance)
         self.highlighter = MarkdownHighlighter(theme: theme)
     }
 
@@ -88,23 +89,34 @@ final class MacTextViewCoordinator: NSObject, NSTextViewDelegate, ObservableObje
     func applyHighlighting(to textView: NSTextView, text: String) {
         guard let textStorage = textView.textStorage else { return }
 
-        // Update theme based on current appearance
-        highlighter.updateTheme(for: textView.effectiveAppearance)
+        let appearanceName = textView.effectiveAppearance.name
+        if appearanceName != lastAppearanceName {
+            highlighter.updateTheme(for: textView.effectiveAppearance)
+            lastAppearanceName = appearanceName
+        }
 
-        // Save selection
-        let selectedRange = textView.selectedRange()
-
-        // Apply highlighting to the textStorage in place
         let highlighted = highlighter.highlight(text)
-        textStorage.beginEditing()
-        textStorage.setAttributedString(highlighted)
-        textStorage.endEditing()
 
-        // Restore selection (clamped)
-        let maxLocation = (textView.string as NSString).length
-        let safeLocation = min(selectedRange.location, maxLocation)
-        let safeLength = min(selectedRange.length, maxLocation - safeLocation)
-        textView.setSelectedRange(NSRange(location: safeLocation, length: safeLength))
+        if highlighted.string == textStorage.string {
+            // Incremental: only attributes change. Layout, scroll, and selection are preserved.
+            let fullRange = NSRange(location: 0, length: textStorage.length)
+            textStorage.beginEditing()
+            textStorage.setAttributes([:], range: fullRange)
+            highlighted.enumerateAttributes(in: NSRange(location: 0, length: highlighted.length)) { attrs, range, _ in
+                textStorage.setAttributes(attrs, range: range)
+            }
+            textStorage.endEditing()
+        } else {
+            // Full replacement path — initial load or external text sync.
+            let selectedRange = textView.selectedRange()
+            textStorage.beginEditing()
+            textStorage.setAttributedString(highlighted)
+            textStorage.endEditing()
+            let maxLocation = (textView.string as NSString).length
+            let safeLocation = min(selectedRange.location, maxLocation)
+            let safeLength = min(selectedRange.length, maxLocation - safeLocation)
+            textView.setSelectedRange(NSRange(location: safeLocation, length: safeLength))
+        }
     }
 
     // MARK: - Toolbar Actions
@@ -241,6 +253,16 @@ final class MacTextViewCoordinator: NSObject, NSTextViewDelegate, ObservableObje
         htmlContent.wrappedValue = text
         onTextChanged?(text)
         applyHighlighting(to: textView, text: text)
+    }
+
+    func insertAtCursor(_ text: String) {
+        guard let tv = textView else { return }
+        let range = tv.selectedRange()
+        let nsString = tv.string as NSString
+        let newText = nsString.replacingCharacters(in: range, with: text)
+        commitText(newText, to: tv)
+        let inserted = (text as NSString).length
+        tv.setSelectedRange(NSRange(location: range.location + inserted, length: 0))
     }
 
     // MARK: - Format Detection

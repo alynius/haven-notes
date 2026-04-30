@@ -22,8 +22,46 @@ struct MacSettingsView: View {
             SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
                 .environmentObject(container)
                 .tabItem { Label("Subscription", systemImage: "star") }
+
+            AboutTab()
+                .tabItem { Label("About", systemImage: "info.circle") }
         }
-        .frame(width: 500, height: 400)
+        .frame(width: 500, height: 420)
+    }
+}
+
+struct AboutTab: View {
+    var body: some View {
+        VStack(spacing: Spacing.md) {
+            Text("H")
+                .font(.system(size: 56, design: .serif).weight(.bold))
+                .foregroundColor(Color.havenPrimary)
+                .padding(.top, Spacing.lg)
+
+            Text("Haven")
+                .font(.havenHeadline)
+                .foregroundColor(Color.havenTextPrimary)
+
+            Text("Fast. Private. Solid.")
+                .font(.havenCaption)
+                .foregroundColor(Color.havenTextSecondary)
+
+            Text("Your notes stay on your device.")
+                .font(.havenCaption)
+                .foregroundColor(Color.havenTextSecondary)
+
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+               let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                Text("Version \(version) (\(build))")
+                    .font(.caption2)
+                    .foregroundColor(Color.havenTextSecondary)
+                    .padding(.top, Spacing.xs)
+            }
+
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
     }
 }
 
@@ -40,14 +78,25 @@ struct GeneralSettingsTab: View {
             }
             .pickerStyle(.segmented)
 
-            Section("Security") {
-                Toggle("Lock Haven with Touch ID", isOn: Binding(
-                    get: { container.biometricService.isEnabled },
-                    set: { container.biometricService.isEnabled = $0 }
-                ))
+            let biometric = container.biometricService.availableBiometric
+            if biometric != .none {
+                Section("Security") {
+                    Toggle(biometricLabel(for: biometric), isOn: Binding(
+                        get: { container.biometricService.isEnabled },
+                        set: { container.biometricService.isEnabled = $0 }
+                    ))
+                }
             }
         }
         .padding()
+    }
+
+    private func biometricLabel(for type: BiometricService.BiometricType) -> String {
+        switch type {
+        case .faceID: return "Lock Haven with Face ID"
+        case .touchID: return "Lock Haven with Touch ID"
+        case .none: return "Lock Haven"
+        }
     }
 }
 #endif

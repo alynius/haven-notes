@@ -29,7 +29,7 @@ struct HavenNavigationStack: View {
                 }
             }
             .tint(Color.havenPrimary)
-            .onChange(of: appState.pendingAction) { action in
+            .onChange(of: appState.pendingAction) { _, action in
                 guard action != .none else { return }
                 Task {
                     switch action {
@@ -84,7 +84,7 @@ struct HavenNavigationStack: View {
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button {
-                        NSApp.keyWindow?.firstResponder?.tryToPerform(
+                        NSApplication.shared.mainWindow?.firstResponder?.tryToPerform(
                             #selector(NSSplitViewController.toggleSidebar(_:)),
                             with: nil
                         )

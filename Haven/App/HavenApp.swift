@@ -30,27 +30,34 @@ struct HavenApp: App {
     @Environment(\.scenePhase) var scenePhase
 
     var body: some Scene {
+        #if os(macOS)
         WindowGroup {
+            mainContent
+        }
+        .defaultSize(width: 1200, height: 800)
+        .commands {
+            HavenMenuCommands()
+        }
+
+        Settings {
+            MacSettingsView()
+                .environmentObject(container)
+        }
+        #else
+        WindowGroup {
+            mainContent
+        }
+        #endif
+    }
+
+    @ViewBuilder
+    private var mainContent: some View {
             Group {
                 if container.biometricService.isEnabled && isLocked {
-                    #if os(iOS)
                     LockScreenView(
                         onUnlock: { attemptUnlock() },
                         biometricType: container.biometricService.availableBiometric
                     )
-                    #else
-                    // Simple lock overlay for macOS
-                    VStack(spacing: Spacing.xl) {
-                        Text("H").font(.system(size: 72, design: .serif)).foregroundColor(Color.havenPrimary)
-                        Text("Haven is Locked").font(.havenHeadline)
-                        Button("Unlock") { Task { await attemptUnlockAsync() } }
-                            .keyboardShortcut(.return, modifiers: [])
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color.havenPrimary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.havenBackground)
-                    #endif
                 } else if hasCompletedOnboarding {
                     HavenNavigationStack()
                         .environmentObject(appState)
@@ -58,7 +65,10 @@ struct HavenApp: App {
                         .environmentObject(toastManager)
                         .preferredColorScheme(appState.preferredColorScheme)
                         .sheet(isPresented: $showPaywallAfterOnboarding) {
-                            SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
+                            SubscriptionView(
+                                viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager),
+                                isModal: true
+                            )
                         }
                 } else {
                     OnboardingView(
@@ -90,6 +100,7 @@ struct HavenApp: App {
             }
             #if os(macOS)
             .onReceive(NotificationCenter.default.publisher(for: .havenQuickNote)) { _ in
+                if container.biometricService.isEnabled && isLocked { return }
                 quickNotePanelController.toggle()
             }
             #endif
@@ -120,19 +131,6 @@ struct HavenApp: App {
             } message: {
                 Text("The database could not be opened. Please restart the app or reinstall.")
             }
-        }
-        #if os(macOS)
-        .commands {
-            HavenMenuCommands()
-        }
-        #endif
-
-        #if os(macOS)
-        Settings {
-            MacSettingsView()
-                .environmentObject(container)
-        }
-        #endif
     }
 
     private func attemptUnlock() {
@@ -190,11 +188,27 @@ struct HavenApp: App {
 
 // MARK: - Lock Screen
 
-#if os(iOS)
 struct LockScreenView: View {
     let onUnlock: () -> Void
     let biometricType: BiometricService.BiometricType
     @State private var appeared = false
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+
+    private var iconName: String {
+        switch biometricType {
+        case .faceID: return "faceid"
+        case .touchID: return "touchid"
+        case .none: return "lock"
+        }
+    }
+
+    private var hint: String {
+        switch biometricType {
+        case .faceID: return "Tap to use Face ID or your passcode"
+        case .touchID: return "Tap to use Touch ID or your passcode"
+        case .none: return "Tap to enter your passcode"
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -217,7 +231,7 @@ struct LockScreenView: View {
                     onUnlock()
                 } label: {
                     HStack(spacing: Spacing.sm) {
-                        Image(systemName: biometricType == .faceID ? "faceid" : "touchid")
+                        Image(systemName: iconName)
                         Text("Unlock")
                     }
                     .font(.body.weight(.semibold))
@@ -227,20 +241,24 @@ struct LockScreenView: View {
                     .background(Color.havenPrimary)
                     .clipShape(.rect(cornerRadius: CornerRadius.sm))
                 }
+                .keyboardShortcut(.return, modifiers: [])
                 .accessibilityLabel("Unlock Haven")
-                .accessibilityHint("Authenticates with Face ID or passcode")
+                .accessibilityHint("Authenticates with biometrics or your passcode")
 
-                Text("Tap to use \(biometricType == .faceID ? "Face ID" : "Touch ID") or your passcode")
+                Text(hint)
                     .font(.caption2)
                     .foregroundColor(Color.havenTextSecondary)
                     .opacity(appeared ? 1.0 : 0)
             }
         }
         .onAppear {
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.1)) {
+            if reduceMotion {
                 appeared = true
+            } else {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.1)) {
+                    appeared = true
+                }
             }
         }
     }
 }
-#endif

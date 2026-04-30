@@ -1,4 +1,3 @@
-#if os(iOS)
 import SwiftUI
 
 struct EditorToolbarView: View {
@@ -10,6 +9,7 @@ struct EditorToolbarView: View {
     var onLink: () -> Void = {}
     var onMicrophone: () -> Void = {}
     var isRecording: Bool = false
+    var showMicrophone: Bool = true
     var activeFormats: Set<MarkdownFormat> = []
 
     var body: some View {
@@ -27,21 +27,23 @@ struct EditorToolbarView: View {
                     .accessibilityIdentifier("editorToolbar_button_checkbox")
                 toolbarButton("link", label: "Link", action: onLink)
                     .accessibilityIdentifier("editorToolbar_button_link")
-                toolbarButton(
-                    isRecording ? "mic.fill" : "mic",
-                    label: isRecording ? "Stop dictation" : "Start dictation",
-                    action: onMicrophone
-                )
-                .accessibilityIdentifier("editorToolbar_button_microphone")
-                .foregroundColor(isRecording ? Color.red : Color.havenTextPrimary)
-                .overlay(
-                    isRecording
-                        ? Circle()
-                            .fill(Color.red)
-                            .frame(width: 6, height: 6)
-                            .offset(x: 12, y: -12)
-                        : nil
-                )
+                if showMicrophone {
+                    toolbarButton(
+                        isRecording ? "mic.fill" : "mic",
+                        label: isRecording ? "Stop dictation" : "Start dictation",
+                        action: onMicrophone
+                    )
+                    .accessibilityIdentifier("editorToolbar_button_microphone")
+                    .foregroundColor(isRecording ? Color.red : Color.havenTextPrimary)
+                    .overlay(
+                        isRecording
+                            ? Circle()
+                                .fill(Color.red)
+                                .frame(width: 6, height: 6)
+                                .offset(x: 12, y: -12)
+                            : nil
+                    )
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -53,11 +55,15 @@ struct EditorToolbarView: View {
         )
     }
 
+    #if os(iOS)
     private let haptic = UIImpactFeedbackGenerator(style: .light)
+    #endif
 
     private func toolbarButton(_ systemName: String, label: String, isActive: Bool = false, action: @escaping () -> Void) -> some View {
         Button {
+            #if os(iOS)
             haptic.impactOccurred()
+            #endif
             action()
         } label: {
             Image(systemName: systemName)
@@ -83,4 +89,3 @@ private struct ToolbarPressStyle: ButtonStyle {
             .animation(reduceMotion ? .none : .spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
-#endif

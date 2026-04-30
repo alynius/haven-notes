@@ -5,12 +5,23 @@ import AppKit
 final class GlobalHotkeyManager {
     static let shared = GlobalHotkeyManager()
     private var hotKeyRef: EventHotKeyRef?
+    private var eventHandlerRef: EventHandlerRef?
     private var onTrigger: (() -> Void)?
-    private init() {}
+
+    private init() {
+        NotificationCenter.default.addObserver(
+            forName: NSApplication.willTerminateNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            GlobalHotkeyManager.shared.unregister()
+        }
+    }
 
     func register(keyCode: UInt32 = UInt32(kVK_ANSI_N),
                   modifiers: UInt32 = UInt32(cmdKey | shiftKey),
                   handler: @escaping () -> Void) {
+        unregister()
         onTrigger = handler
         var hotKeyID = EventHotKeyID()
         hotKeyID.signature = OSType(0x48564E51) // "HVNQ"
@@ -21,7 +32,7 @@ final class GlobalHotkeyManager {
         InstallEventHandler(GetApplicationEventTarget(), { _, _, _ -> OSStatus in
             GlobalHotkeyManager.shared.onTrigger?()
             return noErr
-        }, 1, &eventType, nil, nil)
+        }, 1, &eventType, nil, &eventHandlerRef)
         RegisterEventHotKey(keyCode, modifiers, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef)
     }
 
@@ -30,6 +41,11 @@ final class GlobalHotkeyManager {
             UnregisterEventHotKey(ref)
             hotKeyRef = nil
         }
+        if let handlerRef = eventHandlerRef {
+            RemoveEventHandler(handlerRef)
+            eventHandlerRef = nil
+        }
+        onTrigger = nil
     }
 }
 #endif
