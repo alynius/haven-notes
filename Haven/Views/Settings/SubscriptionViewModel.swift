@@ -25,7 +25,7 @@ final class SubscriptionViewModel: ObservableObject {
         do {
             try await subscriptionManager.fetchProducts()
             products = subscriptionManager.availableProducts
-            try await subscriptionManager.checkEntitlement()
+            await subscriptionManager.checkEntitlement()
             entitlement = subscriptionManager.entitlement
         } catch {
             errorMessage = error.localizedDescription

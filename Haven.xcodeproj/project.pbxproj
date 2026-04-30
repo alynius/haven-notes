@@ -177,6 +177,7 @@
 		4BE5AA54608A26D2CDD63837 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F21E2347101F280AF6E2FC /* AppState.swift */; };
 		4C5A65F0363DBCE92E7F489B /* page-2026-04-08T09-44-40-965Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C940C3A9A946BE88C4FE685C /* page-2026-04-08T09-44-40-965Z.yml */; };
 		4C64008C26B1C746BC1A69BE /* console-2026-04-08T15-15-32-564Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A5E16CDBF4DEE16B97EBF064 /* console-2026-04-08T15-15-32-564Z.log */; };
+		4D8E57B765FF54E68324A9F9 /* Animation+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6776577A403EE16CE1E9A16 /* Animation+Haven.swift */; };
 		4E8AA39739CF28D6238199FC /* asc-app-info.png in Resources */ = {isa = PBXBuildFile; fileRef = DB674EB5B8305C3889BAA2A4 /* asc-app-info.png */; };
 		4EB69C3873055AC72EFAE762 /* editorial-upgrade.png in Resources */ = {isa = PBXBuildFile; fileRef = DFAE94346B3907DBD2B6A49F /* editorial-upgrade.png */; };
 		4F64FBE43DFAD20A9702B96A /* hero-refined.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F83F6B4436AB6D5EED6AE00 /* hero-refined.png */; };
@@ -294,6 +295,7 @@
 		861197B15D3A435EAB3E463D /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBC6C12C9B1F9C044BEDEB /* DesignTokens.swift */; };
 		862F938BF4CB253189F1C21E /* console-2026-04-05T21-12-43-886Z.log in Resources */ = {isa = PBXBuildFile; fileRef = F60AE0192A5E2CEB6C3EC905 /* console-2026-04-05T21-12-43-886Z.log */; };
 		868953B592B8C929B5BFD7EC /* page-2026-04-08T09-44-12-896Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = C042CA287E7E94A596B32A99 /* page-2026-04-08T09-44-12-896Z.yml */; };
+		879739F09C50E257689F6EE2 /* Animation+Haven.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6776577A403EE16CE1E9A16 /* Animation+Haven.swift */; };
 		897A11659D7DF84BB2D8BAF5 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0460B482C048500781097DB /* NoteRowView.swift */; };
 		8A1EE6545BBBB3DCA0BFC395 /* page-2026-04-08T12-44-10-237Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89CB972EF462A6301C293305 /* page-2026-04-08T12-44-10-237Z.yml */; };
 		8A98AEABE60C27D58FA449BE /* page-2026-04-27T07-29-11-529Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = FD24420E2008276D9EE604D6 /* page-2026-04-27T07-29-11-529Z.yml */; };
@@ -857,6 +859,7 @@
 		F6110DD50257059A83838CAE /* rebuild-pricing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rebuild-pricing.png"; sourceTree = "<group>"; };
 		F6451BE2103ED0CDA0A5466E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F648DC62F94C1F87E4F53384 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		F6776577A403EE16CE1E9A16 /* Animation+Haven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Haven.swift"; sourceTree = "<group>"; };
 		F77FBD82F448A506DDBC7B3E /* haven-home-320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-320.png"; sourceTree = "<group>"; };
 		FB16DA6A75B809DC7C5A15CF /* page-2026-04-27T07-26-10-229Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-26-10-229Z.yml"; sourceTree = "<group>"; };
 		FB2312FC9BEE91A2852A5E4C /* page-2026-04-09T18-35-10-048Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-09T18-35-10-048Z.yml"; sourceTree = "<group>"; };
@@ -901,6 +904,7 @@
 		1246268BC229EF2901B379FD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F6776577A403EE16CE1E9A16 /* Animation+Haven.swift */,
 				3AA69AD21992B1DBF8D2E983 /* Color+Haven.swift */,
 				5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */,
 				1F7C6927589DFE73C0E09CA9 /* Font+Haven.swift */,
@@ -1958,6 +1962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				879739F09C50E257689F6EE2 /* Animation+Haven.swift in Sources */,
 				64D9FC9434300B43A8070BEF /* AppSetting.swift in Sources */,
 				85EDC669E036389F6A00F5B6 /* AppState.swift in Sources */,
 				E6AC83BF7ECB23DE9F07E9D7 /* BiometricService.swift in Sources */,
@@ -2068,6 +2073,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D8E57B765FF54E68324A9F9 /* Animation+Haven.swift in Sources */,
 				D5DB5B67DBF54F2A2BDC6594 /* AppSetting.swift in Sources */,
 				4BE5AA54608A26D2CDD63837 /* AppState.swift in Sources */,
 				D3BEA1F8AD7315C921181DE7 /* BiometricService.swift in Sources */,

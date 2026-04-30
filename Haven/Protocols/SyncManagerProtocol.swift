@@ -7,6 +7,7 @@ enum SyncStatus: Equatable {
     case disabled
 }
 
+@MainActor
 protocol SyncManagerProtocol: AnyObject {
     var status: SyncStatus { get }
     var isEnabled: Bool { get }

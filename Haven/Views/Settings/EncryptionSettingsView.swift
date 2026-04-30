@@ -167,27 +167,27 @@ struct EncryptionSettingsView: View {
 
         isSettingUp = true
 
-        // Derive key on background thread (PBKDF2 is intentionally slow)
+        // Capture password on MainActor before hopping off — PBKDF2 is intentionally slow,
+        // so derive off-main, then come back to MainActor for the keychain write.
+        let pw = password
+        let service = container.encryptionService
+
         Task.detached(priority: .userInitiated) {
-            let service = await MainActor.run { self.container.encryptionService }
-            let result = service.deriveKey(from: self.password)
+            let result = service.deriveKey(from: pw)
 
-            do {
-                try service.saveKeyToKeychain(
-                    keyData: result.key.withUnsafeBytes { Data($0) },
-                    salt: result.salt
-                )
-
-                await MainActor.run {
+            await MainActor.run {
+                do {
+                    try service.saveKeyToKeychain(
+                        keyData: result.key.withUnsafeBytes { Data($0) },
+                        salt: result.salt
+                    )
                     service.setMasterKey(result.key)
                     self.isSettingUp = false
                     self.isEnabled = true
                     self.password = ""
                     self.confirmPassword = ""
                     self.toastManager.showSuccess("Encryption enabled")
-                }
-            } catch {
-                await MainActor.run {
+                } catch {
                     self.isSettingUp = false
                     self.toastManager.showError(error.localizedDescription)
                 }

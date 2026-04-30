@@ -6,6 +6,7 @@ enum EntitlementStatus: Equatable {
     case pro(expiresAt: Date?)
 }
 
+@MainActor
 protocol SubscriptionManagerProtocol: AnyObject {
     var entitlement: EntitlementStatus { get }
     var availableProducts: [Product] { get }
