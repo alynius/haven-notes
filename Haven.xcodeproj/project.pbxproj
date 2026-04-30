@@ -29,6 +29,7 @@
 		08AF32613F8329D2FA7A1281 /* page-2026-04-08T15-00-46-450Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = D401AEB9DE158FD0C623900E /* page-2026-04-08T15-00-46-450Z.yml */; };
 		090F6501E04013131197894F /* SettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3487B4F5FB3B9CFC606D50B /* SettingsUITests.swift */; };
 		0915B1A2026E51DC2506A958 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74011861F3C467471A264726 /* TestHelpers.swift */; };
+		09FECA64D1EDE4C03E35F666 /* View+Hover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B578318F16041908A4E39B /* View+Hover.swift */; };
 		0A15C7CD77393B68E1438238 /* haven-home-320.png in Resources */ = {isa = PBXBuildFile; fileRef = F77FBD82F448A506DDBC7B3E /* haven-home-320.png */; };
 		0A38F0886E475BDFB97A4A0F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A66E97D27D71B7B67D1EAD0F /* PrivacyInfo.xcprivacy */; };
 		0AF382B8D27AABB206EA8399 /* page-2026-04-05T20-14-59-511Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = B83CB139D941283AD2688969 /* page-2026-04-05T20-14-59-511Z.yml */; };
@@ -357,6 +358,7 @@
 		A2ADE9EB5FE4BED878994227 /* page-2026-04-10T19-32-40-733Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3E09E0411B0B4096775679E6 /* page-2026-04-10T19-32-40-733Z.yml */; };
 		A376AA1C107B6BC33884F704 /* console-2026-04-05T20-16-25-569Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 69B15D22C89EAFB9B3B0E931 /* console-2026-04-05T20-16-25-569Z.log */; };
 		A39AB4E06DEA2A25A23FFCD7 /* page-2026-04-27T07-23-25-582Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */; };
+		A49CF833DFA6E61F29E23B6A /* View+Hover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B578318F16041908A4E39B /* View+Hover.swift */; };
 		A4DC0CB1E1AC38F88BB744A4 /* page-2026-04-05T20-15-23-954Z.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF82F39E76887E9A64EFC4 /* page-2026-04-05T20-15-23-954Z.yml */; };
 		A53CE8B238DF11BE6E55D256 /* console-2026-04-08T09-45-55-629Z.log in Resources */ = {isa = PBXBuildFile; fileRef = A8AE0DC15779AB9433297753 /* console-2026-04-08T09-45-55-629Z.log */; };
 		A563DA9BEF15DA94B5C3AFA3 /* console-2026-04-05T20-39-53-742Z.log in Resources */ = {isa = PBXBuildFile; fileRef = 9FEBC43AB1152DD4D4690F5A /* console-2026-04-05T20-39-53-742Z.log */; };
@@ -803,6 +805,7 @@
 		C8FC134D3B2D8C07CF173718 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		C940C3A9A946BE88C4FE685C /* page-2026-04-08T09-44-40-965Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-08T09-44-40-965Z.yml"; sourceTree = "<group>"; };
 		C99744EAE77A0129858C53B6 /* 06-mobile-landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-mobile-landing.png"; sourceTree = "<group>"; };
+		C9B578318F16041908A4E39B /* View+Hover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Hover.swift"; sourceTree = "<group>"; };
 		CA27D782856DB172A6EEB01B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CC2348C8ADB454EF4BFF6A3E /* page-2026-04-27T07-23-25-582Z.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "page-2026-04-27T07-23-25-582Z.yml"; sourceTree = "<group>"; };
 		CDDBC857CB35F74C1398E68D /* haven-home-mobile-375-fixed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haven-home-mobile-375-fixed.png"; sourceTree = "<group>"; };
@@ -909,6 +912,7 @@
 				5BD0407E5CAC5FD942AF77C2 /* Date+ISO8601.swift */,
 				1F7C6927589DFE73C0E09CA9 /* Font+Haven.swift */,
 				94A235F8DE76DDDCEE3F3108 /* String+WikiLink.swift */,
+				C9B578318F16041908A4E39B /* View+Hover.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2045,6 +2049,7 @@
 				9A5796FF918922AFFF7DB925 /* TaskRepositoryProtocol.swift in Sources */,
 				28C864663279C8B935A45F8C /* ToastManager.swift in Sources */,
 				9A92DA388F6FFDD34C8CD2D7 /* ToastView.swift in Sources */,
+				09FECA64D1EDE4C03E35F666 /* View+Hover.swift in Sources */,
 				12496FFF1F18F645855F58EA /* WikiLink.swift in Sources */,
 				E7B35C1EEBB85F8C15D5C412 /* WikiLinkAutocompleteView.swift in Sources */,
 				28A544BD42385F7F0FF03902 /* WikiLinkParser.swift in Sources */,
@@ -2156,6 +2161,7 @@
 				462253D9A4394263369F29DE /* TaskRepositoryProtocol.swift in Sources */,
 				DE2A6D0E1E64293041691BCC /* ToastManager.swift in Sources */,
 				9BA6BD260DDE9A3CA82D6F23 /* ToastView.swift in Sources */,
+				A49CF833DFA6E61F29E23B6A /* View+Hover.swift in Sources */,
 				66CBD3054E436659842D8DB7 /* WikiLink.swift in Sources */,
 				F0CE32C9B59F2567772DA2AB /* WikiLinkAutocompleteView.swift in Sources */,
 				BD9ED8CBFF667CA295FDC75B /* WikiLinkParser.swift in Sources */,

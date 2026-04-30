@@ -56,6 +56,7 @@ struct SearchView: View {
                             appState.navigateTo(.noteEditor(noteID: note.id))
                         } label: {
                             SearchResultRowView(note: note, query: viewModel.query)
+                                .hoverHighlight()
                         }
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("search_row_\(note.id)")

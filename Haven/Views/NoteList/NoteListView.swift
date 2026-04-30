@@ -52,6 +52,7 @@ struct NoteListView: View {
                                 note: note,
                                 folderName: note.folderID.flatMap { viewModel.folders[$0] }
                             )
+                            .hoverHighlight()
                         }
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("noteList_row_\(note.id)")

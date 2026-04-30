@@ -166,7 +166,11 @@ struct NoteEditorView: View {
                                             .lineLimit(1)
                                     }
                                     .foregroundColor(Color.havenAccent)
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 6)
+                                    .hoverHighlight()
                                 }
+                                .buttonStyle(.plain)
                                 .accessibilityLabel("Linked from \(linked.title.isEmpty ? "Untitled" : linked.title)")
                             }
                         }
