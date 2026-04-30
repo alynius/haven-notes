@@ -127,18 +127,18 @@ struct RichTextEditor: UIViewRepresentable {
             detectActiveFormats(in: text, at: textView.selectedRange)
         }
 
-        /// Handle taps on links — open in Safari when not actively editing that link
-        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-            // For wiki links, route through the parent callback
-            let tappedText = (textView.text as NSString?)?.substring(with: characterRange) ?? ""
-            if tappedText.hasPrefix("[[") {
-                let title = tappedText.replacingOccurrences(of: "[[", with: "").replacingOccurrences(of: "]]", with: "")
-                parent.onLinkTapped?(title)
-                return false
+        /// Handle taps on links — wiki links route through the parent callback,
+        /// plain URLs fall through to the system default (open in Safari).
+        func textView(_ textView: UITextView, primaryActionFor textItem: UITextItem, defaultAction: UIAction) -> UIAction? {
+            guard case .link = textItem.content else { return nil }
+            let tappedText = (textView.text as NSString?)?.substring(with: textItem.range) ?? ""
+            guard tappedText.hasPrefix("[[") else { return nil }
+            let title = tappedText
+                .replacingOccurrences(of: "[[", with: "")
+                .replacingOccurrences(of: "]]", with: "")
+            return UIAction { [weak self] _ in
+                self?.parent.onLinkTapped?(title)
             }
-            // Open regular URLs in Safari
-            UIApplication.shared.open(URL)
-            return false
         }
 
         /// Detect pasted URLs and auto-fetch page title
