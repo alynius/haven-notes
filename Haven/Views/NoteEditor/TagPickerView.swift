@@ -100,7 +100,10 @@ struct TagPickerView: View {
                             }
                             .padding(.horizontal, Spacing.md)
                             .padding(.vertical, Spacing.sm)
+                            .contentShape(Rectangle())
+                            .hoverHighlight()
                         }
+                        .buttonStyle(.plain)
                         .accessibilityLabel("Add tag \(tag.name)")
 
                         if tag.id != suggestions.prefix(5).last?.id {
