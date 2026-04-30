@@ -35,7 +35,7 @@ struct NoteListView: View {
                 }
                 .listStyle(.plain)
             } else if viewModel.notes.isEmpty {
-                EmptyStateView {
+                EmptyStateView(filter: viewModel.filter) {
                     Task {
                         if let id = await viewModel.createNote() {
                             appState.navigateTo(.noteEditor(noteID: id))

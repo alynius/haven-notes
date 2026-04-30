@@ -76,45 +76,56 @@ struct NoteEditorView: View {
                         .fill(Color.havenBorder.opacity(0.6))
                         .frame(height: 0.5)
 
-                    // Body editor
-                    #if os(iOS)
-                    RichTextEditor(
-                        htmlContent: Binding(
-                            get: { viewModel.note.bodyHTML },
-                            set: { viewModel.updateBody($0) }
-                        ),
-                        onLinkTapped: { target in
-                            Task {
-                                if let linked = await viewModel.resolveWikiLink(title: target) {
-                                    appState.navigateTo(.noteEditor(noteID: linked.id))
+                    // Body editor with empty-state placeholder
+                    ZStack(alignment: .topLeading) {
+                        if viewModel.note.bodyHTML.isEmpty {
+                            Text("Start writing…")
+                                .font(.havenBody)
+                                .foregroundColor(Color.havenTextSecondary.opacity(0.5))
+                                .padding(.top, 14)
+                                .padding(.leading, 5)
+                                .allowsHitTesting(false)
+                                .accessibilityHidden(true)
+                        }
+
+                        #if os(iOS)
+                        RichTextEditor(
+                            htmlContent: Binding(
+                                get: { viewModel.note.bodyHTML },
+                                set: { viewModel.updateBody($0) }
+                            ),
+                            onLinkTapped: { target in
+                                Task {
+                                    if let linked = await viewModel.resolveWikiLink(title: target) {
+                                        appState.navigateTo(.noteEditor(noteID: linked.id))
+                                    }
                                 }
-                            }
-                        },
-                        shared: editorShared
-                    )
-                    .frame(minHeight: 300)
-                    #elseif os(macOS)
-                    MacEditorView(
-                        htmlContent: Binding(
-                            get: { viewModel.note.bodyHTML },
-                            set: { viewModel.updateBody($0) }
-                        ),
-                        onLinkTapped: { target in
-                            Task {
-                                if let linked = await viewModel.resolveWikiLink(title: target) {
-                                    appState.navigateTo(.noteEditor(noteID: linked.id))
+                            },
+                            shared: editorShared
+                        )
+                        #elseif os(macOS)
+                        MacEditorView(
+                            htmlContent: Binding(
+                                get: { viewModel.note.bodyHTML },
+                                set: { viewModel.updateBody($0) }
+                            ),
+                            onLinkTapped: { target in
+                                Task {
+                                    if let linked = await viewModel.resolveWikiLink(title: target) {
+                                        appState.navigateTo(.noteEditor(noteID: linked.id))
+                                    }
                                 }
-                            }
-                        },
-                        onTextChanged: { _ in },
-                        shared: editorShared
-                    )
-                    .frame(minHeight: 300)
-                    .focusedValue(\.activeEditor, editorShared.coordinator)
-                    .onDrop(of: [.fileURL, .url, .plainText, .utf8PlainText], isTargeted: nil) { providers in
-                        handleEditorDrop(providers)
+                            },
+                            onTextChanged: { _ in },
+                            shared: editorShared
+                        )
+                        .focusedValue(\.activeEditor, editorShared.coordinator)
+                        .onDrop(of: [.fileURL, .url, .plainText, .utf8PlainText], isTargeted: nil) { providers in
+                            handleEditorDrop(providers)
+                        }
+                        #endif
                     }
-                    #endif
+                    .frame(minHeight: 300)
 
                     // Tags section
                     if viewModel.isLoaded {
