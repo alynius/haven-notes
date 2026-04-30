@@ -1,7 +1,4 @@
 import SwiftUI
-#if os(macOS)
-import AppKit
-#endif
 
 struct HavenNavigationStack: View {
     @EnvironmentObject var appState: AppState
@@ -80,20 +77,6 @@ struct HavenNavigationStack: View {
                 folderRepo: container.folderRepository,
                 filter: appState.activeFilter
             ))
-            #if os(macOS)
-            .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        NSApplication.shared.mainWindow?.firstResponder?.tryToPerform(
-                            #selector(NSSplitViewController.toggleSidebar(_:)),
-                            with: nil
-                        )
-                    } label: {
-                        Image(systemName: "sidebar.left")
-                    }
-                }
-            }
-            #endif
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .noteEditor(let noteID):

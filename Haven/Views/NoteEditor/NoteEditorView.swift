@@ -271,8 +271,8 @@ struct NoteEditorView: View {
                         }
                     }
                 )
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-                .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showAutocomplete)
+                .transition(.opacity)
+                .animation(.havenSnappy, value: viewModel.showAutocomplete)
             }
         }
         #if os(iOS)

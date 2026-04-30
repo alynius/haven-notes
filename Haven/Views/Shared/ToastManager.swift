@@ -16,7 +16,7 @@ final class ToastManager: ObservableObject {
     }
 
     func show(_ message: String, icon: String = "checkmark.circle", type: ToastView.ToastType = .info) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+        withAnimation(.havenSnappy) {
             currentToast = ToastItem(message: message, icon: icon, type: type)
         }
         #if os(iOS)

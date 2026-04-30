@@ -86,6 +86,6 @@ private struct ToolbarPressStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect((!reduceMotion && configuration.isPressed) ? 0.9 : 1.0)
-            .animation(reduceMotion ? .none : .spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+            .animation(reduceMotion ? .none : .havenSnappy, value: configuration.isPressed)
     }
 }

@@ -21,7 +21,7 @@ struct TaskListView: View {
             ForEach(tasks) { task in
                 HStack(spacing: 12) {
                     Button {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                        withAnimation(.havenSnappy) {
                             onToggle(task.id)
                         }
                     } label: {
