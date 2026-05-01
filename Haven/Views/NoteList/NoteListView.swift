@@ -2,7 +2,7 @@ import SwiftUI
 
 struct NoteListView: View {
     @StateObject var viewModel: NoteListViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
     @Environment(\.horizontalSizeClass) var sizeClass
     @State private var showDeleteConfirm = false

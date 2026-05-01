@@ -23,12 +23,13 @@ enum PendingAction {
 }
 
 @MainActor
-final class AppState: ObservableObject {
-    @Published var navigationPath = NavigationPath()
-    @Published var selectedNoteID: String?
-    @Published var preferredColorScheme: ColorScheme? = nil
-    @Published var activeFilter: NoteFilter = .allNotes
-    @Published var pendingAction: PendingAction = .none
+@Observable
+final class AppState {
+    var navigationPath = NavigationPath()
+    var selectedNoteID: String?
+    var preferredColorScheme: ColorScheme? = nil
+    var activeFilter: NoteFilter = .allNotes
+    var pendingAction: PendingAction = .none
 
     func navigateTo(_ route: Route) {
         navigationPath.append(route)

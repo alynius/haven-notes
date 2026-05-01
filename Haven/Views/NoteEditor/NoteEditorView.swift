@@ -3,7 +3,7 @@ import UniformTypeIdentifiers
 
 struct NoteEditorView: View {
     @StateObject var viewModel: NoteEditorViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @FocusState private var titleFocused: Bool
 
     /// Shared reference to the editor coordinator for toolbar actions.

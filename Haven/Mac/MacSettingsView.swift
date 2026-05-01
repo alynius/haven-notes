@@ -16,7 +16,7 @@ struct MacSettingsView: View {
 
             EncryptionSettingsView()
                 .environmentObject(container)
-                .environmentObject(ToastManager())
+                .environment(ToastManager())
                 .tabItem { Label("Encryption", systemImage: "lock.shield") }
 
             SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))

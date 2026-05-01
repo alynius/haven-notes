@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GraphView: View {
     @StateObject var viewModel: GraphViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
 
     @State private var scale: CGFloat = 0.5
     @State private var lastScale: CGFloat = 0.5

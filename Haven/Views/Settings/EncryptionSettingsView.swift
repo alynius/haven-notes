@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EncryptionSettingsView: View {
     @EnvironmentObject var container: DependencyContainer
-    @EnvironmentObject var toastManager: ToastManager
+    @Environment(ToastManager.self) var toastManager
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var hasAcknowledged = false

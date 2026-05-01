@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct HavenNavigationStack: View {
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
-    @EnvironmentObject var toastManager: ToastManager
+    @Environment(ToastManager.self) var toastManager
     @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
@@ -71,7 +71,8 @@ struct HavenNavigationStack: View {
     }
 
     private var navigationContent: some View {
-        NavigationStack(path: $appState.navigationPath) {
+        @Bindable var appState = appState
+        return NavigationStack(path: $appState.navigationPath) {
             NoteListView(viewModel: NoteListViewModel(
                 noteRepo: container.noteRepository,
                 folderRepo: container.folderRepository,

@@ -6,8 +6,9 @@ import AppKit
 #endif
 
 @MainActor
-final class ToastManager: ObservableObject {
-    @Published var currentToast: ToastItem?
+@Observable
+final class ToastManager {
+    var currentToast: ToastItem?
 
     struct ToastItem: Equatable {
         let message: String

@@ -3,9 +3,9 @@ import SQLite3
 
 @main
 struct HavenApp: App {
-    @StateObject private var appState = AppState()
+    @State private var appState = AppState()
     @StateObject private var container = DependencyContainer()
-    @StateObject private var toastManager = ToastManager()
+    @State private var toastManager = ToastManager()
     #if os(macOS)
     @StateObject private var quickNotePanelController = QuickNotePanelController()
     #endif
@@ -60,9 +60,9 @@ struct HavenApp: App {
                     )
                 } else if hasCompletedOnboarding {
                     HavenNavigationStack()
-                        .environmentObject(appState)
+                        .environment(appState)
                         .environmentObject(container)
-                        .environmentObject(toastManager)
+                        .environment(toastManager)
                         .preferredColorScheme(appState.preferredColorScheme)
                         .sheet(isPresented: $showPaywallAfterOnboarding) {
                             SubscriptionView(

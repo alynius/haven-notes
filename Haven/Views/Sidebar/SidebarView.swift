@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @StateObject var viewModel: SidebarViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
 
     @State private var renamingFolderID: String?
