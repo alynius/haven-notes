@@ -99,14 +99,46 @@ struct OnboardingView: View {
                 .animation(.easeInOut(duration: 0.2), value: currentPage)
 
                 // Pages
+                #if os(iOS)
                 TabView(selection: $currentPage) {
                     ForEach(pages.indices, id: \.self) { index in
                         OnboardingPageView(page: pages[index], pageIndex: index)
                             .tag(index)
                     }
                 }
-                #if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                #else
+                // macOS has no .page tab style — render one page at a time with a slide
+                // transition. Arrow keys advance/retreat for keyboard-driven navigation.
+                ZStack {
+                    ForEach(pages.indices, id: \.self) { index in
+                        if index == currentPage {
+                            OnboardingPageView(page: pages[index], pageIndex: index)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.havenSnappy, value: currentPage)
+                .focusable()
+                .focusEffectDisabled()
+                .onKeyPress(.leftArrow) {
+                    if currentPage > 0 {
+                        withAnimation(.havenSnappy) { currentPage -= 1 }
+                        return .handled
+                    }
+                    return .ignored
+                }
+                .onKeyPress(.rightArrow) {
+                    if currentPage < pages.count - 1 {
+                        withAnimation(.havenSnappy) { currentPage += 1 }
+                        return .handled
+                    }
+                    return .ignored
+                }
                 #endif
 
                 // Progress bar (thin, warm)

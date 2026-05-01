@@ -91,6 +91,9 @@ struct HavenApp: App {
                 if container.biometricService.isEnabled {
                     attemptUnlock()
                 }
+                if hasCompletedOnboarding {
+                    createStarterNoteIfNeeded()
+                }
                 #if os(macOS)
                 setupQuickNotePanel()
                 GlobalHotkeyManager.shared.register {
@@ -113,6 +116,11 @@ struct HavenApp: App {
                 }
                 if newPhase == .active && container.biometricService.isEnabled && isLocked {
                     attemptUnlock()
+                }
+            }
+            .onChange(of: hasCompletedOnboarding) { _, finished in
+                if finished {
+                    createStarterNoteIfNeeded()
                 }
             }
             .alert("Haven cannot start", isPresented: $initializationFailed) {
@@ -182,6 +190,43 @@ struct HavenApp: App {
                 let mode = String(cString: cStr)
                 appState.applyTheme(mode)
             }
+        }
+    }
+
+    /// Seed a "Welcome to Haven" note on first launch only.
+    /// Skips if the user already has notes (pre-feature install) or if we've already seeded once.
+    private func createStarterNoteIfNeeded() {
+        let key = "hasCreatedStarterNote"
+        guard !UserDefaults.standard.bool(forKey: key) else { return }
+
+        Task {
+            let count = await container.noteRepository.countAll()
+            guard count == 0 else {
+                // Existing user — flip the flag silently so we never seed for them.
+                UserDefaults.standard.set(true, forKey: key)
+                return
+            }
+
+            let body = """
+            # Welcome to Haven
+
+            This is your first note. Edit or delete it any time.
+
+            Haven understands markdown:
+            - **Bold** and *italic*
+            - # Headings (one to three #)
+            - [[Wiki links]] — type `[[` to link to another note
+            - Tasks live below the editor; the daily note lives in the sidebar
+
+            Your notes stay on this device. Pro unlocks encrypted sync across devices.
+            """
+
+            _ = try? await container.noteRepository.create(
+                title: "Welcome to Haven",
+                bodyHTML: body,
+                folderID: nil
+            )
+            UserDefaults.standard.set(true, forKey: key)
         }
     }
 }
