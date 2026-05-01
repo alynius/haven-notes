@@ -79,4 +79,13 @@ final class NoteListViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
     }
+
+    func moveNote(id: String, toFolderID folderID: String?) async {
+        do {
+            try await noteRepo.moveToFolder(noteID: id, folderID: folderID)
+            await loadNotes()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
 }

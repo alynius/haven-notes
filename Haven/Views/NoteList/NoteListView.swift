@@ -83,6 +83,32 @@ struct NoteListView: View {
                             } label: {
                                 Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
                             }
+
+                            Menu {
+                                if note.folderID != nil {
+                                    Button {
+                                        Task { await viewModel.moveNote(id: note.id, toFolderID: nil) }
+                                    } label: {
+                                        Label("No Folder", systemImage: "tray")
+                                    }
+                                    Divider()
+                                }
+                                ForEach(viewModel.folders.sorted(by: { $0.value.localizedCaseInsensitiveCompare($1.value) == .orderedAscending }), id: \.key) { folderID, folderName in
+                                    if folderID != note.folderID {
+                                        Button {
+                                            Task { await viewModel.moveNote(id: note.id, toFolderID: folderID) }
+                                        } label: {
+                                            Label(folderName, systemImage: "folder")
+                                        }
+                                    }
+                                }
+                                if viewModel.folders.isEmpty && note.folderID == nil {
+                                    Text("Create a folder in the sidebar first.")
+                                }
+                            } label: {
+                                Label("Move to", systemImage: "folder")
+                            }
+
                             Button(role: .destructive) {
                                 noteToDelete = note.id
                                 showDeleteConfirm = true
