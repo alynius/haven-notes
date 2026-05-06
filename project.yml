@@ -37,7 +37,7 @@ targets:
       properties:
         CFBundleDisplayName: Haven
         CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "3"
+        CFBundleVersion: "4"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIApplicationSceneManifest:
@@ -93,7 +93,7 @@ targets:
       properties:
         CFBundleDisplayName: Haven
         CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "3"
+        CFBundleVersion: "4"
         CFBundleURLTypes:
           - CFBundleURLName: com.havennotes.app
             CFBundleURLSchemes:
@@ -132,7 +132,7 @@ targets:
       properties:
         CFBundleDisplayName: Haven Widget
         CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "3"
+        CFBundleVersion: "4"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
