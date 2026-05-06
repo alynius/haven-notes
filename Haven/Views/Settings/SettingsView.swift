@@ -6,6 +6,22 @@ struct SettingsView: View {
     @EnvironmentObject var container: DependencyContainer
     @State private var showNotionImport = false
 
+    private var biometricIconName: String {
+        switch container.biometricService.availableBiometric {
+        case .faceID: return "faceid"
+        case .touchID: return "touchid"
+        case .none: return "lock"
+        }
+    }
+
+    private var biometricLabel: String {
+        switch container.biometricService.availableBiometric {
+        case .faceID: return "Face ID Lock"
+        case .touchID: return "Touch ID Lock"
+        case .none: return "Lock"
+        }
+    }
+
     var body: some View {
         ZStack {
             Color.havenBackground
@@ -28,28 +44,30 @@ struct SettingsView: View {
                 }
                 .listRowBackground(Color.havenSurface)
 
-                // Security section
-                Section {
-                    Toggle(isOn: Binding(
-                        get: { container.biometricService.isEnabled },
-                        set: { container.biometricService.isEnabled = $0 }
-                    )) {
-                        HStack {
-                            Image(systemName: container.biometricService.availableBiometric == .faceID ? "faceid" : "touchid")
-                                .foregroundColor(Color.havenAccent)
-                            Text(container.biometricService.availableBiometric == .faceID ? "Face ID Lock" : "Touch ID Lock")
-                                .font(.havenBody)
+                // Security section — hidden when no biometric hardware is available
+                if container.biometricService.availableBiometric != .none {
+                    Section {
+                        Toggle(isOn: Binding(
+                            get: { container.biometricService.isEnabled },
+                            set: { container.biometricService.isEnabled = $0 }
+                        )) {
+                            HStack {
+                                Image(systemName: biometricIconName)
+                                    .foregroundColor(Color.havenAccent)
+                                Text(biometricLabel)
+                                    .font(.havenBody)
+                            }
                         }
+                        .tint(Color.havenAccent)
+                        .accessibilityIdentifier("settings_toggle_faceId")
+                    } header: {
+                        Text("Security")
+                    } footer: {
+                        Text("Require authentication to open Haven.")
+                            .font(.caption2)
                     }
-                    .tint(Color.havenAccent)
-                    .accessibilityIdentifier("settings_toggle_faceId")
-                } header: {
-                    Text("Security")
-                } footer: {
-                    Text("Require authentication to open Haven.")
-                        .font(.caption2)
+                    .listRowBackground(Color.havenSurface)
                 }
-                .listRowBackground(Color.havenSurface)
 
                 // Appearance section
                 Section {
