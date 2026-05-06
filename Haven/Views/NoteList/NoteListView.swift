@@ -8,15 +8,21 @@ struct NoteListView: View {
     @State private var showDeleteConfirm = false
     @State private var noteToDelete: String?
     @State private var showSidebar = false
+    #if os(iOS)
     @State private var editMode: EditMode = .inactive
     @State private var selectedNoteIDs: Set<String> = []
 
     private var isEditing: Bool { editMode == .active }
+    #else
+    private var isEditing: Bool { false }
+    #endif
 
     private var navigationTitle: String {
+        #if os(iOS)
         if isEditing && !selectedNoteIDs.isEmpty {
             return "\(selectedNoteIDs.count) selected"
         }
+        #endif
         switch viewModel.filter {
         case .allNotes:
             return "All Notes"
@@ -27,6 +33,7 @@ struct NoteListView: View {
         }
     }
 
+    #if os(iOS)
     private func toggleSelection(_ id: String) {
         if selectedNoteIDs.contains(id) {
             selectedNoteIDs.remove(id)
@@ -39,6 +46,7 @@ struct NoteListView: View {
         editMode = .inactive
         selectedNoteIDs = []
     }
+    #endif
 
     var body: some View {
         ZStack {
@@ -66,18 +74,22 @@ struct NoteListView: View {
                 List {
                     ForEach(viewModel.notes) { note in
                         Button {
+                            #if os(iOS)
                             if isEditing {
                                 toggleSelection(note.id)
-                            } else {
-                                appState.navigateTo(.noteEditor(noteID: note.id))
+                                return
                             }
+                            #endif
+                            appState.navigateTo(.noteEditor(noteID: note.id))
                         } label: {
                             HStack(spacing: Spacing.sm) {
+                                #if os(iOS)
                                 if isEditing {
                                     Image(systemName: selectedNoteIDs.contains(note.id) ? "checkmark.circle.fill" : "circle")
                                         .foregroundColor(selectedNoteIDs.contains(note.id) ? Color.havenAccent : Color.havenTextSecondary.opacity(0.4))
                                         .accessibilityHidden(true)
                                 }
+                                #endif
                                 NoteRowView(
                                     note: note,
                                     folderName: note.folderID.flatMap { viewModel.folders[$0] }
@@ -308,17 +320,21 @@ struct NoteListView: View {
         } message: {
             Text("This note will be moved to trash.")
         }
+        #if os(iOS)
         .environment(\.editMode, $editMode)
-        .task {
-            await viewModel.loadNotes()
-        }
         .onChange(of: editMode) { _, new in
             if new != .active { selectedNoteIDs = [] }
+        }
+        #endif
+        .task {
+            await viewModel.loadNotes()
         }
         .onChange(of: appState.activeFilter) { _, newFilter in
             viewModel.filter = newFilter
             showSidebar = false
+            #if os(iOS)
             exitEditMode()
+            #endif
             Task { await viewModel.loadNotes() }
         }
         .onChange(of: appState.navigationPath) { _, _ in
