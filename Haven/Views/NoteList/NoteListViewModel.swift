@@ -89,6 +89,20 @@ final class NoteListViewModel: ObservableObject {
         }
     }
 
+    /// Move multiple notes to the same destination folder. Failures stop the loop;
+    /// any successful moves before the failure are kept.
+    func moveNotes(ids: Set<String>, toFolderID folderID: String?) async {
+        do {
+            for id in ids {
+                try await noteRepo.moveToFolder(noteID: id, folderID: folderID)
+            }
+            await loadNotes()
+        } catch {
+            errorMessage = error.localizedDescription
+            await loadNotes()
+        }
+    }
+
     /// Optimistic in-memory reorder + persist new positions.
     func reorderNotes(from source: IndexSet, to destination: Int) async {
         var newOrder = notes
