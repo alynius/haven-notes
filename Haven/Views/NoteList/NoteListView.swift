@@ -224,6 +224,11 @@ struct NoteListView: View {
                         Button("Done") { exitSelectionMode() }
                             .foregroundColor(Color.havenPrimary)
                     } else {
+                        #if os(iOS)
+                        EditButton()
+                            .foregroundColor(Color.havenPrimary)
+                            .accessibilityIdentifier("noteList_button_edit")
+                        #endif
                         Button {
                             isSelecting = true
                         } label: {
