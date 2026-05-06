@@ -8,12 +8,14 @@ struct NoteListView: View {
     @State private var showDeleteConfirm = false
     @State private var noteToDelete: String?
     @State private var showSidebar = false
-    @State private var isSelecting = false
+    @State private var editMode: EditMode = .inactive
     @State private var selectedNoteIDs: Set<String> = []
 
+    private var isEditing: Bool { editMode == .active }
+
     private var navigationTitle: String {
-        if isSelecting {
-            return selectedNoteIDs.isEmpty ? "Select Notes" : "\(selectedNoteIDs.count) selected"
+        if isEditing && !selectedNoteIDs.isEmpty {
+            return "\(selectedNoteIDs.count) selected"
         }
         switch viewModel.filter {
         case .allNotes:
@@ -33,8 +35,8 @@ struct NoteListView: View {
         }
     }
 
-    private func exitSelectionMode() {
-        isSelecting = false
+    private func exitEditMode() {
+        editMode = .inactive
         selectedNoteIDs = []
     }
 
@@ -64,14 +66,14 @@ struct NoteListView: View {
                 List {
                     ForEach(viewModel.notes) { note in
                         Button {
-                            if isSelecting {
+                            if isEditing {
                                 toggleSelection(note.id)
                             } else {
                                 appState.navigateTo(.noteEditor(noteID: note.id))
                             }
                         } label: {
                             HStack(spacing: Spacing.sm) {
-                                if isSelecting {
+                                if isEditing {
                                     Image(systemName: selectedNoteIDs.contains(note.id) ? "checkmark.circle.fill" : "circle")
                                         .foregroundColor(selectedNoteIDs.contains(note.id) ? Color.havenAccent : Color.havenTextSecondary.opacity(0.4))
                                         .accessibilityHidden(true)
@@ -194,12 +196,12 @@ struct NoteListView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 16) {
-                    if isSelecting {
+                    if isEditing {
                         Menu {
                             Button {
                                 Task {
                                     await viewModel.moveNotes(ids: selectedNoteIDs, toFolderID: nil)
-                                    exitSelectionMode()
+                                    exitEditMode()
                                 }
                             } label: {
                                 Label("No Folder", systemImage: "tray")
@@ -209,34 +211,27 @@ struct NoteListView: View {
                                 Button {
                                     Task {
                                         await viewModel.moveNotes(ids: selectedNoteIDs, toFolderID: folderID)
-                                        exitSelectionMode()
+                                        exitEditMode()
                                     }
                                 } label: {
                                     Label(folderName, systemImage: "folder")
                                 }
                             }
                         } label: {
-                            Text("Move \(selectedNoteIDs.count)")
+                            Text(selectedNoteIDs.isEmpty ? "Move" : "Move \(selectedNoteIDs.count)")
                                 .foregroundColor(Color.havenPrimary)
                         }
                         .disabled(selectedNoteIDs.isEmpty || viewModel.folders.isEmpty)
                         .accessibilityIdentifier("noteList_button_bulkMove")
-                        Button("Done") { exitSelectionMode() }
+                        EditButton()
                             .foregroundColor(Color.havenPrimary)
+                            .accessibilityIdentifier("noteList_button_edit")
                     } else {
                         #if os(iOS)
                         EditButton()
                             .foregroundColor(Color.havenPrimary)
                             .accessibilityIdentifier("noteList_button_edit")
                         #endif
-                        Button {
-                            isSelecting = true
-                        } label: {
-                            Image(systemName: "checkmark.circle")
-                                .foregroundColor(Color.havenPrimary)
-                        }
-                        .accessibilityLabel("Select notes")
-                        .accessibilityIdentifier("noteList_button_select")
                         Button { appState.navigateTo(.graph) } label: {
                             Image(systemName: "point.3.connected.trianglepath.dotted")
                                 .foregroundColor(Color.havenPrimary)
@@ -313,12 +308,17 @@ struct NoteListView: View {
         } message: {
             Text("This note will be moved to trash.")
         }
+        .environment(\.editMode, $editMode)
         .task {
             await viewModel.loadNotes()
+        }
+        .onChange(of: editMode) { _, new in
+            if new != .active { selectedNoteIDs = [] }
         }
         .onChange(of: appState.activeFilter) { _, newFilter in
             viewModel.filter = newFilter
             showSidebar = false
+            exitEditMode()
             Task { await viewModel.loadNotes() }
         }
         .onChange(of: appState.navigationPath) { _, _ in
