@@ -24,6 +24,15 @@ targets:
         excludes:
           - "**/*.md"
           - "**/*.sql"
+          - "Info.plist"
+          - "MacInfo.plist"
+          - "AppIcon.icns"
+          - "**/*.entitlements"
+          - "**/.playwright-mcp/**"
+          - "smoke-test/**"
+          - "Resources/**"
+          - "haven-*.png"
+          - "**/*.log"
     resources:
       - path: Haven/Assets.xcassets
       - path: Haven/PrivacyInfo.xcprivacy
@@ -82,10 +91,19 @@ targets:
           - "**/*.md"
           - "**/*.sql"
           - "HavenWidget/**"
+          - "Info.plist"
+          - "MacInfo.plist"
+          - "**/*.entitlements"
+          - "**/.playwright-mcp/**"
+          - "smoke-test/**"
+          - "Resources/**"
+          - "haven-*.png"
+          - "**/*.log"
     resources:
       - path: Haven/Assets.xcassets
       - path: Haven/PrivacyInfo.xcprivacy
       - path: Haven/Configuration.storekit
+      - path: Haven/AppIcon.icns
     scheme:
       storeKitConfiguration: Haven/Configuration.storekit
     info:
@@ -94,6 +112,7 @@ targets:
         CFBundleDisplayName: Haven
         CFBundleShortVersionString: "1.1"
         CFBundleVersion: "4"
+        CFBundleIconFile: AppIcon
         CFBundleURLTypes:
           - CFBundleURLName: com.havennotes.app
             CFBundleURLSchemes:
@@ -114,7 +133,6 @@ targets:
         SWIFT_VERSION: 5.9
         MACOSX_DEPLOYMENT_TARGET: "14.0"
         COMBINE_HIDPI_IMAGES: YES
-        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         CODE_SIGN_ENTITLEMENTS: Haven/HavenMac.entitlements
         ENABLE_HARDENED_RUNTIME: YES
