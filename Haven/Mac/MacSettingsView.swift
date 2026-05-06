@@ -27,6 +27,8 @@ struct MacSettingsView: View {
                 .tabItem { Label("About", systemImage: "info.circle") }
         }
         .frame(width: 500, height: 420)
+        .toggleStyle(.switch)
+        .tint(Color.havenAccent)
     }
 }
 
@@ -85,6 +87,8 @@ struct GeneralSettingsTab: View {
                         get: { container.biometricService.isEnabled },
                         set: { container.biometricService.isEnabled = $0 }
                     ))
+                    .toggleStyle(.switch)
+                    .tint(Color.havenAccent)
                 }
             }
         }
