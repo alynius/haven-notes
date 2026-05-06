@@ -2,10 +2,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
     @State private var showNotionImport = false
-    private let biometricService = BiometricService()
 
     var body: some View {
         ZStack {
@@ -32,17 +31,18 @@ struct SettingsView: View {
                 // Security section
                 Section {
                     Toggle(isOn: Binding(
-                        get: { biometricService.isEnabled },
-                        set: { biometricService.isEnabled = $0 }
+                        get: { container.biometricService.isEnabled },
+                        set: { container.biometricService.isEnabled = $0 }
                     )) {
                         HStack {
-                            Image(systemName: biometricService.availableBiometric == .faceID ? "faceid" : "touchid")
+                            Image(systemName: container.biometricService.availableBiometric == .faceID ? "faceid" : "touchid")
                                 .foregroundColor(Color.havenAccent)
-                            Text(biometricService.availableBiometric == .faceID ? "Face ID Lock" : "Touch ID Lock")
+                            Text(container.biometricService.availableBiometric == .faceID ? "Face ID Lock" : "Touch ID Lock")
                                 .font(.havenBody)
                         }
                     }
                     .tint(Color.havenAccent)
+                    .accessibilityIdentifier("settings_toggle_faceId")
                 } header: {
                     Text("Security")
                 } footer: {
@@ -60,7 +60,8 @@ struct SettingsView: View {
                     }
                     .font(.havenBody)
                     .foregroundColor(Color.havenTextPrimary)
-                    .onChange(of: viewModel.themeMode) { newValue in
+                    .accessibilityIdentifier("settings_picker_theme")
+                    .onChange(of: viewModel.themeMode) { _, newValue in
                         viewModel.setThemeMode(newValue)
                         appState.applyTheme(newValue)
                     }
@@ -84,6 +85,7 @@ struct SettingsView: View {
                                 .foregroundColor(Color.havenTextSecondary)
                         }
                     }
+                    .accessibilityIdentifier("settings_button_importNotion")
                 } header: {
                     Text("Import")
                 }
@@ -95,6 +97,7 @@ struct SettingsView: View {
                         Text("Sync Settings")
                             .font(.havenBody)
                     }
+                    .accessibilityIdentifier("settings_navLink_sync")
 
                     NavigationLink(value: Route.encryption) {
                         HStack {
@@ -106,6 +109,7 @@ struct SettingsView: View {
                                 .foregroundColor(container.encryptionService.hasKey ? Color.havenAccent : Color.havenTextSecondary)
                         }
                     }
+                    .accessibilityIdentifier("settings_navLink_encryption")
                 } header: {
                     Text("Sync")
                 }
@@ -117,6 +121,7 @@ struct SettingsView: View {
                         Text("Haven Pro")
                             .font(.havenBody)
                     }
+                    .accessibilityIdentifier("settings_navLink_subscription")
                 } header: {
                     Text("Subscription")
                 }
@@ -148,11 +153,15 @@ struct SettingsView: View {
                 }
                 .listRowBackground(Color.havenSurface)
             }
+            #if os(iOS)
             .listStyle(.insetGrouped)
+            #endif
             .scrollContentBackground(.hidden)
         }
         .navigationTitle("Settings")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .sheet(isPresented: $showNotionImport) {
             NotionImportView(importer: container.notionImporter)
         }

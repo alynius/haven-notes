@@ -24,6 +24,7 @@ struct TagPickerView: View {
             Text("Tags")
                 .font(.havenCaption)
                 .foregroundColor(Color.havenTextSecondary)
+                .accessibilityAddTraits(.isHeader)
 
             // Current tags as chips
             if !tags.isEmpty {
@@ -45,6 +46,9 @@ struct TagPickerView: View {
                             .background(Color.havenAccent.opacity(0.1))
                             .clipShape(.rect(cornerRadius: 12))
                         }
+                        .accessibilityLabel("Remove tag \(tag.name)")
+                        .accessibilityHint("Removes this tag from the note")
+                        .accessibilityIdentifier("tagPicker_button_removeTag_\(tag.id)")
                     }
                 }
             }
@@ -53,9 +57,12 @@ struct TagPickerView: View {
             HStack {
                 TextField("Add tag...", text: $newTagName)
                     .font(.havenBody)
+                    #if os(iOS)
                     .textInputAutocapitalization(.never)
+                    #endif
                     .autocorrectionDisabled()
                     .focused($isFieldFocused)
+                    .accessibilityIdentifier("tagPicker_textField_newTag")
                     .onSubmit {
                         addCurrentTag()
                     }
@@ -66,6 +73,8 @@ struct TagPickerView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(Color.havenAccent)
                     }
+                    .accessibilityLabel("Add tag")
+                    .accessibilityIdentifier("tagPicker_button_addTag")
                 }
             }
             .padding(Spacing.sm)
@@ -91,7 +100,11 @@ struct TagPickerView: View {
                             }
                             .padding(.horizontal, Spacing.md)
                             .padding(.vertical, Spacing.sm)
+                            .contentShape(Rectangle())
+                            .hoverHighlight()
                         }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Add tag \(tag.name)")
 
                         if tag.id != suggestions.prefix(5).last?.id {
                             Divider()

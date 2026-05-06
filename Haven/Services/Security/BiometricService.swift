@@ -21,7 +21,11 @@ final class BiometricService {
     }
 
     var isEnabled: Bool {
-        get { UserDefaults.standard.bool(forKey: "biometricLockEnabled") }
+        get {
+            // Hardware unavailable -> never report enabled, even if a stale UserDefault says so.
+            guard availableBiometric != .none else { return false }
+            return UserDefaults.standard.bool(forKey: "biometricLockEnabled")
+        }
         set { UserDefaults.standard.set(newValue, forKey: "biometricLockEnabled") }
     }
 

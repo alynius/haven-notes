@@ -39,6 +39,28 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0DB065DA98D7CE7E877A0639"
+               BuildableName = "HavenTests.xctest"
+               BlueprintName = "HavenTests"
+               ReferencedContainer = "container:Haven.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AA6FF299DB6D26A88CDDC668"
+               BuildableName = "HavenUITests.xctest"
+               BlueprintName = "HavenUITests"
+               ReferencedContainer = "container:Haven.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

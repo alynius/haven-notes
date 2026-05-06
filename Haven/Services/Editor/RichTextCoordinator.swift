@@ -1,10 +1,6 @@
+#if os(iOS)
 import SwiftUI
 import UIKit
-
-/// Formatting states detectable at the cursor position.
-enum MarkdownFormat: Hashable {
-    case bold, italic, heading, list
-}
 
 /// UIViewRepresentable that wraps UITextView with live inline markdown highlighting.
 /// Stores raw markdown text (not HTML). Syntax characters are visible but dimmed.
@@ -12,6 +8,7 @@ struct RichTextEditor: UIViewRepresentable {
     @Binding var htmlContent: String  // Now holds raw markdown (field name kept for DB compat)
     var onLinkTapped: ((String) -> Void)?
     var onTextChanged: ((String) -> Void)?
+    @Environment(\.colorScheme) private var colorScheme
 
     /// Shared coordinator reference so toolbar actions can reach the text view.
     class Shared: ObservableObject {
@@ -58,7 +55,9 @@ struct RichTextEditor: UIViewRepresentable {
         if context.coordinator.isEditing { return }
 
         let currentPlainText = textView.attributedText?.string ?? ""
-        if currentPlainText != htmlContent {
+        let colorSchemeChanged = context.coordinator.lastColorScheme != colorScheme
+        if currentPlainText != htmlContent || colorSchemeChanged {
+            context.coordinator.lastColorScheme = colorScheme
             context.coordinator.applyHighlighting(to: textView, text: htmlContent)
         }
     }
@@ -73,6 +72,8 @@ struct RichTextEditor: UIViewRepresentable {
         var parent: RichTextEditor
         var isEditing = false
         weak var textView: UITextView?
+        /// Tracks the last known color scheme so updateUIView can detect changes.
+        var lastColorScheme: ColorScheme = .light
 
         private var highlighter: MarkdownHighlighter
         private var highlightWorkItem: DispatchWorkItem?
@@ -103,12 +104,19 @@ struct RichTextEditor: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             let text = textView.text ?? ""
 
-            // Update the binding with raw markdown
+            // Update the binding with raw markdown immediately
             parent.htmlContent = text
             parent.onTextChanged?(text)
 
-            // Apply highlighting immediately for responsive feedback
-            applyHighlighting(to: textView, text: text)
+            // Debounce highlighting to avoid per-keystroke regex overhead
+            highlightWorkItem?.cancel()
+            highlightWorkItem = DispatchWorkItem { [weak self] in
+                guard let self = self, let textView = self.textView else { return }
+                self.applyHighlighting(to: textView, text: textView.text)
+            }
+            if let workItem = highlightWorkItem {
+                DispatchQueue.main.asyncAfter(deadline: .now() + highlightDebounce, execute: workItem)
+            }
 
             // Update active formatting state
             detectActiveFormats(in: text, at: textView.selectedRange)
@@ -119,18 +127,18 @@ struct RichTextEditor: UIViewRepresentable {
             detectActiveFormats(in: text, at: textView.selectedRange)
         }
 
-        /// Handle taps on links — open in Safari when not actively editing that link
-        func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-            // For wiki links, route through the parent callback
-            let tappedText = (textView.text as NSString?)?.substring(with: characterRange) ?? ""
-            if tappedText.hasPrefix("[[") {
-                let title = tappedText.replacingOccurrences(of: "[[", with: "").replacingOccurrences(of: "]]", with: "")
-                parent.onLinkTapped?(title)
-                return false
+        /// Handle taps on links — wiki links route through the parent callback,
+        /// plain URLs fall through to the system default (open in Safari).
+        func textView(_ textView: UITextView, primaryActionFor textItem: UITextItem, defaultAction: UIAction) -> UIAction? {
+            guard case .link = textItem.content else { return nil }
+            let tappedText = (textView.text as NSString?)?.substring(with: textItem.range) ?? ""
+            guard tappedText.hasPrefix("[[") else { return nil }
+            let title = tappedText
+                .replacingOccurrences(of: "[[", with: "")
+                .replacingOccurrences(of: "]]", with: "")
+            return UIAction { [weak self] _ in
+                self?.parent.onLinkTapped?(title)
             }
-            // Open regular URLs in Safari
-            UIApplication.shared.open(URL)
-            return false
         }
 
         /// Detect pasted URLs and auto-fetch page title
@@ -443,3 +451,4 @@ struct RichTextEditor: UIViewRepresentable {
         }
     }
 }
+#endif

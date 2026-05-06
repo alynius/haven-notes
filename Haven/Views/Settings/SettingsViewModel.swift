@@ -1,5 +1,4 @@
 import SwiftUI
-import SQLite3
 
 @MainActor
 final class SettingsViewModel: ObservableObject {
@@ -24,7 +23,7 @@ final class SettingsViewModel: ObservableObject {
 
         // Load theme setting
         try? db.query("SELECT value FROM app_settings WHERE key = 'theme_mode'") { stmt in
-            themeMode = String(cString: sqlite3_column_text(stmt, 0))
+            themeMode = DatabaseManager.columnTextNonNull(stmt, 0)
         }
     }
 

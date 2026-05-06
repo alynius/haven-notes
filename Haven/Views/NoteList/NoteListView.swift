@@ -2,7 +2,7 @@ import SwiftUI
 
 struct NoteListView: View {
     @StateObject var viewModel: NoteListViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
     @Environment(\.horizontalSizeClass) var sizeClass
     @State private var showDeleteConfirm = false
@@ -35,7 +35,7 @@ struct NoteListView: View {
                 }
                 .listStyle(.plain)
             } else if viewModel.notes.isEmpty {
-                EmptyStateView {
+                EmptyStateView(filter: viewModel.filter) {
                     Task {
                         if let id = await viewModel.createNote() {
                             appState.navigateTo(.noteEditor(noteID: id))
@@ -52,8 +52,10 @@ struct NoteListView: View {
                                 note: note,
                                 folderName: note.folderID.flatMap { viewModel.folders[$0] }
                             )
+                            .hoverHighlight()
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("noteList_row_\(note.id)")
                         .listRowBackground(Color.havenBackground)
                         .listRowSeparatorTint(Color.havenBorder)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -63,6 +65,8 @@ struct NoteListView: View {
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
+                            .accessibilityHint("Deletes this note permanently")
+                            .accessibilityIdentifier("noteList_button_delete_\(note.id)")
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button {
@@ -71,6 +75,7 @@ struct NoteListView: View {
                                 Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
                             }
                             .tint(Color.havenAccent)
+                            .accessibilityIdentifier("noteList_button_pin_\(note.id)")
                         }
                         .contextMenu {
                             Button {
@@ -78,6 +83,32 @@ struct NoteListView: View {
                             } label: {
                                 Label(note.isPinned ? "Unpin" : "Pin", systemImage: note.isPinned ? "pin.slash" : "pin")
                             }
+
+                            Menu {
+                                if note.folderID != nil {
+                                    Button {
+                                        Task { await viewModel.moveNote(id: note.id, toFolderID: nil) }
+                                    } label: {
+                                        Label("No Folder", systemImage: "tray")
+                                    }
+                                    Divider()
+                                }
+                                ForEach(viewModel.folders.sorted(by: { $0.value.localizedCaseInsensitiveCompare($1.value) == .orderedAscending }), id: \.key) { folderID, folderName in
+                                    if folderID != note.folderID {
+                                        Button {
+                                            Task { await viewModel.moveNote(id: note.id, toFolderID: folderID) }
+                                        } label: {
+                                            Label(folderName, systemImage: "folder")
+                                        }
+                                    }
+                                }
+                                if viewModel.folders.isEmpty && note.folderID == nil {
+                                    Text("Create a folder in the sidebar first.")
+                                }
+                            } label: {
+                                Label("Move to", systemImage: "folder")
+                            }
+
                             Button(role: .destructive) {
                                 noteToDelete = note.id
                                 showDeleteConfirm = true
@@ -110,6 +141,7 @@ struct NoteListView: View {
             .presentationDetents([.medium, .large])
         }
         .toolbar {
+            #if os(iOS)
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack(spacing: Spacing.md) {
                     if sizeClass != .regular {
@@ -118,7 +150,48 @@ struct NoteListView: View {
                                 .foregroundColor(Color.havenPrimary)
                         }
                         .accessibilityLabel("Folders & Tags")
+                        .accessibilityIdentifier("noteList_button_foldersAndTags")
                     }
+                    Button { appState.navigateTo(.settings) } label: {
+                        Image(systemName: "gearshape")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Settings")
+                    .accessibilityIdentifier("noteList_button_settings")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack(spacing: 16) {
+                    Button { appState.navigateTo(.graph) } label: {
+                        Image(systemName: "point.3.connected.trianglepath.dotted")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Knowledge Graph")
+                    .accessibilityIdentifier("noteList_button_graph")
+                    Button { appState.navigateTo(.search) } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color.havenPrimary)
+                    }
+                    .accessibilityLabel("Search")
+                    .accessibilityIdentifier("noteList_button_search")
+                    Button {
+                        Task {
+                            if let id = await viewModel.createNote() {
+                                appState.navigateTo(.noteEditor(noteID: id))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(Color.havenPrimary)
+                            .font(.title3)
+                    }
+                    .accessibilityLabel("New Note")
+                    .accessibilityIdentifier("noteList_button_newNote")
+                }
+            }
+            #elseif os(macOS)
+            ToolbarItem(placement: .automatic) {
+                HStack(spacing: Spacing.md) {
                     Button { appState.navigateTo(.settings) } label: {
                         Image(systemName: "gearshape")
                             .foregroundColor(Color.havenPrimary)
@@ -126,7 +199,7 @@ struct NoteListView: View {
                     .accessibilityLabel("Settings")
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .automatic) {
                 HStack(spacing: 16) {
                     Button { appState.navigateTo(.graph) } label: {
                         Image(systemName: "point.3.connected.trianglepath.dotted")
@@ -152,6 +225,7 @@ struct NoteListView: View {
                     .accessibilityLabel("New Note")
                 }
             }
+            #endif
         }
         .confirmationDialog("Delete Note", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
@@ -166,12 +240,12 @@ struct NoteListView: View {
         .task {
             await viewModel.loadNotes()
         }
-        .onChange(of: appState.activeFilter) { newFilter in
+        .onChange(of: appState.activeFilter) { _, newFilter in
             viewModel.filter = newFilter
             showSidebar = false
             Task { await viewModel.loadNotes() }
         }
-        .onChange(of: appState.navigationPath) { _ in
+        .onChange(of: appState.navigationPath) { _, _ in
             showSidebar = false  // Dismiss sidebar when navigating (e.g. Daily Note)
         }
         .alert("Error", isPresented: Binding(

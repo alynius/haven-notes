@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+---
+<BaseLayout
+  title="Page not found — Haven Notes"
+  description="That page wandered off. Head back to havennotes.app."
+>
+  <section class="py-32 md:py-40 text-center">
+    <div class="max-w-[600px] mx-auto px-6">
+      <Eyebrow>404</Eyebrow>
+      <h1 class="font-serif text-display mt-4">
+        This page <span class="accent-italic">wandered off.</span>
+      </h1>
+      <p class="text-lg text-text-secondary mt-6">
+        The link you followed is gone, or never existed. Either way, your notes are still safe on your device.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mt-10">
+        <Button href="/" variant="primary">Back home</Button>
+        <Button href="/support/" variant="outline">Get help</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -59,11 +59,14 @@ final class DatabaseManager {
             throw DatabaseError.queryFailed(error)
         }
 
-        defer { sqlite3_finalize(statement) }
+        guard let stmt = statement else {
+            throw DatabaseError.queryFailed("Statement was nil after successful prepare")
+        }
+        defer { sqlite3_finalize(stmt) }
 
-        bindParams(statement: statement!, params: params)
+        bindParams(statement: stmt, params: params)
 
-        let stepResult = sqlite3_step(statement)
+        let stepResult = sqlite3_step(stmt)
         guard stepResult == SQLITE_DONE || stepResult == SQLITE_ROW else {
             let error = String(cString: sqlite3_errmsg(db))
             throw DatabaseError.queryFailed(error)
@@ -82,12 +85,15 @@ final class DatabaseManager {
             throw DatabaseError.queryFailed(error)
         }
 
-        defer { sqlite3_finalize(statement) }
+        guard let stmt = statement else {
+            throw DatabaseError.queryFailed("Statement was nil after successful prepare")
+        }
+        defer { sqlite3_finalize(stmt) }
 
-        bindParams(statement: statement!, params: params)
+        bindParams(statement: stmt, params: params)
 
-        while sqlite3_step(statement) == SQLITE_ROW {
-            handler(statement!)
+        while sqlite3_step(stmt) == SQLITE_ROW {
+            handler(stmt)
         }
     }
 

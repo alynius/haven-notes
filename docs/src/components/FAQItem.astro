@@ -1,0 +1,17 @@
+---
+interface Props {
+  question: string;
+}
+
+const { question } = Astro.props;
+---
+<details class="group">
+  <summary class="flex items-center justify-between cursor-pointer py-6 font-medium text-text-primary text-lg list-none [&::-webkit-details-marker]:hidden">
+    {question}
+    <span aria-hidden="true" class="text-accent text-2xl font-light group-open:hidden">+</span>
+    <span aria-hidden="true" class="text-accent text-2xl font-light hidden group-open:inline">−</span>
+  </summary>
+  <div class="pb-6 text-text-secondary leading-relaxed">
+    <slot />
+  </div>
+</details>

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
 
     var body: some View {
         ZStack {
@@ -14,6 +14,7 @@ struct SearchView: View {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 36, weight: .thin))
                         .foregroundColor(Color.havenTextSecondary.opacity(0.3))
+                        .accessibilityHidden(true)
                     Text("Search your notes")
                         .font(.havenBody)
                         .foregroundColor(Color.havenTextSecondary)
@@ -31,6 +32,7 @@ struct SearchView: View {
                     Image(systemName: "doc.text.magnifyingglass")
                         .font(.system(size: 36))
                         .foregroundColor(Color.havenTextSecondary.opacity(0.4))
+                        .accessibilityHidden(true)
                     Text("No results found")
                         .font(.havenBody)
                         .foregroundStyle(.secondary)
@@ -44,6 +46,7 @@ struct SearchView: View {
                             .font(.havenBody.weight(.medium))
                             .foregroundColor(Color.havenPrimary)
                     }
+                    .accessibilityIdentifier("search_button_clear")
                     .padding(.top, Spacing.xs)
                 }
             } else if !viewModel.results.isEmpty {
@@ -53,17 +56,21 @@ struct SearchView: View {
                             appState.navigateTo(.noteEditor(noteID: note.id))
                         } label: {
                             SearchResultRowView(note: note, query: viewModel.query)
+                                .hoverHighlight()
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("search_row_\(note.id)")
                     }
                 }
                 .listStyle(.plain)
             }
         }
         .navigationTitle("Search")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .searchable(text: $viewModel.query, prompt: "Search notes...")
-        .onChange(of: viewModel.query) { _ in
+        .onChange(of: viewModel.query) { _, _ in
             viewModel.search()
         }
     }

@@ -25,24 +25,9 @@ final class SidebarViewModel: ObservableObject {
         do {
             folders = try await folderRepo.fetchAll()
             tags = try await tagRepo.fetchAll()
-            let allNotes = try await noteRepo.fetchAll()
-            totalNoteCount = allNotes.count
-
-            // Count notes per folder
-            var fCounts: [String: Int] = [:]
-            for folder in folders {
-                let notes = try await noteRepo.fetchByFolder(folderID: folder.id)
-                fCounts[folder.id] = notes.count
-            }
-            folderNoteCounts = fCounts
-
-            // Count notes per tag
-            var tCounts: [String: Int] = [:]
-            for tag in tags {
-                let notes = try await noteRepo.fetchByTag(tagID: tag.id)
-                tCounts[tag.id] = notes.count
-            }
-            tagNoteCounts = tCounts
+            totalNoteCount = await noteRepo.countAll()
+            folderNoteCounts = await noteRepo.countByFolder()
+            tagNoteCounts = await noteRepo.countByTag()
         } catch {
             errorMessage = error.localizedDescription
         }

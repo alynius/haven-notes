@@ -32,6 +32,7 @@ final class SpeechRecognizer: ObservableObject {
         }
 
         let audioStatus: Bool
+        #if os(iOS)
         if #available(iOS 17.0, *) {
             audioStatus = await AVAudioApplication.requestRecordPermission()
         } else {
@@ -41,6 +42,9 @@ final class SpeechRecognizer: ObservableObject {
                 }
             }
         }
+        #else
+        audioStatus = await AVCaptureDevice.requestAccess(for: .audio)
+        #endif
 
         guard audioStatus else {
             errorMessage = "Microphone access not granted"
@@ -58,13 +62,14 @@ final class SpeechRecognizer: ObservableObject {
             return
         }
 
-        // Stop any existing session
         stopRecording()
 
         do {
+            #if os(iOS)
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+            #endif
 
             let audioEngine = AVAudioEngine()
             self.audioEngine = audioEngine
@@ -72,7 +77,6 @@ final class SpeechRecognizer: ObservableObject {
             let request = SFSpeechAudioBufferRecognitionRequest()
             request.shouldReportPartialResults = true
 
-            // Prefer on-device recognition for privacy
             if speechRecognizer.supportsOnDeviceRecognition {
                 request.requiresOnDeviceRecognition = true
             }
@@ -82,7 +86,6 @@ final class SpeechRecognizer: ObservableObject {
             let inputNode = audioEngine.inputNode
             let recordingFormat = inputNode.outputFormat(forBus: 0)
 
-            // Guard against zero-channel format (e.g. simulator or no mic hardware)
             guard recordingFormat.channelCount > 0 else {
                 errorMessage = "No microphone available"
                 return
@@ -129,7 +132,9 @@ final class SpeechRecognizer: ObservableObject {
         recognitionTask = nil
         isRecording = false
 
+        #if os(iOS)
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        #endif
     }
 
     func toggleRecording() async {

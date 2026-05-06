@@ -72,10 +72,50 @@ final class NoteRepository: NoteRepositoryProtocol {
         }
     }
 
+    func countAll() async -> Int {
+        (try? db.performSync {
+            var count = 0
+            try self.db.query(
+                "SELECT COUNT(*) FROM \(HavenConstants.Database.notesTable) WHERE is_deleted = 0"
+            ) { stmt in
+                count = Int(sqlite3_column_int(stmt, 0))
+            }
+            return count
+        }) ?? 0
+    }
+
+    func countByFolder() async -> [String: Int] {
+        (try? db.performSync {
+            var result: [String: Int] = [:]
+            try self.db.query(
+                "SELECT folder_id, COUNT(*) FROM \(HavenConstants.Database.notesTable) WHERE is_deleted = 0 AND folder_id IS NOT NULL GROUP BY folder_id"
+            ) { stmt in
+                let folderID = DatabaseManager.columnTextNonNull(stmt, 0)
+                let count = Int(sqlite3_column_int(stmt, 1))
+                result[folderID] = count
+            }
+            return result
+        }) ?? [:]
+    }
+
+    func countByTag() async -> [String: Int] {
+        (try? db.performSync {
+            var result: [String: Int] = [:]
+            try self.db.query(
+                "SELECT t.tag_id, COUNT(*) FROM \(HavenConstants.Database.noteTagsTable) t JOIN \(HavenConstants.Database.notesTable) n ON t.note_id = n.id WHERE n.is_deleted = 0 GROUP BY t.tag_id"
+            ) { stmt in
+                let tagID = DatabaseManager.columnTextNonNull(stmt, 0)
+                let count = Int(sqlite3_column_int(stmt, 1))
+                result[tagID] = count
+            }
+            return result
+        }) ?? [:]
+    }
+
     // MARK: - Update
 
     func update(_ note: Note) async throws {
-        let plaintext = HTMLSanitizer.stripHTML(note.bodyHTML)
+        let plaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
 
         try db.performSync {
             let sql = """

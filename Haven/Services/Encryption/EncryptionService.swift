@@ -2,14 +2,17 @@ import Foundation
 import CryptoKit
 import CommonCrypto
 
+@MainActor
 final class EncryptionService {
 
     private var masterKey: SymmetricKey?
 
     // MARK: - Key Management
 
-    /// Derive master key from password using PBKDF2
-    func deriveKey(from password: String, salt: Data? = nil) -> (key: SymmetricKey, salt: Data) {
+    /// Derive master key from password using PBKDF2.
+    /// Marked nonisolated so it can be called from a background Task.detached context.
+    /// Only touches local variables; `masterKey` is set by the caller on MainActor.
+    nonisolated func deriveKey(from password: String, salt: Data? = nil) -> (key: SymmetricKey, salt: Data) {
         let keySalt = salt ?? generateSalt()
 
         // PBKDF2 with SHA256, 600K iterations (OWASP 2023 recommendation)
@@ -35,13 +38,15 @@ final class EncryptionService {
         }
 
         let key = SymmetricKey(data: derivedKey)
-        self.masterKey = key
         return (key, keySalt)
     }
 
-    private func generateSalt() -> Data {
+    private nonisolated func generateSalt() -> Data {
         var salt = Data(count: 32)
-        _ = salt.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!) }
+        _ = salt.withUnsafeMutableBytes { buffer -> Int32 in
+            guard let baseAddress = buffer.baseAddress else { return errSecParam }
+            return SecRandomCopyBytes(kSecRandomDefault, 32, baseAddress)
+        }
         return salt
     }
 
@@ -90,7 +95,7 @@ final class EncryptionService {
             kSecAttrService as String: keychainService,
             kSecAttrAccount as String: account,
             kSecValueData as String: data,
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
         ]
 
         let status = SecItemAdd(query as CFDictionary, nil)

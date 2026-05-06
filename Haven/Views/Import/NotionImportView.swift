@@ -68,7 +68,9 @@ struct NotionImportView: View {
             }
             .background(Color.havenBackground)
             .navigationTitle("Import")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
@@ -105,6 +107,7 @@ struct NotionImportView: View {
                 .background(Color.havenPrimary)
                 .clipShape(.rect(cornerRadius: CornerRadius.sm))
         }
+        .accessibilityIdentifier("notionImport_button_select")
     }
 
     private var progressView: some View {
@@ -157,6 +160,7 @@ struct NotionImportView: View {
                 .padding(.vertical, Spacing.md)
                 .background(Color.havenPrimary)
                 .clipShape(.rect(cornerRadius: CornerRadius.sm))
+                .accessibilityIdentifier("notionImport_button_done")
                 .padding(.top, Spacing.sm)
         }
     }

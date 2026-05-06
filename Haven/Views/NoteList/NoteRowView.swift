@@ -12,6 +12,7 @@ struct NoteRowView: View {
                         .font(.caption2)
                         .foregroundColor(Color.havenAccent)
                         .transition(.scale.combined(with: .opacity))
+                        .accessibilityLabel("Pinned")
                 }
                 Text(note.title.isEmpty ? "Untitled" : note.title)
                     .font(.havenBody.weight(.medium))
@@ -48,5 +49,6 @@ struct NoteRowView: View {
                 .foregroundColor(Color.havenTextSecondary)
         }
         .padding(.vertical, Spacing.sm)
+        .accessibilityElement(children: .combine)
     }
 }

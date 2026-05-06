@@ -2,10 +2,10 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Binding var hasCompletedOnboarding: Bool
+    @Binding var showPaywallAfterOnboarding: Bool
     @EnvironmentObject var container: DependencyContainer
     @State private var currentPage = 0
     @State private var appeared = false
-    @State private var showPaywall = false
 
     // 6 pages: Hook → Problem → Solution → Features → Trust → CTA
     private let pages: [OnboardingPage] = [
@@ -91,6 +91,7 @@ struct OnboardingView: View {
                                 .font(.havenBody)
                                 .foregroundColor(Color.havenTextSecondary)
                         }
+                        .accessibilityIdentifier("onboarding_button_skip")
                     }
                 }
                 .padding(.horizontal, Spacing.xxl)
@@ -98,6 +99,7 @@ struct OnboardingView: View {
                 .animation(.easeInOut(duration: 0.2), value: currentPage)
 
                 // Pages
+                #if os(iOS)
                 TabView(selection: $currentPage) {
                     ForEach(pages.indices, id: \.self) { index in
                         OnboardingPageView(page: pages[index], pageIndex: index)
@@ -105,6 +107,39 @@ struct OnboardingView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                #else
+                // macOS has no .page tab style — render one page at a time with a slide
+                // transition. Arrow keys advance/retreat for keyboard-driven navigation.
+                ZStack {
+                    ForEach(pages.indices, id: \.self) { index in
+                        if index == currentPage {
+                            OnboardingPageView(page: pages[index], pageIndex: index)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.havenSnappy, value: currentPage)
+                .focusable()
+                .focusEffectDisabled()
+                .onKeyPress(.leftArrow) {
+                    if currentPage > 0 {
+                        withAnimation(.havenSnappy) { currentPage -= 1 }
+                        return .handled
+                    }
+                    return .ignored
+                }
+                .onKeyPress(.rightArrow) {
+                    if currentPage < pages.count - 1 {
+                        withAnimation(.havenSnappy) { currentPage += 1 }
+                        return .handled
+                    }
+                    return .ignored
+                }
+                #endif
 
                 // Progress bar (thin, warm)
                 GeometryReader { geo in
@@ -122,6 +157,8 @@ struct OnboardingView: View {
                 .frame(height: 4)
                 .padding(.horizontal, Spacing.xxl)
                 .padding(.bottom, Spacing.xl)
+                .accessibilityLabel("Onboarding progress")
+                .accessibilityValue("Page \(currentPage + 1) of \(pages.count)")
 
                 // Bottom button
                 Group {
@@ -129,11 +166,11 @@ struct OnboardingView: View {
                         // Final: prominent Get Started → leads to paywall or app
                         VStack(spacing: Spacing.md) {
                             Button {
-                                // Complete onboarding first, then offer paywall
+                                // Signal paywall before completing onboarding so HavenApp
+                                // can present it from the HavenNavigationStack (which survives
+                                // the onboarding-to-main transition).
+                                showPaywallAfterOnboarding = true
                                 completeOnboarding()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    showPaywall = true
-                                }
                             } label: {
                                 HStack(spacing: Spacing.sm) {
                                     Text("Start Writing")
@@ -146,6 +183,7 @@ struct OnboardingView: View {
                                 .background(Color.havenPrimary)
                                 .clipShape(.rect(cornerRadius: CornerRadius.md))
                             }
+                            .accessibilityIdentifier("onboarding_button_startWriting")
 
                             Text("Free to use · Pro unlocks sync")
                                 .font(.caption)
@@ -169,6 +207,7 @@ struct OnboardingView: View {
                             .background(Color.havenPrimary.opacity(0.08))
                             .clipShape(.rect(cornerRadius: CornerRadius.md))
                         }
+                        .accessibilityIdentifier("onboarding_button_continue")
                     }
                 }
                 .padding(.horizontal, Spacing.xxl)
@@ -181,7 +220,7 @@ struct OnboardingView: View {
                 appeared = true
             }
         }
-        .onChange(of: currentPage) { newPage in
+        .onChange(of: currentPage) { _, newPage in
             // Clamp page index to prevent swiping past the last page
             if newPage >= pages.count {
                 currentPage = pages.count - 1
@@ -189,14 +228,13 @@ struct OnboardingView: View {
                 currentPage = 0
             }
         }
-        .sheet(isPresented: $showPaywall) {
-            SubscriptionView(viewModel: SubscriptionViewModel(subscriptionManager: container.subscriptionManager))
-        }
     }
 
     private func completeOnboarding() {
+        #if os(iOS)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        #endif
 
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             hasCompletedOnboarding = true

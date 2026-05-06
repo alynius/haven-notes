@@ -24,7 +24,7 @@ final class SearchService {
 
             let sql = """
                 SELECT n.id, n.title, n.body_html, n.body_plaintext,
-                       n.is_pinned, n.is_deleted, n.created_at, n.updated_at
+                       n.is_pinned, n.is_deleted, n.created_at, n.updated_at, n.folder_id
                 FROM \(HavenConstants.Database.notesFTSTable) fts
                 JOIN \(HavenConstants.Database.notesTable) n ON n.id = fts.note_id
                 WHERE fts MATCH ? AND n.is_deleted = 0
@@ -59,7 +59,7 @@ final class SearchService {
             // snippet(table, column_index, before_match, after_match, trailing, max_tokens)
             let sql = """
                 SELECT n.id, n.title, n.body_html, n.body_plaintext,
-                       n.is_pinned, n.is_deleted, n.created_at, n.updated_at,
+                       n.is_pinned, n.is_deleted, n.created_at, n.updated_at, n.folder_id,
                        snippet(\(HavenConstants.Database.notesFTSTable), 1, '**', '**', '...', 32)
                 FROM \(HavenConstants.Database.notesFTSTable) fts
                 JOIN \(HavenConstants.Database.notesTable) n ON n.id = fts.note_id
@@ -71,7 +71,7 @@ final class SearchService {
             var results: [(note: Note, snippet: String)] = []
             try self.db.query(sql, params: [ftsQuery, limit]) { stmt in
                 let note = self.noteFromRow(stmt)
-                let snippet = DatabaseManager.columnTextNonNull(stmt, 8)
+                let snippet = DatabaseManager.columnTextNonNull(stmt, 9)
                 results.append((note: note, snippet: snippet))
             }
             return results
@@ -108,6 +108,7 @@ final class SearchService {
             bodyPlaintext: DatabaseManager.columnTextNonNull(stmt, 3),
             isPinned: sqlite3_column_int(stmt, 4) == 1,
             isDeleted: sqlite3_column_int(stmt, 5) == 1,
+            folderID: DatabaseManager.columnText(stmt, 8),
             createdAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 6)) ?? Date(),
             updatedAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 7)) ?? Date()
         )

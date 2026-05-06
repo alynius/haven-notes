@@ -2,13 +2,14 @@ import SwiftUI
 
 struct GraphView: View {
     @StateObject var viewModel: GraphViewModel
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
 
     @State private var scale: CGFloat = 0.5
     @State private var lastScale: CGFloat = 0.5
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
     @State private var draggedNodeID: String?
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var body: some View {
         ZStack {
@@ -26,7 +27,9 @@ struct GraphView: View {
             }
         }
         .navigationTitle("Graph")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .task {
             await viewModel.load()
         }
@@ -42,7 +45,8 @@ struct GraphView: View {
             Image(systemName: "point.3.connected.trianglepath.dotted")
                 .font(.system(size: 48, weight: .thin))
                 .foregroundStyle(Color.havenPrimary.opacity(0.4))
-                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3))
+                .symbolEffect(.pulse.byLayer, options: .repeating.speed(0.3), isActive: !reduceMotion)
+                .accessibilityHidden(true)
             Text("No connections yet")
                 .font(.havenHeadline)
                 .foregroundColor(Color.havenTextPrimary)
@@ -75,6 +79,7 @@ struct GraphView: View {
                         .padding(.vertical, Spacing.xs)
                         .background(.regularMaterial)
                         .clipShape(Capsule())
+                        .accessibilityIdentifier("graph_badge_stats")
                     Spacer()
                     Button {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
@@ -92,6 +97,7 @@ struct GraphView: View {
                             .clipShape(Circle())
                     }
                     .accessibilityLabel("Reset zoom")
+                    .accessibilityIdentifier("graph_button_resetZoom")
                 }
                 .padding(Spacing.lg)
             }

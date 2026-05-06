@@ -27,16 +27,35 @@ final class SyncSettingsViewModel: ObservableObject {
         }
     }
 
-    func saveConfiguration() async {
-        guard let url = URL(string: serverURL), !authToken.isEmpty else {
-            errorMessage = "Please enter a valid server URL and auth token"
-            return
+    func saveConfiguration() async -> Bool {
+        let trimmedURL = serverURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let url = URL(string: trimmedURL),
+              url.scheme?.lowercased() == "https",
+              url.host?.isEmpty == false else {
+            errorMessage = "Server URL must be a valid HTTPS URL (e.g. https://sync.example.com)."
+            return false
+        }
+        let trimmedToken = authToken.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedToken.isEmpty else {
+            errorMessage = "Auth token cannot be empty."
+            return false
         }
         do {
-            try await syncManager.configure(serverURL: url, authToken: authToken)
+            try await syncManager.configure(serverURL: url, authToken: trimmedToken)
+            // Persist the trimmed forms back so the fields stay clean after save.
+            serverURL = trimmedURL
+            authToken = trimmedToken
+            return true
         } catch {
             errorMessage = error.localizedDescription
+            return false
         }
+    }
+
+    /// True when sync is enabled but the user hasn't entered server credentials yet.
+    var isConfigurationIncomplete: Bool {
+        isEnabled && (serverURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                      || authToken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
     }
 
     func syncNow() async {

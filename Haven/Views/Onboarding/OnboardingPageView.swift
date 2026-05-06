@@ -17,6 +17,7 @@ struct OnboardingPageView: View {
     @State private var descVisible = false
     @State private var floatingOffset: CGFloat = 0
     @State private var ringScale: CGFloat = 0.6
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var body: some View {
         VStack(spacing: 0) {
@@ -100,9 +101,11 @@ struct OnboardingPageView: View {
             withAnimation(.easeOut(duration: 0.5).delay(0.45)) {
                 descVisible = true
             }
-            // Floating animation for secondary icon
-            withAnimation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true).delay(0.5)) {
-                floatingOffset = -8
+            // Floating animation for secondary icon (disabled when Reduce Motion is on)
+            if !reduceMotion {
+                withAnimation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true).delay(0.5)) {
+                    floatingOffset = -8
+                }
             }
         }
         .onDisappear {

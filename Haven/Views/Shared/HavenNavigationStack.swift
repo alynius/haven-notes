@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct HavenNavigationStack: View {
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) var appState
     @EnvironmentObject var container: DependencyContainer
-    @EnvironmentObject var toastManager: ToastManager
+    @Environment(ToastManager.self) var toastManager
     @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
@@ -26,6 +26,36 @@ struct HavenNavigationStack: View {
                 }
             }
             .tint(Color.havenPrimary)
+            .onChange(of: appState.pendingAction) { _, action in
+                guard action != .none else { return }
+                Task {
+                    switch action {
+                    case .openDailyNote:
+                        let service = DailyNoteService(noteRepo: container.noteRepository)
+                        if let noteID = try? await service.getOrCreateDailyNote() {
+                            appState.navigationPath = NavigationPath()
+                            appState.navigateTo(.noteEditor(noteID: noteID))
+                        }
+                    case .none:
+                        break
+                    }
+                    appState.pendingAction = .none
+                }
+            }
+            #if os(macOS)
+            .onReceive(NotificationCenter.default.publisher(for: .havenNewNote)) { _ in
+                appState.navigateTo(.noteEditor(noteID: nil))
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .havenDailyNote)) { _ in
+                appState.pendingAction = .openDailyNote
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .havenSearch)) { _ in
+                appState.navigateTo(.search)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .havenShowGraph)) { _ in
+                appState.navigateTo(.graph)
+            }
+            #endif
 
             // Global toast overlay
             if let toast = toastManager.currentToast {
@@ -41,7 +71,8 @@ struct HavenNavigationStack: View {
     }
 
     private var navigationContent: some View {
-        NavigationStack(path: $appState.navigationPath) {
+        @Bindable var appState = appState
+        return NavigationStack(path: $appState.navigationPath) {
             NoteListView(viewModel: NoteListViewModel(
                 noteRepo: container.noteRepository,
                 folderRepo: container.folderRepository,
