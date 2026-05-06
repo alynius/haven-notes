@@ -249,6 +249,16 @@ final class DatabaseManager {
                 """)
             execute("CREATE INDEX IF NOT EXISTS idx_notes_position ON notes(position)")
         }
+
+        // Folders: add color column for visual customization
+        var folderHasColor = false
+        try? query("PRAGMA table_info(folders)") { stmt in
+            let name = DatabaseManager.columnTextNonNull(stmt, 1)
+            if name == "color" { folderHasColor = true }
+        }
+        if !folderHasColor {
+            execute("ALTER TABLE folders ADD COLUMN color TEXT")
+        }
     }
 
     // MARK: - Helpers

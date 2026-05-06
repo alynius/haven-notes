@@ -55,6 +55,15 @@ final class SidebarViewModel: ObservableObject {
         }
     }
 
+    func setFolderColor(id: String, color: String?) async {
+        do {
+            try await folderRepo.setColor(id: id, color: color)
+            await loadAll()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     func deleteFolder(id: String) async {
         do {
             try await folderRepo.delete(id: id)

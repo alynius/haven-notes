@@ -1,6 +1,20 @@
 import SwiftUI
 
 extension Color {
+    /// Construct a Color from a "#RRGGBB" hex string. Returns nil for invalid input.
+    init?(hex: String) {
+        var s = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        if s.hasPrefix("#") { s.removeFirst() }
+        guard s.count == 6, let value = UInt32(s, radix: 16) else { return nil }
+        self.init(
+            .sRGB,
+            red: Double((value >> 16) & 0xff) / 255,
+            green: Double((value >> 8) & 0xff) / 255,
+            blue: Double(value & 0xff) / 255,
+            opacity: 1
+        )
+    }
+
     // MARK: - Brand Colors
     static var havenPrimary: Color {
         #if os(iOS)

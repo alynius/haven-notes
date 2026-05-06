@@ -1,5 +1,15 @@
 import SwiftUI
 
+/// Palette of named colors users can apply to folders.
+private let folderColorPalette: [(name: String, hex: String)] = [
+    ("Red", "#E74C3C"),
+    ("Orange", "#F97316"),
+    ("Yellow", "#F2C94C"),
+    ("Green", "#42BD8C"),
+    ("Blue", "#3B82F6"),
+    ("Purple", "#A855F7"),
+]
+
 struct SidebarView: View {
     @StateObject var viewModel: SidebarViewModel
     @Environment(AppState.self) var appState
@@ -7,6 +17,13 @@ struct SidebarView: View {
 
     @State private var renamingFolderID: String?
     @State private var renameFolderText = ""
+
+    private func folderTint(for folder: Folder) -> Color {
+        if let hex = folder.color, let color = Color(hex: hex) {
+            return color
+        }
+        return Color.havenPrimary
+    }
 
     var body: some View {
         List(selection: Binding(
@@ -92,8 +109,8 @@ struct SidebarView: View {
                                     .foregroundColor(Color.havenTextSecondary)
                             }
                         } icon: {
-                            Image(systemName: "folder")
-                                .foregroundColor(Color.havenPrimary)
+                            Image(systemName: "folder.fill")
+                                .foregroundColor(folderTint(for: folder))
                         }
                         .tag(NoteFilter.folder(id: folder.id, name: folder.name))
                         .contextMenu {
@@ -102,6 +119,24 @@ struct SidebarView: View {
                                 renameFolderText = folder.name
                             } label: {
                                 Label("Rename", systemImage: "pencil")
+                            }
+                            Menu {
+                                ForEach(folderColorPalette, id: \.hex) { swatch in
+                                    Button {
+                                        Task { await viewModel.setFolderColor(id: folder.id, color: swatch.hex) }
+                                    } label: {
+                                        Label(swatch.name, systemImage: "circle.fill")
+                                            .foregroundColor(Color(hex: swatch.hex))
+                                    }
+                                }
+                                Divider()
+                                Button {
+                                    Task { await viewModel.setFolderColor(id: folder.id, color: nil) }
+                                } label: {
+                                    Label("Default", systemImage: "circle")
+                                }
+                            } label: {
+                                Label("Color", systemImage: "paintpalette")
                             }
                             Button(role: .destructive) {
                                 Task { await viewModel.deleteFolder(id: folder.id) }
