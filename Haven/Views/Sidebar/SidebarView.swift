@@ -111,6 +111,9 @@ struct SidebarView: View {
                         }
                     }
                 }
+                .onMove { source, destination in
+                    Task { await viewModel.reorderFolders(from: source, to: destination) }
+                }
 
                 if viewModel.isCreatingFolder {
                     HStack {

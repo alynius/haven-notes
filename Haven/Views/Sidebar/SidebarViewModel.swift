@@ -72,4 +72,17 @@ final class SidebarViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
     }
+
+    /// Optimistically reorder folders in-memory and persist new positions.
+    /// Failed save surfaces via errorMessage; UI keeps the new order until next loadAll().
+    func reorderFolders(from source: IndexSet, to destination: Int) async {
+        var newOrder = folders
+        newOrder.move(fromOffsets: source, toOffset: destination)
+        folders = newOrder
+        do {
+            try await folderRepo.reorder(ids: newOrder.map(\.id))
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
 }
