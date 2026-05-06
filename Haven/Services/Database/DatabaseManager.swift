@@ -222,15 +222,32 @@ final class DatabaseManager {
     // MARK: - Migrations
 
     func runMigrations() {
-        // Add folder_id column to notes table if it doesn't exist
-        var hasColumn = false
+        // Inspect notes columns once
+        var hasFolderID = false
+        var hasPosition = false
         try? query("PRAGMA table_info(notes)") { stmt in
             let name = DatabaseManager.columnTextNonNull(stmt, 1)
-            if name == "folder_id" { hasColumn = true }
+            if name == "folder_id" { hasFolderID = true }
+            if name == "position" { hasPosition = true }
         }
-        if !hasColumn {
+
+        if !hasFolderID {
             execute("ALTER TABLE notes ADD COLUMN folder_id TEXT REFERENCES folders(id) ON DELETE SET NULL")
             execute("CREATE INDEX IF NOT EXISTS idx_notes_folder_id ON notes(folder_id)")
+        }
+
+        if !hasPosition {
+            execute("ALTER TABLE notes ADD COLUMN position INTEGER NOT NULL DEFAULT 0")
+            // Backfill: rank notes by updated_at DESC so the existing "newest first" order is preserved.
+            // Newest gets position 0, next gets 1, etc.
+            execute("""
+                UPDATE notes SET position = (
+                    SELECT COUNT(*) FROM notes AS n2
+                    WHERE n2.updated_at > notes.updated_at
+                       OR (n2.updated_at = notes.updated_at AND n2.id > notes.id)
+                )
+                """)
+            execute("CREATE INDEX IF NOT EXISTS idx_notes_position ON notes(position)")
         }
     }
 

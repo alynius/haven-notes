@@ -117,6 +117,9 @@ struct NoteListView: View {
                             }
                         }
                     }
+                    .onMove { source, destination in
+                        Task { await viewModel.reorderNotes(from: source, to: destination) }
+                    }
                 }
                 .listStyle(.plain)
                 .refreshable {

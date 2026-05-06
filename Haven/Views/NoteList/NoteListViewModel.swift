@@ -88,4 +88,16 @@ final class NoteListViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
     }
+
+    /// Optimistic in-memory reorder + persist new positions.
+    func reorderNotes(from source: IndexSet, to destination: Int) async {
+        var newOrder = notes
+        newOrder.move(fromOffsets: source, toOffset: destination)
+        notes = newOrder
+        do {
+            try await noteRepo.reorderNotes(ids: newOrder.map(\.id))
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
 }

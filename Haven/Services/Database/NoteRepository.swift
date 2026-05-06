@@ -19,10 +19,11 @@ final class NoteRepository: NoteRepositoryProtocol {
         )
 
         try db.performSync {
+            // New notes appear at the top of the manual-position order (one less than current MIN).
             let sql = """
                 INSERT INTO \(HavenConstants.Database.notesTable)
-                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at, position)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MIN(position) - 1 FROM \(HavenConstants.Database.notesTable)), 0))
                 """
             try self.db.executeStatement(sql, params: [
                 note.id,
@@ -62,7 +63,7 @@ final class NoteRepository: NoteRepositoryProtocol {
                 SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                 FROM \(HavenConstants.Database.notesTable)
                 WHERE is_deleted = 0
-                ORDER BY is_pinned DESC, updated_at DESC
+                ORDER BY is_pinned DESC, position ASC, updated_at DESC
                 """
             var notes: [Note] = []
             try self.db.query(sql) { stmt in
@@ -143,10 +144,11 @@ final class NoteRepository: NoteRepositoryProtocol {
         let plaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
 
         try db.performSync {
+            // On INSERT, place at the top via MIN - 1; on UPDATE, leave existing position alone.
             let sql = """
                 INSERT INTO \(HavenConstants.Database.notesTable)
-                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, title, body_html, body_plaintext, is_pinned, is_deleted, folder_id, created_at, updated_at, position)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MIN(position) - 1 FROM \(HavenConstants.Database.notesTable)), 0))
                 ON CONFLICT(id) DO UPDATE SET
                     title = excluded.title,
                     body_html = excluded.body_html,
@@ -346,7 +348,7 @@ final class NoteRepository: NoteRepositoryProtocol {
                     SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                     FROM \(HavenConstants.Database.notesTable)
                     WHERE folder_id = ? AND is_deleted = 0
-                    ORDER BY is_pinned DESC, updated_at DESC
+                    ORDER BY is_pinned DESC, position ASC, updated_at DESC
                     """
                 params = [folderID]
             } else {
@@ -354,7 +356,7 @@ final class NoteRepository: NoteRepositoryProtocol {
                     SELECT id, title, body_html, body_plaintext, is_pinned, is_deleted, created_at, updated_at, folder_id
                     FROM \(HavenConstants.Database.notesTable)
                     WHERE folder_id IS NULL AND is_deleted = 0
-                    ORDER BY is_pinned DESC, updated_at DESC
+                    ORDER BY is_pinned DESC, position ASC, updated_at DESC
                     """
                 params = []
             }
@@ -373,13 +375,26 @@ final class NoteRepository: NoteRepositoryProtocol {
                 FROM \(HavenConstants.Database.notesTable) n
                 JOIN \(HavenConstants.Database.noteTagsTable) nt ON nt.note_id = n.id
                 WHERE nt.tag_id = ? AND n.is_deleted = 0
-                ORDER BY n.is_pinned DESC, n.updated_at DESC
+                ORDER BY n.is_pinned DESC, n.position ASC, n.updated_at DESC
                 """
             var notes: [Note] = []
             try self.db.query(sql, params: [tagID]) { stmt in
                 notes.append(self.noteFromRow(stmt))
             }
             return notes
+        }
+    }
+
+    func reorderNotes(ids: [String]) async throws {
+        try db.performSync {
+            let now = Date().iso8601String
+            for (index, id) in ids.enumerated() {
+                try self.db.executeStatement(
+                    "UPDATE \(HavenConstants.Database.notesTable) SET position = ?, updated_at = ? WHERE id = ?",
+                    params: [index, now, id]
+                )
+                try self.recordSyncChange(entityType: "note", entityID: id, operation: "update")
+            }
         }
     }
 
