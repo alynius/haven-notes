@@ -55,6 +55,15 @@ final class SidebarViewModel: ObservableObject {
         }
     }
 
+    func setFolderColor(id: String, color: String?) async {
+        do {
+            try await folderRepo.setColor(id: id, color: color)
+            await loadAll()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     func deleteFolder(id: String) async {
         do {
             try await folderRepo.delete(id: id)
@@ -68,6 +77,19 @@ final class SidebarViewModel: ObservableObject {
         do {
             try await tagRepo.delete(id: id)
             await loadAll()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    /// Optimistically reorder folders in-memory and persist new positions.
+    /// Failed save surfaces via errorMessage; UI keeps the new order until next loadAll().
+    func reorderFolders(from source: IndexSet, to destination: Int) async {
+        var newOrder = folders
+        newOrder.move(fromOffsets: source, toOffset: destination)
+        folders = newOrder
+        do {
+            try await folderRepo.reorder(ids: newOrder.map(\.id))
         } catch {
             errorMessage = error.localizedDescription
         }

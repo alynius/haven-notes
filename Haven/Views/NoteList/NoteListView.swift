@@ -8,8 +8,21 @@ struct NoteListView: View {
     @State private var showDeleteConfirm = false
     @State private var noteToDelete: String?
     @State private var showSidebar = false
+    #if os(iOS)
+    @State private var editMode: EditMode = .inactive
+    @State private var selectedNoteIDs: Set<String> = []
+
+    private var isEditing: Bool { editMode == .active }
+    #else
+    private var isEditing: Bool { false }
+    #endif
 
     private var navigationTitle: String {
+        #if os(iOS)
+        if isEditing && !selectedNoteIDs.isEmpty {
+            return "\(selectedNoteIDs.count) selected"
+        }
+        #endif
         switch viewModel.filter {
         case .allNotes:
             return "All Notes"
@@ -19,6 +32,21 @@ struct NoteListView: View {
             return "#\(name)"
         }
     }
+
+    #if os(iOS)
+    private func toggleSelection(_ id: String) {
+        if selectedNoteIDs.contains(id) {
+            selectedNoteIDs.remove(id)
+        } else {
+            selectedNoteIDs.insert(id)
+        }
+    }
+
+    private func exitEditMode() {
+        editMode = .inactive
+        selectedNoteIDs = []
+    }
+    #endif
 
     var body: some View {
         ZStack {
@@ -46,13 +74,28 @@ struct NoteListView: View {
                 List {
                     ForEach(viewModel.notes) { note in
                         Button {
+                            #if os(iOS)
+                            if isEditing {
+                                toggleSelection(note.id)
+                                return
+                            }
+                            #endif
                             appState.navigateTo(.noteEditor(noteID: note.id))
                         } label: {
-                            NoteRowView(
-                                note: note,
-                                folderName: note.folderID.flatMap { viewModel.folders[$0] }
-                            )
-                            .hoverHighlight()
+                            HStack(spacing: Spacing.sm) {
+                                #if os(iOS)
+                                if isEditing {
+                                    Image(systemName: selectedNoteIDs.contains(note.id) ? "checkmark.circle.fill" : "circle")
+                                        .foregroundColor(selectedNoteIDs.contains(note.id) ? Color.havenAccent : Color.havenTextSecondary.opacity(0.4))
+                                        .accessibilityHidden(true)
+                                }
+                                #endif
+                                NoteRowView(
+                                    note: note,
+                                    folderName: note.folderID.flatMap { viewModel.folders[$0] }
+                                )
+                                .hoverHighlight()
+                            }
                         }
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("noteList_row_\(note.id)")
@@ -117,6 +160,9 @@ struct NoteListView: View {
                             }
                         }
                     }
+                    .onMove { source, destination in
+                        Task { await viewModel.reorderNotes(from: source, to: destination) }
+                    }
                 }
                 .listStyle(.plain)
                 .refreshable {
@@ -162,31 +208,68 @@ struct NoteListView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 16) {
-                    Button { appState.navigateTo(.graph) } label: {
-                        Image(systemName: "point.3.connected.trianglepath.dotted")
-                            .foregroundColor(Color.havenPrimary)
-                    }
-                    .accessibilityLabel("Knowledge Graph")
-                    .accessibilityIdentifier("noteList_button_graph")
-                    Button { appState.navigateTo(.search) } label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color.havenPrimary)
-                    }
-                    .accessibilityLabel("Search")
-                    .accessibilityIdentifier("noteList_button_search")
-                    Button {
-                        Task {
-                            if let id = await viewModel.createNote() {
-                                appState.navigateTo(.noteEditor(noteID: id))
+                    if isEditing {
+                        Menu {
+                            Button {
+                                Task {
+                                    await viewModel.moveNotes(ids: selectedNoteIDs, toFolderID: nil)
+                                    exitEditMode()
+                                }
+                            } label: {
+                                Label("No Folder", systemImage: "tray")
                             }
+                            Divider()
+                            ForEach(viewModel.folders.sorted(by: { $0.value.localizedCaseInsensitiveCompare($1.value) == .orderedAscending }), id: \.key) { folderID, folderName in
+                                Button {
+                                    Task {
+                                        await viewModel.moveNotes(ids: selectedNoteIDs, toFolderID: folderID)
+                                        exitEditMode()
+                                    }
+                                } label: {
+                                    Label(folderName, systemImage: "folder")
+                                }
+                            }
+                        } label: {
+                            Text(selectedNoteIDs.isEmpty ? "Move" : "Move \(selectedNoteIDs.count)")
+                                .foregroundColor(Color.havenPrimary)
                         }
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
+                        .disabled(selectedNoteIDs.isEmpty || viewModel.folders.isEmpty)
+                        .accessibilityIdentifier("noteList_button_bulkMove")
+                        EditButton()
                             .foregroundColor(Color.havenPrimary)
-                            .font(.title3)
+                            .accessibilityIdentifier("noteList_button_edit")
+                    } else {
+                        #if os(iOS)
+                        EditButton()
+                            .foregroundColor(Color.havenPrimary)
+                            .accessibilityIdentifier("noteList_button_edit")
+                        #endif
+                        Button { appState.navigateTo(.graph) } label: {
+                            Image(systemName: "point.3.connected.trianglepath.dotted")
+                                .foregroundColor(Color.havenPrimary)
+                        }
+                        .accessibilityLabel("Knowledge Graph")
+                        .accessibilityIdentifier("noteList_button_graph")
+                        Button { appState.navigateTo(.search) } label: {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(Color.havenPrimary)
+                        }
+                        .accessibilityLabel("Search")
+                        .accessibilityIdentifier("noteList_button_search")
+                        Button {
+                            Task {
+                                if let id = await viewModel.createNote() {
+                                    appState.navigateTo(.noteEditor(noteID: id))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(Color.havenPrimary)
+                                .font(.title3)
+                        }
+                        .accessibilityLabel("New Note")
+                        .accessibilityIdentifier("noteList_button_newNote")
                     }
-                    .accessibilityLabel("New Note")
-                    .accessibilityIdentifier("noteList_button_newNote")
                 }
             }
             #elseif os(macOS)
@@ -237,12 +320,21 @@ struct NoteListView: View {
         } message: {
             Text("This note will be moved to trash.")
         }
+        #if os(iOS)
+        .environment(\.editMode, $editMode)
+        .onChange(of: editMode) { _, new in
+            if new != .active { selectedNoteIDs = [] }
+        }
+        #endif
         .task {
             await viewModel.loadNotes()
         }
         .onChange(of: appState.activeFilter) { _, newFilter in
             viewModel.filter = newFilter
             showSidebar = false
+            #if os(iOS)
+            exitEditMode()
+            #endif
             Task { await viewModel.loadNotes() }
         }
         .onChange(of: appState.navigationPath) { _, _ in

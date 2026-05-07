@@ -8,11 +8,12 @@ final class FolderRepository: FolderRepositoryProtocol {
 
     func fetchAll() async throws -> [Folder] {
         var folders: [Folder] = []
-        try db.query("SELECT id, name, position, created_at, updated_at FROM folders ORDER BY position ASC") { stmt in
+        try db.query("SELECT id, name, position, created_at, updated_at, color FROM folders ORDER BY position ASC") { stmt in
             folders.append(Folder(
                 id: DatabaseManager.columnTextNonNull(stmt, 0),
                 name: DatabaseManager.columnTextNonNull(stmt, 1),
                 position: Int(sqlite3_column_int(stmt, 2)),
+                color: DatabaseManager.columnText(stmt, 5),
                 createdAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 3)) ?? Date(),
                 updatedAt: Date(iso8601String: DatabaseManager.columnTextNonNull(stmt, 4)) ?? Date()
             ))
@@ -23,8 +24,8 @@ final class FolderRepository: FolderRepositoryProtocol {
     func create(name: String) async throws -> Folder {
         let folder = Folder(name: name, position: 0)
         try db.executeStatement(
-            "INSERT INTO folders (id, name, position, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
-            params: [folder.id, folder.name, folder.position, folder.createdAt.iso8601String, folder.updatedAt.iso8601String]
+            "INSERT INTO folders (id, name, position, created_at, updated_at, color) VALUES (?, ?, ?, ?, ?, ?)",
+            params: [folder.id, folder.name, folder.position, folder.createdAt.iso8601String, folder.updatedAt.iso8601String, folder.color]
         )
         return folder
     }
@@ -33,6 +34,13 @@ final class FolderRepository: FolderRepositoryProtocol {
         try db.executeStatement(
             "UPDATE folders SET name = ?, updated_at = ? WHERE id = ?",
             params: [name, Date().iso8601String, id]
+        )
+    }
+
+    func setColor(id: String, color: String?) async throws {
+        try db.executeStatement(
+            "UPDATE folders SET color = ?, updated_at = ? WHERE id = ?",
+            params: [color, Date().iso8601String, id]
         )
     }
 

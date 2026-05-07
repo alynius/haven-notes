@@ -20,4 +20,5 @@ protocol NoteRepositoryProtocol {
     func fetchByFolder(folderID: String?) async throws -> [Note]
     func fetchByTag(tagID: String) async throws -> [Note]
     func moveToFolder(noteID: String, folderID: String?) async throws
+    func reorderNotes(ids: [String]) async throws
 }
