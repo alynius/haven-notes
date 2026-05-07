@@ -47,6 +47,7 @@ targets:
         CFBundleDisplayName: Haven
         CFBundleShortVersionString: "1.1"
         CFBundleVersion: "4"
+        ITSAppUsesNonExemptEncryption: false
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIApplicationSceneManifest:
@@ -113,6 +114,7 @@ targets:
         CFBundleShortVersionString: "1.1"
         CFBundleVersion: "4"
         CFBundleIconFile: AppIcon
+        ITSAppUsesNonExemptEncryption: false
         CFBundleURLTypes:
           - CFBundleURLName: com.havennotes.app
             CFBundleURLSchemes:
@@ -151,6 +153,7 @@ targets:
         CFBundleDisplayName: Haven Widget
         CFBundleShortVersionString: "1.1"
         CFBundleVersion: "4"
+        ITSAppUsesNonExemptEncryption: false
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
