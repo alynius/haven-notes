@@ -31,6 +31,7 @@ targets:
           - "**/.playwright-mcp/**"
           - "smoke-test/**"
           - "Resources/**"
+          - "screenshots/**"
           - "haven-*.png"
           - "**/*.log"
     resources:
@@ -45,8 +46,8 @@ targets:
       path: Haven/Info.plist
       properties:
         CFBundleDisplayName: Haven
-        CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "4"
+        CFBundleShortVersionString: "1.1.1"
+        CFBundleVersion: "5"
         ITSAppUsesNonExemptEncryption: false
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
@@ -62,8 +63,6 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         NSFaceIDUsageDescription: Haven uses Face ID to secure your notes.
-        NSSpeechRecognitionUsageDescription: Haven uses speech recognition for voice dictation in the note editor.
-        NSMicrophoneUsageDescription: Haven uses the microphone to transcribe your voice into text.
         CFBundleURLTypes:
           - CFBundleURLName: com.havennotes.app
             CFBundleURLSchemes:
@@ -98,6 +97,7 @@ targets:
           - "**/.playwright-mcp/**"
           - "smoke-test/**"
           - "Resources/**"
+          - "screenshots/**"
           - "haven-*.png"
           - "**/*.log"
     resources:
@@ -111,8 +111,8 @@ targets:
       path: Haven/MacInfo.plist
       properties:
         CFBundleDisplayName: Haven
-        CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "4"
+        CFBundleShortVersionString: "1.1.1"
+        CFBundleVersion: "5"
         CFBundleIconFile: AppIcon
         ITSAppUsesNonExemptEncryption: false
         CFBundleURLTypes:
@@ -120,15 +120,12 @@ targets:
             CFBundleURLSchemes:
               - haven
         LSApplicationCategoryType: public.app-category.productivity
-        NSMicrophoneUsageDescription: Haven uses the microphone to transcribe your voice into text.
-        NSSpeechRecognitionUsageDescription: Haven uses speech recognition for voice dictation in the note editor.
     entitlements:
       path: Haven/HavenMac.entitlements
       properties:
         com.apple.security.app-sandbox: true
         com.apple.security.network.client: true
         com.apple.security.files.user-selected.read-only: true
-        com.apple.security.device.audio-input: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.havennotes.app
@@ -151,8 +148,8 @@ targets:
       path: HavenWidget/Info.plist
       properties:
         CFBundleDisplayName: Haven Widget
-        CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "4"
+        CFBundleShortVersionString: "1.1.1"
+        CFBundleVersion: "5"
         ITSAppUsesNonExemptEncryption: false
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

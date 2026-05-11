@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,14 +32,10 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Haven uses the microphone to transcribe your voice into text.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Haven uses speech recognition for voice dictation in the note editor.</string>
 </dict>
 </plist>

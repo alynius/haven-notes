@@ -37,7 +37,6 @@
 		28C864663279C8B935A45F8C /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776E2E8B0CCA359124ADAC35 /* ToastManager.swift */; };
 		28FB3A46E0D9741A4B376513 /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108983F60E6997C4720C656 /* TagRepository.swift */; };
 		2B390C202CD21D158F18D21F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7525EB1C32E9D266C571AE5D /* EmptyStateView.swift */; };
-		2B48438A332490D790219343 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */; };
 		2B4860CE2B347CD725D99788 /* HTMLSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615331F54A69CA6A7EF32D4 /* HTMLSanitizer.swift */; };
 		2BA23512DA732DEFBFB0B38A /* SubscriptionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CAA9BACFA8076210885397 /* SubscriptionManagerProtocol.swift */; };
 		2DC47B4442CA7F8681CF57E7 /* ChangeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651041F6BE63B3B93891866A /* ChangeQueue.swift */; };
@@ -136,7 +135,6 @@
 		9EBFCCD88BC305D37BD0CE85 /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254CA858B24E2E955BAB7AD /* SidebarViewModel.swift */; };
 		A163A9B01EF70558A7D711C6 /* NoteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F7AC6A527808EE4688868A /* NoteListViewModel.swift */; };
 		A49CF833DFA6E61F29E23B6A /* View+Hover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B578318F16041908A4E39B /* View+Hover.swift */; };
-		A56D91177337BDD5DC1359D9 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */; };
 		A74EE02221EB6730F27B2FDC /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */; };
 		A840B42B99A7C270043521E0 /* NotionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04148EDDA531C2CA0DA05653 /* NotionImporter.swift */; };
 		A9B19F35887F892B1209705A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB381115FDF63AF4E668982 /* SettingsViewModel.swift */; };
@@ -330,7 +328,6 @@
 		B375DDE3A8FF4E1894BA64B9 /* DateISO8601Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateISO8601Tests.swift; sourceTree = "<group>"; };
 		B534690A83A3133300CEBA34 /* ConflictResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictResolver.swift; sourceTree = "<group>"; };
 		B6AE1AD127978C940D8A960F /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
-		C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		C4814D66609EE1B3C6629954 /* SubscriptionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUITests.swift; sourceTree = "<group>"; };
 		C4A068D5F6762A8796831D02 /* HTMLSanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLSanitizerTests.swift; sourceTree = "<group>"; };
 		C6F000B2F979187F8F513A78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
@@ -655,7 +652,6 @@
 			children = (
 				F3C57DC7D02BE3CF53FC5791 /* MarkdownHighlighter.swift */,
 				518571D349182791593F73F3 /* RichTextCoordinator.swift */,
-				C1FF9D9D918C0D63CE6F5C7F /* SpeechRecognizer.swift */,
 				38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */,
 			);
 			path = Editor;
@@ -979,7 +975,6 @@
 				6FD4854C0AD37887F60C352F /* SidebarView.swift in Sources */,
 				9EBFCCD88BC305D37BD0CE85 /* SidebarViewModel.swift in Sources */,
 				D6D2412A0B01740675603767 /* SkeletonView.swift in Sources */,
-				2B48438A332490D790219343 /* SpeechRecognizer.swift in Sources */,
 				DDCDCE48D17FA538A5AD5EDA /* String+WikiLink.swift in Sources */,
 				7B1D366E2556AA83B5BF41E6 /* SubscriptionManager.swift in Sources */,
 				C98FA804ABC9E91D529A0B16 /* SubscriptionManagerProtocol.swift in Sources */,
@@ -1091,7 +1086,6 @@
 				42639B76263BE454C5526946 /* SidebarView.swift in Sources */,
 				AB52B31632D1CDB39A94D111 /* SidebarViewModel.swift in Sources */,
 				CFF121264BC492FFE9FD56E9 /* SkeletonView.swift in Sources */,
-				A56D91177337BDD5DC1359D9 /* SpeechRecognizer.swift in Sources */,
 				EBEB6AE2F2DF6D4B260BA3BA /* String+WikiLink.swift in Sources */,
 				D28C42D2CC006139CFD0502A /* SubscriptionManager.swift in Sources */,
 				2BA23512DA732DEFBFB0B38A /* SubscriptionManagerProtocol.swift in Sources */,

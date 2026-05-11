@@ -184,92 +184,27 @@ struct NoteEditorView: View {
             }
             #if os(iOS)
             .safeAreaInset(edge: .bottom) {
-                VStack(spacing: 0) {
-                    // Dictation banner
-                    if viewModel.speechRecognizer.isRecording {
-                        HStack(spacing: Spacing.sm) {
-                            Circle()
-                                .fill(Color.red)
-                                .frame(width: 8, height: 8)
-                            Text(viewModel.speechRecognizer.transcript.isEmpty ? "Listening..." : viewModel.speechRecognizer.transcript)
-                                .font(.havenCaption)
-                                .foregroundColor(Color.havenTextPrimary)
-                                .lineLimit(2)
-                            Spacer()
-                            Button("Insert") {
-                                viewModel.insertDictatedText(viewModel.speechRecognizer.transcript)
-                                viewModel.speechRecognizer.stopRecording()
-                            }
-                            .font(.havenCaption.weight(.semibold))
-                            .foregroundColor(Color.havenAccent)
-                            .disabled(viewModel.speechRecognizer.transcript.isEmpty)
-                            .accessibilityIdentifier("noteEditor_button_insertDictation")
-                        }
-                        .padding(.horizontal, Spacing.lg)
-                        .padding(.vertical, Spacing.sm)
-                        .background(Color.havenSurface)
-                    }
-
-                    EditorToolbarView(
-                        onBold: { editorShared.coordinator?.insertBold() },
-                        onItalic: { editorShared.coordinator?.insertItalic() },
-                        onHeading: { editorShared.coordinator?.insertHeading(level: 1) },
-                        onList: { editorShared.coordinator?.insertList() },
-                        onCheckbox: { editorShared.coordinator?.insertCheckbox() },
-                        onLink: { editorShared.coordinator?.insertLink() },
-                        onMicrophone: {
-                            Task {
-                                await viewModel.speechRecognizer.toggleRecording()
-                            }
-                        },
-                        isRecording: viewModel.speechRecognizer.isRecording,
-                        activeFormats: editorShared.activeFormats
-                    )
-                }
+                EditorToolbarView(
+                    onBold: { editorShared.coordinator?.insertBold() },
+                    onItalic: { editorShared.coordinator?.insertItalic() },
+                    onHeading: { editorShared.coordinator?.insertHeading(level: 1) },
+                    onList: { editorShared.coordinator?.insertList() },
+                    onCheckbox: { editorShared.coordinator?.insertCheckbox() },
+                    onLink: { editorShared.coordinator?.insertLink() },
+                    activeFormats: editorShared.activeFormats
+                )
             }
             #elseif os(macOS)
             .safeAreaInset(edge: .bottom) {
-                VStack(spacing: 0) {
-                    if viewModel.speechRecognizer.isRecording {
-                        HStack(spacing: Spacing.sm) {
-                            Circle()
-                                .fill(Color.red)
-                                .frame(width: 8, height: 8)
-                            Text(viewModel.speechRecognizer.transcript.isEmpty ? "Listening..." : viewModel.speechRecognizer.transcript)
-                                .font(.havenCaption)
-                                .foregroundColor(Color.havenTextPrimary)
-                                .lineLimit(2)
-                            Spacer()
-                            Button("Insert") {
-                                viewModel.insertDictatedText(viewModel.speechRecognizer.transcript)
-                                viewModel.speechRecognizer.stopRecording()
-                            }
-                            .font(.havenCaption.weight(.semibold))
-                            .foregroundColor(Color.havenAccent)
-                            .disabled(viewModel.speechRecognizer.transcript.isEmpty)
-                        }
-                        .padding(.horizontal, Spacing.lg)
-                        .padding(.vertical, Spacing.sm)
-                        .background(Color.havenSurface)
-                    }
-
-                    EditorToolbarView(
-                        onBold: { editorShared.coordinator?.toggleBold() },
-                        onItalic: { editorShared.coordinator?.toggleItalic() },
-                        onHeading: { editorShared.coordinator?.toggleHeading() },
-                        onList: { editorShared.coordinator?.toggleList() },
-                        onCheckbox: { editorShared.coordinator?.toggleTask() },
-                        onLink: { editorShared.coordinator?.insertWikiLink() },
-                        onMicrophone: {
-                            Task {
-                                await viewModel.speechRecognizer.toggleRecording()
-                            }
-                        },
-                        isRecording: viewModel.speechRecognizer.isRecording,
-                        showMicrophone: viewModel.speechRecognizer.isAvailable,
-                        activeFormats: editorShared.activeFormats
-                    )
-                }
+                EditorToolbarView(
+                    onBold: { editorShared.coordinator?.toggleBold() },
+                    onItalic: { editorShared.coordinator?.toggleItalic() },
+                    onHeading: { editorShared.coordinator?.toggleHeading() },
+                    onList: { editorShared.coordinator?.toggleList() },
+                    onCheckbox: { editorShared.coordinator?.toggleTask() },
+                    onLink: { editorShared.coordinator?.insertWikiLink() },
+                    activeFormats: editorShared.activeFormats
+                )
             }
             #endif
 

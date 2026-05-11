@@ -14,8 +14,6 @@ final class NoteEditorViewModel: ObservableObject {
     @Published var isLoaded = false
     @Published var errorMessage: String?
 
-    let speechRecognizer = SpeechRecognizer()
-
     private let noteRepo: NoteRepositoryProtocol
     private let taskRepo: TaskRepositoryProtocol
     private let tagRepo: TagRepositoryProtocol
@@ -140,18 +138,6 @@ final class NoteEditorViewModel: ObservableObject {
         }
         showAutocomplete = false
         autocompleteSuggestions = []
-    }
-
-    func insertDictatedText(_ text: String) {
-        guard !text.isEmpty else { return }
-        if note.bodyHTML.isEmpty {
-            note.bodyHTML = text
-        } else {
-            note.bodyHTML += "\n\n" + text
-        }
-        note.bodyPlaintext = MarkdownStripper.stripMarkdown(note.bodyHTML)
-        note.updatedAt = Date()
-        scheduleAutosave()
     }
 
     // MARK: - Private
