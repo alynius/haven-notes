@@ -27,6 +27,7 @@
 		17F1C387702C187A377AC49B /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC2B056209313C0882151BE /* FolderRepository.swift */; };
 		186DCFD6E201246BA885FECD /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648DC62F94C1F87E4F53384 /* TaskListView.swift */; };
 		1B6CF666986780D1CAAF1DDD /* SyncSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B8077DA44C579327246EC /* SyncSettingsView.swift */; };
+		1F0A6CFE1E3826606AAA6832 /* MacAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DF8E14ECF663BA37E81343 /* MacAppDelegate.swift */; };
 		1F6F3304C29D93EA37BB9512 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE4B86607C03A09485AFEDA /* SearchView.swift */; };
 		24E6EA59A03C3A72C8A226EE /* FlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88140E40CB18B3DFAB7F1EA /* FlowUITests.swift */; };
 		2537FEB42A83A51E972829D2 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FEA75AF0427AB888756AB /* OnboardingUITests.swift */; };
@@ -151,6 +152,7 @@
 		B7F80E378E0A595E6306104E /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */; };
 		B9CAAC4D144E94DCFFE8BE86 /* NotionImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04148EDDA531C2CA0DA05653 /* NotionImporter.swift */; };
 		BD9ED8CBFF667CA295FDC75B /* WikiLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1C2E5A609715507DA5AAE /* WikiLinkParser.swift */; };
+		BDD8CBF4BEA52F49039990AB /* MacAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DF8E14ECF663BA37E81343 /* MacAppDelegate.swift */; };
 		BFF45EC4B80D2FE07DD28A58 /* NoteListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FA39820AA3D91A29A3C08E /* NoteListUITests.swift */; };
 		C030D697838AD6CA05D89A73 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8558063A27B5212C92A15456 /* AppIcon.icns */; };
 		C4DCD9BA014F80FED7210342 /* SyncLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9424BDC0CC10A90F3831B1 /* SyncLogEntry.swift */; };
@@ -330,6 +332,7 @@
 		B6AE1AD127978C940D8A960F /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		C4814D66609EE1B3C6629954 /* SubscriptionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUITests.swift; sourceTree = "<group>"; };
 		C4A068D5F6762A8796831D02 /* HTMLSanitizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLSanitizerTests.swift; sourceTree = "<group>"; };
+		C5DF8E14ECF663BA37E81343 /* MacAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAppDelegate.swift; sourceTree = "<group>"; };
 		C6F000B2F979187F8F513A78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C8C8A7E4A246785295B51B55 /* MacEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorView.swift; sourceTree = "<group>"; };
 		C8FC134D3B2D8C07CF173718 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
@@ -729,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				67587AB0975C95195BD120E3 /* GlobalHotkey.swift */,
+				C5DF8E14ECF663BA37E81343 /* MacAppDelegate.swift */,
 				C8C8A7E4A246785295B51B55 /* MacEditorView.swift */,
 				18C09CB30FBEDB99502E2781 /* MacMenuCommands.swift */,
 				A1113BE38334795C53C1E2D0 /* MacSettingsView.swift */,
@@ -944,6 +948,7 @@
 				6B1F0FB3EDAEC196363D2B95 /* HavenNavigationStack.swift in Sources */,
 				17CC0F7B05228FDAA8F330C1 /* LinkRepository.swift in Sources */,
 				3251E5B1A87A10A2D6120E17 /* LoadingOverlayView.swift in Sources */,
+				BDD8CBF4BEA52F49039990AB /* MacAppDelegate.swift in Sources */,
 				CB6233B5317A4FAF54C65C8B /* MacEditorView.swift in Sources */,
 				CDA8E3E91C173079A5F653FE /* MacMenuCommands.swift in Sources */,
 				B7F80E378E0A595E6306104E /* MacSettingsView.swift in Sources */,
@@ -1055,6 +1060,7 @@
 				79F8F0BE8145656EA596FD22 /* HavenNavigationStack.swift in Sources */,
 				560A908E6EDA8C7762743C11 /* LinkRepository.swift in Sources */,
 				DCE8BCD51FC5E083F449E457 /* LoadingOverlayView.swift in Sources */,
+				1F0A6CFE1E3826606AAA6832 /* MacAppDelegate.swift in Sources */,
 				631DDFD4569E7868F88786A6 /* MacEditorView.swift in Sources */,
 				6FD1767E5729B79309867797 /* MacMenuCommands.swift in Sources */,
 				A74EE02221EB6730F27B2FDC /* MacSettingsView.swift in Sources */,
@@ -1189,6 +1195,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.havennotes.app;
+				PRODUCT_NAME = Haven;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
 			};
@@ -1416,6 +1423,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.havennotes.app;
+				PRODUCT_NAME = Haven;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
 			};

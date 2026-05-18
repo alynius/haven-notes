@@ -7,6 +7,7 @@ struct HavenApp: App {
     @StateObject private var container = DependencyContainer()
     @State private var toastManager = ToastManager()
     #if os(macOS)
+    @NSApplicationDelegateAdaptor(MacAppDelegate.self) private var appDelegate
     @StateObject private var quickNotePanelController = QuickNotePanelController()
     #endif
     @State private var initializationFailed = false
