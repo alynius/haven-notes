@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+test-results/
+.playwright-mcp/
+.superpowers/
+
+# Empty npm stubs left by browser tooling
+/package.json
+/package-lock.json
+
+# Ad-hoc QA and App Store Connect captures
+/*.png
+/Haven/*.png
+/Haven/smoke-test/
+
+# Generated App Store screenshot images (scripts stay tracked)
+/Haven/screenshots/**/*.png

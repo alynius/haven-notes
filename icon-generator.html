@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven Icon Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #1a1816;
+    color: #faf7f3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+  .subtitle { color: #a89e94; font-size: 14px; margin-bottom: 40px; }
+  .variants {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .variant-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #a89e94;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  canvas {
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .preview-row {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    margin-top: 8px;
+  }
+  .preview-row canvas { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  button {
+    background: #8B6F47;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button:hover { background: #a0855e; }
+  .sizes { color: #6b6560; font-size: 12px; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Haven App Icon</h1>
+<p class="subtitle">Premium icon generator &mdash; 1024&times;1024 PNG</p>
+
+<div class="variants">
+  <div class="variant">
+    <span class="variant-label">Light</span>
+    <canvas id="light" width="256" height="256"></canvas>
+    <div class="preview-row">
+      <canvas id="light-60" width="60" height="60"></canvas>
+      <canvas id="light-40" width="40" height="40"></canvas>
+      <canvas id="light-29" width="29" height="29"></canvas>
+    </div>
+    <button onclick="download('light')">Download Light</button>
+  </div>
+  <div class="variant">
+    <span class="variant-label">Dark</span>
+    <canvas id="dark" width="256" height="256"></canvas>
+    <div class="preview-row">
+      <canvas id="dark-60" width="60" height="60"></canvas>
+      <canvas id="dark-40" width="40" height="40"></canvas>
+      <canvas id="dark-29" width="29" height="29"></canvas>
+    </div>
+    <button onclick="download('dark')">Download Dark</button>
+  </div>
+  <div class="variant">
+    <span class="variant-label">Tinted</span>
+    <canvas id="tinted" width="256" height="256" style="background: repeating-conic-gradient(#2a2520 0% 25%, #221f1a 0% 50%) 0 0/16px 16px;"></canvas>
+    <div class="preview-row">
+      <canvas id="tinted-60" width="60" height="60" style="background: repeating-conic-gradient(#2a2520 0% 25%, #221f1a 0% 50%) 0 0/8px 8px;"></canvas>
+      <canvas id="tinted-40" width="40" height="40" style="background: repeating-conic-gradient(#2a2520 0% 25%, #221f1a 0% 50%) 0 0/8px 8px;"></canvas>
+      <canvas id="tinted-29" width="29" height="29" style="background: repeating-conic-gradient(#2a2520 0% 25%, #221f1a 0% 50%) 0 0/8px 8px;"></canvas>
+    </div>
+    <button onclick="download('tinted')">Download Tinted</button>
+  </div>
+</div>
+
+<p class="sizes">Previews: 256px, 60px, 40px, 29px</p>
+
+<script>
+const SIZE = 1024;
+
+function drawIcon(ctx, variant, size) {
+  const s = size / SIZE;
+  ctx.save();
+  ctx.scale(s, s);
+
+  // === BACKGROUND ===
+  if (variant === 'tinted') {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+  } else if (variant === 'dark') {
+    const bg = ctx.createLinearGradient(0, 0, SIZE * 0.3, SIZE);
+    bg.addColorStop(0, '#1e1b17');
+    bg.addColorStop(0.5, '#161412');
+    bg.addColorStop(1, '#0f0d0b');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, SIZE, SIZE);
+
+    // Subtle warm overlay
+    const warm = ctx.createRadialGradient(SIZE*0.35, SIZE*0.3, 0, SIZE*0.5, SIZE*0.5, SIZE*0.7);
+    warm.addColorStop(0, 'rgba(139,111,71,0.08)');
+    warm.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = warm;
+    ctx.fillRect(0, 0, SIZE, SIZE);
+  } else {
+    // Light variant — rich warm gradient (full diagonal coverage)
+    const bg = ctx.createLinearGradient(0, 0, SIZE, SIZE);
+    bg.addColorStop(0, '#9B7F57');
+    bg.addColorStop(0.3, '#8B6F47');
+    bg.addColorStop(0.65, '#7A5E38');
+    bg.addColorStop(1, '#6B5233');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, SIZE, SIZE);
+
+    // Parchment texture — subtle noise via layered radials (kept away from edges)
+    for (let i = 0; i < 6; i++) {
+      const x = SIZE * (0.25 + Math.sin(i * 1.7) * 0.25);
+      const y = SIZE * (0.25 + Math.cos(i * 2.3) * 0.25);
+      const r = SIZE * (0.25 + i * 0.04);
+      const tex = ctx.createRadialGradient(x, y, 0, x, y, r);
+      tex.addColorStop(0, `rgba(255,248,235,${0.025 + i * 0.004})`);
+      tex.addColorStop(0.8, `rgba(255,248,235,${0.005})`);
+      tex.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = tex;
+      ctx.fillRect(0, 0, SIZE, SIZE);
+    }
+
+    // Vignette (extended to cover full corners)
+    const vig = ctx.createRadialGradient(SIZE*0.5, SIZE*0.45, SIZE*0.15, SIZE*0.5, SIZE*0.5, SIZE*0.85);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(0.6, 'rgba(0,0,0,0.02)');
+    vig.addColorStop(1, 'rgba(0,0,0,0.10)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, SIZE, SIZE);
+  }
+
+  // === THE "H" GLYPH ===
+  // Serif-inspired proportions — slightly tapered, with subtle serifs
+
+  const hColor = variant === 'tinted' ? '#FFFFFF' :
+                 variant === 'dark' ? '#e8e0d4' : '#FEFDFB';
+  const shadowColor = variant === 'tinted' ? 'rgba(0,0,0,0)' :
+                      variant === 'dark' ? 'rgba(0,0,0,0.5)' : 'rgba(80,55,25,0.25)';
+
+  // Glyph dimensions
+  const cx = SIZE / 2;
+  const cy = SIZE / 2 - SIZE * 0.01; // slightly above center (optical)
+  const totalH = SIZE * 0.48;   // total height
+  const stemW = SIZE * 0.082;   // stem width
+  const gapW = SIZE * 0.22;     // gap between stems (inner)
+  const crossH = SIZE * 0.075;  // crossbar height
+  const serifW = SIZE * 0.022;  // serif extension
+  const serifH = SIZE * 0.025;  // serif thickness
+  const r = SIZE * 0.012;       // corner radius
+
+  const leftX = cx - gapW/2 - stemW;
+  const rightX = cx + gapW/2;
+  const topY = cy - totalH/2;
+  const botY = cy + totalH/2;
+  const crossY = cy - crossH/2 - SIZE * 0.01; // crossbar slightly above true center
+
+  // Shadow
+  if (variant !== 'tinted') {
+    ctx.save();
+    ctx.shadowColor = shadowColor;
+    ctx.shadowBlur = SIZE * 0.03;
+    ctx.shadowOffsetY = SIZE * 0.008;
+    ctx.fillStyle = hColor;
+
+    drawH(ctx, leftX, rightX, topY, botY, stemW, crossY, crossH, gapW, serifW, serifH, r);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Main H fill
+  ctx.fillStyle = hColor;
+  if (variant !== 'tinted') {
+    ctx.globalAlpha = 0.97;
+  }
+  drawH(ctx, leftX, rightX, topY, botY, stemW, crossY, crossH, gapW, serifW, serifH, r);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Subtle highlight on the H (top-left light source)
+  if (variant === 'light') {
+    const hGrad = ctx.createLinearGradient(leftX, topY, rightX + stemW, botY);
+    hGrad.addColorStop(0, 'rgba(255,255,255,0.12)');
+    hGrad.addColorStop(0.5, 'rgba(255,255,255,0)');
+    hGrad.addColorStop(1, 'rgba(0,0,0,0.04)');
+    ctx.fillStyle = hGrad;
+    drawH(ctx, leftX, rightX, topY, botY, stemW, crossY, crossH, gapW, serifW, serifH, r);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawH(ctx, leftX, rightX, topY, botY, stemW, crossY, crossH, gapW, serifW, serifH, r) {
+  ctx.beginPath();
+
+  // We'll draw the H as a single compound path with serifs
+  // Left stem with serifs
+  const lx = leftX;
+  const rx = leftX + stemW;
+
+  // Top-left serif
+  roundRect(ctx, lx - serifW, topY, stemW + serifW * 2, serifH, r);
+  // Left stem body
+  roundRect(ctx, lx, topY, stemW, botY - topY, r);
+  // Bottom-left serif
+  roundRect(ctx, lx - serifW, botY - serifH, stemW + serifW * 2, serifH, r);
+
+  // Right stem with serifs
+  const rlx = rightX;
+  const rrx = rightX + stemW;
+
+  // Top-right serif
+  roundRect(ctx, rlx - serifW, topY, stemW + serifW * 2, serifH, r);
+  // Right stem body
+  roundRect(ctx, rlx, topY, stemW, botY - topY, r);
+  // Bottom-right serif
+  roundRect(ctx, rlx - serifW, botY - serifH, stemW + serifW * 2, serifH, r);
+
+  // Crossbar
+  roundRect(ctx, lx + stemW * 0.15, crossY, gapW + stemW * 1.7, crossH, r);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  r = Math.min(r, w/2, h/2);
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+}
+
+function renderAll() {
+  ['light', 'dark', 'tinted'].forEach(variant => {
+    // Main preview
+    const c = document.getElementById(variant);
+    drawIcon(c.getContext('2d'), variant, c.width);
+
+    // Small previews
+    [60, 40, 29].forEach(size => {
+      const el = document.getElementById(`${variant}-${size}`);
+      if (el) {
+        const ctx = el.getContext('2d');
+        el.style.borderRadius = (size * 0.22) + 'px';
+        drawIcon(ctx, variant, size);
+      }
+    });
+  });
+}
+
+function download(variant) {
+  // Render at full 1024x1024
+  const c = document.createElement('canvas');
+  c.width = SIZE;
+  c.height = SIZE;
+  drawIcon(c.getContext('2d'), variant, SIZE);
+
+  const a = document.createElement('a');
+  a.download = `Haven-Icon-${variant}.png`;
+  a.href = c.toDataURL('image/png');
+  a.click();
+}
+
+renderAll();
+</script>
+</body>
+</html>
