@@ -15,3 +15,9 @@ test-results/
 
 # Generated App Store screenshot images (scripts stay tracked)
 /Haven/screenshots/**/*.png
+
+# Local secrets and Vercel link: never committed (ops/secrets.md)
+.env
+.env.*
+!.env.example
+.vercel/
